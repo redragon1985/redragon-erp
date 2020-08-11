@@ -1,0 +1,57 @@
+1.安装必须的组件包括JDK（推荐1.8及以上）、MYSQL（推荐5.7及以上）、Tomcat（推荐8.5及以上）、Redis（推荐3.0及以上）
+
+2.找到目录/build/sql，执行所有SQL文件，构建表结构
+
+3.进入erp-springboot，修改相关配置文件
+
+（1）日志文件配置，找到src/main/resources/conf/log/logback-spring.xml，修改如下内容：
+	
+	<!-- dev环境文件路径 -->
+    <property name="DEV_FILE_PATH" value="d:/logs/test.log" />
+    <!-- test环境文件路径 -->
+    <property name="TEST_FILE_PATH" value="d:/logs/test.log" />
+    <!-- pro环境文件路径 -->
+    <property name="PRO_FILE_PATH" value="/opt/test/log" />
+    
+（2）springboot配置文件，找到src/main/resources目录
+
+	修改application.properties文件的spring.profiles.active=dev，dev为运行环境
+	修改application-dev-dataBase.properties文件中的数据源配置
+	
+（3）ERP基础信息配置，找到src/main/resources/global.properties，修改如下内容：
+	
+	#domain为自己系统的域名
+	domain=www.erp.com
+	#orgCode为公司的组织简写
+	orgCode=erp.com
+
+（4）修改其他组件环境配置，找到src/main/resources/redragon.properties，修改如下内容：
+
+	#develop为运行环境，如果文件为空则为默认环境
+	system_environment = develop
+    
+（5）修改Redis配置，找到src/main/resources/redis.properties，修改相对应环境的配置
+
+（6）修改Shiro配置，找到src/main/resources/shiro.properties，修改相对应环境的配置
+
+4.进入CasServer项目，修改单点登录配置
+
+找到文件/src/main/webapp/WEB-INF/deployerConfigContext.xml，定位到如下位置，修改数据源相关内容：
+
+ 	<!-- dataSource -->   
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName">
+			<value>com.mysql.cj.jdbc.Driver</value>
+		</property>
+		<property name="url">
+			<value>jdbc:mysql://127.0.0.1:3306/erp?useUnicode=true&amp;characterEncoding=utf8&amp;serverTimezone=GMT%2B8</value>
+		</property>
+		<property name="username">
+			<value>root</value>
+		</property>
+		<property name="password">
+			<value>root1234</value>
+		</property>
+	</bean>
+
+5.编译项目，并发布到Tomcat即可启动

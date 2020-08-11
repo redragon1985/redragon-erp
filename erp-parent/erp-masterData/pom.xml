@@ -1,0 +1,36 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>redragon</groupId>
+    <artifactId>erp-parent</artifactId>
+    <version>1.0</version>
+  </parent>
+  <artifactId>erp-masterData</artifactId>
+  <packaging>war</packaging>
+  
+  <dependencies>
+	  <dependency>
+	  	<groupId>redragon</groupId>
+	  	<artifactId>erp-springboot</artifactId>
+	  	<version>1.0.0</version>
+	  </dependency>
+	  <dependency>
+	  	<groupId>redragon</groupId>
+	  	<artifactId>erp-dataset</artifactId>
+	  	<version>1.0.0</version>
+	  </dependency>
+  </dependencies>
+  
+  <build>
+    <plugins>
+        <plugin>
+           <artifactId>maven-war-plugin</artifactId>
+           <configuration>
+               <version>3.0</version>
+               <failOnMissingWebXml>false</failOnMissingWebXml>
+            </configuration>
+        </plugin>
+    </plugins>
+  </build>
+
+</project>

@@ -1,0 +1,151 @@
+@CHARSET "UTF-8"; 
+.upload_append_list{height:100%; margin-right:5px; float:left; position:relative;}
+.upload_append_list:hover{cursor:pointer;}
+.upload_delete{margin-left:2em;}
+.upload_image{/* max-height:135px; */ padding:0px;}
+.upload_submit_btn{height:32px; font-size:14px;display:none;}
+
+#fileImage{
+	display: none;
+}
+
+/* 每个图片上的操作bar */
+.file_bar{
+	margin: 0;
+    left: 0px;
+    right: 0px;
+    position: absolute;
+    top: 0px;
+    height:0px;
+    padding:0px;
+    margin: 0;
+    opacity: 0.9;
+    color:#fff;
+    background: none repeat scroll 0 0 #000000;
+    transition: all 0.5s;
+	-moz-transition: all 0.5s;
+	-webkit-transition: all 0.5s;
+	-o-transition: all 0.5s;
+	overflow: hidden;
+}
+.file_bar a{
+	color: #FFFFFF;
+    position: absolute;
+    right: 10px;
+}
+.file_hover{
+	height:30px;
+	cursor:pointer;
+}
+
+.file_failure{
+	display: none;
+	margin: 0;
+	position: absolute;
+	bottom:0px;
+	height:24px;
+	left:0px;
+	right:0px;
+	background: none repeat scroll 0 0 red;
+	color:#fff;
+	text-align:center;
+}
+
+.file_name{
+	margin:0px;
+	white-space: nowrap;
+    width: 66%;                  /* IE6 需要定义宽度 */
+    overflow: hidden;            
+    -o-text-overflow: ellipsis;    /* Opera */
+    text-overflow:    ellipsis;    /* IE, Safari (WebKit) */
+    float: left;
+}
+
+.file_del{
+	background: url("../images/delete_white.png") no-repeat scroll 0 0 transparent;
+	width:18px;
+	height:18px;
+	display: inline;
+	-moz-user-select: none;
+	position: absolute;
+	right:3px;
+	margin-top:4px;
+}
+.file_del:hover{
+	background: url("../images/delete_blue.png") no-repeat scroll 0 0 transparent;
+}
+
+/* 设置图片等比例缩放 并且垂直居中*/
+.upload_append_list a {
+	display: table-cell;
+   /*  width: 140px;	
+    height: 120px; */
+    text-align: center;
+    vertical-align: middle;
+    border: 1px solid #DFDFDF;
+    background: url("../images/bg.png") no-repeat scroll center 0px transparent;
+}
+.upload_append_list img {
+	border: solid 1px #66f;
+	vertical-align: middle; /*图片垂直居中*/
+}
+.uploadImg {
+	margin: auto;
+}
+.uploadImg img{
+	border:none;	
+	max-width: 100%!important;
+	height: auto!important;
+}
+				
+/* 不带有拖拽的样式 */
+.add_upload{
+	height:100%; 
+	float:left; 
+	position:relative;
+}
+.add_upload:hover{
+	cursor:pointer;
+}
+.add_imgBox{
+    border: 1px solid #DFDFDF;
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+    transition: border 0.2s;
+	-moz-transition: border 0.2s;
+	-webkit-transition: border 0.2s;
+	-o-transition: border 0.2s;
+}
+.add_imgBox:hover{
+	border: 1px solid #BBB;
+}
+.single_main{
+	border-top:0px;
+}
+.jdt {
+	 position:absolute;
+	 left:0;
+	 top:0;
+	 z-index:99;
+	 width:60px;
+	 height:60px;
+	 line-height:60px;
+	 font-size:18px;
+	 text-align:center;
+	 color:#242424;
+	 font-size: 12px;
+}
+.img-up-mask {
+	position:absolute;
+	 left:0;
+	 top:0;
+	 z-index:98;
+	 background:#fff;
+	 filter:alpha(opacity=50);  
+      -moz-opacity:0.5;  
+      -khtml-opacity: 0.5;  
+      opacity: 0.5; 
+	  height:60px;
+	  width:60px;
+}
