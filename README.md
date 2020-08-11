@@ -13,11 +13,28 @@
 - 数据字典
 - 单点登录
 
-![赤龙ERP交流群](https://raw.githubusercontent.com/redragon1985/redragon-erp/master/docs/images/1.jpg "赤龙ERP交流群")
-![赤龙ERP交流群](https://raw.githubusercontent.com/redragon1985/redragon-erp/master/docs/images/2.jpg "赤龙ERP交流群")
-![赤龙ERP交流群](https://raw.githubusercontent.com/redragon1985/redragon-erp/master/docs/images/3.jpg "赤龙ERP交流群")
-![赤龙ERP交流群](https://raw.githubusercontent.com/redragon1985/redragon-erp/master/docs/images/4.jpg "赤龙ERP交流群")
-![赤龙ERP交流群](https://raw.githubusercontent.com/redragon1985/redragon-erp/master/docs/images/5.jpg "赤龙ERP交流群")
+## 产品展示
+
+![赤龙ERP](https://raw.githubusercontent.com/redragon1985/redragon-erp/master/docs/images/1.jpg "赤龙ERP")
+
+------------
+
+![赤龙ERP](https://raw.githubusercontent.com/redragon1985/redragon-erp/master/docs/images/2.jpg "赤龙ERP")
+
+------------
+
+![赤龙ERP](https://raw.githubusercontent.com/redragon1985/redragon-erp/master/docs/images/3.jpg "赤龙ERP")
+
+------------
+
+![赤龙ERP](https://raw.githubusercontent.com/redragon1985/redragon-erp/master/docs/images/4.jpg "赤龙ERP")
+
+------------
+
+![赤龙ERP](https://raw.githubusercontent.com/redragon1985/redragon-erp/master/docs/images/5.jpg "赤龙ERP")
+
+------------
+
 
 ## 技术与平台
 
