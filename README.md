@@ -29,5 +29,5 @@
 
 > 扫描二维码与开发者沟通交流
 
-![赤龙ERP交流群](https://raw.githubusercontent.com/redragon1985/redragon-erp/master/redragon.png "赤龙ERP交流群")
+![赤龙ERP交流群](https://gitee.com/redragon/redragon-erp/blob/master/redragon.png "赤龙ERP交流群")
 
