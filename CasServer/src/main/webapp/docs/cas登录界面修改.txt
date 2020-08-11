@@ -1,0 +1,17 @@
+casLoginViewJieyouweb.(class)=org.springframework.web.servlet.view.JstlView
+casLoginViewJieyouweb.url=/jieyouweb/login.jsp
+
+
+<view-state id="viewLoginFormJieyouweb" view="casLoginViewJieyouweb" model="credential">
+        <binder>
+            <binding property="username" />
+            <binding property="password" />
+            <binding property="rememberMe" />
+        </binder>
+        <on-entry>
+            <set name="viewScope.commandName" value="'credential'" />
+        </on-entry>
+		<transition on="submit" bind="true" validate="true" to="realSubmit">
+            <evaluate expression="authenticationViaFormAction.doBind(flowRequestContext, flowScope.credential)" />
+        </transition>
+	</view-state>
