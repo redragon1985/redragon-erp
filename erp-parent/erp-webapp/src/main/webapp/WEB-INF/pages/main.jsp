@@ -82,10 +82,10 @@
 					</div>
 					<small>手工凭证</small>
 					
-					<h1 class="no-margins"></h1>
+					<h1 class="no-margins">&nbsp;</h1>
 					<div class="stat-percent font-bold text-danger">
 					</div>
-					<small></small>
+					<small>&nbsp;</small>
 				</div>
 			</div>
 		</div>
