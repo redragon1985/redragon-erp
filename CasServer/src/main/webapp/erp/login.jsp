@@ -45,16 +45,16 @@
 		<div class="row">
 
 			<div class="col-md-6">
-				<h2 class="font-bold">ERP系统</h2>
+				<h2 class="font-bold">赤龙ERP</h2>
 
-				<p>RD-ERP系统是由国内经验丰富的专业人士精心打造</p>
+				<p>由国内经验丰富的专业人士精心打造</p>
 
-				<p>旨在为国内中小企业提供免费的ERP解决方案，并实现软件开源和终身免费</p>
+				<p>旨在为小微企业提供免费的ERP解决方案，并实现软件开源和终身免费</p>
 
 				<p>系统提供“订单”、“库存”、“收付款”、“凭证”、“审批”等多种业务及财务功能</p>
 
 				<p style="color: silver;">
-					<small>未经版权人允许，不得用于商业用途</small>
+					<small>受Apache-2.0许可协议保护，未经开发者允许，不得用于商业用途</small>
 				</p>
 
 			</div>

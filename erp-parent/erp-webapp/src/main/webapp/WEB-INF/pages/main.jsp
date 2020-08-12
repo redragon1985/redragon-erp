@@ -316,7 +316,7 @@
 								(7)&nbsp;凭证管理
 								</p>
 								<a href="#" class="btn btn-sm btn-success">&nbsp;访问官网&nbsp;</a> 
-								<span class="vertical-date" style="font-weight: bold;"> v0.5 <br /> <small>2020.8.8</small>
+								<span class="vertical-date" style="font-weight: bold;"> v0.5 <br /> <small>2020.8.12</small>
 								</span>
 							</div>
 						</div>
@@ -335,7 +335,7 @@
 								(4)&nbsp;优化表单提交验证逻辑<br/>
 								(5)&nbsp;增加结算时收付款金额的判断逻辑<br/>
 								</p>
-								<span class="vertical-date" style="font-weight: bold;"> v0.51 <br /> <small>2020.8.22</small>
+								<span class="vertical-date" style="font-weight: bold;"> v0.51 <br /> <small>2020.8</small>
 								</span>
 							</div>
 						</div>
