@@ -329,9 +329,11 @@
 							<div class="vertical-timeline-content">
 								<h2>小版本更新：解决第一版BUG，增加小功能</h2>
 								<p>
-								(1)&nbsp;功能待定<br/>
-								(2)&nbsp;功能待定<br/>
-								(3)&nbsp;功能待定<br/>
+								(1)&nbsp;增加数据权限功能及配置<br/>
+								(2)&nbsp;增加操作权限功能及配置<br/>
+								(3)&nbsp;优化凭证自动编号逻辑<br/>
+								(4)&nbsp;优化表单提交验证逻辑<br/>
+								(5)&nbsp;增加结算时收付款金额的判断逻辑<br/>
 								</p>
 								<span class="vertical-date" style="font-weight: bold;"> v0.51 <br /> <small>2020.8.22</small>
 								</span>
@@ -346,9 +348,9 @@
 							<div class="vertical-timeline-content">
 								<h2>新功能迭代</h2>
 								<p>
-								(1)&nbsp;功能待定<br/>
-								(2)&nbsp;功能待定<br/>
-								(3)&nbsp;功能待定<br/>
+								(1)&nbsp;增加出入库模块，主要包括：仓库管理、库存管理、入库、出库、库存盘点<br/>
+								(2)&nbsp;优化shiro授权时的存储逻辑<br/>
+								(3)&nbsp;优化单点登录的浏览器兼容性<br/>
 								</p>
 								<a href="#" class="btn btn-sm btn-info">版本说明</a> 
 								<span class="vertical-date" style="font-weight: bold;"> v0.6 <br /> <small>2020.9</small></span>
