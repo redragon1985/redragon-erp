@@ -29,11 +29,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.framework.controller.ControllerSupport;
+import com.framework.dao.data.GlobalDataBox;
 import com.framework.dao.model.Pages;
 import com.framework.util.JsonResultUtil;
 import com.framework.util.JsonUtil;
 import com.framework.util.ShiroUtil;
-import com.springboot.dao.data.GlobalDataBox;
 import com.erp.dataset.service.DatasetCommonService;
 import com.erp.hr.dao.model.HrStaffInfoRO;
 import com.erp.hr.service.HrCommonService;
@@ -89,7 +89,7 @@ public class PoHeadWebController extends ControllerSupport{
         }
         
         //分页查询数据
-        List<PoHead> poHeadList = this.poHeadService.getDataObjects(pages, poHeadCO);
+        List<PoHead> poHeadList = this.poHeadService.getDataObjectsForDataAuth("", pages, poHeadCO);
         
         //采购订单类型
         Map poTypeMap = this.datasetCommonService.getPOType();
@@ -240,7 +240,6 @@ public class PoHeadWebController extends ControllerSupport{
             if(poHead.getStatus().equals("NEW")) {
                 //删除数据
                 this.poHeadService.deleteDataObject(poHead);
-                this.poLineService.deletetPoLineByPoHeadCode(poHead.getPoHeadCode());
                 
                 //提示信息
                 attr.addFlashAttribute("hint", "success");

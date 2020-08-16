@@ -29,11 +29,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.framework.controller.ControllerSupport;
+import com.framework.dao.data.GlobalDataBox;
 import com.framework.dao.model.Pages;
 import com.framework.util.JsonResultUtil;
 import com.framework.util.JsonUtil;
 import com.framework.util.ShiroUtil;
-import com.springboot.dao.data.GlobalDataBox;
 import com.erp.dataset.service.DatasetCommonService;
 import com.erp.hr.dao.model.HrStaffInfoRO;
 import com.erp.hr.service.HrCommonService;
@@ -90,7 +90,7 @@ public class SoHeadWebController extends ControllerSupport{
         }
         
         //分页查询数据
-        List<SoHead> soHeadList = this.soHeadService.getDataObjects(pages, soHeadCO);
+        List<SoHead> soHeadList = this.soHeadService.getDataObjectsForDataAuth("", pages, soHeadCO);
         
         //采购销售类型
         Map soTypeMap = this.datasetCommonService.getSOType();
@@ -241,7 +241,6 @@ public class SoHeadWebController extends ControllerSupport{
             if(soHead.getStatus().equals("NEW")) {
                 //删除数据
                 this.soHeadService.deleteDataObject(soHead);
-                this.soLineService.deletetSoLineBySoHeadCode(soHead.getSoHeadCode());
                 
                 //提示信息
                 attr.addFlashAttribute("hint", "success");

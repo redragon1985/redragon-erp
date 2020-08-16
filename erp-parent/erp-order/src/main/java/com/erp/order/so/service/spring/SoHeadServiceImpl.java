@@ -29,6 +29,7 @@ import com.erp.order.so.dao.SoHeadDao;
 import com.erp.order.so.dao.model.SoHead;
 import com.erp.order.so.dao.model.SoHeadCO;
 import com.erp.order.so.service.SoHeadService;
+import com.erp.order.so.service.SoLineService;
 
 @Service
 @Transactional(rollbackFor=Exception.class)
@@ -37,6 +38,8 @@ public class SoHeadServiceImpl implements SoHeadService {
     //注入Dao
     @Autowired
     private SoHeadDao soHeadDao;
+    @Autowired
+    private SoLineService soLineService;
     
     @Override
     public void insertDataObject(SoHead obj) {
@@ -56,6 +59,7 @@ public class SoHeadServiceImpl implements SoHeadService {
     @Override
     public void deleteDataObject(SoHead obj) {
         this.soHeadDao.deleteDataObject(obj);
+        this.soLineService.deletetSoLineBySoHeadCode(obj.getSoHeadCode());
     }
 
     @Override

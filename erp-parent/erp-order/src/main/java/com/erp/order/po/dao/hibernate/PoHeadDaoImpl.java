@@ -122,9 +122,24 @@ public class PoHeadDaoImpl implements PoHeadDao{
     }
     
     @Override
-    @Permissions(PermissionType.OWN)
+    @Permissions(PermissionType.DATA_AUTH)
     public List<PoHead> getDataObjectsForDataAuth(@SqlParam String dataAuthSQL, Pages pages, PoHeadCO paramObj) {
-        return null;
+        String sql = "select p.* from po_head p where 1=1";
+        
+        Map<String, Object> args = new HashMap<String, Object>();
+        sql = sql + DaoUtil.getSQLCondition(paramObj, "poHeadCode", "and p.", args);
+        sql = sql + DaoUtil.getSQLCondition(paramObj, "poType", "and p.", args);
+        sql = sql + DaoUtil.getSQLCondition(paramObj, "poName", "and p.", args);
+        sql = sql + DaoUtil.getSQLCondition(paramObj, "vendorCode", "and p.", args);
+        sql = sql + DaoUtil.getSQLCondition(paramObj, "projectCode", "and p.", args);
+        sql = sql + DaoUtil.getSQLCondition(paramObj, "status", "and p.", args);
+        sql = sql + DaoUtil.getDataAuthSQL(dataAuthSQL, "p.", "p.");
+        sql = sql + " order by p.po_head_id desc";
+        
+        Map<String, Class<?>> entity = new HashMap<String, Class<?>>();
+        entity.put("p", PoHead.class);
+        
+        return this.daoSupport.getDataSqlByPage(sql, entity, args, pages);
     }
     
     @Override

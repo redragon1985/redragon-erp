@@ -123,9 +123,24 @@ public class SoHeadDaoImpl implements SoHeadDao{
     }
     
     @Override
-    @Permissions(PermissionType.OWN)
+    @Permissions(PermissionType.DATA_AUTH)
     public List<SoHead> getDataObjectsForDataAuth(@SqlParam String dataAuthSQL, Pages pages, SoHeadCO paramObj) {
-        return null;
+        String sql = "select s.* from so_head s where 1=1";
+        
+        Map<String, Object> args = new HashMap<String, Object>();
+        sql = sql + DaoUtil.getSQLCondition(paramObj, "soHeadCode", "and s.", args);
+        sql = sql + DaoUtil.getSQLCondition(paramObj, "soType", "and s.", args);
+        sql = sql + DaoUtil.getSQLCondition(paramObj, "soName", "and s.", args);
+        sql = sql + DaoUtil.getSQLCondition(paramObj, "customerCode", "and s.", args);
+        sql = sql + DaoUtil.getSQLCondition(paramObj, "projectCode", "and s.", args);
+        sql = sql + DaoUtil.getSQLCondition(paramObj, "status", "and s.", args);
+        sql = sql + DaoUtil.getDataAuthSQL(dataAuthSQL, "s.", "s.");
+        sql = sql + " order by s.so_head_id desc";
+        
+        Map<String, Class<?>> entity = new HashMap<String, Class<?>>();
+        entity.put("s", SoHead.class);
+        
+        return this.daoSupport.getDataSqlByPage(sql, entity, args, pages);
     }
     
     @Override

@@ -29,6 +29,7 @@ import com.erp.order.po.dao.PoHeadDao;
 import com.erp.order.po.dao.model.PoHead;
 import com.erp.order.po.dao.model.PoHeadCO;
 import com.erp.order.po.service.PoHeadService;
+import com.erp.order.po.service.PoLineService;
 
 @Service
 @Transactional(rollbackFor=Exception.class)
@@ -37,6 +38,8 @@ public class PoHeadServiceImpl implements PoHeadService {
     //注入Dao
     @Autowired
     private PoHeadDao poHeadDao;
+    @Autowired
+    private PoLineService poLineService;
     
     @Override
     public void insertDataObject(PoHead obj) {
@@ -56,6 +59,7 @@ public class PoHeadServiceImpl implements PoHeadService {
     @Override
     public void deleteDataObject(PoHead obj) {
         this.poHeadDao.deleteDataObject(obj);
+        this.poLineService.deletetPoLineByPoHeadCode(obj.getPoHeadCode());
     }
 
     @Override
