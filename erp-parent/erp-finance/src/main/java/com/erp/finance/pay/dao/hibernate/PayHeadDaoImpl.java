@@ -122,9 +122,24 @@ public class PayHeadDaoImpl implements PayHeadDao{
     }
     
     @Override
-    @Permissions(PermissionType.OWN)
+    @Permissions(PermissionType.DATA_AUTH)
     public List<PayHead> getDataObjectsForDataAuth(@SqlParam String dataAuthSQL, Pages pages, PayHeadCO paramObj) {
-        return null;
+        String sql = "select p.* from pay_head p where 1=1";
+        
+        Map<String, Object> args = new HashMap<String, Object>();
+        sql = sql + DaoUtil.getSQLCondition(paramObj, "payHeadCode", "and p.", args);
+        sql = sql + DaoUtil.getSQLCondition(paramObj, "paySourceType", "and p.", args);
+        sql = sql + DaoUtil.getSQLCondition(paramObj, "paySourceHeadCode", "and p.", args);
+        sql = sql + DaoUtil.getSQLCondition(paramObj, "receiver", "and p.", args);
+        sql = sql + DaoUtil.getSQLCondition(paramObj, "prepayFlag", "and p.", args);
+        sql = sql + DaoUtil.getSQLCondition(paramObj, "status", "and p.", args);
+        sql = sql + DaoUtil.getDataAuthSQL(dataAuthSQL, "p.", "p.");
+        sql = sql + " order by p.pay_head_id desc";
+        
+        Map<String, Class<?>> entity = new HashMap<String, Class<?>>();
+        entity.put("p", PayHead.class);
+        
+        return this.daoSupport.getDataSqlByPage(sql, entity, args, pages);
     }
     
     @Override

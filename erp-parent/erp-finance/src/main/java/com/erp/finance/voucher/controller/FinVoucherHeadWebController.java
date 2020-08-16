@@ -33,11 +33,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.framework.controller.ControllerSupport;
+import com.framework.dao.data.GlobalDataBox;
 import com.framework.dao.model.Pages;
 import com.framework.util.JsonResultUtil;
 import com.framework.util.JsonUtil;
 import com.framework.util.ShiroUtil;
-import com.springboot.dao.data.GlobalDataBox;
 
 import redragon.frame.hibernate.SnowFlake;
 
@@ -53,6 +53,7 @@ import com.erp.finance.voucher.service.FinVoucherHeadService;
 import com.erp.finance.voucher.service.FinVoucherLineService;
 import com.erp.finance.voucher.service.FinVoucherModelHeadService;
 import com.erp.finance.voucher.service.FinVoucherModelLineService;
+import com.erp.finance.voucher.util.FinVoucherUtil;
 import com.erp.hr.dao.model.HrStaffInfoRO;
 import com.erp.hr.service.HrCommonService;
 import com.erp.masterdata.common.service.MasterDataCommonService;
@@ -108,7 +109,7 @@ public class FinVoucherHeadWebController extends ControllerSupport{
         }
         
         //分页查询数据
-        List<FinVoucherHead> finVoucherHeadList = this.finVoucherHeadService.getDataObjects(pages, finVoucherHeadCO);
+        List<FinVoucherHead> finVoucherHeadList = this.finVoucherHeadService.getDataObjectsForDataAuth("", pages, finVoucherHeadCO);
         //循环获取凭证金额
         for(FinVoucherHead finVoucherHead: finVoucherHeadList) {
             finVoucherHead.setAmount(this.finVoucherLineService.getFinVoucherAmountByVoucherHeadCode(finVoucherHead.getVoucherHeadCode()));
@@ -241,6 +242,7 @@ public class FinVoucherHeadWebController extends ControllerSupport{
         if(finVoucherHead.getVoucherHeadId()==null) {
             finVoucherHead.setVoucherHeadCode(SnowFlake.generateId().toString());
         }
+        finVoucherHead.setVoucherNumber(FinVoucherUtil.incrVoucherNumberCache(finVoucherHead.getVoucherType()).toString());
         
         List<FinVoucherLine> finVoucherLineList = new ArrayList<FinVoucherLine>();
         //循环设置凭证行
@@ -289,8 +291,7 @@ public class FinVoucherHeadWebController extends ControllerSupport{
     public String editFinVoucherHeadStatus(FinVoucherHead finVoucherHead, Model model, RedirectAttributes attr) {
         if(finVoucherHead!=null&&finVoucherHead.getVoucherHeadId()!=null&&StringUtils.isNotBlank(finVoucherHead.getVoucherHeadCode())) {
             if(StringUtils.isNotBlank(finVoucherHead.getStatus())) {
-                this.finVoucherHeadService.updateFinVoucherHeadForStatus(finVoucherHead.getVoucherHeadId(), finVoucherHead.getStatus());
-                this.finVoucherBillRService.deleteFinVoucherBillRByVoucherHeadCode(finVoucherHead.getVoucherHeadCode());
+                this.finVoucherHeadService.updateFinVoucherHeadForStatus(finVoucherHead.getVoucherHeadId(), finVoucherHead.getVoucherHeadCode(), finVoucherHead.getStatus());
                 //提示信息
                 attr.addFlashAttribute("hint", "success");
             }else if(StringUtils.isNotBlank(finVoucherHead.getApproveStatus())) {
@@ -325,8 +326,7 @@ public class FinVoucherHeadWebController extends ControllerSupport{
             if(finVoucherHead.getApproveStatus().equals("UNSUBMIT")||finVoucherHead.getApproveStatus().equals("REJECT")) {
                 //删除数据
                 this.finVoucherHeadService.deleteDataObject(finVoucherHead);
-                this.finVoucherLineService.deleteFinVoucherLineByVoucherHeadCode(finVoucherHead.getVoucherHeadCode());
-                this.finVoucherBillRService.deleteFinVoucherBillRByVoucherHeadCode(finVoucherHead.getVoucherHeadCode());
+
                 //提示信息
                 attr.addFlashAttribute("hint", "success");
             }else {

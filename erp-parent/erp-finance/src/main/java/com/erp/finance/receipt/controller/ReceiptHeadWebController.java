@@ -30,11 +30,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.framework.controller.ControllerSupport;
+import com.framework.dao.data.GlobalDataBox;
 import com.framework.dao.model.Pages;
 import com.framework.util.JsonResultUtil;
 import com.framework.util.JsonUtil;
 import com.framework.util.ShiroUtil;
-import com.springboot.dao.data.GlobalDataBox;
 import com.erp.dataset.service.DatasetCommonService;
 import com.erp.finance.pay.dao.model.PayHead;
 import com.erp.finance.receipt.dao.data.DataBox;
@@ -111,7 +111,7 @@ public class ReceiptHeadWebController extends ControllerSupport{
         }
         
         //分页查询数据
-        List<ReceiptHead> receiptHeadList = this.receiptHeadService.getDataObjects(pages, receiptHeadCO);
+        List<ReceiptHead> receiptHeadList = this.receiptHeadService.getDataObjectsForDataAuth("", pages, receiptHeadCO);
         
         //收款来源类型
         Map receiptSourceTypeMap = DataBox.getReceiptSourceType();
@@ -354,7 +354,6 @@ public class ReceiptHeadWebController extends ControllerSupport{
             if(receiptHead.getStatus().equals("NEW")) {
                 //删除数据
                 this.receiptHeadService.deleteDataObject(receiptHead);
-                this.receiptLineService.deleteReceiptLineByReceiptHeadCode(receiptHead.getReceiptHeadCode());
                 
                 //提示信息
                 attr.addFlashAttribute("hint", "success");

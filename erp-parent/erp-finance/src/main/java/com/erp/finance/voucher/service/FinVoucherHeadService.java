@@ -29,7 +29,7 @@ public interface FinVoucherHeadService extends DaoCRUDIF<FinVoucherHead, FinVouc
     public abstract void insertOrUpdateFinVoucher(FinVoucherHead finVoucherHead, List<FinVoucherLine> finVoucherLineList);
     
     //更新凭证头状态
-    public abstract void updateFinVoucherHeadForStatus(Integer voucherHeadId, String status);
+    public abstract void updateFinVoucherHeadForStatus(Integer voucherHeadId, String voucherHeadCode, String status);
     
     //更新凭证审批状态
     public abstract void updateFinVoucherHeadForApproveStatus(Integer voucherHeadId, String approveStatus);

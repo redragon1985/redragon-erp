@@ -29,6 +29,7 @@ import com.erp.finance.pay.dao.PayHeadDao;
 import com.erp.finance.pay.dao.model.PayHead;
 import com.erp.finance.pay.dao.model.PayHeadCO;
 import com.erp.finance.pay.service.PayHeadService;
+import com.erp.finance.pay.service.PayLineService;
 
 @Service
 @Transactional(rollbackFor=Exception.class)
@@ -37,6 +38,8 @@ public class PayHeadServiceImpl implements PayHeadService {
     //注入Dao
     @Autowired
     private PayHeadDao payHeadDao;
+    @Autowired
+    private PayLineService payLineService;
     
     @Override
     public void insertDataObject(PayHead obj) {
@@ -56,6 +59,7 @@ public class PayHeadServiceImpl implements PayHeadService {
     @Override
     public void deleteDataObject(PayHead obj) {
         this.payHeadDao.deleteDataObject(obj);
+        this.payLineService.deletePayLineByPayHeadCode(obj.getPayHeadCode());
     }
 
     @Override

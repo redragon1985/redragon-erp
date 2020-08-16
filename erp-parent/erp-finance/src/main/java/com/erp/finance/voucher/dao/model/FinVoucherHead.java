@@ -72,7 +72,7 @@ public class FinVoucherHead implements java.io.Serializable {
     }
     
     //凭证号
-    @NotBlank(message="凭证号不能为空")
+    //@NotBlank(message="凭证号不能为空")
     @Column(name = "voucher_number", unique = false, nullable = false, length = 45)
     private String voucherNumber;
     

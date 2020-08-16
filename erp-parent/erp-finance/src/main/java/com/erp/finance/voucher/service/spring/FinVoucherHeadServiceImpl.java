@@ -30,6 +30,7 @@ import com.erp.finance.voucher.dao.FinVoucherLineDao;
 import com.erp.finance.voucher.dao.model.FinVoucherHead;
 import com.erp.finance.voucher.dao.model.FinVoucherHeadCO;
 import com.erp.finance.voucher.dao.model.FinVoucherLine;
+import com.erp.finance.voucher.service.FinVoucherBillRService;
 import com.erp.finance.voucher.service.FinVoucherHeadService;
 
 @Service
@@ -41,6 +42,8 @@ public class FinVoucherHeadServiceImpl implements FinVoucherHeadService {
     private FinVoucherHeadDao finVoucherHeadDao;
     @Autowired
     private FinVoucherLineDao finVoucherLineDao;
+    @Autowired
+    private FinVoucherBillRService finVoucherBillRService;
     
     @Override
     public void insertDataObject(FinVoucherHead obj) {
@@ -60,6 +63,8 @@ public class FinVoucherHeadServiceImpl implements FinVoucherHeadService {
     @Override
     public void deleteDataObject(FinVoucherHead obj) {
         this.finVoucherHeadDao.deleteDataObject(obj);
+        this.finVoucherLineDao.deleteFinVoucherLineByVoucherHeadCode(obj.getVoucherHeadCode());
+        this.finVoucherBillRService.deleteFinVoucherBillRByVoucherHeadCode(obj.getVoucherHeadCode());
     }
 
     @Override
@@ -118,8 +123,9 @@ public class FinVoucherHeadServiceImpl implements FinVoucherHeadService {
     }
     
     @Override
-    public void updateFinVoucherHeadForStatus(Integer voucherHeadId, String approveStatus) {
+    public void updateFinVoucherHeadForStatus(Integer voucherHeadId, String voucherHeadCode, String approveStatus) {
         this.finVoucherHeadDao.updateFinVoucherHeadForApproveStatus(voucherHeadId, approveStatus);
+        this.finVoucherBillRService.deleteFinVoucherBillRByVoucherHeadCode(voucherHeadCode);
     }
     
     @Override

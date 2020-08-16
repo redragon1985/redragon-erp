@@ -123,9 +123,24 @@ public class ReceiptHeadDaoImpl implements ReceiptHeadDao{
     }
     
     @Override
-    @Permissions(PermissionType.OWN)
+    @Permissions(PermissionType.DATA_AUTH)
     public List<ReceiptHead> getDataObjectsForDataAuth(@SqlParam String dataAuthSQL, Pages pages, ReceiptHeadCO paramObj) {
-        return null;
+        String sql = "select p.* from receipt_head p where 1=1";
+        
+        Map<String, Object> args = new HashMap<String, Object>();
+        sql = sql + DaoUtil.getSQLCondition(paramObj, "receiptHeadCode", "and p.", args);
+        sql = sql + DaoUtil.getSQLCondition(paramObj, "receiptSourceType", "and p.", args);
+        sql = sql + DaoUtil.getSQLCondition(paramObj, "receiptSourceHeadCode", "and p.", args);
+        sql = sql + DaoUtil.getSQLCondition(paramObj, "payer", "and p.", args);
+        sql = sql + DaoUtil.getSQLCondition(paramObj, "preReceiptFlag", "and p.", args);
+        sql = sql + DaoUtil.getSQLCondition(paramObj, "status", "and p.", args);
+        sql = sql + DaoUtil.getDataAuthSQL(dataAuthSQL, "p.", "p.");
+        sql = sql + " order by p.receipt_head_id desc";
+        
+        Map<String, Class<?>> entity = new HashMap<String, Class<?>>();
+        entity.put("p", ReceiptHead.class);
+        
+        return this.daoSupport.getDataSqlByPage(sql, entity, args, pages);
     }
     
     @Override

@@ -29,6 +29,7 @@ import com.erp.finance.receipt.dao.ReceiptHeadDao;
 import com.erp.finance.receipt.dao.model.ReceiptHead;
 import com.erp.finance.receipt.dao.model.ReceiptHeadCO;
 import com.erp.finance.receipt.service.ReceiptHeadService;
+import com.erp.finance.receipt.service.ReceiptLineService;
 
 @Service
 @Transactional(rollbackFor=Exception.class)
@@ -37,6 +38,8 @@ public class ReceiptHeadServiceImpl implements ReceiptHeadService {
     //注入Dao
     @Autowired
     private ReceiptHeadDao receiptHeadDao;
+    @Autowired
+    private ReceiptLineService receiptLineService;
     
     @Override
     public void insertDataObject(ReceiptHead obj) {
@@ -56,6 +59,7 @@ public class ReceiptHeadServiceImpl implements ReceiptHeadService {
     @Override
     public void deleteDataObject(ReceiptHead obj) {
         this.receiptHeadDao.deleteDataObject(obj);
+        this.receiptLineService.deleteReceiptLineByReceiptHeadCode(obj.getReceiptHeadCode());
     }
 
     @Override

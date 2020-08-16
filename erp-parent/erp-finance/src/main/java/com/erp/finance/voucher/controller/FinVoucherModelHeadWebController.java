@@ -17,10 +17,12 @@ package com.erp.finance.voucher.controller;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 
 import javax.validation.Valid;
 
@@ -40,7 +42,6 @@ import com.framework.dao.model.Pages;
 import com.framework.util.JsonResultUtil;
 import com.framework.util.JsonUtil;
 import com.framework.util.ShiroUtil;
-import com.springboot.dao.data.GlobalDataBox;
 
 import redragon.basic.tools.TimeToolKit;
 import redragon.frame.hibernate.SnowFlake;
@@ -64,6 +65,8 @@ import com.erp.finance.voucher.service.FinVoucherHeadService;
 import com.erp.finance.voucher.service.FinVoucherLineService;
 import com.erp.finance.voucher.service.FinVoucherModelHeadService;
 import com.erp.finance.voucher.service.FinVoucherModelLineService;
+import com.erp.finance.voucher.util.FinVoucherUtil;
+import com.erp.hr.dao.model.HrPosition;
 import com.erp.hr.dao.model.HrStaffInfoRO;
 import com.erp.hr.service.HrCommonService;
 import com.erp.masterdata.common.service.MasterDataCommonService;
@@ -370,7 +373,6 @@ public class FinVoucherModelHeadWebController extends ControllerSupport{
         if(finVoucherModelHead!=null&&finVoucherModelHead.getVoucherHeadId()!=null&&StringUtils.isNotBlank(finVoucherModelHead.getVoucherHeadCode())) {
             //删除数据
             this.finVoucherModelHeadService.deleteDataObject(finVoucherModelHead);
-            this.finVoucherModelLineService.deleteFinVoucherModelLineByVoucherHeadCode(finVoucherModelHead.getVoucherHeadCode());
             
             //提示信息
             attr.addFlashAttribute("hint", "success");
@@ -443,5 +445,56 @@ public class FinVoucherModelHeadWebController extends ControllerSupport{
         }else {
             return JsonResultUtil.getErrorJson(-1, "付款单参数传递错误");
         }
+    }
+    
+    
+    
+    /**
+     * 
+     * @description 跳转凭证字的流水号页面
+     * @date 2020-07-04 18:25:32
+     * @author 
+     * @param hrPosition
+     * @param model
+     * @return String
+     *
+     */
+    @RequestMapping("getVoucherTypeNumber")
+    public String getVoucherTypeNumber(Model model) {
+        //获取凭证类型
+        Map<String, String> voucherTypeMap = this.datasetCommonService.getVoucherType();
+        
+        //循环凭证类型，获取对应的流水号
+        Map<String, String> voucherNumberMap = new HashMap<String, String>();
+        Set<Entry<String, String>> voucherTypeSet = voucherTypeMap.entrySet();
+        for(Entry<String, String> temp: voucherTypeSet) {
+            voucherNumberMap.put(temp.getKey(), FinVoucherUtil.getVoucherNumberCache(temp.getKey()).toString());
+        }
+        
+        //页面属性设置
+        model.addAttribute("voucherTypeMap", voucherTypeMap);
+        model.addAttribute("voucherNumberMap", voucherNumberMap);
+        
+        return "basic.jsp?content=finVoucher/voucherTypeNumberEdit";
+    }
+    
+    /**
+     * 
+     * @description 编辑凭证字的流水号
+     * @date 2020-07-04 18:25:32
+     * @author 
+     * @param hrPosition
+     * @param model
+     * @return String
+     *
+     */
+    @RequestMapping("editVoucherTypeNumber")
+    public String editVoucherTypeNumber(String voucherType, Long voucherNumber, Model model) {
+        //重置凭证初始流水号
+        if(StringUtils.isNotBlank(voucherType)) {
+            FinVoucherUtil.setVoucherNumberCache(voucherType, voucherNumber);
+        }
+        
+        return "redirect:getVoucherTypeNumber";
     }
 }

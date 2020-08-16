@@ -107,9 +107,22 @@ public class FinVoucherHeadDaoImpl implements FinVoucherHeadDao{
     }
     
     @Override
-    @Permissions(PermissionType.OWN)
+    @Permissions(PermissionType.DATA_AUTH)
     public List<FinVoucherHead> getDataObjectsForDataAuth(@SqlParam String dataAuthSQL, Pages pages, FinVoucherHeadCO paramObj) {
-        return null;
+        String sql = "select v.* from fin_voucher_head v where 1=1";
+        
+        Map<String, Object> args = new HashMap<String, Object>();
+        sql = sql + DaoUtil.getSQLCondition(paramObj, "voucherType", "and v.", args);
+        sql = sql + DaoUtil.getSQLCondition(paramObj, "voucherNumber", "and v.", args);
+        sql = sql + DaoUtil.getSQLCondition(paramObj, "voucherDate", "and v.", args);
+        sql = sql + DaoUtil.getSQLCondition(paramObj, "status", "and v.", args);
+        sql = sql + DaoUtil.getDataAuthSQL(dataAuthSQL, "v.", "v.");
+        sql = sql + " order by v.voucher_head_id desc";
+        
+        Map<String, Class<?>> entity = new HashMap<String, Class<?>>();
+        entity.put("v", FinVoucherHead.class);
+        
+        return this.daoSupport.getDataSqlByPage(sql, entity, args, pages);
     }
     
     @Override

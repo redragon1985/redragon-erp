@@ -43,6 +43,7 @@ import com.erp.finance.voucher.service.FinVoucherBillRService;
 import com.erp.finance.voucher.service.FinVoucherHeadService;
 import com.erp.finance.voucher.service.FinVoucherLineService;
 import com.erp.finance.voucher.service.FinVoucherModelHeadService;
+import com.erp.finance.voucher.util.FinVoucherUtil;
 import com.erp.hr.dao.model.HrStaffInfoRO;
 import com.erp.hr.service.HrCommonService;
 
@@ -82,6 +83,7 @@ public class FinVoucherModelHeadServiceImpl implements FinVoucherModelHeadServic
     @Override
     public void deleteDataObject(FinVoucherModelHead obj) {
         this.finVoucherModelHeadDao.deleteDataObject(obj);
+        this.finVoucherModelLineDao.deleteFinVoucherModelLineByVoucherHeadCode(obj.getVoucherHeadCode());
     }
 
     @Override
@@ -167,8 +169,8 @@ public class FinVoucherModelHeadServiceImpl implements FinVoucherModelHeadServic
                String code = SnowFlake.generateId().toString();
                finVoucherHead.setVoucherHeadCode(code);
                finVoucherHead.setVoucherType(finVoucherModelHead.getVoucherType());
-               //bbc凭证编号临时处理（不能采用雪花算法，各企业算法可能不同）
-               finVoucherHead.setVoucherNumber(code);
+               //获取凭证编号
+               finVoucherHead.setVoucherNumber(FinVoucherUtil.incrVoucherNumberCache(finVoucherModelHead.getVoucherType()).toString());
                //获取当前用户职员信息
                HrStaffInfoRO staffInfo = this.hrCommonService.getStaffInfo(ShiroUtil.getUsername());
                finVoucherHead.setStaffCode(staffInfo.getStaffCode());

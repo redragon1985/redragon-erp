@@ -30,11 +30,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.framework.controller.ControllerSupport;
+import com.framework.dao.data.GlobalDataBox;
 import com.framework.dao.model.Pages;
 import com.framework.util.JsonResultUtil;
 import com.framework.util.JsonUtil;
 import com.framework.util.ShiroUtil;
-import com.springboot.dao.data.GlobalDataBox;
 import com.erp.dataset.service.DatasetCommonService;
 import com.erp.finance.pay.dao.data.DataBox;
 import com.erp.finance.pay.dao.model.PayHead;
@@ -105,7 +105,7 @@ public class PayHeadWebController extends ControllerSupport{
         }
         
         //分页查询数据
-        List<PayHead> payHeadList = this.payHeadService.getDataObjects(pages, payHeadCO);
+        List<PayHead> payHeadList = this.payHeadService.getDataObjectsForDataAuth("", pages, payHeadCO);
         
         //付款来源类型
         Map paySourceTypeMap = DataBox.getPaySourceType();
@@ -348,7 +348,6 @@ public class PayHeadWebController extends ControllerSupport{
             if(payHead.getStatus().equals("NEW")) {
                 //删除数据
                 this.payHeadService.deleteDataObject(payHead);
-                this.payLineService.deletePayLineByPayHeadCode(payHead.getPayHeadCode());
                 
                 //提示信息
                 attr.addFlashAttribute("hint", "success");
