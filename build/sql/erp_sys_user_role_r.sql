@@ -32,9 +32,10 @@ CREATE TABLE `sys_user_role_r` (
   `created_by` varchar(30) NOT NULL,
   `last_updated_date` datetime DEFAULT NULL,
   `last_updated_by` varchar(30) DEFAULT NULL,
+  `org_code` varchar(10) NOT NULL COMMENT '组织机构',
   PRIMARY KEY (`ur_id`),
   UNIQUE KEY `UK_sys_user_role_r` (`username`,`role_code`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='系统用户与角色关联表';
+) ENGINE=InnoDB AUTO_INCREMENT=59 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='系统用户与角色关联表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -46,4 +47,4 @@ CREATE TABLE `sys_user_role_r` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-08-10 13:53:21
+-- Dump completed on 2020-08-16 21:41:37

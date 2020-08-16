@@ -41,7 +41,7 @@ CREATE TABLE `receipt_line` (
   PRIMARY KEY (`receipt_line_id`),
   UNIQUE KEY `receipt_line_code_UNIQUE` (`receipt_line_code`),
   KEY `IX_receipt_line_receipt_head_code` (`receipt_head_code`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='收款单行表';
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='收款单行表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -53,4 +53,4 @@ CREATE TABLE `receipt_line` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-08-10 13:53:14
+-- Dump completed on 2020-08-16 21:41:29

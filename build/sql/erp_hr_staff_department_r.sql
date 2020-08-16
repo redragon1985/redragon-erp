@@ -34,9 +34,10 @@ CREATE TABLE `hr_staff_department_r` (
   `created_by` varchar(45) NOT NULL COMMENT '创建人',
   `last_updated_date` datetime DEFAULT NULL COMMENT '最后修改时间',
   `last_updated_by` varchar(45) DEFAULT NULL COMMENT '最后修改人',
+  `org_code` varchar(10) NOT NULL COMMENT '组织机构',
   PRIMARY KEY (`sd_id`),
   UNIQUE KEY `uk_staff_department_position` (`staff_code`,`department_code`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='人力职员与部门关联表';
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='人力职员与部门关联表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -48,4 +49,4 @@ CREATE TABLE `hr_staff_department_r` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-08-10 13:53:13
+-- Dump completed on 2020-08-16 21:41:27
