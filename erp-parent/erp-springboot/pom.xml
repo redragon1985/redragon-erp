@@ -16,4 +16,11 @@
         </plugin>
     </plugins>
   </build>
+  <dependencies>
+  	<dependency>
+  		<groupId>redragon</groupId>
+  		<artifactId>erp-hr</artifactId>
+  		<version>1.0</version>
+  	</dependency>
+  </dependencies>
 </project>

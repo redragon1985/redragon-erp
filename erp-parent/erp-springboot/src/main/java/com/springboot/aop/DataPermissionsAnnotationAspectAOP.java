@@ -23,7 +23,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-import com.framework.spring.aspect.DataPermissionsAnnotationAspect;
+import com.springboot.aop.aspect.DataPermissionsAnnotationAspect;
+
 
 /**
  * AOP拦截Dao层的方法用于数据权限的控制
@@ -37,10 +38,7 @@ public class DataPermissionsAnnotationAspectAOP extends DataPermissionsAnnotatio
 	//日志处理
 	private Logger logger = LoggerFactory.getLogger(DataPermissionsAnnotationAspectAOP.class);
 	
-	@Pointcut("execution(* com.erp.permission.dao.*.*(..))||"
-	        + "execution(* com.erp.dataset.dao.*.*(..))||"
-	        + "execution(* com.erp.hr.dao.*.*(..))||"
-	        + "execution(* com.erp.masterdata.*.dao.*.*(..))||"
+	@Pointcut("execution(* com.erp.hr.dao.*.*(..))||"
 	        + "execution(* com.erp.order.*.dao.*.*(..))||"
 	        + "execution(* com.erp.finance.*.dao.*.*(..))")
 	public void pointcut(){}
