@@ -20,11 +20,4 @@
     </plugins>
   </build>
 
-  <dependencies>
-  	<dependency>
-  		<groupId>redragon</groupId>
-  		<artifactId>erp-springboot</artifactId>
-  		<version>1.0.0</version>
-  	</dependency>
-  </dependencies>
 </project>

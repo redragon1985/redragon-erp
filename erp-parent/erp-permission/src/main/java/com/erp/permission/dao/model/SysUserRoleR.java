@@ -106,5 +106,15 @@ public class SysUserRoleR implements java.io.Serializable {
         this.lastUpdatedBy = lastUpdatedBy;
     }
     
+    //组织机构
+    @Column(name = "org_code", unique = false, nullable = false, length = 10)
+    private String orgCode;
+    
+    public String getOrgCode() {
+        return this.orgCode;
+    }
+    public void setOrgCode(String orgCode) {
+        this.orgCode = orgCode;
+    }
     
 }
