@@ -45,7 +45,7 @@
 		<div class="row">
 
 			<div class="col-md-6">
-				<h2 class="font-bold">赤龙ERP</h2>
+				<h2 class="font-bold"><img src="erp/images/logo.png" alt="赤龙ERP" width="100" height="40"><span style="vertical-align: middle; font-size: 28px;">ERP</span></h2>
 
 				<p>由国内经验丰富的专业人士精心打造</p>
 
