@@ -29,10 +29,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.framework.controller.ControllerSupport;
+import com.framework.dao.data.GlobalDataBox;
 import com.framework.dao.model.Pages;
 import com.framework.util.JsonResultUtil;
 import com.framework.util.JsonUtil;
-import com.springboot.dao.data.GlobalDataBox;
 import com.erp.dataset.service.DatasetCommonService;
 import com.erp.masterdata.customer.dao.model.MdCustomer;
 import com.erp.masterdata.customer.dao.model.MdCustomerCO;
@@ -223,7 +223,7 @@ public class MdCustomerWebController extends ControllerSupport{
         if(StringUtils.isNotBlank(code)&&StringUtils.isNotBlank(approveStatus)) {
             //更新审核状态
             this.mdCustomerService.updateApproveStatus(code, approveStatus);
-          //提示信息
+            //提示信息
             attr.addFlashAttribute("hint", "success");
             attr.addAttribute("customerCode", code);
         }else {

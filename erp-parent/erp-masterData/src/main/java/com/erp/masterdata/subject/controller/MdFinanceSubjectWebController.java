@@ -39,9 +39,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.framework.controller.ControllerSupport;
 import com.framework.dao.model.Pages;
+import com.framework.dao.model.TreeNode;
 import com.framework.util.JsonResultUtil;
 import com.framework.util.JsonUtil;
-import com.springboot.dao.model.TreeNode;
 import com.erp.masterdata.subject.dao.model.MdFinanceSubject;
 import com.erp.masterdata.subject.dao.model.MdFinanceSubjectCO;
 import com.erp.masterdata.subject.service.MdFinanceSubjectService;
