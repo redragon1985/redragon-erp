@@ -46,7 +46,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		            <h4>收款单列表</h4>
 		            <div class="ibox-tools">
 		                <button id="addButton" class="btn btn-success btn-sm" type="button"><i class="fa fa-plus"></i>&nbsp;&nbsp;<span class="bold">新增收款单</span></button>
-		                <button id="searchButton" class="btn btn-default btn-sm" type="button"><i class="fa fa-search"></i>&nbsp;&nbsp;展开查询</button>
+		                <button id="searchButton" class="btn btn-default btn-sm btn-notcontrol" type="button"><i class="fa fa-search"></i>&nbsp;&nbsp;展开查询</button>
 		            </div>
 		        </div>
 				<div class="ibox-content border-bottom" style="padding-bottom: 0px;">
@@ -127,7 +127,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 									</td>
 									<td>
 										<div class="btn-group">
-											<button class="btn-white btn btn-xs" onclick="editData('${data.receiptHeadCode}')"><i class="fa fa-edit"></i>&nbsp;编辑</button>&nbsp;
+											<button class="btn-white btn btn-xs btn-notcontrol" onclick="editData('${data.receiptHeadCode}')"><i class="fa fa-edit"></i>&nbsp;编辑</button>&nbsp;
 											<c:if test="${data.approveStatus!='APPROVE'&&data.approveStatus!='SUBMIT'}">
 												<button class="btn-white btn btn-xs" onclick="deleteData(${data.receiptHeadId},'${data.receiptHeadCode}','${data.status}')"><i class="fa fa-trash"></i>&nbsp;删除</button>
 											</c:if>

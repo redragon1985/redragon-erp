@@ -473,9 +473,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					$("#tabDiv").html(data);
 					$("#lineTab").addClass("active");
 					//隐藏保存按钮
-					if("${param.payHeadCode}"!="null"&&"${param.payHeadCode}"!=""&&"${requestScope.payHead.approveStatus}"!="UNSUBMIT"&&"${requestScope.payHead.approveStatus}"!="REJECT"){
+					if(("${param.payHeadCode}"!="null"&&"${param.payHeadCode}"!=""&&"${requestScope.payHead.approveStatus}"!="UNSUBMIT"&&"${requestScope.payHead.approveStatus}"!="REJECT")||
+					   "${param.payHeadCode}"=="null"||"${param.payHeadCode}"==""){
 						$("#tabDiv .btn").hide();
 					}
+					initControlAuth();
 				}
 			},
 			error: function(XMLHttpRequest, textStatus, errorThrown){

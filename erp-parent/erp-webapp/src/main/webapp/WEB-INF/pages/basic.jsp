@@ -59,7 +59,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	        <jsp:include page="common/top.jsp"></jsp:include>
 	        
 	        <%-- 页面内容导入 --%>
-	        <jsp:include page="${param.content}"></jsp:include>
+	        <div id="page-content">
+	        	<jsp:include page="${param.content}"></jsp:include>
+	        </div>
 	        
 	        <%-- foot部分导入 --%>
 	        <jsp:include page="common/foot.jsp"></jsp:include>

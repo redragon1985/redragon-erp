@@ -316,9 +316,10 @@ response.setDateHeader ("Expires", 0);
 					$("#tabDiv").html(data);
 					$("#ltab").addClass("active");
 					//隐藏保存按钮
-					if("${param.customerCode}"!="null"&&"${param.customerCode}"!=""&&"${requestScope.mdCustomer.approveStatus}"!="UNSUBMIT"&&"${requestScope.mdCustomer.approveStatus}"!="REJECT"){
+					if(("${param.customerCode}"!="null"&&"${param.customerCode}"!=""&&"${requestScope.mdCustomer.approveStatus}"!="UNSUBMIT"&&"${requestScope.mdCustomer.approveStatus}"!="REJECT")||"${param.customerCode}"=="null"||"${param.customerCode}"==""){
 						$("#tabDiv .ladda-button").hide();
 					}
+					initControlAuth();
 				}
 			},
 			error: function(XMLHttpRequest, textStatus, errorThrown){
@@ -341,9 +342,10 @@ response.setDateHeader ("Expires", 0);
 					$("#tabDiv").html(data);
 					$("#ctab").addClass("active");
 					//隐藏保存按钮
-					if("${param.customerCode}"!="null"&&"${param.customerCode}"!=""&&"${requestScope.mdCustomer.approveStatus}"!="UNSUBMIT"&&"${requestScope.mdCustomer.approveStatus}"!="REJECT"){
+					if(("${param.customerCode}"!="null"&&"${param.customerCode}"!=""&&"${requestScope.mdCustomer.approveStatus}"!="UNSUBMIT"&&"${requestScope.mdCustomer.approveStatus}"!="REJECT")||"${param.customerCode}"=="null"||"${param.customerCode}"==""){
 						$("#tabDiv .btn").hide();
 					}
+					initControlAuth();
 				}
 			},
 			error: function(XMLHttpRequest, textStatus, errorThrown){
@@ -366,9 +368,10 @@ response.setDateHeader ("Expires", 0);
 					$("#tabDiv").html(data);
 					$("#btab").addClass("active");
 					//隐藏保存按钮
-					if("${param.customerCode}"!="null"&&"${param.customerCode}"!=""&&"${requestScope.mdCustomer.approveStatus}"!="UNSUBMIT"&&"${requestScope.mdCustomer.approveStatus}"!="REJECT"){
+					if(("${param.customerCode}"!="null"&&"${param.customerCode}"!=""&&"${requestScope.mdCustomer.approveStatus}"!="UNSUBMIT"&&"${requestScope.mdCustomer.approveStatus}"!="REJECT")||"${param.customerCode}"=="null"||"${param.customerCode}"==""){
 						$("#tabDiv .btn").hide();
 					}
+					initControlAuth();
 				}
 			},
 			error: function(XMLHttpRequest, textStatus, errorThrown){

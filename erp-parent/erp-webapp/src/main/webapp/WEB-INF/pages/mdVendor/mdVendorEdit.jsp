@@ -317,9 +317,11 @@ response.setDateHeader ("Expires", 0);
 					$("#tabDiv").html(data);
 					$("#ltab").addClass("active");
 					//隐藏保存按钮
-					if("${param.vendorCode}"!="null"&&"${param.vendorCode}"!=""&&"${requestScope.mdVendor.approveStatus}"!="UNSUBMIT"&&"${requestScope.mdVendor.approveStatus}"!="REJECT"){
+					if(("${param.vendorCode}"!="null"&&"${param.vendorCode}"!=""&&"${requestScope.mdVendor.approveStatus}"!="UNSUBMIT"&&"${requestScope.mdVendor.approveStatus}"!="REJECT")||
+						"${param.vendorCode}"=="null"||"${param.vendorCode}"==""){
 						$("#tabDiv .ladda-button").hide();
 					}
+					initControlAuth();
 				}
 			},
 			error: function(XMLHttpRequest, textStatus, errorThrown){
@@ -342,9 +344,11 @@ response.setDateHeader ("Expires", 0);
 					$("#tabDiv").html(data);
 					$("#ctab").addClass("active");
 					//隐藏保存按钮
-					if("${param.vendorCode}"!="null"&&"${param.vendorCode}"!=""&&"${requestScope.mdVendor.approveStatus}"!="UNSUBMIT"&&"${requestScope.mdVendor.approveStatus}"!="REJECT"){
+					if(("${param.vendorCode}"!="null"&&"${param.vendorCode}"!=""&&"${requestScope.mdVendor.approveStatus}"!="UNSUBMIT"&&"${requestScope.mdVendor.approveStatus}"!="REJECT")||
+					   "${param.vendorCode}"=="null"||"${param.vendorCode}"==""){
 						$("#tabDiv .btn").hide();
 					}
+					initControlAuth();
 				}
 			},
 			error: function(XMLHttpRequest, textStatus, errorThrown){
@@ -367,9 +371,11 @@ response.setDateHeader ("Expires", 0);
 					$("#tabDiv").html(data);
 					$("#btab").addClass("active");
 					//隐藏保存按钮
-					if("${param.vendorCode}"!="null"&&"${param.vendorCode}"!=""&&"${requestScope.mdVendor.approveStatus}"!="UNSUBMIT"&&"${requestScope.mdVendor.approveStatus}"!="REJECT"){
+					if(("${param.vendorCode}"!="null"&&"${param.vendorCode}"!=""&&"${requestScope.mdVendor.approveStatus}"!="UNSUBMIT"&&"${requestScope.mdVendor.approveStatus}"!="REJECT")||
+					   "${param.vendorCode}"=="null"||"${param.vendorCode}"==""){
 						$("#tabDiv .btn").hide();
 					}
+					initControlAuth();
 				}
 			},
 			error: function(XMLHttpRequest, textStatus, errorThrown){

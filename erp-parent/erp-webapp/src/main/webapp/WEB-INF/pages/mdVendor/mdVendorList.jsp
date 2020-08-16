@@ -52,7 +52,7 @@ response.setDateHeader ("Expires", 0);
 		            <h4>供应商列表</h4>
 		            <div class="ibox-tools">
 		                <button id="addButton" class="btn btn-success btn-sm" type="button"><i class="fa fa-plus"></i>&nbsp;&nbsp;<span class="bold">新增供应商</span></button>
-		                <button id="searchButton" class="btn btn-default btn-sm" type="button"><i class="fa fa-search"></i>&nbsp;&nbsp;展开查询</button>
+		                <button id="searchButton" class="btn btn-default btn-sm btn-notcontrol" type="button"><i class="fa fa-search"></i>&nbsp;&nbsp;展开查询</button>
 		            </div>
 		        </div>
 				<div class="ibox-content border-bottom" style="padding-bottom: 0px;">
@@ -131,7 +131,7 @@ response.setDateHeader ("Expires", 0);
 									</td>
 									<td>
 										<div class="btn-group">
-											<button class="btn-white btn btn-xs" onclick="editSysUser('${data.vendorCode}')"><i class="fa fa-edit"></i>&nbsp;编辑</button>&nbsp;
+											<button class="btn-white btn btn-xs btn-notcontrol" onclick="editSysUser('${data.vendorCode}')"><i class="fa fa-edit"></i>&nbsp;编辑</button>&nbsp;
 											<c:if test="${data.approveStatus!='APPROVE'&&data.approveStatus!='SUBMIT'}">
 												<button class="btn-white btn btn-xs" onclick="deleteSysUser(${data.vendorId},'${data.vendorCode}')"><i class="fa fa-trash"></i>&nbsp;删除</button>
 											</c:if>

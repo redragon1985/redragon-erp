@@ -85,6 +85,7 @@
 				redragonJS.removeLoading("relateListDiv");
 				if(data!=""){
 					$("#relateListDiv").html(data);
+					initControlAuth();
 				}
 			},
 			error: function(XMLHttpRequest, textStatus, errorThrown){

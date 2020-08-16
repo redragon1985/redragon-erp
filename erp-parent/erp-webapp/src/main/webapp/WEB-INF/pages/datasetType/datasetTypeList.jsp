@@ -46,7 +46,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		            <h4>数据字典（值集）列表</h4>
 		            <div class="ibox-tools">
 		                <button id="addButton" class="btn btn-success btn-sm" type="button"><i class="fa fa-plus"></i>&nbsp;&nbsp;<span class="bold">新增值集类型</span></button>
-		                <button id="searchButton" class="btn btn-default btn-sm" type="button"><i class="fa fa-search"></i>&nbsp;&nbsp;展开查询</button>
+		                <button id="searchButton" class="btn btn-default btn-sm btn-notcontrol" type="button"><i class="fa fa-search"></i>&nbsp;&nbsp;展开查询</button>
 		            </div>
 		        </div>
 				<div class="ibox-content">
@@ -91,8 +91,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 									</td>
 									<td>
 										<div class="btn-group">
-											<button class="btn-white btn btn-xs" onclick="editDataset('${data.datasetTypeCode}','${data.datasetTypeName}')"><i class="fa fa-server btn-info btn-outline"></i>&nbsp;维护值集</button>&nbsp;
-											<button class="btn-white btn btn-xs" onclick="editData(${data.datasetTypeId})"><i class="fa fa-edit"></i>&nbsp;编辑</button>&nbsp;
+											<button class="btn-white btn btn-xs btn-notcontrol" onclick="editDataset('${data.datasetTypeCode}','${data.datasetTypeName}')"><i class="fa fa-server btn-info btn-outline"></i>&nbsp;维护值集</button>&nbsp;
+											<button class="btn-white btn btn-xs btn-notcontrol" onclick="editData(${data.datasetTypeId})"><i class="fa fa-edit"></i>&nbsp;编辑</button>&nbsp;
 											<button class="btn-white btn btn-xs" onclick="deleteData(${data.datasetTypeId},'${data.datasetTypeCode}')"><i class="fa fa-trash"></i>&nbsp;删除</button>
 										</div>
 									</td>

@@ -453,9 +453,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					$("#tabDiv").html(data);
 					$("#lineTab").addClass("active");
 					//隐藏保存按钮
-					if("${param.soHeadCode}"!="null"&&"${param.soHeadCode}"!=""&&"${requestScope.soHead.approveStatus}"!="UNSUBMIT"&&"${requestScope.soHead.approveStatus}"!="REJECT"){
+					if(("${param.soHeadCode}"!="null"&&"${param.soHeadCode}"!=""&&"${requestScope.soHead.approveStatus}"!="UNSUBMIT"&&"${requestScope.soHead.approveStatus}"!="REJECT")||
+					   "${param.soHeadCode}"=="null"||"${param.soHeadCode}"==""){
 						$("#tabDiv .btn").hide();
 					}
+					initControlAuth();
 				}
 			},
 			error: function(XMLHttpRequest, textStatus, errorThrown){

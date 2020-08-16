@@ -46,7 +46,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		            <h4>职员列表</h4>
 		            <div class="ibox-tools">
 		                <button id="addButton" class="btn btn-success btn-sm" type="button"><i class="fa fa-plus"></i>&nbsp;&nbsp;<span class="bold">新增职员</span></button>
-		                <button id="searchButton" class="btn btn-default btn-sm" type="button"><i class="fa fa-search"></i>&nbsp;&nbsp;展开查询</button>
+		                <button id="searchButton" class="btn btn-default btn-sm btn-notcontrol" type="button"><i class="fa fa-search"></i>&nbsp;&nbsp;展开查询</button>
 		            </div>
 		        </div>
 				<div class="ibox-content border-bottom" style="padding-bottom: 0px;">
@@ -110,7 +110,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 									<td>${data.createdBy}</td>
 									<td>
 										<div class="btn-group">
-											<button class="btn-white btn btn-xs" onclick="editData(${data.staffId})"><i class="fa fa-edit"></i>&nbsp;编辑</button>&nbsp;
+											<button class="btn-white btn btn-xs btn-notcontrol" onclick="editData(${data.staffId})"><i class="fa fa-edit"></i>&nbsp;编辑</button>&nbsp;
 											<button class="btn-white btn btn-xs" onclick="deleteData(${data.staffId},'${data.staffCode}')"><i class="fa fa-trash"></i>&nbsp;删除</button>
 										</div>
 									</td>

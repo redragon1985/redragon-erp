@@ -97,7 +97,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		                        		<option value="${voucherType.key}">${voucherType.value}</option>
 		                        	</c:forEach>
 								</select>&nbsp; 
-								<input id="voucherNumber" name="voucherNumber" type="text" class="form-control" value="${requestScope.finVoucherHead.voucherNumber}" style="display: inline; width: 100px; vertical-align: middle;" placeholder="输入凭证号">
+								<input id="voucherNumber" name="voucherNumber" type="text" class="form-control" value="${requestScope.finVoucherHead.voucherNumber}" style="display: inline; width: 130px; vertical-align: middle;" placeholder="自动生成凭证号">
 							</label> 
 							
 							<label class="col-sm-4 col-form-label">
@@ -300,9 +300,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			$("#voucherType").val("${requestScope.finVoucherHead.voucherType}");
 		}
 		//初始化code只读
-		if("${requestScope.finVoucherHead.voucherNumber}"!=""){
-			$("#voucherNumber").prop("readonly", true);
-		}
+		//if("${requestScope.finVoucherHead.voucherNumber}"!=""){
+		$("#voucherNumber").prop("readonly", true);
+		//}
 		
 		//设置日期插件
 		$('#voucherDate').datepicker({
@@ -519,9 +519,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				voucherType : {
 					required : true,
 				},
-				voucherNumber : {
-					required : true,
-				},
 				voucherDate : {
 					required : true,
 				},
@@ -529,6 +526,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					required : true,
 				},
 				/*
+				voucherNumber : {
+					required : true,
+				},
 				memo : {
 					required : true,
 				},

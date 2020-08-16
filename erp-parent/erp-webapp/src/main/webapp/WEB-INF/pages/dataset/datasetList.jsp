@@ -68,7 +68,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		            <h4>值列表</h4>
 		            <div class="ibox-tools">
 		                <button id="addButton" class="btn btn-success btn-sm" type="button" ><i class="fa fa-plus"></i>&nbsp;&nbsp;<span class="bold">新增值</span></button>
-		                <button id="searchButton" class="btn btn-default btn-sm" type="button"><i class="fa fa-search"></i>&nbsp;&nbsp;展开查询</button>
+		                <button id="searchButton" class="btn btn-default btn-sm btn-notcontrol" type="button"><i class="fa fa-search"></i>&nbsp;&nbsp;展开查询</button>
 		            </div>
 		        </div>
 				<div class="ibox-content m-b-none border-bottom" style="padding-bottom: 0px;">
