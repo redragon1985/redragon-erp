@@ -15,6 +15,8 @@
  */
 package com.erp.hr.service.spring;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -60,6 +62,12 @@ public class HrCommonServiceImpl implements HrCommonService {
     @Cache(cacheType=CacheType.ALL, cacheSeconds=7200)
     public HrStaff getHrStaff(String staffCode) {
         return this.hrStaffDao.getDataObject(staffCode);
+    }
+    
+    @Override
+    @Cache(cacheType=CacheType.ALL, cacheSeconds=7200)
+    public List<HrDepartment> getHrDepartmentChildList(String departmentCode) {
+        return this.hrDepartmentDao.getHrDepartmentChildList(departmentCode);
     }
 
 }

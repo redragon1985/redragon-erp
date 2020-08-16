@@ -138,4 +138,17 @@ public class HrDepartmentDaoImpl implements HrDepartmentDao{
         return 0;
     }
     
+    @Override
+    public List<HrDepartment> getHrDepartmentChildList(String departmentCode) {
+        String sql = "select d.* from hr_department d where d.segment_code like (select concat(segment_code,'%') from hr_department where department_code = :departmentCode) order by department_id";
+        
+        Map<String, Object> args = new HashMap<String, Object>();
+        args.put("departmentCode", departmentCode);
+        
+        Map<String, Class<?>> entity = new HashMap<String, Class<?>>();
+        entity.put("d", HrDepartment.class);
+        
+        return this.daoSupport.selectDataSql(sql, entity, args);
+    }
+    
 }

@@ -18,10 +18,14 @@ package com.erp.hr.dao;
 import com.framework.api.DaoCRUDIF;
 import com.erp.hr.dao.model.HrDepartment;
 import com.erp.hr.dao.model.HrDepartmentCO;
+import java.util.List;
 
 public interface HrDepartmentDao extends DaoCRUDIF<HrDepartment, HrDepartmentCO>{
     
     //包含子节点数量
     public abstract int getHrChildDepartmentNum(Integer departmentId);
+    
+    //获取子部门列表
+    public abstract List<HrDepartment> getHrDepartmentChildList(String departmentCode);
     
 }

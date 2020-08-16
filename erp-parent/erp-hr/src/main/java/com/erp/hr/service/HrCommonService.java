@@ -15,6 +15,8 @@
  */
 package com.erp.hr.service;
 
+import java.util.List;
+
 import com.erp.hr.dao.model.HrDepartment;
 import com.erp.hr.dao.model.HrStaff;
 import com.erp.hr.dao.model.HrStaffInfoRO;
@@ -35,5 +37,8 @@ public interface HrCommonService {
     
     //获取组织信息
     public abstract HrDepartment getHrDepartment(String departmentCode);
+    
+    //获取子部门列表
+    public abstract List<HrDepartment> getHrDepartmentChildList(String departmentCode);
     
 }
