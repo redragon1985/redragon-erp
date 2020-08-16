@@ -37,10 +37,5 @@
   		<artifactId>erp-order</artifactId>
   		<version>1.0</version>
   	</dependency>
-  	<dependency>
-  		<groupId>redragon</groupId>
-  		<artifactId>erp-springboot</artifactId>
-  		<version>1.0.0</version>
-  	</dependency>
   </dependencies>
 </project>
