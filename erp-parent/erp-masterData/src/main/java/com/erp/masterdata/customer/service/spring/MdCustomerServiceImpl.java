@@ -45,40 +45,28 @@ public class MdCustomerServiceImpl implements MdCustomerService {
     public void insertDataObject(MdCustomer obj) {
         this.mdCustomerDao.insertDataObject(obj);
         //清除缓存
-        EhcacheUtil.clear(MasterDataParam.CUSTOMER_CACHE_KEY);
-        RedisUtil.clear(MasterDataParam.CUSTOMER_CACHE_KEY);
-        EhcacheUtil.clear(MasterDataParam.CUSTOMER_OWN_CACHE_KEY);
-        RedisUtil.clear(MasterDataParam.CUSTOMER_OWN_CACHE_KEY);
+        this.clearCache();
     }
 
     @Override
     public void updateDataObject(MdCustomer obj) {
         this.mdCustomerDao.updateDataObject(obj);
         //清除缓存
-        EhcacheUtil.clear(MasterDataParam.CUSTOMER_CACHE_KEY);
-        RedisUtil.clear(MasterDataParam.CUSTOMER_CACHE_KEY);
-        EhcacheUtil.clear(MasterDataParam.CUSTOMER_OWN_CACHE_KEY);
-        RedisUtil.clear(MasterDataParam.CUSTOMER_OWN_CACHE_KEY);
+        this.clearCache();
     }
     
     @Override
     public void insertOrUpdateDataObject(MdCustomer obj) {
         this.mdCustomerDao.insertOrUpdateDataObject(obj);
         //清除缓存
-        EhcacheUtil.clear(MasterDataParam.CUSTOMER_CACHE_KEY);
-        RedisUtil.clear(MasterDataParam.CUSTOMER_CACHE_KEY);
-        EhcacheUtil.clear(MasterDataParam.CUSTOMER_OWN_CACHE_KEY);
-        RedisUtil.clear(MasterDataParam.CUSTOMER_OWN_CACHE_KEY);
+        this.clearCache();
     }
 
     @Override
     public void deleteDataObject(MdCustomer obj) {
         this.mdCustomerDao.deleteDataObject(obj);
         //清除缓存
-        EhcacheUtil.clear(MasterDataParam.CUSTOMER_CACHE_KEY);
-        RedisUtil.clear(MasterDataParam.CUSTOMER_CACHE_KEY);
-        EhcacheUtil.clear(MasterDataParam.CUSTOMER_OWN_CACHE_KEY);
-        RedisUtil.clear(MasterDataParam.CUSTOMER_OWN_CACHE_KEY);
+        this.clearCache();
     }
 
     @Override
@@ -135,6 +123,17 @@ public class MdCustomerServiceImpl implements MdCustomerService {
     @Cache(cacheType=CacheType.ALL, cacheSeconds=7200)
     public int getCustomerNum() {
         return this.mdCustomerDao.getCustomerNum();
+    }
+    
+    //清除缓存
+    private void clearCache() {
+        //清除缓存
+        EhcacheUtil.clear(MasterDataParam.CUSTOMER_CACHE_KEY);
+        RedisUtil.clear(MasterDataParam.CUSTOMER_CACHE_KEY);
+        EhcacheUtil.clear(MasterDataParam.CUSTOMER_OWN_CACHE_KEY);
+        RedisUtil.clear(MasterDataParam.CUSTOMER_OWN_CACHE_KEY);
+        EhcacheUtil.clearBatch("*getMdCustomerInfoCache*");
+        RedisUtil.clearBatch("*getMdCustomerInfoCache*");
     }
     
 }

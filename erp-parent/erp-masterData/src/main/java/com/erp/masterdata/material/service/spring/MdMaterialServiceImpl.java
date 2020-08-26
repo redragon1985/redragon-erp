@@ -45,32 +45,28 @@ public class MdMaterialServiceImpl implements MdMaterialService {
     public void insertDataObject(MdMaterial obj) {
         this.mdMaterialDao.insertDataObject(obj);
         //清除缓存
-        EhcacheUtil.clear(MasterDataParam.MATERIAL_CACHE_KEY);
-        RedisUtil.clear(MasterDataParam.MATERIAL_CACHE_KEY);
+        this.clearMdMaterialCache();
     }
 
     @Override
     public void updateDataObject(MdMaterial obj) {
         this.mdMaterialDao.updateDataObject(obj);
         //清除缓存
-        EhcacheUtil.clear(MasterDataParam.MATERIAL_CACHE_KEY);
-        RedisUtil.clear(MasterDataParam.MATERIAL_CACHE_KEY);
+        this.clearMdMaterialCache();
     }
     
     @Override
     public void insertOrUpdateDataObject(MdMaterial obj) {
         this.mdMaterialDao.insertOrUpdateDataObject(obj);
         //清除缓存
-        EhcacheUtil.clear(MasterDataParam.MATERIAL_CACHE_KEY);
-        RedisUtil.clear(MasterDataParam.MATERIAL_CACHE_KEY);
+        this.clearMdMaterialCache();
     }
 
     @Override
     public void deleteDataObject(MdMaterial obj) {
         this.mdMaterialDao.deleteDataObject(obj);
         //清除缓存
-        EhcacheUtil.clear(MasterDataParam.MATERIAL_CACHE_KEY);
-        RedisUtil.clear(MasterDataParam.MATERIAL_CACHE_KEY);
+        this.clearMdMaterialCache();
     }
 
     @Override
@@ -116,6 +112,15 @@ public class MdMaterialServiceImpl implements MdMaterialService {
     @Override
     public void updateApproveStatus(int id, String approveStatus) {
         this.mdMaterialDao.updateApproveStatus(id, approveStatus);
+    }
+    
+    //清理物料的所有缓存
+    private void clearMdMaterialCache() {
+        EhcacheUtil.clear(MasterDataParam.MATERIAL_CACHE_KEY);
+        RedisUtil.clear(MasterDataParam.MATERIAL_CACHE_KEY);
+        
+        EhcacheUtil.clearBatch("*getMdMaterialInfoCache*");
+        RedisUtil.clearBatch("*getMdMaterialInfoCache*");
     }
     
 }

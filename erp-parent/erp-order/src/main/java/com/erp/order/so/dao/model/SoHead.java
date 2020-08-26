@@ -335,6 +335,8 @@ public class SoHead implements java.io.Serializable {
     private String departmentName;
     @Transient
     private Double amount;
+    @Transient
+    private String customerContactDesc;
     
     public Double getAmount() {
         return this.amount;
@@ -353,6 +355,12 @@ public class SoHead implements java.io.Serializable {
     }
     public void setDepartmentName(String departmentName) {
         this.departmentName = departmentName;
+    }
+    public String getCustomerContactDesc() {
+        return customerContactDesc;
+    }
+    public void setCustomerContactDesc(String customerContactDesc) {
+        this.customerContactDesc = customerContactDesc;
     }
     
 }

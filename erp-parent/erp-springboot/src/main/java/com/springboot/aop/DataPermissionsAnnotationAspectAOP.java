@@ -40,7 +40,8 @@ public class DataPermissionsAnnotationAspectAOP extends DataPermissionsAnnotatio
 	
 	@Pointcut("execution(* com.erp.hr.dao.*.*(..))||"
 	        + "execution(* com.erp.order.*.dao.*.*(..))||"
-	        + "execution(* com.erp.finance.*.dao.*.*(..))")
+	        + "execution(* com.erp.finance.*.dao.*.*(..))||"
+	        + "execution(* com.erp.inv.*.dao.*.*(..))")
 	public void pointcut(){}
 	
 	@Around("pointcut()")

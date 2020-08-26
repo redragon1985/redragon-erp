@@ -77,7 +77,17 @@ public class MdVendorContactDaoImpl implements MdVendorContactDao{
     
     @Override
     public List<MdVendorContact> getDataObjects(MdVendorContactCO paramObj) {
-        return null;
+        String sql = "select c.* from md_vendor_contact c where vendor_code=:code";
+        
+        Map<String, Object> args = new HashMap<String, Object>();
+        args.put("code", paramObj.getVendorCode());
+        
+        sql = sql + " order by c.contact_id desc";
+        
+        Map<String, Class<?>> entity = new HashMap<String, Class<?>>();
+        entity.put("c", MdVendorContact.class);
+        
+        return this.daoSupport.selectDataSql(sql, entity, args);
     }
     
     @Override

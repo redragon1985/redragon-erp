@@ -25,16 +25,23 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.erp.masterdata.common.param.MasterDataParam;
 import com.erp.masterdata.common.service.MasterDataCommonService;
+import com.erp.masterdata.customer.dao.MdCustomerContactDao;
 import com.erp.masterdata.customer.dao.MdCustomerDao;
 import com.erp.masterdata.customer.dao.model.MdCustomer;
+import com.erp.masterdata.customer.dao.model.MdCustomerContact;
+import com.erp.masterdata.customer.dao.model.MdCustomerContactCO;
 import com.erp.masterdata.material.dao.MdMaterialDao;
 import com.erp.masterdata.material.dao.model.MdMaterial;
 import com.erp.masterdata.project.dao.MdProjectDao;
 import com.erp.masterdata.project.dao.model.MdProject;
 import com.erp.masterdata.subject.dao.MdFinanceSubjectDao;
 import com.erp.masterdata.subject.dao.model.MdFinanceSubject;
+import com.erp.masterdata.vendor.dao.MdVendorContactDao;
 import com.erp.masterdata.vendor.dao.MdVendorDao;
 import com.erp.masterdata.vendor.dao.model.MdVendor;
+import com.erp.masterdata.vendor.dao.model.MdVendorContact;
+import com.erp.masterdata.vendor.dao.model.MdVendorContactCO;
+import com.erp.masterdata.vendor.service.MdVendorContactService;
 import com.framework.annotation.Cache;
 import com.framework.annotation.Cache.CacheType;
 
@@ -59,6 +66,10 @@ public class MasterDataCommonServiceImpl implements MasterDataCommonService {
     private MdProjectDao mdProjectDao;
     @Autowired
     private MdFinanceSubjectDao mdFinanceSubjectDao;
+    @Autowired
+    private MdCustomerContactDao mdCustomerContactDao;
+    @Autowired
+    private MdVendorContactDao mdVendorContactDao;
     
     
     
@@ -151,6 +162,42 @@ public class MasterDataCommonServiceImpl implements MasterDataCommonService {
         }
         
         return map;
+    }
+    
+    @Override
+    @Cache(cacheType=CacheType.ALL, cacheSeconds=7200)
+    public MdMaterial getMdMaterialInfoCache(String materialCode) {
+        return this.mdMaterialDao.getDataObject(materialCode);
+    }
+    
+    @Override
+    @Cache(cacheType=CacheType.ALL, cacheSeconds=7200)
+    public MdCustomer getMdCustomerInfoCache(String customerCode) {
+        //获取客户信息
+        MdCustomer mdCustomer = this.mdCustomerDao.getDataObject(customerCode);
+        //获取客户联系人
+        MdCustomerContactCO mdCustomerContactCO = new MdCustomerContactCO();
+        mdCustomerContactCO.setCustomerCode(customerCode);
+        List<MdCustomerContact> mdCustomerContactList = this.mdCustomerContactDao.getDataObjects(mdCustomerContactCO);
+        //设置联系人
+        mdCustomer.setMdCustomerContactList(mdCustomerContactList);
+        
+        return mdCustomer;
+    }
+    
+    @Override
+    @Cache(cacheType=CacheType.ALL, cacheSeconds=7200)
+    public MdVendor getMdVendorInfoCache(String vendorCode) {
+        //获取供应商信息
+        MdVendor mdVendor = this.mdVendorDao.getDataObject(vendorCode);
+        //获取供应商联系人
+        MdVendorContactCO mdVendorContactCO = new MdVendorContactCO();
+        mdVendorContactCO.setVendorCode(vendorCode);
+        List<MdVendorContact> mdVendorContactList = this.mdVendorContactDao.getDataObjects(mdVendorContactCO);
+        //设置联系人
+        mdVendor.setMdVendorContactList(mdVendorContactList);
+        
+        return mdVendor;
     }
 
 }

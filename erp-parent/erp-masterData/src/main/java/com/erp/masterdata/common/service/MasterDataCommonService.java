@@ -17,6 +17,10 @@ package com.erp.masterdata.common.service;
 
 import java.util.Map;
 
+import com.erp.masterdata.customer.dao.model.MdCustomer;
+import com.erp.masterdata.material.dao.model.MdMaterial;
+import com.erp.masterdata.vendor.dao.model.MdVendor;
+
 /**
  * @description
  * @date 2020年7月16日
@@ -45,5 +49,13 @@ public interface MasterDataCommonService {
     
     //获取科目Map
     public abstract Map<String, String> getSubjectMap();
-
+    
+    //获取物料信息
+    public abstract MdMaterial getMdMaterialInfoCache(String materialCode);
+    
+    //获取供应商信息
+    public abstract MdVendor getMdVendorInfoCache(String vendorCode);
+    
+    //获取客户信息
+    public abstract MdCustomer getMdCustomerInfoCache(String customerCode);
 }

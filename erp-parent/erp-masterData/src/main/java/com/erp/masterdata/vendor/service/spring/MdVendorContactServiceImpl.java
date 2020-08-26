@@ -25,6 +25,9 @@ import com.framework.annotation.Cache;
 import com.framework.annotation.Cache.CacheType;
 import com.framework.annotation.Log;
 import com.framework.dao.model.Pages;
+import com.framework.util.EhcacheUtil;
+import com.framework.util.RedisUtil;
+import com.erp.masterdata.common.param.MasterDataParam;
 import com.erp.masterdata.vendor.dao.MdVendorContactDao;
 import com.erp.masterdata.vendor.dao.model.MdVendorContact;
 import com.erp.masterdata.vendor.dao.model.MdVendorContactCO;
@@ -41,21 +44,29 @@ public class MdVendorContactServiceImpl implements MdVendorContactService {
     @Override
     public void insertDataObject(MdVendorContact obj) {
         this.mdVendorContactDao.insertDataObject(obj);
+        //清除缓存
+        this.clearCache();
     }
 
     @Override
     public void updateDataObject(MdVendorContact obj) {
         this.mdVendorContactDao.updateDataObject(obj);
+        //清除缓存
+        this.clearCache();
     }
     
     @Override
     public void insertOrUpdateDataObject(MdVendorContact obj) {
         this.mdVendorContactDao.insertOrUpdateDataObject(obj);
+        //清除缓存
+        this.clearCache();
     }
 
     @Override
     public void deleteDataObject(MdVendorContact obj) {
         this.mdVendorContactDao.deleteDataObject(obj);
+        //清除缓存
+        this.clearCache();
     }
 
     @Override
@@ -106,6 +117,12 @@ public class MdVendorContactServiceImpl implements MdVendorContactService {
     @Override
     public List<MdVendorContact> getContactListByVendorCode(Pages pages, MdVendorContactCO paramObj) {
         return this.mdVendorContactDao.getContactListByVendorCode(pages, paramObj);
+    }
+    
+    //清除缓存
+    private void clearCache() {
+        EhcacheUtil.clearBatch("*getMdVendorInfoCache*");
+        RedisUtil.clearBatch("*getMdVendorInfoCache*");
     }
     
 }

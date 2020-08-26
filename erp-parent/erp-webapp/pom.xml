@@ -56,6 +56,12 @@
     	<version>1.0</version>
     	<type>war</type>
     </dependency>
+    <dependency>
+    	<groupId>redragon</groupId>
+    	<artifactId>erp-inv</artifactId>
+    	<version>1.0</version>
+    	<type>war</type>
+    </dependency>
   </dependencies>
   
   <build>
@@ -97,6 +103,10 @@
                   <overlay>    
                    <groupId>redragon</groupId>
                    <artifactId>erp-global</artifactId>
+                  </overlay>
+                  <overlay>    
+                   <groupId>redragon</groupId>
+                   <artifactId>erp-inv</artifactId>
                   </overlay> 
               </overlays>   
           </configuration>    

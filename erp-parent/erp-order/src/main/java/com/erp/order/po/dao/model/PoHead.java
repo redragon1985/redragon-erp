@@ -338,6 +338,8 @@ public class PoHead implements java.io.Serializable {
     private String departmentName;
     @Transient
     private Double amount;
+    @Transient
+    private String vendorContactDesc;
     
     public Double getAmount() {
         return this.amount;
@@ -356,6 +358,12 @@ public class PoHead implements java.io.Serializable {
     }
     public void setDepartmentName(String departmentName) {
         this.departmentName = departmentName;
+    }
+    public String getVendorContactDesc() {
+        return vendorContactDesc;
+    }
+    public void setVendorContactDesc(String vendorContactDesc) {
+        this.vendorContactDesc = vendorContactDesc;
     }
     
 }

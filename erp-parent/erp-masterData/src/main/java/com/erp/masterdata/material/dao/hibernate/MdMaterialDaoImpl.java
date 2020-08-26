@@ -71,6 +71,19 @@ public class MdMaterialDaoImpl implements MdMaterialDao{
     
     @Override
     public MdMaterial getDataObject(String code) {
+        String sql = "select m.* from md_material m where m.material_code = :code";
+        
+        Map<String, Object> args = new HashMap<String, Object>();
+        args.put("code", code);
+        
+        Map<String, Class<?>> entity = new HashMap<String, Class<?>>();
+        entity.put("m", MdMaterial.class);
+        
+        List<MdMaterial> list = this.daoSupport.selectDataSql(sql, entity, args);
+        if(list.size()>0) {
+            return list.get(0);
+        }
+        
         return null;
     }
     

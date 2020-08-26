@@ -270,15 +270,31 @@ contentPage=contentPage.substring(contentPage.lastIndexOf("/")+1, contentPage.le
 				</ul>
 			</li>
 				
-			<%-- 
-			<li><a href="#"><i class="fa fa-edit"></i> <span class="nav-label">库房管理</span><span class="fa arrow"></span></a>
+			<%if(contentPage.contains("inv")){ %>		
+				<li class="active menu"><a href="#"><i class="fa fa-truck"></i> <span class="nav-label">库房管理</span><span class="fa arrow"></span></a>
+			<%}else{ %>
+				<li class="menu"><a href="#"><i class="fa fa-truck"></i> <span class="nav-label">库房管理</span><span class="fa arrow"></span></a>
+			<%} %>
 				<ul class="nav nav-second-level collapse">
-					<li><a href="form_basic.html">入库单</a></li>
-					<li><a href="form_advanced.html">出库单</a></li>
-					<li><a href="form_wizard.html">库存管理</a></li>
-					<li><a href="form_file_upload.html">库存盘点</a></li>
-				</ul></li>
-			--%>	
+					<%if(contentPage.equalsIgnoreCase("invInputList")||contentPage.equalsIgnoreCase("invInputEdit")){ %>
+						<li class="active"><a href="web/invInputHead/getInvInputHeadList">入库单</a></li>
+					<%}else{ %>
+						<li><a href="web/invInputHead/getInvInputHeadList">入库单</a></li>
+					<%} %>
+					
+					<%if(contentPage.equalsIgnoreCase("invOutputList")||contentPage.equalsIgnoreCase("invOutputEdit")){ %>
+						<li class="active"><a href="web/invOutputHead/getInvOutputHeadList">出库单</a></li>
+					<%}else{ %>
+						<li><a href="web/invOutputHead/getInvOutputHeadList">出库单</a></li>
+					<%} %>
+					
+					<%if(contentPage.equalsIgnoreCase("invWarehouseList")||contentPage.equalsIgnoreCase("invWarehouseEdit")){ %>
+						<li class="active"><a href="web/invWarehouse/getInvWarehouseList">仓库及库存管理</a></li>
+					<%}else{ %>
+						<li><a href="web/invWarehouse/getInvWarehouseList">仓库及库存管理</a></li>
+					<%} %>
+				</ul>
+			</li>
 				
 			
 			
@@ -330,7 +346,7 @@ contentPage=contentPage.substring(contentPage.lastIndexOf("/")+1, contentPage.le
 					<%if(contentPage.equalsIgnoreCase("voucherTypeNumberEdit")){ %>
 						<li class="active"><a href="web/finVoucherModelHead/getVoucherTypeNumber">凭证号维护&nbsp;<i class="fa fa-sliders"></i></a></li>
 					<%}else{ %>
-						<li><a href="web/finVoucherModelHead/getVoucherTypeNumber">凭证号维护</a></li>
+						<li><a href="web/finVoucherModelHead/getVoucherTypeNumber">凭证号维护&nbsp;<i class="fa fa-sliders"></i></a></li>
 					<%} %>
 				</ul>
 			</li>

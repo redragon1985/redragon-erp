@@ -42,7 +42,8 @@ public class SystemLogAspectAOP extends SystemLogAspect {
 	        + "execution(* com.erp.hr.service.*.*(..))||"
 	        + "execution(* com.erp.masterdata.*.service.*.*(..))||"
 	        + "execution(* com.erp.order.*.service.*.*(..))||"
-	        + "execution(* com.erp.finance.*.service.*.*(..))")
+	        + "execution(* com.erp.finance.*.service.*.*(..))||"
+	        + "execution(* com.erp.inv.*.service.*.*(..))")
 	public void pointcut(){}
 	
 	@Around("pointcut()")

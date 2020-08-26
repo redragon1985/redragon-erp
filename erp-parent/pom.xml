@@ -337,5 +337,6 @@
     <module>erp-order</module>
     <module>erp-finance</module>
     <module>erp-global</module>
+    <module>erp-inv</module>
   </modules>
 </project>

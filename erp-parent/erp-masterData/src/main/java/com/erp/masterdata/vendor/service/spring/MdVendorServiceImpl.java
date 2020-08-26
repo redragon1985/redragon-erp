@@ -45,40 +45,28 @@ public class MdVendorServiceImpl implements MdVendorService {
     public void insertDataObject(MdVendor obj) {
         this.mdVendorDao.insertDataObject(obj);
         //清除缓存
-        EhcacheUtil.clear(MasterDataParam.VENDOR_CACHE_KEY);
-        RedisUtil.clear(MasterDataParam.VENDOR_CACHE_KEY);
-        EhcacheUtil.clear(MasterDataParam.VENDOR_OWN_CACHE_KEY);
-        RedisUtil.clear(MasterDataParam.VENDOR_OWN_CACHE_KEY);
+        this.clearCache();
     }
 
     @Override
     public void updateDataObject(MdVendor obj) {
         this.mdVendorDao.updateDataObject(obj);
         //清除缓存
-        EhcacheUtil.clear(MasterDataParam.VENDOR_CACHE_KEY);
-        RedisUtil.clear(MasterDataParam.VENDOR_CACHE_KEY);
-        EhcacheUtil.clear(MasterDataParam.VENDOR_OWN_CACHE_KEY);
-        RedisUtil.clear(MasterDataParam.VENDOR_OWN_CACHE_KEY);
+        this.clearCache();
     }
     
     @Override
     public void insertOrUpdateDataObject(MdVendor obj) {
         this.mdVendorDao.insertOrUpdateDataObject(obj);
         //清除缓存
-        EhcacheUtil.clear(MasterDataParam.VENDOR_CACHE_KEY);
-        RedisUtil.clear(MasterDataParam.VENDOR_CACHE_KEY);
-        EhcacheUtil.clear(MasterDataParam.VENDOR_OWN_CACHE_KEY);
-        RedisUtil.clear(MasterDataParam.VENDOR_OWN_CACHE_KEY);
+        this.clearCache();
     }
 
     @Override
     public void deleteDataObject(MdVendor obj) {
         this.mdVendorDao.deleteDataObject(obj);
         //清除缓存
-        EhcacheUtil.clear(MasterDataParam.VENDOR_CACHE_KEY);
-        RedisUtil.clear(MasterDataParam.VENDOR_CACHE_KEY);
-        EhcacheUtil.clear(MasterDataParam.VENDOR_OWN_CACHE_KEY);
-        RedisUtil.clear(MasterDataParam.VENDOR_OWN_CACHE_KEY);
+        this.clearCache();
     }
 
     @Override
@@ -135,6 +123,16 @@ public class MdVendorServiceImpl implements MdVendorService {
     @Cache(cacheType=CacheType.ALL, cacheSeconds=7200)
     public int getVendorNum() {
         return this.mdVendorDao.getVendorNum();
+    }
+    
+    //清除缓存
+    private void clearCache() {
+        EhcacheUtil.clear(MasterDataParam.VENDOR_CACHE_KEY);
+        RedisUtil.clear(MasterDataParam.VENDOR_CACHE_KEY);
+        EhcacheUtil.clear(MasterDataParam.VENDOR_OWN_CACHE_KEY);
+        RedisUtil.clear(MasterDataParam.VENDOR_OWN_CACHE_KEY);
+        EhcacheUtil.clearBatch("*getMdVendorInfoCache*");
+        RedisUtil.clearBatch("*getMdVendorInfoCache*");
     }
     
 }

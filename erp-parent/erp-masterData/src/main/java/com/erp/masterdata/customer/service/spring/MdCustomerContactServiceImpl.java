@@ -25,6 +25,9 @@ import com.framework.annotation.Cache;
 import com.framework.annotation.Cache.CacheType;
 import com.framework.annotation.Log;
 import com.framework.dao.model.Pages;
+import com.framework.util.EhcacheUtil;
+import com.framework.util.RedisUtil;
+import com.erp.masterdata.common.param.MasterDataParam;
 import com.erp.masterdata.customer.dao.MdCustomerContactDao;
 import com.erp.masterdata.customer.dao.model.MdCustomerBank;
 import com.erp.masterdata.customer.dao.model.MdCustomerContact;
@@ -42,21 +45,29 @@ public class MdCustomerContactServiceImpl implements MdCustomerContactService {
     @Override
     public void insertDataObject(MdCustomerContact obj) {
         this.mdCustomerContactDao.insertDataObject(obj);
+        //清除缓存
+        this.clearCache();
     }
 
     @Override
     public void updateDataObject(MdCustomerContact obj) {
         this.mdCustomerContactDao.updateDataObject(obj);
+        //清除缓存
+        this.clearCache();
     }
     
     @Override
     public void insertOrUpdateDataObject(MdCustomerContact obj) {
         this.mdCustomerContactDao.insertOrUpdateDataObject(obj);
+        //清除缓存
+        this.clearCache();
     }
 
     @Override
     public void deleteDataObject(MdCustomerContact obj) {
         this.mdCustomerContactDao.deleteDataObject(obj);
+        //清除缓存
+        this.clearCache();
     }
 
     @Override
@@ -107,6 +118,13 @@ public class MdCustomerContactServiceImpl implements MdCustomerContactService {
     @Override
     public List<MdCustomerContact> getContactListByCustomerCode(Pages pages, MdCustomerContactCO paramObj) {
         return this.mdCustomerContactDao.getContactListByCustomerCode(pages, paramObj);
+    }
+    
+    //清除缓存
+    private void clearCache() {
+        //清除缓存
+        EhcacheUtil.clearBatch("*getMdCustomerInfoCache*");
+        RedisUtil.clearBatch("*getMdCustomerInfoCache*");
     }
     
 }
