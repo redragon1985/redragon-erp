@@ -18,28 +18,29 @@ USE `erp`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `sys_dataset`
+-- Table structure for table `inv_stock_check_line`
 --
 
-DROP TABLE IF EXISTS `sys_dataset`;
+DROP TABLE IF EXISTS `inv_stock_check_line`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
-CREATE TABLE `sys_dataset` (
-  `dataset_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
-  `dataset_code` varchar(45) NOT NULL COMMENT '值集编码',
-  `dataset_name` varchar(45) NOT NULL COMMENT '值集名称',
-  `dataset_type_code` varchar(45) NOT NULL COMMENT '值集类型编码',
-  `status` char(1) NOT NULL DEFAULT 'Y' COMMENT '状态',
+CREATE TABLE `inv_stock_check_line` (
+  `check_line_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `check_line_code` varchar(45) NOT NULL COMMENT '盘点行编码',
+  `check_head_code` varchar(45) NOT NULL COMMENT '盘点头编码',
+  `material_code` varchar(45) NOT NULL COMMENT '物料编码',
+  `check_before_quantity` double NOT NULL COMMENT '盘点前数量',
+  `check_after_quantity` double NOT NULL COMMENT '盘点后数量',
+  `memo` varchar(200) DEFAULT NULL COMMENT '备注',
+  `status` varchar(45) NOT NULL DEFAULT 'Y' COMMENT '状态',
   `created_date` datetime NOT NULL COMMENT '创建时间',
   `created_by` varchar(45) NOT NULL COMMENT '创建人',
   `last_updated_date` datetime DEFAULT NULL COMMENT '最后修改时间',
   `last_updated_by` varchar(45) DEFAULT NULL COMMENT '最后修改人',
   `org_code` varchar(10) NOT NULL COMMENT '组织机构',
-  PRIMARY KEY (`dataset_id`),
-  UNIQUE KEY `dataset_name_UNIQUE` (`dataset_name`),
-  UNIQUE KEY `dataset_code_UNIQUE` (`dataset_code`),
-  KEY `IX_dataset_dataset_type_code` (`dataset_type_code`) /*!80000 INVISIBLE */
-) ENGINE=InnoDB AUTO_INCREMENT=78 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='系统数据字典值表';
+  PRIMARY KEY (`check_line_id`),
+  UNIQUE KEY `check_line_code_UNIQUE` (`check_line_code`)
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='库存盘点表行';
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -51,4 +52,4 @@ CREATE TABLE `sys_dataset` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-08-29 21:31:25
+-- Dump completed on 2020-08-29 21:31:26
