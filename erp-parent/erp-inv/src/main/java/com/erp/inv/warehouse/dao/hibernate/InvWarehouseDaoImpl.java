@@ -1,17 +1,20 @@
 /*
  * Copyright 2020-2021 redragon.dongbin
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      https://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * This file is part of redragon-erp/赤龙ERP.
+
+ * redragon-erp/赤龙ERP is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+
+ * redragon-erp/赤龙ERP is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+
+ * You should have received a copy of the GNU General Public License
+ * along with redragon-erp/赤龙ERP.  If not, see <https://www.gnu.org/licenses/>.
  */
 package com.erp.inv.warehouse.dao.hibernate;
 
@@ -28,6 +31,7 @@ import com.framework.annotation.SqlParam;
 import com.framework.dao.DaoSupport;
 import com.framework.dao.model.Pages;
 import com.framework.util.DaoUtil;
+import com.erp.inv.check.dao.model.InvStockCheckHead;
 import com.erp.inv.warehouse.dao.InvWarehouseDao;
 import com.erp.inv.warehouse.dao.model.InvWarehouse;
 import com.erp.inv.warehouse.dao.model.InvWarehouseCO;
@@ -71,6 +75,19 @@ public class InvWarehouseDaoImpl implements InvWarehouseDao{
     
     @Override
     public InvWarehouse getDataObject(String code) {
+        String sql = "select h.* from inv_warehouse h where h.warehouse_code = :code";
+        
+        Map<String, Object> args = new HashMap<String, Object>();
+        args.put("code", code);
+        
+        Map<String, Class<?>> entity = new HashMap<String, Class<?>>();
+        entity.put("h", InvWarehouse.class);
+        
+        List<InvWarehouse> list = this.daoSupport.selectDataSql(sql, entity, args);
+        if(list.size()>0) {
+            return list.get(0);
+        }
+        
         return null;
     }
     

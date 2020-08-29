@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>redragon</groupId>
   <artifactId>erp-parent</artifactId>
-  <version>1.0</version>
+  <version>${redragon.erp.version}</version>
   <packaging>pom</packaging>
   
   <!-- 定义公共资源版本 -->
@@ -15,6 +15,7 @@
   
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <redragon.erp.version>0.6</redragon.erp.version>
   </properties>
   
   <dependencies>
@@ -237,7 +238,7 @@
 	    <groupId>org.aspectj</groupId>
 	    <artifactId>aspectjrt</artifactId>
 	</dependency>
-    
+	
     <!--  
     <dependency>
         <groupId>redragon</groupId>
@@ -297,7 +298,7 @@
         <version>4.1.33.Final</version>
     </dependency>
     -->
-    
+
   </dependencies>
   
   <build>

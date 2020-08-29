@@ -3,16 +3,17 @@
   <parent>
     <groupId>redragon</groupId>
     <artifactId>erp-parent</artifactId>
-    <version>1.0</version>
+    <version>${redragon.erp.version}</version>
   </parent>
   <artifactId>erp-masterData</artifactId>
+  <version>${redragon.erp.version}</version>
   <packaging>war</packaging>
   
   <dependencies>
 	  <dependency>
 	  	<groupId>redragon</groupId>
 	  	<artifactId>erp-dataset</artifactId>
-	  	<version>1.0.0</version>
+	  	<version>${redragon.erp.version}</version>
 	  </dependency>
   </dependencies>
   

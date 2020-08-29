@@ -1,18 +1,21 @@
 <%--
 
-	Copyright 2020-2021 redragon.dongbin
+    Copyright 2020-2021 redragon.dongbin
+ 
+    This file is part of redragon-erp/赤龙ERP.
 
-	Licensed under the Apache License, Version 2.0 (the "License");
-	you may not use this file except in compliance with the License.
-	You may obtain a copy of the License at
+    redragon-erp/赤龙ERP is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 2 of the License, or
+    (at your option) any later version.
 
-      https://www.apache.org/licenses/LICENSE-2.0
+    redragon-erp/赤龙ERP is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
 
-	Unless required by applicable law or agreed to in writing, software
-	distributed under the License is distributed on an "AS IS" BASIS,
-	WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-	See the License for the specific language governing permissions and
-	limitations under the License.
+    You should have received a copy of the GNU General Public License
+    along with redragon-erp/赤龙ERP.  If not, see <https://www.gnu.org/licenses/>.
 	
 --%>
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
@@ -101,7 +104,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 										</div>
 										<div class="btn-group" style="margin-top: 5px;">
 											<button class="btn-info btn btn-xs" onclick="getStockDetail('${data.warehouseCode}')"><i class="fa fa-book"></i>&nbsp;库存明细</button>&nbsp;
-											<button class="btn-success btn btn-xs" onclick="initWarehouse('${data.warehouseCode}')"><i class="fa fa-th"></i>&nbsp;库存盘点</button>
+											<button class="btn-success btn btn-xs" onclick="getStockCheck('${data.warehouseCode}')"><i class="fa fa-th"></i>&nbsp;库存盘点</button>
 										</div>
 									</td>
 								</tr>
@@ -165,5 +168,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 	function getStockDetail(code){
 		window.location.href="web/invStock/getInvStockDetailList?warehouseCode="+code;
+	}
+	
+	function getStockCheck(code){
+		window.location.href="web/invStockCheckHead/getInvStockCheckHeadList?warehouseCode="+code;
 	}
 </script>       

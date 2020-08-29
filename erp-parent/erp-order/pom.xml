@@ -3,9 +3,10 @@
   <parent>
     <groupId>redragon</groupId>
     <artifactId>erp-parent</artifactId>
-    <version>1.0</version>
+    <version>${redragon.erp.version}</version>
   </parent>
   <artifactId>erp-order</artifactId>
+  <version>${redragon.erp.version}</version>
   <packaging>war</packaging>
   
   <build>
@@ -24,17 +25,17 @@
   	<dependency>
   		<groupId>redragon</groupId>
   		<artifactId>erp-dataset</artifactId>
-  		<version>1.0.0</version>
+  		<version>${redragon.erp.version}</version>
   	</dependency>
   	<dependency>
   		<groupId>redragon</groupId>
   		<artifactId>erp-hr</artifactId>
-  		<version>1.0</version>
+  		<version>${redragon.erp.version}</version>
   	</dependency>
   	<dependency>
   		<groupId>redragon</groupId>
   		<artifactId>erp-masterData</artifactId>
-  		<version>1.0</version>
+  		<version>${redragon.erp.version}</version>
   	</dependency>
   </dependencies>
 </project>
