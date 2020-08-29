@@ -95,7 +95,559 @@
         <artifactId>mysql-connector-java</artifactId>
         <version>8.0.20</version>
 	</dependency>
-    
+	
+	<dependency>
+	    <groupId>activation</groupId>
+	    <artifactId>activation</artifactId>
+	    <version>1.1</version>
+	    <scope>system</scope>
+	    <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/activation-1.1.jar</systemPath>
+	</dependency>
+	
+	<dependency>
+	    <groupId>antlr</groupId>
+	    <artifactId>antlr</artifactId>
+	    <version>2.7.7</version>
+	    <scope>system</scope>
+	    <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/antlr-2.7.7.jar</systemPath>
+	</dependency>
+	
+	<dependency>
+	    <groupId>aopalliance</groupId>
+	    <artifactId>aopalliance</artifactId>
+	    <version>1.0</version>
+	    <scope>system</scope>
+	    <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/aopalliance-1.0.jar</systemPath>
+	</dependency>
+	
+	<dependency>
+	    <groupId>aspectjrt</groupId>
+	    <artifactId>aspectjrt</artifactId>
+	    <version>1.7.2</version>
+	    <scope>system</scope>
+	    <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/aspectjrt-1.7.2.jar</systemPath>
+	</dependency>
+	
+	<dependency>
+	    <groupId>aspectjweaver</groupId>
+	    <artifactId>aspectjweaver</artifactId>
+	    <version>1.7.2</version>
+	    <scope>system</scope>
+	    <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/aspectjweaver-1.7.2.jar</systemPath>
+	</dependency>
+	
+	<dependency>
+	    <groupId>cas-server-core</groupId>
+	    <artifactId>cas-server-core</artifactId>
+	    <version>4.0.0</version>
+	    <scope>system</scope>
+	    <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/cas-server-core-4.0.0.jar</systemPath>
+	</dependency>
+	
+	<dependency>
+	    <groupId>cas-server-support-generic</groupId>
+	    <artifactId>cas-server-support-generic</artifactId>
+	    <version>4.0.0</version>
+	    <scope>system</scope>
+	    <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/cas-server-support-generic-4.0.0.jar</systemPath>
+	</dependency>
+	
+	<dependency>
+	    <groupId>cas-server-support-jdbc</groupId>
+	    <artifactId>cas-server-support-jdbc</artifactId>
+	    <version>4.0.0</version>
+	    <scope>system</scope>
+	    <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/cas-server-support-jdbc-4.0.0.jar</systemPath>
+	</dependency>
+	
+	<dependency>
+	    <groupId>cas-server-webapp-support</groupId>
+	    <artifactId>cas-server-webapp-support</artifactId>
+	    <version>4.0.0</version>
+	    <scope>system</scope>
+	    <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/cas-server-webapp-support-4.0.0.jar</systemPath>
+	</dependency>
+	
+	<dependency>
+	    <groupId>commons-beanutils</groupId>
+	    <artifactId>commons-beanutils</artifactId>
+	    <version>1.8.3</version>
+	    <scope>system</scope>
+	    <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/commons-beanutils-1.8.3.jar</systemPath>
+	</dependency>
+	
+	<dependency>
+	    <groupId>commons-codec</groupId>
+	    <artifactId>commons-codec</artifactId>
+	    <version>1.7</version>
+	    <scope>system</scope>
+	    <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/commons-codec-1.7.jar</systemPath>
+	</dependency>
+	
+	<dependency>
+	    <groupId>commons-collections</groupId>
+	    <artifactId>commons-collections</artifactId>
+	    <version>3.2.1</version>
+	    <scope>system</scope>
+	    <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/commons-collections-3.2.1.jar</systemPath>
+	</dependency>
+	
+	<dependency>
+	    <groupId>commons-io</groupId>
+	    <artifactId>commons-io</artifactId>
+	    <version>2.4</version>
+	    <scope>system</scope>
+	    <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/commons-io-2.4.jar</systemPath>
+	</dependency>
+	
+	<dependency>
+	    <groupId>commons-jexl</groupId>
+	    <artifactId>commons-jexl</artifactId>
+	    <version>1.1</version>
+	    <scope>system</scope>
+	    <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/commons-jexl-1.1.jar</systemPath>
+	</dependency>
+	
+	<dependency>
+	    <groupId>commons-lang</groupId>
+	    <artifactId>commons-lang</artifactId>
+	    <version>2.5</version>
+	    <scope>system</scope>
+	    <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/commons-lang-2.5.jar</systemPath>
+	</dependency>
+	
+	<dependency>
+	    <groupId>commons-logging</groupId>
+	    <artifactId>commons-logging</artifactId>
+	    <version>1.1.3</version>
+	    <scope>system</scope>
+	    <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/commons-logging-1.1.3.jar</systemPath>
+	</dependency>
+	
+	<dependency>
+	    <groupId>commons-logging-api</groupId>
+	    <artifactId>commons-logging-api</artifactId>
+	    <version>1.1</version>
+	    <scope>system</scope>
+	    <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/commons-logging-api-1.1.jar</systemPath>
+	</dependency>
+	
+	<dependency>
+	    <groupId>dom4j</groupId>
+	    <artifactId>dom4j</artifactId>
+	    <version>1.6.1</version>
+	    <scope>system</scope>
+	    <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/dom4j-1.6.1.jar</systemPath>
+	</dependency>
+	
+	<dependency>
+	    <groupId>ezmorph</groupId>
+	    <artifactId>ezmorph</artifactId>
+	    <version>1.0.6</version>
+	    <scope>system</scope>
+	    <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/ezmorph-1.0.6.jar</systemPath>
+	</dependency>
+	
+	<dependency>
+	    <groupId>hibernate-commons-annotations</groupId>
+	    <artifactId>hibernate-commons-annotations</artifactId>
+	    <version>4.0.1</version>
+	    <scope>system</scope>
+	    <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/hibernate-commons-annotations-4.0.1.Final.jar</systemPath>
+	</dependency>
+	
+	<dependency>
+	    <groupId>hibernate-core</groupId>
+	    <artifactId>hibernate-core</artifactId>
+	    <version>4.1.0</version>
+	    <scope>system</scope>
+	    <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/hibernate-core-4.1.0.Final.jar</systemPath>
+	</dependency>
+	
+	<dependency>
+	    <groupId>hibernate-jpa</groupId>
+	    <artifactId>hibernate-jpa</artifactId>
+	    <version>2.0</version>
+	    <scope>system</scope>
+	    <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/hibernate-jpa-2.0-api-1.0.1.Final.jar</systemPath>
+	</dependency>
+	
+	<dependency>
+	    <groupId>hibernate-validator</groupId>
+	    <artifactId>hibernate-validator</artifactId>
+	    <version>4.2.0</version>
+	    <scope>system</scope>
+	    <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/hibernate-validator-4.2.0.Final.jar</systemPath>
+	</dependency>
+	
+	<dependency>
+	    <groupId>inspektr-audit</groupId>
+	    <artifactId>inspektr-audit</artifactId>
+	    <version>1.0.7</version>
+	    <scope>system</scope>
+	    <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/inspektr-audit-1.0.7.GA.jar</systemPath>
+	</dependency>
+	
+	<dependency>
+	    <groupId>inspektr-common</groupId>
+	    <artifactId>inspektr-common</artifactId>
+	    <version>1.0.7</version>
+	    <scope>system</scope>
+	    <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/inspektr-common-1.0.7.GA.jar</systemPath>
+	</dependency>
+	
+	<dependency>
+	    <groupId>inspektr-error</groupId>
+	    <artifactId>inspektr-error</artifactId>
+	    <version>1.0.7</version>
+	    <scope>system</scope>
+	    <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/inspektr-error-1.0.7.GA.jar</systemPath>
+	</dependency>
+	
+	<dependency>
+	    <groupId>inspektr-support-spring</groupId>
+	    <artifactId>inspektr-support-spring</artifactId>
+	    <version>1.0.7</version>
+	    <scope>system</scope>
+	    <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/inspektr-support-spring-1.0.7.GA.jar</systemPath>
+	</dependency>
+	
+	<dependency>
+	    <groupId>javassist</groupId>
+	    <artifactId>javassist</artifactId>
+	    <version>3.15.0</version>
+	    <scope>system</scope>
+	    <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/javassist-3.15.0-GA.jar</systemPath>
+	</dependency>
+	
+	<dependency>
+	    <groupId>jaxb-api</groupId>
+	    <artifactId>jaxb-api</artifactId>
+	    <version>2.2</version>
+	    <scope>system</scope>
+	    <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/jaxb-api-2.2.jar</systemPath>
+	</dependency>
+	
+	<dependency>
+	    <groupId>jaxb-impl</groupId>
+	    <artifactId>jaxb-impl</artifactId>
+	    <version>2.2</version>
+	    <scope>system</scope>
+	    <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/jaxb-impl-2.2.jar</systemPath>
+	</dependency>
+	
+	<dependency>
+	    <groupId>jboss-logging</groupId>
+	    <artifactId>jboss-logging</artifactId>
+	    <version>3.1.0</version>
+	    <scope>system</scope>
+	    <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/jboss-logging-3.1.0.CR2.jar</systemPath>
+	</dependency>
+	
+	<dependency>
+	    <groupId>jboss-transaction-api</groupId>
+	    <artifactId>jboss-transaction-api</artifactId>
+	    <version>1.1</version>
+	    <scope>system</scope>
+	    <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/jboss-transaction-api_1.1_spec-1.0.0.Final.jar</systemPath>
+	</dependency>
+	
+	<dependency>
+	    <groupId>jcl-over-slf4j</groupId>
+	    <artifactId>jcl-over-slf4j</artifactId>
+	    <version>1.7.5</version>
+	    <scope>system</scope>
+	    <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/jcl-over-slf4j-1.7.5.jar</systemPath>
+	</dependency>
+	
+	<dependency>
+	    <groupId>joda-time</groupId>
+	    <artifactId>joda-time</artifactId>
+	    <version>2.2</version>
+	    <scope>system</scope>
+	    <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/joda-time-2.2.jar</systemPath>
+	</dependency>
+	
+	<dependency>
+	    <groupId>json</groupId>
+	    <artifactId>json</artifactId>
+	    <version>1.0</version>
+	    <scope>system</scope>
+	    <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/json-1.0.jar</systemPath>
+	</dependency>
+	
+	<dependency>
+	    <groupId>json-lib</groupId>
+	    <artifactId>json-lib</artifactId>
+	    <version>2.4</version>
+	    <scope>system</scope>
+	    <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/json-lib-2.4-jdk15.jar</systemPath>
+	</dependency>
+	
+	<dependency>
+	    <groupId>jstl</groupId>
+	    <artifactId>jstl</artifactId>
+	    <version>1.1.2</version>
+	    <scope>system</scope>
+	    <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/jstl-1.1.2.jar</systemPath>
+	</dependency>
+	
+	<dependency>
+	    <groupId>log4j</groupId>
+	    <artifactId>log4j</artifactId>
+	    <version>1.2.17</version>
+	    <scope>system</scope>
+	    <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/log4j-1.2.17.jar</systemPath>
+	</dependency>
+	
+	<dependency>
+	    <groupId>mysql-connector-java</groupId>
+	    <artifactId>mysql-connector-java</artifactId>
+	    <version>8.0.20</version>
+	    <scope>system</scope>
+	    <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/mysql-connector-java-8.0.20.jar</systemPath>
+	</dependency>
+	
+	<dependency>
+	    <groupId>perf4j</groupId>
+	    <artifactId>perf4j</artifactId>
+	    <version>0.9.16</version>
+	    <scope>system</scope>
+	    <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/perf4j-0.9.16-log4jonly.jar</systemPath>
+	</dependency>
+	
+	<dependency>
+	    <groupId>person-directory-api</groupId>
+	    <artifactId>person-directory-api</artifactId>
+	    <version>1.5.1</version>
+	    <scope>system</scope>
+	    <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/person-directory-api-1.5.1.jar</systemPath>
+	</dependency>
+	
+	<dependency>
+	    <groupId>person-directory-impl</groupId>
+	    <artifactId>person-directory-impl</artifactId>
+	    <version>1.5.1</version>
+	    <scope>system</scope>
+	    <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/person-directory-impl-1.5.1.jar</systemPath>
+	</dependency>
+	
+	<dependency>
+	    <groupId>quartz</groupId>
+	    <artifactId>quartz</artifactId>
+	    <version>1.6.1</version>
+	    <scope>system</scope>
+	    <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/quartz-1.6.1.jar</systemPath>
+	</dependency>
+	
+	<dependency>
+	    <groupId>redragon</groupId>
+	    <artifactId>redragon</artifactId>
+	    <version>1.8.7</version>
+	    <scope>system</scope>
+	    <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/redragon-1.8.7.jar</systemPath>
+	</dependency>
+	
+	<dependency>
+	    <groupId>slf4j-api</groupId>
+	    <artifactId>slf4j-api</artifactId>
+	    <version>1.7.5</version>
+	    <scope>system</scope>
+	    <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/slf4j-api-1.7.5.jar</systemPath>
+	</dependency>
+	
+	<dependency>
+	    <groupId>slf4j-log4j12</groupId>
+	    <artifactId>slf4j-log4j12</artifactId>
+	    <version>1.7.5</version>
+	    <scope>system</scope>
+	    <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/slf4j-log4j12-1.7.5.jar</systemPath>
+	</dependency>
+	
+	<dependency>
+	    <groupId>spring-aop</groupId>
+	    <artifactId>spring-aop</artifactId>
+	    <version>3.2.6</version>
+	    <scope>system</scope>
+	    <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/spring-aop-3.2.6.RELEASE.jar</systemPath>
+	</dependency>
+	
+	<dependency>
+	    <groupId>spring-beans</groupId>
+	    <artifactId>spring-beans</artifactId>
+	    <version>3.2.6</version>
+	    <scope>system</scope>
+	    <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/spring-beans-3.2.6.RELEASE.jar</systemPath>
+	</dependency>
+	
+	<dependency>
+	    <groupId>spring-binding</groupId>
+	    <artifactId>spring-binding</artifactId>
+	    <version>2.3.2</version>
+	    <scope>system</scope>
+	    <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/spring-binding-2.3.2.RELEASE.jar</systemPath>
+	</dependency>
+	
+	<dependency>
+	    <groupId>spring-context</groupId>
+	    <artifactId>spring-context</artifactId>
+	    <version>3.2.6</version>
+	    <scope>system</scope>
+	    <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/spring-context-3.2.6.RELEASE.jar</systemPath>
+	</dependency>
+	
+	<dependency>
+	    <groupId>spring-context-support</groupId>
+	    <artifactId>spring-context-support</artifactId>
+	    <version>3.2.6</version>
+	    <scope>system</scope>
+	    <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/spring-context-support-3.2.6.RELEASE.jar</systemPath>
+	</dependency>
+	
+	<dependency>
+	    <groupId>spring-core</groupId>
+	    <artifactId>spring-core</artifactId>
+	    <version>3.2.6</version>
+	    <scope>system</scope>
+	    <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/spring-core-3.2.6.RELEASE.jar</systemPath>
+	</dependency>
+	
+	<dependency>
+	    <groupId>spring-expression</groupId>
+	    <artifactId>spring-expression</artifactId>
+	    <version>3.2.6</version>
+	    <scope>system</scope>
+	    <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/spring-expression-3.2.6.RELEASE.jar</systemPath>
+	</dependency>
+	
+	<dependency>
+	    <groupId>spring-jdbc</groupId>
+	    <artifactId>spring-jdbc</artifactId>
+	    <version>3.2.6</version>
+	    <scope>system</scope>
+	    <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/spring-jdbc-3.2.6.RELEASE.jar</systemPath>
+	</dependency>
+	
+	<dependency>
+	    <groupId>spring-js</groupId>
+	    <artifactId>spring-js</artifactId>
+	    <version>2.3.2</version>
+	    <scope>system</scope>
+	    <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/spring-js-2.3.2.RELEASE.jar</systemPath>
+	</dependency>
+	
+	<dependency>
+	    <groupId>spring-js-resources</groupId>
+	    <artifactId>spring-js-resources</artifactId>
+	    <version>2.3.2</version>
+	    <scope>system</scope>
+	    <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/spring-js-resources-2.3.2.RELEASE.jar</systemPath>
+	</dependency>
+	
+	<dependency>
+	    <groupId>spring-ldap</groupId>
+	    <artifactId>spring-ldap</artifactId>
+	    <version>2.3.1</version>
+	    <scope>system</scope>
+	    <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/spring-ldap-core-2.3.1.RELEASE.jar</systemPath>
+	</dependency>
+	
+	<dependency>
+	    <groupId>spring-modules-cache</groupId>
+	    <artifactId>spring-modules-cache</artifactId>
+	    <version>0.8</version>
+	    <scope>system</scope>
+	    <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/spring-modules-cache-0.8.jar</systemPath>
+	</dependency>
+	
+	<dependency>
+	    <groupId>spring-orm</groupId>
+	    <artifactId>spring-orm</artifactId>
+	    <version>3.2.6</version>
+	    <scope>system</scope>
+	    <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/spring-orm-3.2.6.RELEASE.jar</systemPath>
+	</dependency>
+	
+	<dependency>
+	    <groupId>spring-security-config</groupId>
+	    <artifactId>spring-security-config</artifactId>
+	    <version>3.2.0</version>
+	    <scope>system</scope>
+	    <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/spring-security-config-3.2.0.RELEASE.jar</systemPath>
+	</dependency>
+	
+	<dependency>
+	    <groupId>spring-security-core</groupId>
+	    <artifactId>spring-security-core</artifactId>
+	    <version>3.2.0</version>
+	    <scope>system</scope>
+	    <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/spring-security-core-3.2.0.RELEASE.jar</systemPath>
+	</dependency>
+	
+	<dependency>
+	    <groupId>spring-security-web</groupId>
+	    <artifactId>spring-security-web</artifactId>
+	    <version>3.2.0</version>
+	    <scope>system</scope>
+	    <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/spring-security-web-3.2.0.RELEASE.jar</systemPath>
+	</dependency>
+	
+	<dependency>
+	    <groupId>spring-tx</groupId>
+	    <artifactId>spring-tx</artifactId>
+	    <version>3.2.6</version>
+	    <scope>system</scope>
+	    <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/spring-tx-3.2.6.RELEASE.jar</systemPath>
+	</dependency>
+	
+	<dependency>
+	    <groupId>spring-web</groupId>
+	    <artifactId>spring-web</artifactId>
+	    <version>3.2.6</version>
+	    <scope>system</scope>
+	    <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/spring-web-3.2.6.RELEASE.jar</systemPath>
+	</dependency>
+	
+	<dependency>
+	    <groupId>spring-webflow</groupId>
+	    <artifactId>spring-webflow</artifactId>
+	    <version>2.3.2</version>
+	    <scope>system</scope>
+	    <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/spring-webflow-2.3.2.RELEASE.jar</systemPath>
+	</dependency>
+	
+	<dependency>
+	    <groupId>spring-webmvc</groupId>
+	    <artifactId>spring-webmvc</artifactId>
+	    <version>3.2.6</version>
+	    <scope>system</scope>
+	    <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/spring-webmvc-3.2.6.RELEASE.jar</systemPath>
+	</dependency>
+	
+	<dependency>
+	    <groupId>standard</groupId>
+	    <artifactId>standard</artifactId>
+	    <version>1.1.2</version>
+	    <scope>system</scope>
+	    <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/standard-1.1.2.jar</systemPath>
+	</dependency>
+	
+	<dependency>
+	    <groupId>stax-api</groupId>
+	    <artifactId>stax-api</artifactId>
+	    <version>1.0</version>
+	    <scope>system</scope>
+	    <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/stax-api-1.0-2.jar</systemPath>
+	</dependency>
+	
+	<dependency>
+	    <groupId>validation-api</groupId>
+	    <artifactId>validation-api</artifactId>
+	    <version>1.0.0</version>
+	    <scope>system</scope>
+	    <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/validation-api-1.0.0.GA.jar</systemPath>
+	</dependency>
+	
   </dependencies>
 
   <build>
