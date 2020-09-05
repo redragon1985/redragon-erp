@@ -390,7 +390,7 @@
 								(3)&nbsp;实现三单匹配<br/>
 								</p>
 								<a href="https://gitee.com/redragon/redragon-erp/blob/master/README.md" target="_blank" class="btn btn-sm btn-info">版本说明</a> 
-								<span class="vertical-date" style="font-weight: bold;"> v0.6 （开发中）<br /> <small>2020.9</small></span>
+								<span class="vertical-date" style="font-weight: bold;"> v0.6 （开发中）<br /> <small>2020.10</small></span>
 							</div>
 						</div>
 						
