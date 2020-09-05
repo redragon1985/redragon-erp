@@ -145,7 +145,7 @@ public class InvStockWebController extends ControllerSupport{
         }
         
         //物料
-        Map materialMap = this.masterDataCommonService.getMaterialMap();
+        Map materialMap = this.masterDataCommonService.getMaterialForMaterialMap();
         
         //页面属性设置
         model.addAttribute("invStock", invStock);
@@ -303,7 +303,7 @@ public class InvStockWebController extends ControllerSupport{
         Map stockBillTypeMap = DataBox.getStockBillTypeMap();
         
         //物料
-        Map materialMap = this.masterDataCommonService.getMaterialMap();
+        Map materialMap = this.masterDataCommonService.getMaterialForMaterialMap();
         
         //页面属性设置
         model.addAttribute("stockBillTypeMap", stockBillTypeMap);

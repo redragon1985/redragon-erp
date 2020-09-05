@@ -3,10 +3,9 @@
   <parent>
     <groupId>redragon</groupId>
     <artifactId>erp-parent</artifactId>
-    <version>${redragon.erp.version}</version>
+    <version>0.6</version>
   </parent>
   <artifactId>erp-inv</artifactId>
-  <version>${redragon.erp.version}</version>
   <packaging>war</packaging>
   
   <build>

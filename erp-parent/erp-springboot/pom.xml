@@ -3,10 +3,9 @@
   <parent>
     <groupId>redragon</groupId>
     <artifactId>erp-parent</artifactId>
-    <version>${redragon.erp.version}</version>
+    <version>0.6</version>
   </parent>
   <artifactId>erp-springboot</artifactId>
-  <version>${redragon.erp.version}</version>
   <packaging>jar</packaging>
   
   <build>
@@ -17,6 +16,7 @@
         </plugin>
     </plugins>
   </build>
+  
   <dependencies>
   	<dependency>
   		<groupId>redragon</groupId>

@@ -115,7 +115,7 @@ public class InvInputHeadWebController extends ControllerSupport{
         }
         
         //分页查询数据
-        List<InvInputHead> invInputHeadList = this.invInputHeadService.getDataObjects(pages, invInputHeadCO);
+        List<InvInputHead> invInputHeadList = this.invInputHeadService.getDataObjectsForDataAuth("", pages, invInputHeadCO);
         
         //入库状态
         Map inputStatusMap = DataBox.getInputStatusMap();

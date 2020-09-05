@@ -98,13 +98,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 									</td>
 									<td>
 										<div class="btn-group">
-											<button class="btn btn-xs" onclick="initWarehouse('${data.warehouseCode}')"><i class="fa fa-inbox"></i>&nbsp;库存初始化</button>&nbsp;
-											<button class="btn-white btn btn-xs" onclick="editData(${data.warehouseId})"><i class="fa fa-edit"></i>&nbsp;编辑</button>&nbsp;
+											<button class="btn btn-xs btn-notcontrol" onclick="initWarehouse('${data.warehouseCode}')"><i class="fa fa-inbox"></i>&nbsp;库存初始化</button>&nbsp;
+											<button class="btn-white btn btn-xs btn-notcontrol" onclick="editData(${data.warehouseId})"><i class="fa fa-edit"></i>&nbsp;编辑</button>&nbsp;
 											<button class="btn-white btn btn-xs" onclick="deleteData(${data.warehouseId},'${data.warehouseCode}')"><i class="fa fa-trash"></i>&nbsp;删除</button>
 										</div>
 										<div class="btn-group" style="margin-top: 5px;">
-											<button class="btn-info btn btn-xs" onclick="getStockDetail('${data.warehouseCode}')"><i class="fa fa-book"></i>&nbsp;库存明细</button>&nbsp;
-											<button class="btn-success btn btn-xs" onclick="getStockCheck('${data.warehouseCode}')"><i class="fa fa-th"></i>&nbsp;库存盘点</button>
+											<button class="btn-info btn btn-xs btn-notcontrol" onclick="getStockDetail('${data.warehouseCode}')"><i class="fa fa-book"></i>&nbsp;库存明细</button>&nbsp;
+											<button class="btn-success btn btn-xs btn-notcontrol" onclick="getStockCheck('${data.warehouseCode}')"><i class="fa fa-th"></i>&nbsp;库存盘点</button>
 										</div>
 									</td>
 								</tr>

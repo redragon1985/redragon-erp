@@ -35,6 +35,7 @@ import com.erp.masterdata.customer.dao.model.MdCustomerContact;
 import com.erp.masterdata.customer.dao.model.MdCustomerContactCO;
 import com.erp.masterdata.material.dao.MdMaterialDao;
 import com.erp.masterdata.material.dao.model.MdMaterial;
+import com.erp.masterdata.material.dao.model.MdMaterialCO;
 import com.erp.masterdata.project.dao.MdProjectDao;
 import com.erp.masterdata.project.dao.model.MdProject;
 import com.erp.masterdata.subject.dao.MdFinanceSubjectDao;
@@ -108,6 +109,38 @@ public class MasterDataCommonServiceImpl implements MasterDataCommonService {
         Map<String, String> map = new HashMap<String, String>();
         
         List<MdMaterial> list = this.mdMaterialDao.getDataObjects();
+        for(MdMaterial mdMaterial: list) {
+            map.put(mdMaterial.getMaterialCode(), mdMaterial.getMaterialName());
+        }
+        
+        return map;
+    }
+    
+    @Override
+    @Cache(cacheType=CacheType.ALL, cacheSeconds=7200, cacheKey=MasterDataParam.MATERIAL_MATERIAL_CACHE_KEY)
+    public Map<String, String> getMaterialForMaterialMap() {
+        Map<String, String> map = new HashMap<String, String>();
+        
+        MdMaterialCO mdMaterialCO = new MdMaterialCO();
+        mdMaterialCO.setMaterialType("MATERIAL");
+        
+        List<MdMaterial> list = this.mdMaterialDao.getDataObjects(mdMaterialCO);
+        for(MdMaterial mdMaterial: list) {
+            map.put(mdMaterial.getMaterialCode(), mdMaterial.getMaterialName());
+        }
+        
+        return map;
+    }
+    
+    @Override
+    @Cache(cacheType=CacheType.ALL, cacheSeconds=7200, cacheKey=MasterDataParam.MATERIAL_MATTER_CACHE_KEY)
+    public Map<String, String> getMaterialForMatterMap() {
+        Map<String, String> map = new HashMap<String, String>();
+        
+        MdMaterialCO mdMaterialCO = new MdMaterialCO();
+        mdMaterialCO.setMaterialType("MATTER");
+        
+        List<MdMaterial> list = this.mdMaterialDao.getDataObjects(mdMaterialCO);
         for(MdMaterial mdMaterial: list) {
             map.put(mdMaterial.getMaterialCode(), mdMaterial.getMaterialName());
         }

@@ -119,7 +119,7 @@ public class InvOutputHeadWebController extends ControllerSupport{
         }
         
         //分页查询数据
-        List<InvOutputHead> invOutputHeadList = this.invOutputHeadService.getDataObjects(pages, invOutputHeadCO);
+        List<InvOutputHead> invOutputHeadList = this.invOutputHeadService.getDataObjectsForDataAuth("", pages, invOutputHeadCO);
         
         //出库状态
         Map outputStatusMap = DataBox.getOutputStatusMap();

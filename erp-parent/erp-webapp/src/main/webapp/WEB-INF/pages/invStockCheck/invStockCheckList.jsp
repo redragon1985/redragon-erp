@@ -119,7 +119,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 									</td>
 									<td>
 										<div class="btn-group">
-											<button class="btn-white btn btn-xs" onclick="editData('${data.checkHeadCode}','${data.warehouseCode}')"><i class="fa fa-edit"></i>&nbsp;编辑</button>&nbsp;
+											<button class="btn-white btn btn-xs btn-notcontrol" onclick="editData('${data.checkHeadCode}','${data.warehouseCode}')"><i class="fa fa-edit"></i>&nbsp;编辑</button>&nbsp;
 											<c:if test="${data.approveStatus!='APPROVE'&&data.approveStatus!='SUBMIT'}">
 												<button class="btn-white btn btn-xs" onclick="deleteData(${data.checkHeadId},'${data.checkHeadCode}','${data.warehouseCode}','${data.status}')"><i class="fa fa-trash"></i>&nbsp;删除</button>
 											</c:if>

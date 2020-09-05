@@ -49,9 +49,8 @@ public class DataBox {
     public static Map<String, String> getOutputTypeMap(){
         Map<String, String> map = new LinkedHashMap<String, String>();
         map.put("SO_OUT", "销售出库");
-        map.put("PO_RETURN", "购入退出");
-        map.put("CHECK_OUT", "盘点出库");
-        map.put("TRANSFER_OUT", "调拨出库");
+        //map.put("PO_RETURN", "购入退出");
+        //map.put("TRANSFER_OUT", "调拨出库");
         return map;
     }
     

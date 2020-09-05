@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>redragon</groupId>
   <artifactId>erp-parent</artifactId>
-  <version>${redragon.erp.version}</version>
+  <version>0.6</version>
   <packaging>pom</packaging>
   
   <!-- 定义公共资源版本 -->

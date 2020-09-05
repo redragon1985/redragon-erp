@@ -98,7 +98,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 						<div class="form-group row">
 							<div class="col-sm-12 col-sm-offset-2 text-right">
-								<button class="btn btn-white btn-lg" type="button" onclick="window.location.href='web/invWarehouse/getInvWarehouseList'">返回</button>&nbsp;
+								<button class="btn btn-white btn-lg btn-notcontrol" type="button" onclick="window.location.href='web/invWarehouse/getInvWarehouseList'">返回</button>&nbsp;
 								<button class="ladda-button ladda-button-demo btn btn-primary btn-lg" data-style="expand-right">&nbsp;&nbsp;确定&nbsp;&nbsp;<i class="fa fa-check-square-o"></i></button>
 							</div>
 						</div>

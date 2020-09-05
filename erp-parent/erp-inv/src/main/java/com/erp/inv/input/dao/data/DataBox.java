@@ -49,9 +49,8 @@ public class DataBox {
     public static Map<String, String> getInputTypeMap(){
         Map<String, String> map = new LinkedHashMap<String, String>();
         map.put("PO_IN", "采购入库");
-        map.put("SO_RETURN", "销售退回");
-        map.put("CHECK_IN", "盘点入库");
-        map.put("TRANSFER_IN", "调拨入库");
+        //map.put("SO_RETURN", "销售退回");
+        //map.put("TRANSFER_IN", "调拨入库");
         return map;
     }
     

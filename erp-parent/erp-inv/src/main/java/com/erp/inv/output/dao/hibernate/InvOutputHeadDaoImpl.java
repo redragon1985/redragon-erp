@@ -128,7 +128,22 @@ public class InvOutputHeadDaoImpl implements InvOutputHeadDao{
     @Override
     @Permissions(PermissionType.DATA_AUTH)
     public List<InvOutputHead> getDataObjectsForDataAuth(@SqlParam String dataAuthSQL, Pages pages, InvOutputHeadCO paramObj) {
-        return null;
+        String sql = "select i.* from inv_output_head i where 1=1";
+        
+        Map<String, Object> args = new HashMap<String, Object>();
+        sql = sql + DaoUtil.getSQLCondition(paramObj, "outputHeadCode", "and i.", args);
+        sql = sql + DaoUtil.getSQLCondition(paramObj, "outputSourceType", "and i.", args);
+        sql = sql + DaoUtil.getSQLCondition(paramObj, "outputSourceHeadCode", "and i.", args);
+        sql = sql + DaoUtil.getSQLCondition(paramObj, "outputType", "and i.", args);
+        sql = sql + DaoUtil.getSQLCondition(paramObj, "outputDate", "and i.", args);
+        sql = sql + DaoUtil.getSQLCondition(paramObj, "status", "and i.", args);
+        sql = sql + DaoUtil.getDataAuthSQL(dataAuthSQL, "i.", "i.");
+        sql = sql + " order by i.output_head_id desc";
+        
+        Map<String, Class<?>> entity = new HashMap<String, Class<?>>();
+        entity.put("i", InvOutputHead.class);
+        
+        return this.daoSupport.getDataSqlByPage(sql, entity, args, pages);
     }
     
     @Override

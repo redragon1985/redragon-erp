@@ -92,7 +92,21 @@ public class MdMaterialDaoImpl implements MdMaterialDao{
     
     @Override
     public List<MdMaterial> getDataObjects(MdMaterialCO paramObj) {
-        return null;
+        String sql = "select m.* from md_material m where 1=1";
+        
+        Map<String, Object> args = new HashMap<String, Object>();
+        sql = sql + DaoUtil.getSQLCondition(paramObj, "materialCode", "and m.", args);
+        sql = sql + DaoUtil.getSQLCondition(paramObj, "materialName", "and m.", args);
+        sql = sql + DaoUtil.getSQLCondition(paramObj, "materialType", "and m.", args);
+        sql = sql + DaoUtil.getSQLCondition(paramObj, "categoryCode", "and m.", args);
+        sql = sql + DaoUtil.getSQLCondition(paramObj, "status", "and m.", args);
+        
+        sql = sql + " order by m.material_id desc";
+        
+        Map<String, Class<?>> entity = new HashMap<String, Class<?>>();
+        entity.put("m", MdMaterial.class);
+        
+        return this.daoSupport.selectDataSql(sql, entity, args);
     }
     
     @Override

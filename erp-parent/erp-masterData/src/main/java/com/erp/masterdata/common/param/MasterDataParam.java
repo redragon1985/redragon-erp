@@ -40,6 +40,8 @@ public class MasterDataParam {
     
     //物料
     public static final String MATERIAL_CACHE_KEY = "MD_MATERIAL";
+    public static final String MATERIAL_MATERIAL_CACHE_KEY = "MD_MATERIAL_MATERIAL";
+    public static final String MATERIAL_MATTER_CACHE_KEY = "MD_MATERIAL_MATTER";
     
     //项目
     public static final String PROJECT_CACHE_KEY = "MD_PROJECT";

@@ -3,10 +3,9 @@
   <parent>
     <groupId>redragon</groupId>
     <artifactId>erp-parent</artifactId>
-    <version>${redragon.erp.version}</version>
+    <version>0.6</version>
   </parent>
   <artifactId>erp-dataset</artifactId>
-  <version>${redragon.erp.version}</version>
   <packaging>war</packaging>
 
   <build>
@@ -21,4 +20,13 @@
     </plugins>
   </build>
 
+  <dependencies>
+  	<dependency>
+	    <groupId>redragon</groupId>
+	    <artifactId>redragon</artifactId>
+	    <version>1.0</version>
+	    <scope>system</scope>
+	    <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/redragon.jar</systemPath>
+	</dependency>
+  </dependencies>
 </project>

@@ -46,7 +46,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<div class="ibox-title">
 					<h2>库存[${requestScope.invWarehouse.warehouseName}(${param.warehouseCode})]盘点</h2>
 					<div class="ibox-tools">
-						<button class="btn btn-white btn-lg" type="button" onclick="window.location.href='web/invStockCheckHead/getInvStockCheckHeadList?warehouseCode=${param.warehouseCode}'">返回</button>&nbsp;
+						<button class="btn btn-white btn-lg btn-notcontrol" type="button" onclick="window.location.href='web/invStockCheckHead/getInvStockCheckHeadList?warehouseCode=${param.warehouseCode}'">返回</button>&nbsp;
 						
 						<c:if test="${param.checkHeadCode==null||param.checkHeadCode==''||requestScope.invStockCheckHead.approveStatus=='UNSUBMIT'||requestScope.invStockCheckHead.approveStatus=='REJECT' }">
 							<button class="ladda-button ladda-button-demo btn btn-primary btn-lg" data-style="expand-right">&nbsp;&nbsp;保存&nbsp;&nbsp;<i class="fa fa-check-square-o"></i></button>

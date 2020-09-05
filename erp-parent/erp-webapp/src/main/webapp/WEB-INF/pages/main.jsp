@@ -318,8 +318,8 @@
 								(6)&nbsp;付款与收款单<br/>
 								(7)&nbsp;凭证管理
 								</p>
-								<a href="#" class="btn btn-sm btn-success">&nbsp;访问官网&nbsp;</a> 
-								<span class="vertical-date" style="font-weight: bold;"> v0.5 <br /> <small>2020.8.12</small>
+								<a href="https://www.redragon-erp.com" target="_blank" class="btn btn-sm btn-success">&nbsp;访问官网&nbsp;</a> 
+								<span class="vertical-date" style="font-weight: bold;"> v0.5 （已发布）<br /> <small>2020.8.12</small>
 								</span>
 							</div>
 						</div>
@@ -338,7 +338,7 @@
 								(4)&nbsp;优化表单提交验证逻辑<br/>
 								(5)&nbsp;增加结算时收付款金额的判断逻辑<br/>
 								</p>
-								<span class="vertical-date" style="font-weight: bold;"> v0.51 <br /> <small>2020.8</small>
+								<span class="vertical-date" style="font-weight: bold;"> v0.51 （已发布）<br /> <small>2020.8</small>
 								</span>
 							</div>
 						</div>
@@ -351,14 +351,50 @@
 							<div class="vertical-timeline-content">
 								<h2>新功能迭代</h2>
 								<p>
-								(1)&nbsp;增加出入库模块，主要包括：仓库管理、库存管理、入库、出库、库存盘点<br/>
-								(2)&nbsp;优化shiro授权时的存储逻辑<br/>
-								(3)&nbsp;优化单点登录的浏览器兼容性<br/>
+								(1)&nbsp;增加入库管理、出库管理<br/>
+								(2)&nbsp;增加仓库管理、库存管理及库存盘点<br/>
+								(3)&nbsp;优化shiro授权时的存储逻辑<br/>
 								</p>
-								<a href="#" class="btn btn-sm btn-info">版本说明</a> 
-								<span class="vertical-date" style="font-weight: bold;"> v0.6 <br /> <small>2020.9</small></span>
+								<a href="https://gitee.com/redragon/redragon-erp/blob/master/README.md" target="_blank" class="btn btn-sm btn-info">版本说明</a> 
+								<span class="vertical-date" style="font-weight: bold;"> v0.6 （已发布）<br /> <small>2020.9</small></span>
 							</div>
 						</div>
+						
+						<div class="vertical-timeline-block">
+							<div class="vertical-timeline-icon yellow-bg">
+								<i class="fa fa-info-circle"></i>
+							</div>
+
+							<div class="vertical-timeline-content">
+								<h2>小版本更新：解决0.6版本 BUG，增加小功能</h2>
+								<p>
+								(1)&nbsp;优化物料选择逻辑<br/>
+								(2)&nbsp;优化maven jar包依赖管理<br/>
+								(3)&nbsp;软件分发时同步发布war包<br/>
+								</p>
+								<span class="vertical-date" style="font-weight: bold;"> v0.61 （已发布）<br /> <small>2020.9</small>
+								</span>
+							</div>
+						</div>
+						
+						<div class="vertical-timeline-block">
+							<div class="vertical-timeline-icon lazur-bg">
+								<i class="fa fa-flash"></i>
+							</div>
+
+							<div class="vertical-timeline-content">
+								<h2>新功能迭代</h2>
+								<p>
+								(1)&nbsp;增加应收发票管理<br/>
+								(2)&nbsp;增加应付发票管理<br/>
+								(3)&nbsp;实现三单匹配<br/>
+								</p>
+								<a href="https://gitee.com/redragon/redragon-erp/blob/master/README.md" target="_blank" class="btn btn-sm btn-info">版本说明</a> 
+								<span class="vertical-date" style="font-weight: bold;"> v0.6 （开发中）<br /> <small>2020.9</small></span>
+							</div>
+						</div>
+						
+						
 
 					</div>
 				</div>
