@@ -369,7 +369,7 @@
 								<h2>小版本更新：解决0.6版本 BUG，增加小功能</h2>
 								<p>
 								(1)&nbsp;优化物料选择逻辑<br/>
-								(2)&nbsp;优化maven jar包依赖管理<br/>
+								(2)&nbsp;优化maven jar包依赖关系<br/>
 								(3)&nbsp;软件分发时同步发布war包<br/>
 								</p>
 								<span class="vertical-date" style="font-weight: bold;"> v0.61 （已发布）<br /> <small>2020.9</small>
