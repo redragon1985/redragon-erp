@@ -176,7 +176,7 @@ public class PayHeadWebController extends ControllerSupport{
             payHead.setBankName(this.datasetCommonService.getBank().get(payHead.getBankCode()));
         }else {
             //初始化默认字段
-            payHead.setAmount(0D);
+            //payHead.setAmount(0D);
             payHead.setPaidStatus("N");
             payHead.setPrepayFlag("N");
             payHead.setStatus("NEW");

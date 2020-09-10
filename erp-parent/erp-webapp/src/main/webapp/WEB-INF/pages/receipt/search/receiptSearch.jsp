@@ -37,7 +37,7 @@
 		<div class="row">
 			<div class="col-sm-4">
 				<div class="form-group">
-					<label class="control-label" for="receiptHeadCode">收款单编码</label> 
+					<label class="control-label" for="receiptHeadCode">发票编码</label> 
 					<input type="text" id="receiptHeadCode" name="receiptHeadCode" value="${param.receiptHeadCode}" class="form-control">
 				</div>
 			</div>
@@ -54,7 +54,7 @@
 			</div>
 			<div class="col-sm-4">
 				<div class="form-group">
-					<label class="control-label" for="receiptSourceHeadCode">来源编码</label> 
+					<label class="control-label" for="receiptSourceHeadCode">销售订单编码</label> 
 					<input type="text" id="receiptSourceHeadCode" name="receiptSourceHeadCode" value="${param.receiptSourceHeadCode}" class="form-control">
 				</div>
 			</div>
@@ -62,7 +62,7 @@
 		<div class="row">	
 			<div class="col-sm-4">
 				<div class="form-group">
-					<label class="control-label" for="payer">付款方</label> 
+					<label class="control-label" for="payer">客户</label> 
                     <select class="select2 form-control" name="payer" id="payer">
                     	<option value="" selected="selected">请选择...</option>
                     	<c:forEach items="${requestScope.customerMap}" var="customer">

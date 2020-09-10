@@ -32,8 +32,8 @@ contentPage=contentPage.substring(contentPage.lastIndexOf("/")+1, contentPage.le
 				<div class="dropdown profile-element">
 					<img alt="image" class="rounded-circle" src="img/profile_small.jpg" />
 					<a data-toggle="dropdown" class="dropdown-toggle" href="javascript:void(0)"> <span
-						class="block m-t-xs font-bold">${requestScope.staffInfo.staffName}</span> 
-						<span class="text-muted text-xs block">${requestScope.staffInfo.departmentName}&nbsp;&nbsp;${requestScope.staffInfo.positionName}
+						class="block m-t-xs font-bold">${staffInfo.staffName}</span> 
+						<span class="text-muted text-xs block">${staffInfo.departmentName}&nbsp;&nbsp;${staffInfo.positionName}
 						<%-- bbc 暂时取消账户快捷功能 
 						<b class="caret"></b>
 						--%>
@@ -303,21 +303,21 @@ contentPage=contentPage.substring(contentPage.lastIndexOf("/")+1, contentPage.le
 			
 			
 			<%if(contentPage.contains("pay")||contentPage.contains("receipt")){ %>	
-				<li class="active menu"><a href="#"><i class="fa fa-handshake-o"></i> <span class="nav-label">收付款</span><span class="fa arrow"></span></a>
+				<li class="active menu"><a href="#"><i class="fa fa-handshake-o"></i> <span class="nav-label">发票管理</span><span class="fa arrow"></span></a>
 			<%}else{ %>
-				<li class="menu"><a href="#"><i class="fa fa-handshake-o"></i> <span class="nav-label">收付款</span><span class="fa arrow"></span></a>
+				<li class="menu"><a href="#"><i class="fa fa-handshake-o"></i> <span class="nav-label">发票管理</span><span class="fa arrow"></span></a>
 			<%} %>
 				<ul class="nav nav-second-level collapse">
 					<%if(contentPage.equalsIgnoreCase("payList")||contentPage.equalsIgnoreCase("payEdit")){ %>
-						<li class="active"><a href="web/payHead/getPayHeadList">付款单</a></li>
+						<li class="active"><a href="web/payHead/getPayHeadList">采购发票</a></li>
 					<%}else{ %>
-						<li><a href="web/payHead/getPayHeadList">付款单</a></li>
+						<li><a href="web/payHead/getPayHeadList">采购发票</a></li>
 					<%} %>
 					
 					<%if(contentPage.equalsIgnoreCase("receiptList")||contentPage.equalsIgnoreCase("receiptEdit")){ %>
-						<li class="active"><a href="web/receiptHead/getReceiptHeadList">收款单</a></li>
+						<li class="active"><a href="web/receiptHead/getReceiptHeadList">销售发票</a></li>
 					<%}else{ %>
-						<li><a href="web/receiptHead/getReceiptHeadList">收款单</a></li>
+						<li><a href="web/receiptHead/getReceiptHeadList">销售发票</a></li>
 					<%} %>
 					
 					<%-- 

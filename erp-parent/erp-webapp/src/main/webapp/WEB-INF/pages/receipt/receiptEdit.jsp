@@ -52,7 +52,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<div class="col-lg-12">
 			<div class="ibox ">
 				<div class="ibox-title btn-success btn-outline panel-success collapse-link" style="cursor: pointer;" title="展开/收起">
-					<h5>收款单头信息&nbsp;<span style="color: black;">（<i class="fa fa-tag"></i>${requestScope.approveStatusMap[requestScope.receiptHead.approveStatus]}）</span></h5>
+					<h5>销售发票头信息&nbsp;<span style="color: black;">（<i class="fa fa-tag"></i>${requestScope.approveStatusMap[requestScope.receiptHead.approveStatus]}）</span></h5>
 					<div class="ibox-tools">
 						<i class="fa fa-chevron-up"></i> 
 					</div>
@@ -61,12 +61,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<div id="ibox-content" class="ibox-content border-bottom" style="padding-bottom: 0px;">
 					<form id="form" action="web/receiptHead/editReceiptHead" method="post">
 						<div class="form-group  row">
-							<label class="col-sm-2 col-form-label"><span class="text-danger">*</span><strong>收款单编码</strong></label>
+							<label class="col-sm-2 col-form-label"><span class="text-danger">*</span><strong>发票编码</strong></label>
 							<div class="col-sm-4">
 								<input id="receiptHeadCode" name="receiptHeadCode" type="text" class="form-control" value="${requestScope.receiptHead.receiptHeadCode}">
 							</div>
 							
-							<label class="col-sm-2 col-form-label"><span class="text-danger">*</span><strong>收款来源</strong></label>
+							<label class="col-sm-2 col-form-label"><span class="text-danger">*</span><strong>发票来源</strong></label>
 							<div class="col-sm-4">
 								<select class="form-control" name="receiptSourceType" id="receiptSourceType">
 		                        	<option value="" selected="selected">请选择...</option>
@@ -84,7 +84,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	                        	<input id="receiptSourceHeadCode" name="receiptSourceHeadCode" type="text" class="form-control" value="${requestScope.receiptHead.receiptSourceHeadCode}">
 	                        </div>
 	                        
-	                        <label class="col-sm-2 col-form-label"><strong id="paySourceHeadNameText">来源头名称</strong></label>
+	                        <label class="col-sm-2 col-form-label"><strong id="receiptSourceHeadNameText">来源头名称</strong></label>
 	                        <div class="col-sm-4">
 		                        <input id="receiptSourceHeadName" type="text" class="form-control" value="${requestScope.receiptHead.receiptSourceHeadName}" readonly="readonly">
 	                        </div>
@@ -93,19 +93,24 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						
 						<div class="form-group  row">
 							<label class="col-sm-2 col-form-label"><strong>摘要</strong></label>
-							<div class="col-sm-10">
+							<div class="col-sm-4">
 								<textarea id="memo" name="memo" rows="3" class="form-control">${requestScope.receiptHead.memo}</textarea>
+							</div>
+							
+							<label class="col-sm-2 col-form-label"><strong>发票参考号</strong></label>
+							<div class="col-sm-4">
+								<input id="referenceNumber" name="referenceNumber" type="text" class="form-control" value="${requestScope.receiptHead.referenceNumber}">
 							</div>
 						</div>
 						<div class="hr-line-dashed"></div>
 						
 						<div class="form-group row">
-							<label class="col-sm-2 col-form-label"><span class="text-danger">*</span><strong>付款方</strong></label>
+							<label class="col-sm-2 col-form-label"><span class="text-danger">*</span><strong>购买方/客户</strong></label>
 							<div class="col-sm-4">
 		                        <input id="payerName" name="payerName" type="text" class="form-control" value="${requestScope.receiptHead.payerName}" readonly="readonly">
 							</div>
 						
-	                        <label class="col-sm-2 col-form-label"><span class="text-danger">*</span><strong>收款方</strong></label>
+	                        <label class="col-sm-2 col-form-label"><span class="text-danger">*</span><strong>销售方/供应商</strong></label>
 	                        <div class="col-sm-4">
 	                        	<select class="select2 form-control" name="receiver" id="receiver">
 		                        	<option value="" selected="selected">请选择...</option>
@@ -118,9 +123,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	                    <div class="hr-line-dashed"></div>
 	                    
 	                    <div class="form-group row">
-	                    	<label class="col-sm-2 col-form-label"><strong>本次收款金额</strong></label>
+	                    	<label class="col-sm-2 col-form-label"><strong>发票金额（不含税）</strong></label>
 	                        <div class="col-sm-4 input-group">
-		                        <input id="amount" type="text" class="form-control" value="${requestScope.receiptHead.amount}" readonly="readonly">
+		                        <input id="amount" name="amount" type="text" class="form-control" value="${requestScope.receiptHead.amount}" >
 	                        	<span class="input-group-addon">(元)</span>
 	                        </div>
 	                        
@@ -137,13 +142,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<div class="hr-line-dashed"></div>
 						
 						<div class="form-group row">
-	                        <label class="col-sm-2 col-form-label"><strong id="paySourceHeadAmountText">来源单据金额</strong></label>
+	                        <label class="col-sm-2 col-form-label"><strong id="receiptSourceHeadAmountText">来源单据金额</strong></label>
 	                        <div class="col-sm-4 input-group">
 		                        <input id="receiptSourceHeadAmount" type="text" class="form-control" value="${requestScope.receiptHead.receiptSourceHeadAmount}" readonly="readonly">
 	                        	<span class="input-group-addon">(元)</span>
 	                        </div>
 	                    
-							<label class="col-sm-2 col-form-label"><strong>历史收款金额</strong></label>
+							<label class="col-sm-2 col-form-label"><strong>历史开票金额</strong></label>
 							<div class="col-sm-4 input-group">
 		                        <input id="receiptSourceHeadHISAmount" type="text" class="form-control" value="${requestScope.receiptHead.receiptSourceHeadHISAmount}" readonly="readonly">
 	                        	<span class="input-group-addon">(元)</span>
@@ -152,9 +157,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<div class="hr-line-dashed"></div>
 	                    
 						<div class="form-group row">
-							<label class="col-sm-2 col-form-label"><span class="text-danger">*</span><strong>收款状态</strong></label>
+							<label class="col-sm-2 col-form-label"><span class="text-danger">*</span><strong>预收款标识</strong></label>
 	                        <div class="col-sm-4">
-								<input type="text" class="form-control" value="${requestScope.receivedStatusMap[requestScope.receiptHead.receivedStatus]}" readonly="readonly">
+	                        	<select class="form-control" name="preReceiptFlag" id="preReceiptFlag">
+		                        	<option value="" selected="selected">请选择...</option>
+		                            <option value="Y">是</option>
+		                            <option value="N">否</option>
+		                        </select>
 	                        </div>
 	                        
 	                        <label class="col-sm-2 col-form-label"><span class="text-danger">*</span><strong>状态</strong></label>
@@ -165,13 +174,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	                    <div class="hr-line-dashed"></div>
 	                    
 	                    <div class="form-group row">
-							<label class="col-sm-2 col-form-label"><span class="text-danger">*</span><strong>预收款标识</strong></label>
+	                        <label class="col-sm-2 col-form-label"><span class="text-danger">*</span><strong>收款状态</strong></label>
 	                        <div class="col-sm-4">
-	                        	<select class="form-control" name="preReceiptFlag" id="preReceiptFlag">
-		                        	<option value="" selected="selected">请选择...</option>
-		                            <option value="Y">是</option>
-		                            <option value="N">否</option>
-		                        </select>
+								<input type="text" class="form-control" value="${requestScope.receivedStatusMap[requestScope.receiptHead.receivedStatus]}" readonly="readonly">
 	                        </div>
 	                        
 	                        <label class="col-sm-2 col-form-label"><span class="text-danger">*</span><strong>收款方式</strong></label>
@@ -187,12 +192,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	                    <div class="hr-line-dashed"></div>
 	                    
 	                    <div class="form-group row">
-							<label class="col-sm-2 col-form-label"><strong>收款银行</strong></label>
+							<label class="col-sm-2 col-form-label"><strong>供应商收款银行</strong></label>
 	                        <div class="col-sm-4">
 		                        <input id="bankName" name="bankName" type="text" class="form-control" value="${requestScope.receiptHead.bankName}">
 	                        </div>
 	                        
-	                        <label class="col-sm-2 col-form-label"><strong>收款分行</strong></label>
+	                        <label class="col-sm-2 col-form-label"><strong>供应商收款分行</strong></label>
 	                        <div class="col-sm-4">
 	                        	<input id="subBankCode" name="subBankCode" type="text" class="form-control" value="${requestScope.receiptHead.subBankCode}" readonly="readonly">
 	                        </div>
@@ -200,12 +205,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	                    <div class="hr-line-dashed"></div>
 	                    
 	                    <div class="form-group row">
-							<label class="col-sm-2 col-form-label"><strong>收款银行账户</strong></label>
+							<label class="col-sm-2 col-form-label"><strong>供应商收款银行账户</strong></label>
 	                        <div class="col-sm-4">
 		                        <input id="bankAccount" name="bankAccount" type="text" class="form-control" value="${requestScope.receiptHead.bankAccount}" readonly="readonly">
 	                        </div>
 	                        
-	                        <label class="col-sm-2 col-form-label"><span class="text-danger">*</span><strong>付款时间</strong></label>
+	                        <label class="col-sm-2 col-form-label"><span class="text-danger">*</span><strong>发票日期</strong></label>
 							<div class="col-sm-4">
 	                        	<div class="input-group date">
 									<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
@@ -237,7 +242,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								
 								<c:if test="${param.receiptHeadCode!=null&&param.receiptHeadCode!=''}">
 									<c:if test="${requestScope.receiptHead.approveStatus=='UNSUBMIT'||requestScope.receiptHead.approveStatus=='REJECT' }">
-										<button class="btn btn-primary btn-lg" type="button" onclick="window.location.href='web/receiptHead/updateApproveStatus?code=${requestScope.receiptHead.receiptHeadCode}&approveStatus=SUBMIT'">&nbsp;&nbsp;提交&nbsp;&nbsp;<i class="fa fa-arrow-circle-right"></i></button>&nbsp;
+										<button class="btn btn-primary btn-lg" type="button" onclick="submitInvoiceApprove()">&nbsp;&nbsp;提交&nbsp;&nbsp;<i class="fa fa-arrow-circle-right"></i></button>&nbsp;
 									</c:if>
 									<c:if test="${requestScope.receiptHead.approveStatus=='SUBMIT' }">
 										<button class="btn btn-warning btn-lg" type="button" onclick="window.location.href='web/receiptHead/updateApproveStatus?code=${requestScope.receiptHead.receiptHeadCode}&approveStatus=APPROVE'">&nbsp;&nbsp;审核通过&nbsp;&nbsp;<i class="fa fa-check-circle"></i></button>&nbsp;
@@ -268,7 +273,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<div class="col-lg-12">
 						<div class="ibox ">
 							<div class="ibox-title btn-info btn-outline panel-info">
-								<h5>收款单行信息</h5>
+								<h5>销售发票行信息</h5>
 								<div class="ibox-tools">
 								</div>
 							</div>
@@ -276,7 +281,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<div id="ibox-content1" class="ibox-content border-bottom" style="padding-bottom: 0px;">
 								<div class="tabs-container">
 									<ul class="nav nav-tabs">
-										<li><a class="nav-link active" data-toggle="tab" href="#lineTab" onclick="getLineTab('${requestScope.receiptHead.receiptHeadCode}')">收款行</a></li>
+										<li><a class="nav-link active" data-toggle="tab" href="#lineTab" onclick="getLineTab('${requestScope.receiptHead.receiptHeadCode}')">发票行</a></li>
 									</ul>
 									<div id="tabDiv" class="tab-content">
 									</div>
@@ -300,7 +305,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script src="js/plugins/select2/select2.full.min.js"></script>
 
 <script>
+
+	//发票历史金额
+	var hAmountHis = 0;
+	
 	$(document).ready(function() {
+		
+		//获取发票历史金额，用于提交验证
+		if($.isNumeric($("#amount").val())){
+			hAmountHis = parseFloat($("#amount").val());
+		}
+		
 	
 		//设置收起的title效果
 		$(".collapse-link").on("click", function(){
@@ -362,17 +377,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		//初始化选择头单据字段
 		setReceiptSourceHeadCodeText();
 		
+		//设置来源头类型选择的效果
+	 	setReceiptSourceTypeStyle();
+		
 		//来源类型切换
 		$("#receiptSourceType").change(function(){
-			if($(this).val()=="SO"){
-				$("#receiptSourceHeadCodeText").text("采购订单编码");
-				$("#receiptSourceHeadNameText").text("采购订单名称");
-				$("#receiptSourceHeadAmountText").text("采购订单金额");
-			}else if($(this).val()=="OUTPUT"){
-				$("#receiptSourceHeadCodeText").text("入库单编码");
-				$("#receiptSourceHeadNameText").text("入库单名称");
-				$("#receiptSourceHeadAmountText").text("采购订单金额");
-			}
+			//设置来源头类型选择的效果
+	 		setReceiptSourceTypeStyle();
+	 		
 			//设置选择头单据字段
 			setReceiptSourceHeadCodeText();
 		});
@@ -438,6 +450,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				receiptMode : {
 					required : true,
 				},
+				amount : {
+					required : true,
+					number : true,
+					min: 0,
+				},
 				/* bbc 只有转账必填
 				bankName : {
 					required : true,
@@ -492,6 +509,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		}
 	}
 	
+	//设置来源头类型选择的效果
+	function setReceiptSourceTypeStyle(){
+		if($("#receiptSourceType").val()=="SO"){
+			$("#receiptSourceHeadCodeText").text("销售订单编码");
+			$("#receiptSourceHeadNameText").text("销售订单名称");
+			$("#receiptSourceHeadAmountText").text("销售订单金额");
+		}else if($("#receiptSourceType").val()=="OUTPUT"){
+			$("#receiptSourceHeadCodeText").text("出库单编码");
+			$("#receiptSourceHeadNameText").text("出库单名称");
+			$("#receiptSourceHeadAmountText").text("销售订单金额");
+		}
+	}
+	
 	//付款方式切换效果
 	function initReceiptMode(){
 		if($("#receiptMode").val()==""||$("#receiptMode").val()=="cash"||$("#receiptMode").val()=="check"){
@@ -509,7 +539,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	function getSelectBankModal(){
 		$("#bankName").blur();
 		if($("#receiver").val()==""){
-			redragonJS.alert("请先选择收款方");
+			redragonJS.alert("请先选择供应商");
 		}else{
 			$('#selectSODiv').modal('hide');
 			redragonJS.loading("ibox-content");
@@ -557,5 +587,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				redragonJS.alert(textStatus);
 			}
 		});
+	}
+	
+	//发票头提交
+	function submitInvoiceApprove(){
+		var lAmount = parseFloat($("#lineAmountSum").text());
+		var hAmount = parseFloat($("#amount").val());
+		
+		if(hAmountHis==hAmount){
+			if(lAmount==hAmount){
+				window.location.href='web/receiptHead/updateApproveStatus?code=${requestScope.receiptHead.receiptHeadCode}&approveStatus=SUBMIT'
+			}else{
+				redragonJS.alert("发票金额("+hAmount+"元)与发票行合计金额("+lAmount+"元)不相等，金额不匹配无法提交发票");
+			}
+		}else{
+			redragonJS.alert("请先保存发票头");
+		}
+		
 	}
 </script>

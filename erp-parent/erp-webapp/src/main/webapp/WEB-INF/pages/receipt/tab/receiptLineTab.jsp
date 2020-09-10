@@ -44,14 +44,17 @@
 				<thead>
 					<tr>
 						<th width="5%">行号</th>
-						<th>来源行编码</th>
+						<th>销售行编码</th>
 						<th>物料编码</th>
 						<th>物料名称</th>
-						<th>单价</th>
-						<th>数量</th>
+						<th>规格型号</th>
+						<th>销售单价</th>
+						<th>出库数量</th>
 						<th>单位</th>
-						<th>金额</th>
-						<th>付款金额</th>
+						<th>发票行数量</th>
+						<th>发票行金额</th>
+						<th>税率</th>
+						<th>税额</th>
 						<th>摘要</th>
 						<th width="10%">操作</th>
 					</tr>
@@ -64,11 +67,14 @@
 						<td>${data.receiptSourceLineCode}</td>
 						<td>${data.materialCode}</td>
 						<td>${data.materialName}</td>
+						<td>${data.standard}</td>
 						<td>${data.price}</td>
-						<td>${data.quantity}</td>
+						<td>${data.outputQuantity}</td>
 						<td>${data.unit}</td>
-						<td>${data.soLineAmount}</td>
+						<td style="color: #1c84c6 !important;">${data.quantity}</td>
 						<td class="lineAmount" style="color: #1c84c6 !important;">${data.amount}</td>
+						<td style="color: #1c84c6 !important;">${data.taxRate}</td>
+						<td class="lineTaxAmount" style="color: #1c84c6 !important;">${data.taxAmount}</td>
 						<td style="color: #1c84c6 !important;">${data.memo}</td>
 						<td>
 							<div class="btn-group">
@@ -78,6 +84,23 @@
 						</td>
 					</tr>
 					</c:forEach>
+					
+					<tr>
+						<td><strong>合计</strong></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td id="lineAmountSum" style="font-weight: bold;">0.00</td>
+						<td></td>
+						<td id="lineTaxAmountSum" style="font-weight: bold;">0.00</td>
+						<td></td>
+						<td></td>
+					</tr>
 					
 				</tbody>
 				<tfoot>
@@ -98,11 +121,18 @@
 	$(document).ready(function() {
 		//设置头金额
 		var sumAmount = 0;
+		var sumTaxAmount = 0;
 		$(".lineAmount").each(function(){
-			sumAmount = sumAmount+parseFloat($(this).text());
+			sumAmount = redragonJS.numberAdd(sumAmount, parseFloat($(this).text()));
 			
 		});
-		$("#amount").val(sumAmount);
+		$(".lineTaxAmount").each(function(){
+			sumTaxAmount = redragonJS.numberAdd(sumTaxAmount, parseFloat($(this).text()));
+			
+		});
+		//设置合计
+		$("#lineAmountSum").text(sumAmount.toFixed(2));
+		$("#lineTaxAmountSum").text(sumTaxAmount.toFixed(2));
 	
 		$("#addButton").click(function(){
 			getSelectSOLineModal();
@@ -133,12 +163,12 @@
 		});
 	}
 	
-	function getLineModal(id, soLineCode, materialCode, materialName, price, quantity, unit, lineAmount){
+	function getLineModal(id, soLineCode, materialCode, materialName, price, outputQuantity, unit, lineAmount){
 		$.ajax({
 			type: "post",
 			url: "web/receiptLine/getReceiptLine",
 			data: {"receiptLineId": id, "receiptHeadCode": "${param.receiptHeadCode}", "receiptSourceType": $("#receiptSourceType").val(), "receiptSourceLineCode": soLineCode, "materialCode": materialCode,
-				   "materialName": materialName, "price": price, "quantity": quantity, "unit": unit, "soLineAmount": lineAmount},
+				   "materialName": materialName, "price": price, "outputQuantity": outputQuantity, "unit": unit, "soLineAmount": lineAmount},
 			async: false,
 			dataType: "html",
 			cache: false,

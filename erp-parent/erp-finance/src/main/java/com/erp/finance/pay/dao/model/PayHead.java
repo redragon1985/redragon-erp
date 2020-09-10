@@ -121,6 +121,18 @@ public class PayHead implements java.io.Serializable {
         this.receiver = receiver;
     }
     
+    //发票金额
+    @NotNull(message="发票金额不能为空")
+    @Column(name = "amount", unique = false, nullable = false)
+    private Double amount;
+    
+    public Double getAmount() {
+        return amount;
+    }
+    public void setAmount(Double amount) {
+        this.amount = amount;
+    }
+
     //币种
     @NotBlank(message="币种不能为空")
     @Column(name = "currency_code", unique = false, nullable = false, length = 45)
@@ -133,6 +145,17 @@ public class PayHead implements java.io.Serializable {
         this.currencyCode = currencyCode;
     }
     
+    //发票参考号（纸质发票号）
+    @Column(name = "reference_number", unique = false, nullable = true, length = 45)
+    private String referenceNumber;
+    
+    public String getReferenceNumber() {
+        return referenceNumber;
+    }
+    public void setReferenceNumber(String referenceNumber) {
+        this.referenceNumber = referenceNumber;
+    }
+
     //付款时间
     @NotNull(message="付款时间不能为空")
     @Column(name = "pay_date", unique = false, nullable = false)
@@ -346,8 +369,6 @@ public class PayHead implements java.io.Serializable {
     @Transient
     private String departmentName;
     @Transient
-    private Double amount = 0D;
-    @Transient
     private String paySourceHeadName;
     @Transient
     private Double paySourceHeadAmount = 0D;
@@ -369,12 +390,6 @@ public class PayHead implements java.io.Serializable {
     }
     public void setDepartmentName(String departmentName) {
         this.departmentName = departmentName;
-    }
-    public Double getAmount() {
-        return amount;
-    }
-    public void setAmount(Double amount) {
-        this.amount = amount;
     }
     public String getPaySourceHeadName() {
         return paySourceHeadName;

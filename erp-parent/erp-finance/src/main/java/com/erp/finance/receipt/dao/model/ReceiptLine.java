@@ -95,6 +95,18 @@ public class ReceiptLine implements java.io.Serializable {
         this.receiptSourceLineCode = receiptSourceLineCode;
     }
     
+    //发票行数量
+    @NotNull(message="发票行数量不能为空")
+    @Column(name = "quantity", unique = false, nullable = false)
+    private Double quantity;
+    
+    public Double getQuantity() {
+        return quantity;
+    }
+    public void setQuantity(Double quantity) {
+        this.quantity = quantity;
+    }
+    
     //行金额
     @NotNull(message="行金额不能为空")
     @Column(name = "amount", unique = false, nullable = false)
@@ -105,6 +117,30 @@ public class ReceiptLine implements java.io.Serializable {
     }
     public void setAmount(Double amount) {
         this.amount = amount;
+    }
+    
+    //税率（带小数）
+    @NotNull(message="税率不能为空")
+    @Column(name = "tax_rate", unique = false, nullable = false)
+    private Double taxRate;
+    
+    public Double getTaxRate() {
+        return taxRate;
+    }
+    public void setTaxRate(Double taxRate) {
+        this.taxRate = taxRate;
+    }
+    
+    //税额
+    @NotNull(message="税额不能为空")
+    @Column(name = "tax_amount", unique = false, nullable = false)
+    private Double taxAmount;
+    
+    public Double getTaxAmount() {
+        return taxAmount;
+    }
+    public void setTaxAmount(Double taxAmount) {
+        this.taxAmount = taxAmount;
     }
     
     //摘要
@@ -205,9 +241,11 @@ public class ReceiptLine implements java.io.Serializable {
     @Transient
     private String materialName;
     @Transient
+    private String standard;
+    @Transient
     private Double price;
     @Transient
-    private Double quantity;
+    private Double outputQuantity;
     @Transient
     private String unit;
     @Transient
@@ -231,11 +269,11 @@ public class ReceiptLine implements java.io.Serializable {
     public void setPrice(Double price) {
         this.price = price;
     }
-    public Double getQuantity() {
-        return quantity;
+    public Double getOutputQuantity() {
+        return outputQuantity;
     }
-    public void setQuantity(Double quantity) {
-        this.quantity = quantity;
+    public void setOutputQuantity(Double outputQuantity) {
+        this.outputQuantity = outputQuantity;
     }
     public String getUnit() {
         return unit;
@@ -248,6 +286,12 @@ public class ReceiptLine implements java.io.Serializable {
     }
     public void setSoLineAmount(Double soLineAmount) {
         this.soLineAmount = soLineAmount;
+    }
+    public String getStandard() {
+        return standard;
+    }
+    public void setStandard(String standard) {
+        this.standard = standard;
     }
     
 }

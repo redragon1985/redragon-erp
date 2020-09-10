@@ -46,7 +46,9 @@ import com.erp.dataset.service.DatasetCommonService;
 import com.erp.finance.pay.dao.model.PayLine;
 import com.erp.finance.pay.dao.model.PayLineCO;
 import com.erp.finance.pay.service.PayLineService;
+import com.erp.inv.input.service.InvInputLineService;
 import com.erp.masterdata.common.service.MasterDataCommonService;
+import com.erp.masterdata.material.dao.model.MdMaterial;
 import com.erp.order.po.dao.model.PoHead;
 import com.erp.order.po.dao.model.PoHeadCO;
 import com.erp.order.po.dao.model.PoLine;
@@ -69,6 +71,8 @@ public class PayLineWebController extends ControllerSupport{
     private DatasetCommonService datasetCommonService;
     @Autowired
     private PoLineService poLineService;
+    @Autowired
+    private InvInputLineService invInputLineService;
     
     @Override
     public String getExceptionRedirectURL() {
@@ -107,8 +111,9 @@ public class PayLineWebController extends ControllerSupport{
             PoLine poLine = this.poLineService.getDataObject(payLine.getPaySourceLineCode());
             payLine.setMaterialCode(poLine.getMaterialCode());
             payLine.setMaterialName(materialMap.get(poLine.getMaterialCode()).toString());
+            payLine.setStandard(this.masterDataCommonService.getMdMaterialInfoCache(poLine.getMaterialCode()).getStandard());
             payLine.setPrice(poLine.getPrice());
-            payLine.setQuantity(poLine.getQuantity());
+            payLine.setInputQuantity(poLine.getQuantity());
             payLine.setUnit(materialUnitMap.get(poLine.getUnit()).toString());
             payLine.setPoLineAmount(poLine.getAmount());
         }
@@ -143,13 +148,25 @@ public class PayLineWebController extends ControllerSupport{
         
         //分页查询采购订单行数据
         List<PoLine> poLineList = this.poLineService.getPoLineListByPoHeadCode(pages, poLineCO);
-        //获取付款行数据
+        //循环设置入库数量
+        for(PoLine poLine: poLineList) {
+            MdMaterial mdMaterial = this.masterDataCommonService.getMdMaterialInfoCache(poLine.getMaterialCode());
+            if(mdMaterial.getMaterialType().equals("MATERIAL")) {
+                //如果是物料则取入库数量
+                poLine.setInputQuantity(this.invInputLineService.getInputQuantityByPoLineCode(poLine.getPoLineCode()));
+            }else {
+                //如果是事项则入库数量直接取采购数量
+                poLine.setInputQuantity(poLine.getQuantity());
+            }
+        }
+        
+        //获取发票行数据
         Pages pagesTemp = new Pages();
         pagesTemp.setPage(1);
         pagesTemp.setMax(100);
         List<PayLine> payLineList = this.payLineService.getPayLineListByPayHeadCode(pagesTemp, payLineCO);
         
-        //剔除已经做了付款行的采购订单行
+        //剔除已经做了发票行的采购订单行
         Iterator<PoLine> poLineIt = poLineList.iterator();
         Iterator<PayLine> payLineIt = payLineList.iterator();
         while(poLineIt.hasNext()) {
@@ -207,14 +224,16 @@ public class PayLineWebController extends ControllerSupport{
                     PoLine poLine = this.poLineService.getDataObject(payLine.getPaySourceLineCode());
                     payLine.setMaterialCode(poLine.getMaterialCode());
                     payLine.setMaterialName(materialMap.get(poLine.getMaterialCode()).toString());
+                    payLine.setStandard(this.masterDataCommonService.getMdMaterialInfoCache(poLine.getMaterialCode()).getStandard());
                     payLine.setPrice(poLine.getPrice());
-                    payLine.setQuantity(poLine.getQuantity());
+                    payLine.setInputQuantity(poLine.getQuantity());
                     payLine.setUnit(materialUnitMap.get(poLine.getUnit()).toString());
                     payLine.setPoLineAmount(poLine.getAmount());
                 }
             }
         }else {
             //payLine.setAmount(0D);
+            payLine.setStandard(this.masterDataCommonService.getMdMaterialInfoCache(payLine.getMaterialCode()).getStandard());
         }
         
         //页面属性设置

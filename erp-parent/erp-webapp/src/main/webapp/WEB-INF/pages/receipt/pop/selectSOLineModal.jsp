@@ -35,7 +35,7 @@
 		<div class="modal-content animated bounceInRight">
 
 			<div class="modal-header">
-				<h4 class="modal-title">选择要收款的单据行</h4>
+				<h4 class="modal-title">选择要匹配的单据行</h4>
 				<button type="button" class="close" data-dismiss="modal"
 					aria-label="Close">
 					<span aria-hidden="true">&times;</span>
@@ -53,7 +53,7 @@
 								<th>物料编码</th>
 								<th>物料名称</th>
 								<th>单价</th>
-								<th>数量</th>
+								<th>出库数量</th>
 								<th>单位</th>
 								<th>金额</th>
 								<th>摘要</th>
@@ -68,7 +68,7 @@
 									<td class="materialCode">${data.materialCode}</td>
 									<td class="materialName">${requestScope.materialMap[data.materialCode]}</td>
 									<td class="price">${data.price}</td>
-									<td class="quantity">${data.quantity}</td>
+									<td class="quantity">${data.outputQuantity}</td>
 									<td class="unit">${requestScope.materialUnitMap[data.unit]}</td>
 									<td class="soLineAmount">${data.amount}</td>
 									<td>${data.memo}</td>

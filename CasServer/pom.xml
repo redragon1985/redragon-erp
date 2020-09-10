@@ -120,7 +120,6 @@
 		<artifactId>hibernate-jpa-2.0-api</artifactId>
 		<version>1.0.1.Final</version>
 	</dependency>
-	<!--  
 	<dependency>
 		<groupId>com.github.inspektr</groupId>
 		<artifactId>inspektr-audit</artifactId>
@@ -131,7 +130,6 @@
 		<artifactId>inspektr-common</artifactId>
 		<version>1.0.7.GA</version>
 	</dependency>
-	-->
 	<dependency>
 		<groupId>org.javassist</groupId>
 		<artifactId>javassist</artifactId>
@@ -462,5 +460,5 @@
   <properties>
     <cs.dir>${project.parent.basedir}</cs.dir>
   </properties>
-</project>
 
+</project>

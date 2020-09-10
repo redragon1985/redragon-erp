@@ -170,7 +170,7 @@ public class ReceiptHeadWebController extends ControllerSupport{
                 SoHead soHead = this.soHeadService.getDataObject(receiptHead.getReceiptSourceHeadCode());
                 receiptHead.setReceiptSourceHeadName(soHead.getSoName());
                 //获取采购订单金额
-                BigDecimal amount = this.soLineService.getSoAmount(receiptHead.getReceiptHeadCode());
+                BigDecimal amount = this.soLineService.getSoAmount(receiptHead.getReceiptSourceHeadCode());
                 receiptHead.setReceiptSourceHeadAmount(amount==null?0D:amount.doubleValue());
                 //获取已付款历史金额
                 BigDecimal HISAmount = this.receiptLineService.getHISReceiptAmountForSO(receiptHead.getReceiptSourceHeadCode(), receiptHead.getReceiptHeadCode());
@@ -182,7 +182,7 @@ public class ReceiptHeadWebController extends ControllerSupport{
             receiptHead.setBankName(this.datasetCommonService.getBank().get(receiptHead.getBankCode()));
         }else {
             //初始化默认字段
-            receiptHead.setAmount(0D);
+            //receiptHead.setAmount(0D);
             receiptHead.setReceivedStatus("N");
             receiptHead.setPreReceiptFlag("N");
             receiptHead.setStatus("NEW");

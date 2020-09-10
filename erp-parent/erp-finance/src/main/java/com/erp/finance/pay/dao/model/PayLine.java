@@ -96,6 +96,18 @@ public class PayLine implements java.io.Serializable {
         this.paySourceLineCode = paySourceLineCode;
     }
     
+    //发票行数量
+    @NotNull(message="发票行数量不能为空")
+    @Column(name = "quantity", unique = false, nullable = false)
+    private Double quantity;
+    
+    public Double getQuantity() {
+        return quantity;
+    }
+    public void setQuantity(Double quantity) {
+        this.quantity = quantity;
+    }
+
     //行金额
     @NotNull(message="付款行金额不能为空")
     @Column(name = "amount", unique = false, nullable = false)
@@ -108,6 +120,30 @@ public class PayLine implements java.io.Serializable {
         this.amount = amount;
     }
     
+    //税率（带小数）
+    @NotNull(message="税率不能为空")
+    @Column(name = "tax_rate", unique = false, nullable = false)
+    private Double taxRate;
+    
+    public Double getTaxRate() {
+        return taxRate;
+    }
+    public void setTaxRate(Double taxRate) {
+        this.taxRate = taxRate;
+    }
+    
+    //税额
+    @NotNull(message="税额不能为空")
+    @Column(name = "tax_amount", unique = false, nullable = false)
+    private Double taxAmount;
+    
+    public Double getTaxAmount() {
+        return taxAmount;
+    }
+    public void setTaxAmount(Double taxAmount) {
+        this.taxAmount = taxAmount;
+    }
+
     //摘要
     @Column(name = "memo", unique = false, nullable = true, length = 200)
     private String memo;
@@ -206,9 +242,11 @@ public class PayLine implements java.io.Serializable {
     @Transient
     private String materialName;
     @Transient
+    private String standard;
+    @Transient
     private Double price;
     @Transient
-    private Double quantity;
+    private Double inputQuantity;
     @Transient
     private String unit;
     @Transient
@@ -232,11 +270,11 @@ public class PayLine implements java.io.Serializable {
     public void setPrice(Double price) {
         this.price = price;
     }
-    public Double getQuantity() {
-        return quantity;
+    public Double getInputQuantity() {
+        return inputQuantity;
     }
-    public void setQuantity(Double quantity) {
-        this.quantity = quantity;
+    public void setInputQuantity(Double inputQuantity) {
+        this.inputQuantity = inputQuantity;
     }
     public String getUnit() {
         return unit;
@@ -249,6 +287,12 @@ public class PayLine implements java.io.Serializable {
     }
     public void setPoLineAmount(Double poLineAmount) {
         this.poLineAmount = poLineAmount;
+    }
+    public String getStandard() {
+        return standard;
+    }
+    public void setStandard(String standard) {
+        this.standard = standard;
     }
     
 }

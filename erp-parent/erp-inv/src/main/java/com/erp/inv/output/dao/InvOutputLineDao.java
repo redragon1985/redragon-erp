@@ -36,4 +36,7 @@ public interface InvOutputLineDao extends DaoCRUDIF<InvOutputLine, InvOutputLine
     //删除行（根据头code）
     public abstract void deleteInvOutputLineByOutputHeadCode(String outputHeadCode);
     
+    //获取物料的出库数量（根据销售订单行）
+    public abstract Double getOutputQuantityBySoLineCode(String soLineCode);
+    
 }

@@ -52,7 +52,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<div class="col-lg-12">
 			<div class="ibox ">
 				<div class="ibox-title btn-success btn-outline panel-success collapse-link" style="cursor: pointer;" title="展开/收起">
-					<h5>付款单头信息&nbsp;<span style="color: black;">（<i class="fa fa-tag"></i>${requestScope.approveStatusMap[requestScope.payHead.approveStatus]}）</span></h5>
+					<h5>采购发票头信息&nbsp;<span style="color: black;">（<i class="fa fa-tag"></i>${requestScope.approveStatusMap[requestScope.payHead.approveStatus]}）</span></h5>
 					<div class="ibox-tools">
 						<i class="fa fa-chevron-up"></i> 
 					</div>
@@ -61,12 +61,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<div id="ibox-content" class="ibox-content border-bottom" style="padding-bottom: 0px;">
 					<form id="form" action="web/payHead/editPayHead" method="post">
 						<div class="form-group  row">
-							<label class="col-sm-2 col-form-label"><span class="text-danger">*</span><strong>付款单编码</strong></label>
+							<label class="col-sm-2 col-form-label"><span class="text-danger">*</span><strong>发票编码</strong></label>
 							<div class="col-sm-4">
 								<input id="payHeadCode" name="payHeadCode" type="text" class="form-control" value="${requestScope.payHead.payHeadCode}">
 							</div>
 							
-							<label class="col-sm-2 col-form-label"><span class="text-danger">*</span><strong>付款来源</strong></label>
+							<label class="col-sm-2 col-form-label"><span class="text-danger">*</span><strong>发票来源</strong></label>
 							<div class="col-sm-4">
 								<select class="form-control" name="paySourceType" id="paySourceType">
 		                        	<option value="" selected="selected">请选择...</option>
@@ -91,16 +91,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						</div>
 						<div class="hr-line-dashed"></div>
 						
-						<div class="form-group  row">
+						<div class="form-group row">
 							<label class="col-sm-2 col-form-label"><strong>摘要</strong></label>
-							<div class="col-sm-10">
+							<div class="col-sm-4">
 								<textarea id="memo" name="memo" rows="3" class="form-control">${requestScope.payHead.memo}</textarea>
+							</div>
+							
+							<label class="col-sm-2 col-form-label"><strong>发票参考号</strong></label>
+							<div class="col-sm-4">
+								<input id="referenceNumber" name="referenceNumber" type="text" class="form-control" value="${requestScope.payHead.referenceNumber}">
 							</div>
 						</div>
 						<div class="hr-line-dashed"></div>
 						
 						<div class="form-group row">
-							<label class="col-sm-2 col-form-label"><span class="text-danger">*</span><strong>付款方</strong></label>
+							<label class="col-sm-2 col-form-label"><span class="text-danger">*</span><strong>购买方/客户</strong></label>
 							<div class="col-sm-4">
 								<select class="select2 form-control" name="payer" id="payer">
 		                        	<option value="" selected="selected">请选择...</option>
@@ -110,7 +115,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		                        </select>
 							</div>
 						
-	                        <label class="col-sm-2 col-form-label"><span class="text-danger">*</span><strong>收款方</strong></label>
+	                        <label class="col-sm-2 col-form-label"><span class="text-danger">*</span><strong>销售方/供应商</strong></label>
 	                        <div class="col-sm-4">
 	                        	<%-- 
 		                        <select class="select2 form-control" name="receiver" id="receiver">
@@ -126,9 +131,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	                    <div class="hr-line-dashed"></div>
 	                    
 	                    <div class="form-group row">
-	                    	<label class="col-sm-2 col-form-label"><strong>本次付款金额</strong></label>
+	                    	<label class="col-sm-2 col-form-label"><strong>发票金额（不含税）</strong></label>
 	                        <div class="col-sm-4 input-group">
-		                        <input id="amount" type="text" class="form-control" value="${requestScope.payHead.amount}" readonly="readonly">
+		                        <input id="amount" name="amount" type="text" class="form-control" value="${requestScope.payHead.amount}" >
 	                        	<span class="input-group-addon">(元)</span>
 	                        </div>
 	                        
@@ -151,7 +156,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	                        	<span class="input-group-addon">(元)</span>
 	                        </div>
 	                    
-							<label class="col-sm-2 col-form-label"><strong>历史付款金额</strong></label>
+							<label class="col-sm-2 col-form-label"><strong>历史开票金额</strong></label>
 							<div class="col-sm-4 input-group">
 		                        <input id="paySourceHeadHISAmount" type="text" class="form-control" value="${requestScope.payHead.paySourceHeadHISAmount}" readonly="readonly">
 	                        	<span class="input-group-addon">(元)</span>
@@ -160,9 +165,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<div class="hr-line-dashed"></div>
 	                    
 						<div class="form-group row">
-							<label class="col-sm-2 col-form-label"><span class="text-danger">*</span><strong>付款状态</strong></label>
+							<label class="col-sm-2 col-form-label"><span class="text-danger">*</span><strong>预付款标识</strong></label>
 	                        <div class="col-sm-4">
-								<input type="text" class="form-control" value="${requestScope.paidStatusMap[requestScope.payHead.paidStatus]}" readonly="readonly">
+	                        	<select class="form-control" name="prepayFlag" id="prepayFlag">
+		                        	<option value="" selected="selected">请选择...</option>
+		                            <option value="Y">是</option>
+		                            <option value="N">否</option>
+		                        </select>
 	                        </div>
 	                        
 	                        <label class="col-sm-2 col-form-label"><span class="text-danger">*</span><strong>状态</strong></label>
@@ -173,13 +182,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	                    <div class="hr-line-dashed"></div>
 	                    
 	                    <div class="form-group row">
-							<label class="col-sm-2 col-form-label"><span class="text-danger">*</span><strong>预付款标识</strong></label>
+							<label class="col-sm-2 col-form-label"><span class="text-danger">*</span><strong>付款状态</strong></label>
 	                        <div class="col-sm-4">
-	                        	<select class="form-control" name="prepayFlag" id="prepayFlag">
-		                        	<option value="" selected="selected">请选择...</option>
-		                            <option value="Y">是</option>
-		                            <option value="N">否</option>
-		                        </select>
+								<input type="text" class="form-control" value="${requestScope.paidStatusMap[requestScope.payHead.paidStatus]}" readonly="readonly">
 	                        </div>
 	                        
 	                        <label class="col-sm-2 col-form-label"><span class="text-danger">*</span><strong>付款方式</strong></label>
@@ -195,12 +200,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	                    <div class="hr-line-dashed"></div>
 	                    
 	                    <div class="form-group row">
-							<label class="col-sm-2 col-form-label"><strong>收款银行</strong></label>
+							<label class="col-sm-2 col-form-label"><strong>供应商收款银行</strong></label>
 	                        <div class="col-sm-4">
 		                        <input id="bankName" name="bankName" type="text" class="form-control" value="${requestScope.payHead.bankName}">
 	                        </div>
 	                        
-	                        <label class="col-sm-2 col-form-label"><strong>收款分行</strong></label>
+	                        <label class="col-sm-2 col-form-label"><strong>供应商收款分行</strong></label>
 	                        <div class="col-sm-4">
 	                        	<input id="subBankCode" name="subBankCode" type="text" class="form-control" value="${requestScope.payHead.subBankCode}" readonly="readonly">
 	                        </div>
@@ -208,12 +213,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	                    <div class="hr-line-dashed"></div>
 	                    
 	                    <div class="form-group row">
-							<label class="col-sm-2 col-form-label"><strong>收款银行账户</strong></label>
+							<label class="col-sm-2 col-form-label"><strong>供应商收款银行账户</strong></label>
 	                        <div class="col-sm-4">
 		                        <input id="bankAccount" name="bankAccount" type="text" class="form-control" value="${requestScope.payHead.bankAccount}" readonly="readonly">
 	                        </div>
 	                        
-	                        <label class="col-sm-2 col-form-label"><span class="text-danger">*</span><strong>付款时间</strong></label>
+	                        <label class="col-sm-2 col-form-label"><span class="text-danger">*</span><strong>发票日期</strong></label>
 							<div class="col-sm-4">
 	                        	<div class="input-group date">
 									<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
@@ -245,7 +250,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								
 								<c:if test="${param.payHeadCode!=null&&param.payHeadCode!=''}">
 									<c:if test="${requestScope.payHead.approveStatus=='UNSUBMIT'||requestScope.payHead.approveStatus=='REJECT' }">
-										<button class="btn btn-primary btn-lg" type="button" onclick="window.location.href='web/payHead/updateApproveStatus?code=${requestScope.payHead.payHeadCode}&approveStatus=SUBMIT'">&nbsp;&nbsp;提交&nbsp;&nbsp;<i class="fa fa-arrow-circle-right"></i></button>&nbsp;
+										<button class="btn btn-primary btn-lg" type="button" onclick="submitInvoiceApprove()">&nbsp;&nbsp;提交&nbsp;&nbsp;<i class="fa fa-arrow-circle-right"></i></button>&nbsp;
 									</c:if>
 									<c:if test="${requestScope.payHead.approveStatus=='SUBMIT' }">
 										<button class="btn btn-warning btn-lg" type="button" onclick="window.location.href='web/payHead/updateApproveStatus?code=${requestScope.payHead.payHeadCode}&approveStatus=APPROVE'">&nbsp;&nbsp;审核通过&nbsp;&nbsp;<i class="fa fa-check-circle"></i></button>&nbsp;
@@ -276,7 +281,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<div class="col-lg-12">
 						<div class="ibox ">
 							<div class="ibox-title btn-info btn-outline panel-info">
-								<h5>付款单行信息</h5>
+								<h5>采购发票行信息</h5>
 								<div class="ibox-tools">
 								</div>
 							</div>
@@ -284,7 +289,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<div id="ibox-content1" class="ibox-content border-bottom" style="padding-bottom: 0px;">
 								<div class="tabs-container">
 									<ul class="nav nav-tabs">
-										<li><a class="nav-link active" data-toggle="tab" href="#lineTab" onclick="getLineTab('${requestScope.payHead.payHeadCode}')">付款行</a></li>
+										<li><a class="nav-link active" data-toggle="tab" href="#lineTab" onclick="getLineTab('${requestScope.payHead.payHeadCode}')">发票行</a></li>
 									</ul>
 									<div id="tabDiv" class="tab-content">
 									</div>
@@ -308,7 +313,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script src="js/plugins/select2/select2.full.min.js"></script>
 
 <script>
+
+	//发票历史金额
+	var hAmountHis = 0;
+	
 	$(document).ready(function() {
+	
+		//获取发票历史金额，用于提交验证
+		if($.isNumeric($("#amount").val())){
+			hAmountHis = parseFloat($("#amount").val());
+		}
 	
 		//设置收起的title效果
 		$(".collapse-link").on("click", function(){
@@ -370,17 +384,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		//初始化选择头单据字段
 		setPaySourceHeadCodeText();
 		
+		//设置来源头类型选择的效果
+		setPaySourceTypeStyle();
+		
 		//来源类型切换
 		$("#paySourceType").change(function(){
-			if($(this).val()=="PO"){
-				$("#paySourceHeadCodeText").text("采购订单编码");
-				$("#paySourceHeadNameText").text("采购订单名称");
-				$("#paySourceHeadAmountText").text("采购订单金额");
-			}else if($(this).val()=="INPUT"){
-				$("#paySourceHeadCodeText").text("入库单编码");
-				$("#paySourceHeadNameText").text("入库单名称");
-				$("#paySourceHeadAmountText").text("采购订单金额");
-			}
+			//设置来源头类型选择的效果
+			setPaySourceTypeStyle();
+			
 			//设置选择头单据字段
 			setPaySourceHeadCodeText();
 		});
@@ -444,6 +455,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				payMode : {
 					required : true,
 				},
+				amount : {
+					required : true,
+					number : true,
+					min: 0,
+				},
 				/*bbc 只有转账必填
 				bankName : {
 					required : true,
@@ -498,6 +514,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		}
 	}
 	
+	//设置来源头类型选择的效果
+	function setPaySourceTypeStyle(){
+		if($("#paySourceType").val()=="PO"){
+			$("#paySourceHeadCodeText").text("采购订单编码");
+			$("#paySourceHeadNameText").text("采购订单名称");
+			$("#paySourceHeadAmountText").text("采购订单金额");
+		}else if($("#paySourceType").val()=="INPUT"){
+			$("#paySourceHeadCodeText").text("入库单编码");
+			$("#paySourceHeadNameText").text("入库单名称");
+			$("#paySourceHeadAmountText").text("采购订单金额");
+		}
+	}
+	
 	//付款方式切换效果
 	function initPayMode(){
 		if($("#payMode").val()==""||$("#payMode").val()=="cash"||$("#payMode").val()=="check"){
@@ -515,7 +544,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	function getSelectBankModal(){
 		$("#bankName").blur();
 		if($("#receiver").val()==""){
-			redragonJS.alert("请先选择收款方");
+			redragonJS.alert("请先选择供应商");
 		}else{
 			$('#selectPODiv').modal('hide');
 			redragonJS.loading("ibox-content");
@@ -563,5 +592,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				redragonJS.alert(textStatus);
 			}
 		});
+	}
+	
+	//发票头提交
+	function submitInvoiceApprove(){
+		var lAmount = parseFloat($("#lineAmountSum").text());
+		var hAmount = parseFloat($("#amount").val());
+		
+		if(hAmountHis==hAmount){
+			if(lAmount==hAmount){
+				window.location.href='web/payHead/updateApproveStatus?code=${requestScope.payHead.payHeadCode}&approveStatus=SUBMIT';
+			}else{
+				redragonJS.alert("发票金额("+hAmount+"元)与发票行合计金额("+lAmount+"元)不相等，金额不匹配无法提交发票");
+			}
+		}else{
+			redragonJS.alert("请先保存发票头");
+		}
+		
 	}
 </script>

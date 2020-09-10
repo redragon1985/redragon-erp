@@ -18,6 +18,8 @@
  */
 package com.global.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -84,7 +86,7 @@ public class GlobalController {
     }
     
     @RequestMapping("web/main")
-    public String webMain(Model model) {
+    public String webMain(Model model, HttpSession session) {
         //获取当前用户职员信息
         HrStaffInfoRO staffInfo = this.hrCommonService.getStaffInfo(ShiroUtil.getUsername());
         
@@ -108,6 +110,7 @@ public class GlobalController {
         
         //页面属性设置
         model.addAttribute("staffInfo", staffInfo);
+        session.setAttribute("staffInfo", staffInfo);
         
         return "basic.jsp?content=main";
     }

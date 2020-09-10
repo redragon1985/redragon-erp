@@ -47,7 +47,10 @@ import com.erp.finance.pay.dao.model.PayLineCO;
 import com.erp.finance.receipt.dao.model.ReceiptLine;
 import com.erp.finance.receipt.dao.model.ReceiptLineCO;
 import com.erp.finance.receipt.service.ReceiptLineService;
+import com.erp.inv.input.service.InvInputLineService;
+import com.erp.inv.output.service.InvOutputLineService;
 import com.erp.masterdata.common.service.MasterDataCommonService;
+import com.erp.masterdata.material.dao.model.MdMaterial;
 import com.erp.order.po.dao.model.PoLine;
 import com.erp.order.po.dao.model.PoLineCO;
 import com.erp.order.po.service.PoLineService;
@@ -71,6 +74,8 @@ public class ReceiptLineWebController extends ControllerSupport{
     private DatasetCommonService datasetCommonService;
     @Autowired
     private SoLineService soLineService;
+    @Autowired
+    private InvOutputLineService invOutputLineService;
     
     @Override
     public String getExceptionRedirectURL() {
@@ -109,8 +114,9 @@ public class ReceiptLineWebController extends ControllerSupport{
             SoLine soLine = this.soLineService.getDataObject(receiptLine.getReceiptSourceLineCode());
             receiptLine.setMaterialCode(soLine.getMaterialCode());
             receiptLine.setMaterialName(materialMap.get(soLine.getMaterialCode()).toString());
+            receiptLine.setStandard(this.masterDataCommonService.getMdMaterialInfoCache(soLine.getMaterialCode()).getStandard());
             receiptLine.setPrice(soLine.getPrice());
-            receiptLine.setQuantity(soLine.getQuantity());
+            receiptLine.setOutputQuantity(soLine.getQuantity());
             receiptLine.setUnit(materialUnitMap.get(soLine.getUnit()).toString());
             receiptLine.setSoLineAmount(soLine.getAmount());
         }
@@ -143,13 +149,25 @@ public class ReceiptLineWebController extends ControllerSupport{
         
         //分页查询销售订单行数据
         List<SoLine> soLineList = this.soLineService.getSoLineListBySoHeadCode(pages, soLineCO);
-        //获取付款行数据
+        //循环设置出库数量
+        for(SoLine soLine: soLineList) {
+            MdMaterial mdMaterial = this.masterDataCommonService.getMdMaterialInfoCache(soLine.getMaterialCode());
+            if(mdMaterial.getMaterialType().equals("MATERIAL")) {
+                //如果是物料则取入库数量
+                soLine.setOutputQuantity(this.invOutputLineService.getOutputQuantityBySoLineCode(soLine.getSoLineCode()));
+            }else {
+                //如果是事项则入库数量直接取采购数量
+                soLine.setOutputQuantity(soLine.getQuantity());
+            }
+        }
+        
+        //获取发票数据
         Pages pagesTemp = new Pages();
         pagesTemp.setPage(1);
         pagesTemp.setMax(100);
         List<ReceiptLine> receiptLineList = this.receiptLineService.getReceiptLineListByReceiptHeadCode(pagesTemp, receiptLineCO);
         
-        //剔除已经做了付款行的采购订单行
+        //剔除已经做了发票行的销售订单行
         Iterator<SoLine> soLineIt = soLineList.iterator();
         Iterator<ReceiptLine> receiptLineIt = receiptLineList.iterator();
         while(soLineIt.hasNext()) {
@@ -207,14 +225,16 @@ public class ReceiptLineWebController extends ControllerSupport{
                     SoLine soLine = this.soLineService.getDataObject(receiptLine.getReceiptSourceLineCode());
                     receiptLine.setMaterialCode(soLine.getMaterialCode());
                     receiptLine.setMaterialName(materialMap.get(soLine.getMaterialCode()).toString());
+                    receiptLine.setStandard(this.masterDataCommonService.getMdMaterialInfoCache(soLine.getMaterialCode()).getStandard());
                     receiptLine.setPrice(soLine.getPrice());
-                    receiptLine.setQuantity(soLine.getQuantity());
+                    receiptLine.setOutputQuantity(soLine.getQuantity());
                     receiptLine.setUnit(materialUnitMap.get(soLine.getUnit()).toString());
                     receiptLine.setSoLineAmount(soLine.getAmount());
                 }
             }
         }else {
             //receiptLine.setAmount(0D);
+            receiptLine.setStandard(this.masterDataCommonService.getMdMaterialInfoCache(receiptLine.getMaterialCode()).getStandard());
         }
         
         //页面属性设置

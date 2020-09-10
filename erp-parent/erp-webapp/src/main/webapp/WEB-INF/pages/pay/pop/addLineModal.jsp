@@ -28,11 +28,11 @@
             + path + "/";
 %>
 
-<div class="modal" id="addLineDiv" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal" id="addLineDiv" tabindex="-1" role="dialog" aria-hidden="true" >
 
-	<div class="modal-dialog" role="document">
+	<div class="modal-dialog" role="document" style="max-width: 800px;">
 
-		<div class="modal-content animated bounceInRight">
+		<div class="modal-content animated bounceInRight" >
 
 			<div class="modal-header">
 				<h4 class="modal-title">付款行编辑</h4>
@@ -50,59 +50,86 @@
 			
 				<form id="lineForm">
 					<div class="form-group row">
-						<label class="col-sm-3 col-form-label">物料编码</label>
-						<div class="col-sm-9">
+						<label class="col-sm-2 col-form-label">物料编码</label>
+						<div class="col-sm-4">
 							<input id="materialCode" type="text" class="form-control" value="${requestScope.payLine.materialCode}" readonly="readonly">
+						</div>
+						
+						<label class="col-sm-2 col-form-label">物料名称</label>
+						<div class="col-sm-4">
+							<input id="materialName" type="text" class="form-control" value="${requestScope.payLine.materialName}" readonly="readonly">
 						</div>
 					</div>
 					<div class="hr-line-dashed"></div>
 					
 					<div class="form-group row">
-						<label class="col-sm-3 col-form-label">物料</label>
-						<div class="col-sm-9">
-							<input id="materialName" type="text" class="form-control" value="${requestScope.payLine.materialName}" readonly="readonly">
+						<label class="col-sm-2 col-form-label">规格型号</label>
+						<div class="col-sm-10">
+							<input id="standard" type="text" class="form-control" value="${requestScope.payLine.standard}" readonly="readonly">
 						</div>
 					</div>
 					<div class="hr-line-dashed"></div>
 				
 					<div class="form-group row">
-						<label class="col-sm-3 col-form-label">单价</label>
-						<div class="col-sm-9 input-group">
+						<label class="col-sm-2 col-form-label">采购单价</label>
+						<div class="col-sm-4 input-group">
 							<input id="price" type="text" class="form-control" value="${requestScope.payLine.price}" readonly="readonly">
+							<span class="input-group-addon">(元)</span>
+						</div>
+
+						<label class="col-sm-2 col-form-label">入库数量</label>
+						<div class="col-sm-4 input-group">
+							<input id="inputQuantity" type="text" class="form-control" value="${requestScope.payLine.inputQuantity}" readonly="readonly">
+							<span class="input-group-addon">(${requestScope.payLine.unit})</span>
+						</div>
+					</div>
+					<div class="hr-line-dashed"></div>
+					
+					<%-- 
+					<div class="form-group row">
+						<label class="col-sm-2 col-form-label">采购行金额</label>
+						<div class="col-sm-10 input-group">
+							<input id="lineAmount" type="text" class="form-control" value="${requestScope.payLine.poLineAmount}" readonly="readonly">
 							<span class="input-group-addon">(元)</span>
 						</div>
 					</div>
 					<div class="hr-line-dashed"></div>
-
+					--%>
+					
 					<div class="form-group row">
-						<label class="col-sm-3 col-form-label">数量</label>
-						<div class="col-sm-9 input-group">
-							<input id="quantity" type="text" class="form-control" value="${requestScope.payLine.quantity}" readonly="readonly">
+						<label class="col-sm-2 col-form-label"><span class="text-danger">*</span>发票行数量</label>
+						<div class="col-sm-10 input-group">
+							<input id="quantity" name="quantity" type="text" class="form-control" value="${requestScope.payLine.quantity}">
 							<span class="input-group-addon">(${requestScope.payLine.unit})</span>
 						</div>
 					</div>
 					<div class="hr-line-dashed"></div>
 					
 					<div class="form-group row">
-						<label class="col-sm-3 col-form-label">行金额</label>
-						<div class="col-sm-9 input-group">
-							<input id="lineAmount" type="text" class="form-control" value="${requestScope.payLine.poLineAmount}" readonly="readonly">
+						<label class="col-sm-2 col-form-label"><span class="text-danger">*</span>发票行金额</label>
+						<div class="col-sm-10 input-group">
+							<input id="payLineAmount" name="amount" type="text" class="form-control" value="${requestScope.payLine.amount}" readonly="readonly">
 							<span class="input-group-addon">(元)</span>
 						</div>
 					</div>
 					<div class="hr-line-dashed"></div>
 					
 					<div class="form-group row">
-						<label class="col-sm-3 col-form-label"><span class="text-danger">*</span>付款金额</label>
-						<div class="col-sm-9 input-group">
-							<input id="payLineAmount" name="amount" type="text" class="form-control" value="${requestScope.payLine.amount}">
+						<label class="col-sm-2 col-form-label"><span class="text-danger">*</span>税率</label>
+						<div class="col-sm-4">
+							<input id="taxRate" name="taxRate" type="text" class="form-control" value="${requestScope.payLine.taxRate}">
+						</div>
+
+						<label class="col-sm-2 col-form-label"><span class="text-danger">*</span>税额</label>
+						<div class="col-sm-4">
+							<input id="taxAmount" name="taxAmount" type="text" class="form-control" value="${requestScope.payLine.taxAmount}" readonly="readonly">
 						</div>
 					</div>
 					<div class="hr-line-dashed"></div>
 					
 					<div class="form-group row">
-						<label class="col-sm-3 col-form-label">付款摘要</label>
-						<div class="col-sm-9">
+						<label class="col-sm-2 col-form-label">发票行摘要</label>
+						<div class="col-sm-10">
 							<input id="payLineMemo" name="memo" type="text" class="form-control" value="${requestScope.payLine.memo}">
 						</div>
 					</div>
@@ -139,6 +166,29 @@
 
 <script>
 	$(document).ready(function() {
+	
+		//行金额计算
+		$("#quantity").blur(function(){
+			if($.isNumeric($("#quantity").val())){
+				var amount = redragonJS.numberMulti(parseFloat($("#quantity").val()), parseFloat($("#price").val()));
+				$("#payLineAmount").val(amount);
+			}
+		});
+		
+		//税额计算
+		$("#taxRate").blur(function(){
+			setTaxRate();
+		});
+		
+		function setTaxRate(){
+			if($.isNumeric($("#taxRate").val())&&$.isNumeric($("#payLineAmount").val())){
+				var taxAmount = redragonJS.numberMulti(parseFloat($("#payLineAmount").val()), parseFloat($("#taxRate").val()));
+				$("#taxAmount").val(taxAmount);
+			}
+		}
+		
+		
+		//表单提交
 		var l = $('.ladda-button-demo').ladda();
 
 		l.click(function() {
@@ -150,15 +200,32 @@
 			rules : {
 				amount : {
 					required : true,
-					compareNumber: "#lineAmount"
+					number : true,
+				},
+				quantity : {
+					required : true,
+					number : true,
+					compareNumber: "#inputQuantity"
+				},
+				taxRate : {
+					required : true,
+					number : true,
+					max : 1,
+				},
+				taxAmount : {
+					required : true,
+					number : true,
 				},
 			},
 			messages : {
-				amount : {
-					compareNumber: "付款金额不能大于行金额"
+				quantity : {
+					compareNumber: "发票行数量不能大于入库数量/采购数量"
 				},
 			},
 			submitHandler: function(form) {
+				//税额计算
+				setTaxRate();
+				
 				l.ladda('start');
 				editLine();
 		    }
@@ -173,7 +240,9 @@
 		$.ajax({
 			type: "post",
 			url: "web/payLine/editPayLine",
-			data: {"amount": $("#payLineAmount").val(), "memo": $("#payLineMemo").val(), "payHeadCode": $("#payHeadCode").val(), "payLineId": $("#payLineId").val(),
+			data: {"quantity": $("#quantity").val(), "amount": $("#payLineAmount").val(), "memo": $("#payLineMemo").val(), 
+				   "taxRate": $("#taxRate").val(), "taxAmount": $("#taxAmount").val(),
+				   "payHeadCode": $("#payHeadCode").val(), "payLineId": $("#payLineId").val(),
 				   "payLineCode": $("#payLineCode").val(), "paySourceLineCode": $("#paySourceLineCode").val(), "createdDate": $("#createdDate").val(),
 				   "createdBy": $("#createdBy").val()},
 			async: false,

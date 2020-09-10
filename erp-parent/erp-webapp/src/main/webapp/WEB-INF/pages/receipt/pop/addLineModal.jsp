@@ -30,7 +30,7 @@
 
 <div class="modal" id="addLineDiv" tabindex="-1" role="dialog" aria-hidden="true">
 
-	<div class="modal-dialog" role="document">
+	<div class="modal-dialog" role="document" style="max-width: 800px;">
 
 		<div class="modal-content animated bounceInRight">
 
@@ -50,39 +50,42 @@
 			
 				<form id="lineForm">
 					<div class="form-group row">
-						<label class="col-sm-3 col-form-label">物料编码</label>
-						<div class="col-sm-9">
+						<label class="col-sm-2 col-form-label">物料编码</label>
+						<div class="col-sm-4">
 							<input id="materialCode" type="text" class="form-control" value="${requestScope.receiptLine.materialCode}" readonly="readonly">
+						</div>
+
+						<label class="col-sm-2 col-form-label">物料</label>
+						<div class="col-sm-4">
+							<input id="materialName" type="text" class="form-control" value="${requestScope.receiptLine.materialName}" readonly="readonly">
 						</div>
 					</div>
 					<div class="hr-line-dashed"></div>
 					
 					<div class="form-group row">
-						<label class="col-sm-3 col-form-label">物料</label>
-						<div class="col-sm-9">
-							<input id="materialName" type="text" class="form-control" value="${requestScope.receiptLine.materialName}" readonly="readonly">
+						<label class="col-sm-2 col-form-label">规格型号</label>
+						<div class="col-sm-10">
+							<input id="standard" type="text" class="form-control" value="${requestScope.receiptLine.standard}" readonly="readonly">
 						</div>
 					</div>
 					<div class="hr-line-dashed"></div>
 				
 					<div class="form-group row">
-						<label class="col-sm-3 col-form-label">单价</label>
-						<div class="col-sm-9 input-group">
+						<label class="col-sm-2 col-form-label">销售单价</label>
+						<div class="col-sm-4 input-group">
 							<input id="price" type="text" class="form-control" value="${requestScope.receiptLine.price}" readonly="readonly">
 							<span class="input-group-addon">(元)</span>
 						</div>
-					</div>
-					<div class="hr-line-dashed"></div>
 
-					<div class="form-group row">
-						<label class="col-sm-3 col-form-label">数量</label>
-						<div class="col-sm-9 input-group">
-							<input id="quantity" type="text" class="form-control" value="${requestScope.receiptLine.quantity}" readonly="readonly">
+						<label class="col-sm-2 col-form-label">出库数量</label>
+						<div class="col-sm-4 input-group">
+							<input id="outputQuantity" type="text" class="form-control" value="${requestScope.receiptLine.outputQuantity}" readonly="readonly">
 							<span class="input-group-addon">(${requestScope.receiptLine.unit})</span>
 						</div>
 					</div>
 					<div class="hr-line-dashed"></div>
 					
+					<%-- 
 					<div class="form-group row">
 						<label class="col-sm-3 col-form-label">行金额</label>
 						<div class="col-sm-9 input-group">
@@ -91,18 +94,42 @@
 						</div>
 					</div>
 					<div class="hr-line-dashed"></div>
+					--%>
 					
 					<div class="form-group row">
-						<label class="col-sm-3 col-form-label"><span class="text-danger">*</span>收款金额</label>
-						<div class="col-sm-9 input-group">
-							<input id="receiptLineAmount" name="amount" type="text" class="form-control" value="${requestScope.receiptLine.amount}">
+						<label class="col-sm-2 col-form-label"><span class="text-danger">*</span>发票行数量</label>
+						<div class="col-sm-10 input-group">
+							<input id="quantity" name="quantity" type="text" class="form-control" value="${requestScope.receiptLine.quantity}">
+							<span class="input-group-addon">(${requestScope.receiptLine.unit})</span>
 						</div>
 					</div>
 					<div class="hr-line-dashed"></div>
 					
 					<div class="form-group row">
-						<label class="col-sm-3 col-form-label">收款摘要</label>
-						<div class="col-sm-9">
+						<label class="col-sm-2 col-form-label"><span class="text-danger">*</span>发票行金额</label>
+						<div class="col-sm-10 input-group">
+							<input id="receiptLineAmount" name="amount" type="text" class="form-control" value="${requestScope.receiptLine.amount}" readonly="readonly">
+							<span class="input-group-addon">(元)</span>
+						</div>
+					</div>
+					<div class="hr-line-dashed"></div>
+					
+					<div class="form-group row">
+						<label class="col-sm-2 col-form-label"><span class="text-danger">*</span>税率</label>
+						<div class="col-sm-4">
+							<input id="taxRate" name="taxRate" type="text" class="form-control" value="${requestScope.receiptLine.taxRate}">
+						</div>
+
+						<label class="col-sm-2 col-form-label"><span class="text-danger">*</span>税额</label>
+						<div class="col-sm-4">
+							<input id="taxAmount" name="taxAmount" type="text" class="form-control" value="${requestScope.receiptLine.taxAmount}" readonly="readonly">
+						</div>
+					</div>
+					<div class="hr-line-dashed"></div>
+					
+					<div class="form-group row">
+						<label class="col-sm-2 col-form-label">发票行摘要</label>
+						<div class="col-sm-10">
 							<input id="receiptLineMemo" name="memo" type="text" class="form-control" value="${requestScope.receiptLine.memo}">
 						</div>
 					</div>
@@ -139,6 +166,29 @@
 
 <script>
 	$(document).ready(function() {
+	
+		//行金额计算
+		$("#quantity").blur(function(){
+			if($.isNumeric($("#quantity").val())){
+				var amount = redragonJS.numberMulti(parseFloat($("#quantity").val()), parseFloat($("#price").val()));
+				$("#receiptLineAmount").val(amount);
+			}
+		});
+		
+		//税额计算
+		$("#taxRate").blur(function(){
+			setTaxRate();
+		});
+		
+		function setTaxRate(){
+			if($.isNumeric($("#taxRate").val())&&$.isNumeric($("#receiptLineAmount").val())){
+				var taxAmount = redragonJS.numberMulti(parseFloat($("#receiptLineAmount").val()), parseFloat($("#taxRate").val()));
+				$("#taxAmount").val(taxAmount);
+			}
+		}
+	
+	
+		//表单提交
 		var l = $('.ladda-button-demo').ladda();
 
 		l.click(function() {
@@ -150,15 +200,32 @@
 			rules : {
 				amount : {
 					required : true,
-					compareNumber: "#lineAmount"
+					number : true,
+				},
+				quantity : {
+					required : true,
+					number : true,
+					compareNumber: "#outputQuantity"
+				},
+				taxRate : {
+					required : true,
+					number : true,
+					max : 1,
+				},
+				taxAmount : {
+					required : true,
+					number : true,
 				},
 			},
 			messages : {
-				amount : {
-					compareNumber: "收款金额不能大于行金额"
+				quantity : {
+					compareNumber: "发票行数量不能大于入库数量/采购数量"
 				},
 			},
 			submitHandler: function(form) {
+				//税额计算
+				setTaxRate();
+				
 				l.ladda('start');
 				editLine();
 		    }
@@ -173,7 +240,9 @@
 		$.ajax({
 			type: "post",
 			url: "web/receiptLine/editReceiptLine",
-			data: {"amount": $("#receiptLineAmount").val(), "memo": $("#receiptLineMemo").val(), "receiptHeadCode": $("#receiptHeadCode").val(), "receiptLineId": $("#receiptLineId").val(),
+			data: {"quantity": $("#quantity").val(), "amount": $("#receiptLineAmount").val(), "memo": $("#receiptLineMemo").val(),
+				   "taxRate": $("#taxRate").val(), "taxAmount": $("#taxAmount").val(), 
+			       "receiptHeadCode": $("#receiptHeadCode").val(), "receiptLineId": $("#receiptLineId").val(),
 				   "receiptLineCode": $("#receiptLineCode").val(), "receiptSourceLineCode": $("#receiptSourceLineCode").val(), "createdDate": $("#createdDate").val(),
 				   "createdBy": $("#createdBy").val()},
 			async: false,
