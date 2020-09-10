@@ -31,7 +31,9 @@ CREATE TABLE `pay_head` (
   `pay_source_head_code` varchar(45) NOT NULL COMMENT '付款来源头编码（采购订单头编码、入库单头编码）',
   `payer` varchar(45) NOT NULL COMMENT '付款方',
   `receiver` varchar(45) NOT NULL COMMENT '收款方',
+  `amount` decimal(10,2) NOT NULL COMMENT '发票金额',
   `currency_code` varchar(45) NOT NULL COMMENT '币种',
+  `reference_number` varchar(45) DEFAULT NULL COMMENT '发票参考号（纸质发票号）',
   `pay_date` date NOT NULL COMMENT '付款时间',
   `prepay_flag` char(1) NOT NULL DEFAULT 'N' COMMENT '预付款标识',
   `pay_mode` varchar(45) NOT NULL COMMENT '付款方式',
@@ -52,7 +54,7 @@ CREATE TABLE `pay_head` (
   `org_code` varchar(10) NOT NULL COMMENT '组织机构',
   PRIMARY KEY (`pay_head_id`),
   UNIQUE KEY `pay_head_code_UNIQUE` (`pay_head_code`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='付款单头表';
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='付款单头表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -64,4 +66,4 @@ CREATE TABLE `pay_head` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-08-29 21:31:11
+-- Dump completed on 2020-09-10 21:55:42

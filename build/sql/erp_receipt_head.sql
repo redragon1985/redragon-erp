@@ -31,7 +31,9 @@ CREATE TABLE `receipt_head` (
   `receipt_source_head_code` varchar(45) NOT NULL COMMENT '收款来源头编码（销售订单头编码、出库单头编码）',
   `payer` varchar(45) NOT NULL COMMENT '付款方',
   `receiver` varchar(45) NOT NULL COMMENT '收款方',
+  `amount` decimal(10,2) NOT NULL COMMENT '发票金额',
   `currency_code` varchar(45) NOT NULL COMMENT '币种',
+  `reference_number` varchar(45) DEFAULT NULL COMMENT '发票参考号（纸质发票号）',
   `receipt_date` date NOT NULL COMMENT '收款时间',
   `pre_receipt_flag` char(1) NOT NULL COMMENT '预收款标识',
   `receipt_mode` varchar(45) NOT NULL DEFAULT 'N' COMMENT '收款方式',
@@ -64,4 +66,4 @@ CREATE TABLE `receipt_head` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-08-29 21:31:22
+-- Dump completed on 2020-09-10 21:55:51

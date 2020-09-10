@@ -29,7 +29,10 @@ CREATE TABLE `receipt_line` (
   `receipt_line_code` varchar(45) NOT NULL COMMENT '收款行编码',
   `receipt_head_code` varchar(45) NOT NULL COMMENT '收款头编码',
   `receipt_source_line_code` varchar(45) NOT NULL COMMENT '收款来源行编码',
+  `quantity` double NOT NULL COMMENT '发票行数量',
   `amount` decimal(10,2) NOT NULL COMMENT '行金额',
+  `tax_rate` double NOT NULL COMMENT '税率（带小数）',
+  `tax_amount` decimal(10,2) NOT NULL COMMENT '税额',
   `memo` varchar(200) DEFAULT NULL COMMENT '摘要',
   `version` int(11) NOT NULL DEFAULT '1' COMMENT '版本',
   `status` char(1) NOT NULL DEFAULT 'Y' COMMENT '状态',
@@ -41,7 +44,7 @@ CREATE TABLE `receipt_line` (
   PRIMARY KEY (`receipt_line_id`),
   UNIQUE KEY `receipt_line_code_UNIQUE` (`receipt_line_code`),
   KEY `IX_receipt_line_receipt_head_code` (`receipt_head_code`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='收款单行表';
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='收款单行表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -53,4 +56,4 @@ CREATE TABLE `receipt_line` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-08-29 21:31:08
+-- Dump completed on 2020-09-10 21:55:39
