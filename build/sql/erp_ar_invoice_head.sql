@@ -18,23 +18,23 @@ USE `erp`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `receipt_head`
+-- Table structure for table `ar_invoice_head`
 --
 
-DROP TABLE IF EXISTS `receipt_head`;
+DROP TABLE IF EXISTS `ar_invoice_head`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
-CREATE TABLE `receipt_head` (
-  `receipt_head_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '收款头id',
-  `receipt_head_code` varchar(45) NOT NULL COMMENT '收款头编码',
-  `receipt_source_type` varchar(45) NOT NULL COMMENT '收款来源类型（采购订单SO、入库单OUTPUT）',
-  `receipt_source_head_code` varchar(45) NOT NULL COMMENT '收款来源头编码（销售订单头编码、出库单头编码）',
+CREATE TABLE `ar_invoice_head` (
+  `invoice_head_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '收款头id',
+  `invoice_head_code` varchar(45) NOT NULL COMMENT '收款头编码',
+  `invoice_source_type` varchar(45) NOT NULL COMMENT '收款来源类型（采购订单SO、入库单OUTPUT）',
+  `invoice_source_head_code` varchar(45) NOT NULL COMMENT '收款来源头编码（销售订单头编码、出库单头编码）',
   `payer` varchar(45) NOT NULL COMMENT '付款方',
   `receiver` varchar(45) NOT NULL COMMENT '收款方',
   `amount` decimal(10,2) NOT NULL COMMENT '发票金额',
   `currency_code` varchar(45) NOT NULL COMMENT '币种',
   `reference_number` varchar(45) DEFAULT NULL COMMENT '发票参考号（纸质发票号）',
-  `receipt_date` date NOT NULL COMMENT '收款时间',
+  `invoice_date` date NOT NULL COMMENT '收款时间',
   `pre_receipt_flag` char(1) NOT NULL COMMENT '预收款标识',
   `receipt_mode` varchar(45) NOT NULL DEFAULT 'N' COMMENT '收款方式',
   `bank_code` varchar(45) DEFAULT NULL COMMENT '银行编码',
@@ -52,9 +52,9 @@ CREATE TABLE `receipt_head` (
   `last_updated_date` datetime DEFAULT NULL COMMENT '最后修改时间',
   `last_updated_by` varchar(45) DEFAULT NULL COMMENT '最后修改人',
   `org_code` varchar(10) NOT NULL COMMENT '组织机构',
-  PRIMARY KEY (`receipt_head_id`),
-  UNIQUE KEY `receipt_head_code_UNIQUE` (`receipt_head_code`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='收款单头表';
+  PRIMARY KEY (`invoice_head_id`),
+  UNIQUE KEY `receipt_head_code_UNIQUE` (`invoice_head_code`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='收款单头表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -66,4 +66,4 @@ CREATE TABLE `receipt_head` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-09-10 21:55:51
+-- Dump completed on 2020-09-12 23:02:07
