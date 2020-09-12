@@ -302,22 +302,22 @@ contentPage=contentPage.substring(contentPage.lastIndexOf("/")+1, contentPage.le
 				
 			
 			
-			<%if(contentPage.contains("pay")||contentPage.contains("receipt")){ %>	
+			<%if(contentPage.contains("apInvoice")||contentPage.contains("arInvoice")){ %>	
 				<li class="active menu"><a href="#"><i class="fa fa-handshake-o"></i> <span class="nav-label">发票管理</span><span class="fa arrow"></span></a>
 			<%}else{ %>
 				<li class="menu"><a href="#"><i class="fa fa-handshake-o"></i> <span class="nav-label">发票管理</span><span class="fa arrow"></span></a>
 			<%} %>
 				<ul class="nav nav-second-level collapse">
-					<%if(contentPage.equalsIgnoreCase("payList")||contentPage.equalsIgnoreCase("payEdit")){ %>
-						<li class="active"><a href="web/payHead/getPayHeadList">采购发票</a></li>
+					<%if(contentPage.equalsIgnoreCase("apInvoiceList")||contentPage.equalsIgnoreCase("apInvoiceEdit")){ %>
+						<li class="active"><a href="web/apInvoiceHead/getApInvoiceHeadList">采购发票</a></li>
 					<%}else{ %>
-						<li><a href="web/payHead/getPayHeadList">采购发票</a></li>
+						<li><a href="web/apInvoiceHead/getApInvoiceHeadList">采购发票</a></li>
 					<%} %>
 					
-					<%if(contentPage.equalsIgnoreCase("receiptList")||contentPage.equalsIgnoreCase("receiptEdit")){ %>
-						<li class="active"><a href="web/receiptHead/getReceiptHeadList">销售发票</a></li>
+					<%if(contentPage.equalsIgnoreCase("arInvoiceList")||contentPage.equalsIgnoreCase("arInvoiceEdit")){ %>
+						<li class="active"><a href="web/arInvoiceHead/getArInvoiceHeadList">销售发票</a></li>
 					<%}else{ %>
-						<li><a href="web/receiptHead/getReceiptHeadList">销售发票</a></li>
+						<li><a href="web/arInvoiceHead/getArInvoiceHeadList">销售发票</a></li>
 					<%} %>
 					
 					<%-- 

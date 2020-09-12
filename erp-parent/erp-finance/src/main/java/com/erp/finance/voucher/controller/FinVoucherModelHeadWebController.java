@@ -50,14 +50,14 @@ import redragon.basic.tools.TimeToolKit;
 import redragon.frame.hibernate.SnowFlake;
 
 import com.erp.dataset.service.DatasetCommonService;
-import com.erp.finance.pay.dao.model.PayHead;
-import com.erp.finance.pay.dao.model.PayHeadCO;
-import com.erp.finance.pay.service.PayHeadService;
-import com.erp.finance.pay.service.PayLineService;
-import com.erp.finance.receipt.dao.model.ReceiptHead;
-import com.erp.finance.receipt.dao.model.ReceiptHeadCO;
-import com.erp.finance.receipt.service.ReceiptHeadService;
-import com.erp.finance.receipt.service.ReceiptLineService;
+import com.erp.finance.pay.dao.model.ApInvoiceHead;
+import com.erp.finance.pay.dao.model.ApInvoiceHeadCO;
+import com.erp.finance.pay.service.ApInvoiceHeadService;
+import com.erp.finance.pay.service.ApInvoiceLineService;
+import com.erp.finance.receipt.dao.model.ArInvoiceHead;
+import com.erp.finance.receipt.dao.model.ArInvoiceHeadCO;
+import com.erp.finance.receipt.service.ArInvoiceHeadService;
+import com.erp.finance.receipt.service.ArInvoiceLineService;
 import com.erp.finance.voucher.dao.data.DataBox;
 import com.erp.finance.voucher.dao.model.FinVoucherHead;
 import com.erp.finance.voucher.dao.model.FinVoucherLine;
@@ -95,13 +95,13 @@ public class FinVoucherModelHeadWebController extends ControllerSupport{
     @Autowired
     private MasterDataCommonService masterDataCommonService;
     @Autowired
-    private PayHeadService payHeadService;
+    private ApInvoiceHeadService payHeadService;
     @Autowired
-    private PayLineService payLineService;
+    private ApInvoiceLineService payLineService;
     @Autowired
-    private ReceiptHeadService receiptHeadService;
+    private ArInvoiceHeadService receiptHeadService;
     @Autowired
-    private ReceiptLineService receiptLineService;
+    private ArInvoiceLineService receiptLineService;
     
     @Override
     public String getExceptionRedirectURL() {
@@ -236,7 +236,7 @@ public class FinVoucherModelHeadWebController extends ControllerSupport{
      *
      */
     @RequestMapping("getSelectBillModal")
-    public String getSelectBillModal(String businessType, Pages pages, PayHeadCO poHeadCO, ReceiptHeadCO receiptHeadCO, Model model) {
+    public String getSelectBillModal(String businessType, Pages pages, ApInvoiceHeadCO poHeadCO, ArInvoiceHeadCO receiptHeadCO, Model model) {
         //分页查询数据
         if(pages.getPage()==0) {
             pages.setPage(1);
@@ -244,19 +244,19 @@ public class FinVoucherModelHeadWebController extends ControllerSupport{
         
         if(businessType.equals("PAY")) {
             //分页查询数据
-            List<PayHead> payHeadList = this.payHeadService.getPayHeadListForNotCreateVoucher(pages, poHeadCO);
+            List<ApInvoiceHead> payHeadList = this.payHeadService.getApInvoiceHeadListForNotCreateVoucher(pages, poHeadCO);
             //循环获取金额
             //循环设置职员和组织信息
-            for(PayHead payHead: payHeadList) {
-                payHead.setAmount(this.payLineService.getPayAmountByPayHeadCode(payHead.getPayHeadCode()).doubleValue());
+            for(ApInvoiceHead payHead: payHeadList) {
+                payHead.setAmount(this.payLineService.getApInvoiceAmountByHeadCode(payHead.getInvoiceHeadCode()).doubleValue());
                 payHead.setStaffName(this.hrCommonService.getHrStaff(payHead.getStaffCode()).getStaffName());
                 payHead.setDepartmentName(this.hrCommonService.getHrDepartment(payHead.getDepartmentCode()).getDepartmentName());
             }
             
             //付款来源类型
-            Map paySourceTypeMap = com.erp.finance.pay.dao.data.DataBox.getPaySourceType();
+            Map paySourceTypeMap = com.erp.finance.pay.dao.data.DataBox.getApInvoiceSourceType();
             //状态
-            Map payStatusMap = com.erp.finance.pay.dao.data.DataBox.getPayStatusMap();
+            Map payStatusMap = com.erp.finance.pay.dao.data.DataBox.getApInvoiceStatusMap();
             //获取出纳状态
             Map paidStatusMap = com.erp.finance.pay.dao.data.DataBox.getPaidStatusMap();
             //获取供应商
@@ -273,19 +273,19 @@ public class FinVoucherModelHeadWebController extends ControllerSupport{
             return "finVoucher/pop/selectPayBillModal";
         }else if(businessType.equals("RECEIPT")) {
           //分页查询数据
-            List<ReceiptHead> receiptHeadList = this.receiptHeadService.getReceiptHeadListForNotCreateVoucher(pages, receiptHeadCO);
+            List<ArInvoiceHead> receiptHeadList = this.receiptHeadService.getArInvoiceHeadListForNotCreateVoucher(pages, receiptHeadCO);
             //循环获取金额
             //循环设置职员和组织信息
-            for(ReceiptHead receiptHead: receiptHeadList) {
-                receiptHead.setAmount(this.receiptLineService.getReceiptAmountByReceiptHeadCode(receiptHead.getReceiptHeadCode()).doubleValue());
+            for(ArInvoiceHead receiptHead: receiptHeadList) {
+                receiptHead.setAmount(this.receiptLineService.getArInvoiceAmountByHeadCode(receiptHead.getInvoiceHeadCode()).doubleValue());
                 receiptHead.setStaffName(this.hrCommonService.getHrStaff(receiptHead.getStaffCode()).getStaffName());
                 receiptHead.setDepartmentName(this.hrCommonService.getHrDepartment(receiptHead.getDepartmentCode()).getDepartmentName());
             }
             
             //收款来源类型
-            Map receiptSourceTypeMap = com.erp.finance.receipt.dao.data.DataBox.getReceiptSourceType();
+            Map receiptSourceTypeMap = com.erp.finance.receipt.dao.data.DataBox.getArInvoiceSourceType();
             //状态
-            Map receiptStatusMap = com.erp.finance.receipt.dao.data.DataBox.getReceiptStatusMap();
+            Map receiptStatusMap = com.erp.finance.receipt.dao.data.DataBox.getArInvoiceStatusMap();
             //获取出纳状态
             Map receivedStatusMap = com.erp.finance.receipt.dao.data.DataBox.getReceivedStatusMap();
             //获取客户

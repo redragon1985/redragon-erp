@@ -31,7 +31,7 @@ import java.util.Map;
 public class DataBox {
 
     //获取付款状态
-    public static Map<String, String> getPayStatusMap(){
+    public static Map<String, String> getApInvoiceStatusMap(){
         Map<String, String> map = new LinkedHashMap<String, String>();
         map.put("NEW", "新建");
         map.put("CONFIRM", "确认");
@@ -49,7 +49,7 @@ public class DataBox {
     }
     
     //获取付款来源类型
-    public static Map<String, String> getPaySourceType(){
+    public static Map<String, String> getApInvoiceSourceType(){
         Map<String, String> map = new LinkedHashMap<String, String>();
         map.put("PO", "采购订单");
         //bbc 此功能未开放

@@ -26,8 +26,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.erp.finance.pay.service.PayHeadService;
-import com.erp.finance.receipt.service.ReceiptHeadService;
+import com.erp.finance.pay.service.ApInvoiceHeadService;
+import com.erp.finance.receipt.service.ArInvoiceHeadService;
 import com.erp.finance.voucher.service.FinVoucherHeadService;
 import com.erp.hr.dao.model.HrStaffInfoRO;
 import com.erp.hr.service.HrCommonService;
@@ -55,9 +55,9 @@ public class GlobalController {
     @Autowired
     private FinVoucherHeadService finVoucherHeadService;
     @Autowired
-    private PayHeadService payHeadService;
+    private ApInvoiceHeadService apInvoiceHeadService;
     @Autowired
-    private ReceiptHeadService receiptHeadService;
+    private ArInvoiceHeadService receiptHeadService;
     @Autowired
     private PoHeadService poHeadService;
     @Autowired
@@ -98,9 +98,9 @@ public class GlobalController {
         //获取销售订单数
         model.addAttribute("soHeadNum", this.soHeadService.getSoHeadNum(startDate, endDate));
         //获取付款单数
-        model.addAttribute("payHeadNum", this.payHeadService.getPayHeadNum(startDate, endDate));
+        model.addAttribute("payHeadNum", this.apInvoiceHeadService.getApInvoiceHeadNum(startDate, endDate));
         //获取收款单数
-        model.addAttribute("receiptHeadNum", this.receiptHeadService.getReceiptHeadNum(startDate, endDate));
+        model.addAttribute("receiptHeadNum", this.receiptHeadService.getArInvoiceHeadNum(startDate, endDate));
         //获取凭证数
         model.addAttribute("voucherHeadNum", this.finVoucherHeadService.getVoucherHeadNum(startDate, endDate));
         //获取客户数

@@ -46,7 +46,7 @@ import redragon.frame.hibernate.SnowFlake;
 
 import com.erp.dataset.service.DatasetCommonService;
 import com.erp.finance.pay.dao.data.DataBox;
-import com.erp.finance.pay.dao.model.PayHead;
+import com.erp.finance.pay.dao.model.ApInvoiceHead;
 import com.erp.finance.voucher.dao.model.FinVoucherHead;
 import com.erp.finance.voucher.dao.model.FinVoucherHeadCO;
 import com.erp.finance.voucher.dao.model.FinVoucherLine;
