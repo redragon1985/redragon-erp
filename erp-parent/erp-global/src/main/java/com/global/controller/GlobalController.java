@@ -26,8 +26,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.erp.finance.pay.service.ApInvoiceHeadService;
-import com.erp.finance.receipt.service.ArInvoiceHeadService;
+import com.erp.finance.ap.invoice.service.ApInvoiceHeadService;
+import com.erp.finance.ar.invoice.service.ArInvoiceHeadService;
 import com.erp.finance.voucher.service.FinVoucherHeadService;
 import com.erp.hr.dao.model.HrStaffInfoRO;
 import com.erp.hr.service.HrCommonService;
