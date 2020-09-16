@@ -2,6 +2,10 @@
 
 旨在为小微企业提供一款**免费**、**开源**、**满足业务**、**灵活稳定**的ERP管理系统
 
+我们 **承诺** 【赤龙ERP】软件 **永久免费** ，请大家 **点亮星标** [![star](https://gitee.com/redragon/redragon-erp/badge/star.svg?theme=dark)](https://gitee.com/redragon/redragon-erp/stargazers) ，对我们的付出给予支持！
+
+`未经开发者授权，本产品及衍生产品不得用于任何形式的商业用途`
+
 ## 主要功能
 
 #### - 采购/销售订单管理
