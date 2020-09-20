@@ -355,7 +355,7 @@ public class ArInvoiceHeadWebController extends ControllerSupport{
             }else {
                 //提示信息
                 attr.addFlashAttribute("hint", "hint");
-                attr.addFlashAttribute("alertMessage", "非新建状态的收款不能删除");
+                attr.addFlashAttribute("alertMessage", "非新建状态的发票不能删除");
             }
         }
         

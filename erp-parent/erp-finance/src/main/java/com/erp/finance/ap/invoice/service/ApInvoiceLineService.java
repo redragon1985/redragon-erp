@@ -41,4 +41,7 @@ public interface ApInvoiceLineService extends DaoCRUDIF<ApInvoiceLine, ApInvoice
     //获取付款单总金额
     public abstract BigDecimal getApInvoiceAmountByHeadCode(String headCode);
     
+    //获取发票行不含税金额和税额汇总
+    public abstract BigDecimal[] getInvoiceLineAmountSumByHeadCode(String headCode);
+    
 }

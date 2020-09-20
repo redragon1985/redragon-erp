@@ -110,6 +110,8 @@ public class ApInvoiceHeadDaoImpl implements ApInvoiceHeadDao{
         sql = sql + DaoUtil.getSQLCondition(paramObj, "invoiceSourceHeadCode", "and p.", args);
         sql = sql + DaoUtil.getSQLCondition(paramObj, "receiver", "and p.", args);
         sql = sql + DaoUtil.getSQLCondition(paramObj, "prepayFlag", "and p.", args);
+        sql = sql + DaoUtil.getSQLCondition(paramObj, "amount", "and p.", args);
+        sql = sql + DaoUtil.getSQLCondition(paramObj, "invoiceDate", "and p.", args);
         sql = sql + DaoUtil.getSQLCondition(paramObj, "status", "and p.", args);
         sql = sql + " order by p.invoice_head_id desc";
         
@@ -135,6 +137,8 @@ public class ApInvoiceHeadDaoImpl implements ApInvoiceHeadDao{
         sql = sql + DaoUtil.getSQLCondition(paramObj, "invoiceSourceHeadCode", "and p.", args);
         sql = sql + DaoUtil.getSQLCondition(paramObj, "receiver", "and p.", args);
         sql = sql + DaoUtil.getSQLCondition(paramObj, "prepayFlag", "and p.", args);
+        sql = sql + DaoUtil.getSQLCondition(paramObj, "amount", "and p.", args);
+        sql = sql + DaoUtil.getSQLCondition(paramObj, "invoiceDate", "and p.", args);
         sql = sql + DaoUtil.getSQLCondition(paramObj, "status", "and p.", args);
         sql = sql + DaoUtil.getDataAuthSQL(dataAuthSQL, "p.", "p.");
         sql = sql + " order by p.invoice_head_id desc";
@@ -155,6 +159,8 @@ public class ApInvoiceHeadDaoImpl implements ApInvoiceHeadDao{
         sql = sql + DaoUtil.getSQLCondition(paramObj, "invoiceSourceHeadCode", "and p.", args);
         sql = sql + DaoUtil.getSQLCondition(paramObj, "receiver", "and p.", args);
         sql = sql + DaoUtil.getSQLCondition(paramObj, "prepayFlag", "and p.", args);
+        sql = sql + DaoUtil.getSQLCondition(paramObj, "amount", "and p.", args);
+        sql = sql + DaoUtil.getSQLCondition(paramObj, "invoiceDate", "and p.", args);
         sql = sql + DaoUtil.getSQLCondition(paramObj, "status", "and p.", args);
         
         sql = sql + " and not exists (select 1 from fin_voucher_bill_r where bill_type = 'PAY' and bill_head_code = p.invoice_head_code)";

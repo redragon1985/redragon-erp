@@ -48,7 +48,7 @@ public class ApInvoiceHead implements java.io.Serializable {
     
     //Fields
     
-    //付款头id
+    //发票头id
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "invoice_head_id", unique = true, nullable = false)
@@ -61,8 +61,8 @@ public class ApInvoiceHead implements java.io.Serializable {
         this.invoiceHeadId = invoiceHeadId;
     }
 
-    //付款头编码
-    @NotBlank(message="付款头编码不能为空")
+    //发票头编码
+    @NotBlank(message="发票头编码不能为空")
     @Column(name = "invoice_head_code", unique = true, nullable = false, length = 45)
     private String invoiceHeadCode;
     
@@ -73,8 +73,8 @@ public class ApInvoiceHead implements java.io.Serializable {
         this.invoiceHeadCode = invoiceHeadCode;
     }
 
-    //付款来源类型（采购订单PO、入库单INPUT）
-    @NotBlank(message="付款来源类型不能为空")
+    //发票来源类型（采购订单PO、入库单INPUT）
+    @NotBlank(message="发票来源类型不能为空")
     @Column(name = "invoice_source_type", unique = false, nullable = false, length = 45)
     private String invoiceSourceType;
     
@@ -85,8 +85,8 @@ public class ApInvoiceHead implements java.io.Serializable {
         this.invoiceSourceType = invoiceSourceType;
     }
 
-    //付款来源头编码（采购订单头编码、入库单头编码）
-    @NotBlank(message="付款来源头编码不能为空")
+    //发票来源头编码（采购订单头编码、入库单头编码）
+    @NotBlank(message="发票来源头编码不能为空")
     @Column(name = "invoice_source_head_code", unique = false, nullable = false, length = 45)
     private String invoiceSourceHeadCode;
     
@@ -156,8 +156,8 @@ public class ApInvoiceHead implements java.io.Serializable {
         this.referenceNumber = referenceNumber;
     }
 
-    //付款时间
-    @NotNull(message="付款时间不能为空")
+    //发票时间
+    @NotNull(message="发票时间不能为空")
     @Column(name = "invoice_date", unique = false, nullable = false)
     private Date invoiceDate;
     
@@ -376,6 +376,8 @@ public class ApInvoiceHead implements java.io.Serializable {
     private String receiverName;
     @Transient
     private String bankName;
+    @Transient
+    private Double taxAmount;
 
     public String getStaffName() {
         return staffName;
@@ -418,6 +420,12 @@ public class ApInvoiceHead implements java.io.Serializable {
     }
     public void setBankName(String bankName) {
         this.bankName = bankName;
+    }
+    public Double getTaxAmount() {
+        return taxAmount;
+    }
+    public void setTaxAmount(Double taxAmount) {
+        this.taxAmount = taxAmount;
     }
     
 }

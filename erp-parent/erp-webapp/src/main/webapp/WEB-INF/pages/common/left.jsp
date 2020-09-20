@@ -303,9 +303,9 @@ contentPage=contentPage.substring(contentPage.lastIndexOf("/")+1, contentPage.le
 			
 			
 			<%if(contentPage.contains("apInvoice")||contentPage.contains("arInvoice")){ %>	
-				<li class="active menu"><a href="#"><i class="fa fa-handshake-o"></i> <span class="nav-label">发票管理</span><span class="fa arrow"></span></a>
+				<li class="active menu"><a href="#"><i class="fa fa-file-text-o"></i> <span class="nav-label">发票管理</span><span class="fa arrow"></span></a>
 			<%}else{ %>
-				<li class="menu"><a href="#"><i class="fa fa-handshake-o"></i> <span class="nav-label">发票管理</span><span class="fa arrow"></span></a>
+				<li class="menu"><a href="#"><i class="fa fa-file-text-o"></i> <span class="nav-label">发票管理</span><span class="fa arrow"></span></a>
 			<%} %>
 				<ul class="nav nav-second-level collapse">
 					<%if(contentPage.equalsIgnoreCase("apInvoiceList")||contentPage.equalsIgnoreCase("apInvoiceEdit")){ %>
@@ -319,11 +319,28 @@ contentPage=contentPage.substring(contentPage.lastIndexOf("/")+1, contentPage.le
 					<%}else{ %>
 						<li><a href="web/arInvoiceHead/getArInvoiceHeadList">销售发票</a></li>
 					<%} %>
+				</ul>
+			</li>
+			
+			
+			
+			<%if(contentPage.contains("apPay")||contentPage.contains("arReceipt")){ %>	
+				<li class="active menu"><a href="#"><i class="fa fa-handshake-o"></i> <span class="nav-label">收付款管理</span><span class="fa arrow"></span></a>
+			<%}else{ %>
+				<li class="menu"><a href="#"><i class="fa fa-handshake-o"></i> <span class="nav-label">收付款管理</span><span class="fa arrow"></span></a>
+			<%} %>
+				<ul class="nav nav-second-level collapse">
+					<%if(contentPage.equalsIgnoreCase("apPayList")||contentPage.equalsIgnoreCase("apPayEdit")){ %>
+						<li class="active"><a href="web/apPayHead/getApPayHeadList">付款管理</a></li>
+					<%}else{ %>
+						<li><a href="web/apPayHead/getApPayHeadList">付款管理</a></li>
+					<%} %>
 					
-					<%-- 
-					<li><a href="profile.html">付款确认</a></li>
-					<li><a href="contacts_2.html">收款确认</a></li>
-					--%>
+					<%if(contentPage.equalsIgnoreCase("arReceiptList")||contentPage.equalsIgnoreCase("arReceiptEdit")){ %>
+						<li class="active"><a href="web/arReceiptHead/getArReceiptHeadList">收款管理</a></li>
+					<%}else{ %>
+						<li><a href="web/arReceiptHead/getArReceiptHeadList">收款管理</a></li>
+					<%} %>
 				</ul>
 			</li>
 			

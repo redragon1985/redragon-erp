@@ -120,4 +120,9 @@ public class ApInvoiceLineServiceImpl implements ApInvoiceLineService {
         return this.payLineDao.getApInvoiceAmountByHeadCode(headCode);
     }
     
+    @Override
+    public BigDecimal[] getInvoiceLineAmountSumByHeadCode(String headCode) {
+        return this.payLineDao.getInvoiceLineAmountSumByHeadCode(headCode);
+    }
+    
 }

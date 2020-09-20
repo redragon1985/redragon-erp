@@ -48,7 +48,7 @@ public class ApInvoiceLine implements java.io.Serializable {
     
     //Fields
     
-    //付款行id
+    //发票行id
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "invoice_line_id", unique = true, nullable = false)
@@ -61,7 +61,7 @@ public class ApInvoiceLine implements java.io.Serializable {
         this.invoiceLineId = invoiceLineId;
     }
 
-    //付款行编码
+    //发票行编码
     @Column(name = "invoice_line_code", unique = true, nullable = false, length = 45)
     private String invoiceLineCode;
     
@@ -72,8 +72,8 @@ public class ApInvoiceLine implements java.io.Serializable {
         this.invoiceLineCode = invoiceLineCode;
     }
 
-    //付款头编码
-    @NotBlank(message="付款头编码不能为空")
+    //发票头编码
+    @NotBlank(message="发票头编码不能为空")
     @Column(name = "invoice_head_code", unique = false, nullable = false, length = 45)
     private String invoiceHeadCode;
     
@@ -84,8 +84,8 @@ public class ApInvoiceLine implements java.io.Serializable {
         this.invoiceHeadCode = invoiceHeadCode;
     }
 
-    //付款来源行编码（采购订单行编码、入库单行编码）
-    @NotBlank(message="付款来源行编码不能为空")
+    //发票来源行编码（采购订单行编码、入库单行编码）
+    @NotBlank(message="发票来源行编码不能为空")
     @Column(name = "invoice_source_line_code", unique = false, nullable = false, length = 45)
     private String invoiceSourceLineCode;
     
@@ -109,7 +109,7 @@ public class ApInvoiceLine implements java.io.Serializable {
     }
 
     //行金额
-    @NotNull(message="付款行金额不能为空")
+    @NotNull(message="发票行金额不能为空")
     @Column(name = "amount", unique = false, nullable = false)
     private Double amount;
     

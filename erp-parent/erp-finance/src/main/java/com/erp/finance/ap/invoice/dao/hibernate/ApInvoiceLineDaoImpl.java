@@ -158,4 +158,30 @@ public class ApInvoiceLineDaoImpl implements ApInvoiceLineDao{
         return new BigDecimal(0);
     }
     
+    @Override
+    public BigDecimal[] getInvoiceLineAmountSumByHeadCode(String headCode) {
+        String sql = "select sum(amount) as amount,sum(tax_amount) as tax_amount from ap_invoice_line l where l.invoice_head_code = :headCode";
+        
+        Map<String, Object> args = new HashMap<String, Object>();
+        args.put("headCode", headCode);
+        
+        BigDecimal[] sumAmount = new BigDecimal[2];
+        List<Object[]> list = this.daoSupport.selectDataSqlCount(sql, args);
+        if(list.size()>0) {
+            if(list.get(0)[0]!=null) {
+                sumAmount[0] = new BigDecimal(String.valueOf(list.get(0)[0]));
+            }else {
+                sumAmount[0] = new BigDecimal(0D);
+            }
+            
+            if(list.get(0)[1]!=null) {
+                sumAmount[1] = new BigDecimal(String.valueOf(list.get(0)[1]));
+            }else {
+                sumAmount[1] = new BigDecimal(0D);
+            }
+        }
+        
+        return sumAmount;
+    }
+    
 }

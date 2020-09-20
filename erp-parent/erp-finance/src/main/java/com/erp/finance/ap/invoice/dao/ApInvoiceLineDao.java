@@ -35,10 +35,13 @@ public interface ApInvoiceLineDao extends DaoCRUDIF<ApInvoiceLine, ApInvoiceLine
     //获取采购订单历史开票金额
     public abstract BigDecimal getHISApInvoiceAmountForPO(String poHeadCode, String headCode);
     
-    //删除付款行（根据头）
+    //删除发票行（根据头）
     public abstract void deleteLineByHeadCode(String headCode);
     
-    //获取付款单总金额
+    //获取发票总金额
     public abstract BigDecimal getApInvoiceAmountByHeadCode(String headCode);
+    
+    //获取发票行不含税金额和税额汇总
+    public abstract BigDecimal[] getInvoiceLineAmountSumByHeadCode(String headCode);
     
 }
