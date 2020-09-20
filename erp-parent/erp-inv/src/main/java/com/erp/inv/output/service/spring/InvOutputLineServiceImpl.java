@@ -152,4 +152,9 @@ public class InvOutputLineServiceImpl implements InvOutputLineService {
         this.invOutputLineDao.deleteInvOutputLineByOutputHeadCode(outputHeadCode);
     }
     
+    @Override
+    public Double getOutputQuantityBySoLineCode(String soLineCode) {
+        return this.invOutputLineDao.getOutputQuantityBySoLineCode(soLineCode);
+    }
+    
 }

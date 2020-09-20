@@ -41,7 +41,7 @@ CREATE TABLE `inv_output_line` (
   `org_code` varchar(10) NOT NULL COMMENT '组织机构',
   PRIMARY KEY (`output_line_id`),
   UNIQUE KEY `input_line_code_UNIQUE` (`output_line_code`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='出库单行表';
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='出库单行表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -53,4 +53,4 @@ CREATE TABLE `inv_output_line` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-08-29 21:31:18
+-- Dump completed on 2020-09-20 14:04:48

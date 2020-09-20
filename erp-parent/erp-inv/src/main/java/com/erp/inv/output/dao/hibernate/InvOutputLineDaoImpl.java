@@ -128,4 +128,21 @@ public class InvOutputLineDaoImpl implements InvOutputLineDao{
         this.daoSupport.executeSQLTransaction(sql, args);
     }
     
+    @Override
+    public Double getOutputQuantityBySoLineCode(String soLineCode) {
+        String sql = "select sum(l.output_quantity) from inv_output_line l where l.output_source_line_code = :soLineCode";
+        
+        Map<String, Object> args = new HashMap<String, Object>();
+        args.put("soLineCode", soLineCode);
+        
+        List list = this.daoSupport.selectDataSqlCount(sql, args);
+        if(list!=null&&list.size()>0) {
+            if(list.get(0)!=null) {
+                return Double.valueOf(String.valueOf(list.get(0)));
+            }
+        }
+        
+        return 0D;
+    }
+    
 }

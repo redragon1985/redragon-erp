@@ -3,10 +3,12 @@
   <fixed facet="java"/>
   <fixed facet="jst.web"/>
   <fixed facet="wst.jsdt.web"/>
-  <installed facet="java" version="1.7"/>
-  <installed facet="jst.web" version="3.1"/>
   <installed facet="jst.web.jstl" version="1.2.2"/>
   <installed facet="maven" version="1.0"/>
   <installed facet="wst.jsdt.web" version="1.0"/>
   <installed facet="jst.jaxrs" version="2.0"/>
+  <installed facet="java" version="1.8"/>
+  <installed facet="jst.web" version="2.4"/>
+  <installed facet="me.spring" version="3.1"/>
+  <installed facet="me.hibernate" version="4.1"/>
 </faceted-project>

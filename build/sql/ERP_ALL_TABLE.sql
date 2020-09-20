@@ -18,6 +18,260 @@ USE `erp`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `ap_invoice_head`
+--
+
+DROP TABLE IF EXISTS `ap_invoice_head`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `ap_invoice_head` (
+  `invoice_head_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '发票头id',
+  `invoice_head_code` varchar(45) NOT NULL COMMENT '发票头编码',
+  `invoice_source_type` varchar(45) NOT NULL COMMENT '发票来源类型（采购订单PO、入库单INPUT）',
+  `invoice_source_head_code` varchar(45) NOT NULL COMMENT '发票来源头编码（采购订单头编码、入库单头编码）',
+  `payer` varchar(45) NOT NULL COMMENT '付款方',
+  `receiver` varchar(45) NOT NULL COMMENT '收款方',
+  `amount` decimal(10,2) NOT NULL COMMENT '发票金额',
+  `currency_code` varchar(45) NOT NULL COMMENT '币种',
+  `reference_number` varchar(45) DEFAULT NULL COMMENT '发票参考号（纸质发票号）',
+  `invoice_date` date NOT NULL COMMENT '发票时间',
+  `prepay_flag` char(1) NOT NULL DEFAULT 'N' COMMENT '预付款标识',
+  `pay_mode` varchar(45) NOT NULL COMMENT '付款方式',
+  `bank_code` varchar(45) DEFAULT NULL COMMENT '银行编码',
+  `sub_bank_code` varchar(45) DEFAULT NULL COMMENT '分行编码',
+  `bank_account` varchar(45) DEFAULT NULL COMMENT '银行账户',
+  `memo` varchar(200) DEFAULT NULL COMMENT '摘要',
+  `version` int(11) NOT NULL DEFAULT '1' COMMENT '版本',
+  `status` varchar(10) NOT NULL DEFAULT 'NEW' COMMENT '状态（新建NEW，确认CONFIRM，取消CANCEL）',
+  `approve_status` varchar(10) NOT NULL DEFAULT 'UNSUBMIT' COMMENT '审批状态（未提交UNSUBMIT、已提交SUBMIT、已审批APPROVE、已驳回REJECT）',
+  `paid_status` varchar(10) DEFAULT NULL COMMENT '付款状态（未付款N，已付款Y）',
+  `staff_code` varchar(45) NOT NULL COMMENT '制单人',
+  `department_code` varchar(45) NOT NULL COMMENT '制单部门',
+  `created_date` datetime NOT NULL COMMENT '创建时间',
+  `created_by` varchar(45) NOT NULL COMMENT '创建人',
+  `last_updated_date` datetime DEFAULT NULL COMMENT '最后修改时间',
+  `last_updated_by` varchar(45) DEFAULT NULL COMMENT '最后修改人',
+  `org_code` varchar(10) NOT NULL COMMENT '组织机构',
+  PRIMARY KEY (`invoice_head_id`),
+  UNIQUE KEY `pay_head_code_UNIQUE` (`invoice_head_code`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='采购发票头表';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ap_invoice_line`
+--
+
+DROP TABLE IF EXISTS `ap_invoice_line`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `ap_invoice_line` (
+  `invoice_line_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '发票行id',
+  `invoice_line_code` varchar(45) NOT NULL COMMENT '发票行编码',
+  `invoice_head_code` varchar(45) NOT NULL COMMENT '发票头编码',
+  `invoice_source_line_code` varchar(45) NOT NULL COMMENT '发票来源行编码（采购订单行编码、入库单行编码）',
+  `quantity` double NOT NULL COMMENT '发票行数量',
+  `amount` decimal(10,2) NOT NULL COMMENT '行金额',
+  `tax_rate` double NOT NULL COMMENT '税率（带小数）',
+  `tax_amount` decimal(10,2) NOT NULL COMMENT '税额',
+  `memo` varchar(200) DEFAULT NULL COMMENT '摘要',
+  `version` int(11) NOT NULL DEFAULT '1' COMMENT '版本',
+  `status` varchar(10) NOT NULL DEFAULT 'Y' COMMENT '状态',
+  `created_date` datetime NOT NULL COMMENT '创建时间',
+  `created_by` varchar(45) NOT NULL COMMENT '创建人',
+  `last_updated_date` datetime DEFAULT NULL COMMENT '最后修改时间',
+  `last_updated_by` varchar(45) DEFAULT NULL COMMENT '最后修改人',
+  `org_code` varchar(10) NOT NULL COMMENT '组织机构',
+  PRIMARY KEY (`invoice_line_id`),
+  UNIQUE KEY `pay_line_code_UNIQUE` (`invoice_line_code`),
+  KEY `IX_pay_line_pay_head_code` (`invoice_head_code`)
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='采购发票行表';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ap_pay_head`
+--
+
+DROP TABLE IF EXISTS `ap_pay_head`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `ap_pay_head` (
+  `pay_head_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '付款头id',
+  `pay_head_code` varchar(45) NOT NULL COMMENT '付款头code',
+  `pay_type` varchar(45) NOT NULL COMMENT '付款类型',
+  `vendor_code` varchar(45) NOT NULL COMMENT '供应商编码',
+  `currency_code` varchar(45) NOT NULL COMMENT '币种',
+  `amount` decimal(10,2) NOT NULL COMMENT '付款金额',
+  `pay_date` date NOT NULL COMMENT '付款日期',
+  `memo` varchar(200) DEFAULT NULL COMMENT '备注',
+  `version` int(11) NOT NULL DEFAULT '1' COMMENT '版本',
+  `status` varchar(10) NOT NULL DEFAULT 'NEW' COMMENT '状态（新建NEW，确认CONFIRM，取消CANCEL）',
+  `approve_status` varchar(10) NOT NULL DEFAULT 'UNSUBMIT' COMMENT '审批状态（未提交UNSUBMIT、已提交SUBMIT、已审批APPROVE、已驳回REJECT）',
+  `staff_code` varchar(45) NOT NULL COMMENT '制单人',
+  `department_code` varchar(45) NOT NULL COMMENT '制单部门',
+  `created_date` datetime NOT NULL COMMENT '创建时间',
+  `created_by` varchar(45) NOT NULL COMMENT '创建人',
+  `last_updated_date` datetime DEFAULT NULL COMMENT '最后修改时间',
+  `last_updated_by` varchar(45) DEFAULT NULL COMMENT '最后修改人',
+  `org_code` varchar(10) NOT NULL COMMENT '组织机构',
+  PRIMARY KEY (`pay_head_id`),
+  UNIQUE KEY `pay_head_code_UNIQUE` (`pay_head_code`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='付款头表';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ap_pay_line`
+--
+
+DROP TABLE IF EXISTS `ap_pay_line`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `ap_pay_line` (
+  `pay_line_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '付款行id',
+  `pay_line_code` varchar(45) NOT NULL COMMENT '付款行code',
+  `pay_head_code` varchar(45) NOT NULL COMMENT '付款头code',
+  `invoice_head_code` varchar(45) NOT NULL COMMENT '发票头code',
+  `invoice_pay_amount` decimal(10,2) NOT NULL COMMENT '核销金额',
+  `memo` varchar(200) DEFAULT NULL COMMENT '备注',
+  `version` int(11) NOT NULL DEFAULT '1' COMMENT '版本',
+  `status` varchar(10) NOT NULL DEFAULT 'Y' COMMENT '状态',
+  `created_date` datetime NOT NULL COMMENT '创建时间',
+  `created_by` varchar(45) NOT NULL COMMENT '创建人',
+  `last_updated_date` datetime DEFAULT NULL COMMENT '最后修改时间',
+  `last_updated_by` varchar(45) DEFAULT NULL COMMENT '最后修改人',
+  `org_code` varchar(10) NOT NULL COMMENT '组织机构',
+  PRIMARY KEY (`pay_line_id`),
+  UNIQUE KEY `pay_line_code_UNIQUE` (`pay_line_code`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='付款行表';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ar_invoice_head`
+--
+
+DROP TABLE IF EXISTS `ar_invoice_head`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `ar_invoice_head` (
+  `invoice_head_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '发票头id',
+  `invoice_head_code` varchar(45) NOT NULL COMMENT '发票头编码',
+  `invoice_source_type` varchar(45) NOT NULL COMMENT '发票来源类型（采购订单SO、入库单OUTPUT）',
+  `invoice_source_head_code` varchar(45) NOT NULL COMMENT '发票来源头编码（销售订单头编码、出库单头编码）',
+  `payer` varchar(45) NOT NULL COMMENT '付款方',
+  `receiver` varchar(45) NOT NULL COMMENT '收款方',
+  `amount` decimal(10,2) NOT NULL COMMENT '发票金额',
+  `currency_code` varchar(45) NOT NULL COMMENT '币种',
+  `reference_number` varchar(45) DEFAULT NULL COMMENT '发票参考号（纸质发票号）',
+  `invoice_date` date NOT NULL COMMENT '发票时间',
+  `pre_receipt_flag` char(1) NOT NULL COMMENT '预收款标识',
+  `receipt_mode` varchar(45) NOT NULL DEFAULT 'N' COMMENT '收款方式',
+  `bank_code` varchar(45) DEFAULT NULL COMMENT '银行编码',
+  `sub_bank_code` varchar(45) DEFAULT NULL COMMENT '分行编码',
+  `bank_account` varchar(45) DEFAULT NULL COMMENT '银行账户',
+  `memo` varchar(200) DEFAULT NULL COMMENT '摘要',
+  `version` int(11) NOT NULL DEFAULT '1' COMMENT '版本',
+  `status` varchar(10) NOT NULL DEFAULT 'NEW' COMMENT '状态（新建NEW，确认CONFIRM，取消CANCEL）',
+  `approve_status` varchar(10) NOT NULL DEFAULT 'UNSUBMIT' COMMENT '审批状态（未提交UNSUBMIT、已提交SUBMIT、已审批APPROVE、已驳回REJECT）',
+  `received_status` varchar(10) DEFAULT NULL COMMENT '收款状态（未付款N，已付款Y）',
+  `staff_code` varchar(45) NOT NULL COMMENT '制单人',
+  `department_code` varchar(45) NOT NULL COMMENT '制单人部门',
+  `created_date` datetime NOT NULL COMMENT '创建时间',
+  `created_by` varchar(45) NOT NULL COMMENT '创建人',
+  `last_updated_date` datetime DEFAULT NULL COMMENT '最后修改时间',
+  `last_updated_by` varchar(45) DEFAULT NULL COMMENT '最后修改人',
+  `org_code` varchar(10) NOT NULL COMMENT '组织机构',
+  PRIMARY KEY (`invoice_head_id`),
+  UNIQUE KEY `receipt_head_code_UNIQUE` (`invoice_head_code`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='销售发票头表';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ar_invoice_line`
+--
+
+DROP TABLE IF EXISTS `ar_invoice_line`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `ar_invoice_line` (
+  `invoice_line_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '发票行id',
+  `invoice_line_code` varchar(45) NOT NULL COMMENT '发票行编码',
+  `invoice_head_code` varchar(45) NOT NULL COMMENT '发票头编码',
+  `invoice_source_line_code` varchar(45) NOT NULL COMMENT '发票来源行编码',
+  `quantity` double NOT NULL COMMENT '发票行数量',
+  `amount` decimal(10,2) NOT NULL COMMENT '行金额',
+  `tax_rate` double NOT NULL COMMENT '税率（带小数）',
+  `tax_amount` decimal(10,2) NOT NULL COMMENT '税额',
+  `memo` varchar(200) DEFAULT NULL COMMENT '摘要',
+  `version` int(11) NOT NULL DEFAULT '1' COMMENT '版本',
+  `status` char(1) NOT NULL DEFAULT 'Y' COMMENT '状态',
+  `created_date` datetime NOT NULL COMMENT '创建时间',
+  `created_by` varchar(45) NOT NULL COMMENT '创建人',
+  `last_updated_date` datetime DEFAULT NULL COMMENT '最后修改时间',
+  `last_updated_by` varchar(45) DEFAULT NULL COMMENT '最后修改人',
+  `org_code` varchar(10) NOT NULL COMMENT '组织机构',
+  PRIMARY KEY (`invoice_line_id`),
+  UNIQUE KEY `receipt_line_code_UNIQUE` (`invoice_line_code`),
+  KEY `IX_receipt_line_receipt_head_code` (`invoice_head_code`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='销售发票行表';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ar_receipt_head`
+--
+
+DROP TABLE IF EXISTS `ar_receipt_head`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `ar_receipt_head` (
+  `receipt_head_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '收款头id',
+  `receipt_head_code` varchar(45) NOT NULL COMMENT '收款头code',
+  `receipt_type` varchar(45) NOT NULL COMMENT '收款类型',
+  `customer_code` varchar(45) NOT NULL COMMENT '客户编码',
+  `currency_code` varchar(45) NOT NULL COMMENT '币种',
+  `amount` decimal(10,2) NOT NULL COMMENT '收款金额',
+  `receipt_date` date NOT NULL COMMENT '收款日期',
+  `memo` varchar(200) DEFAULT NULL COMMENT '备注',
+  `version` int(11) NOT NULL DEFAULT '1' COMMENT '版本',
+  `status` varchar(10) NOT NULL DEFAULT 'NEW' COMMENT '状态（新建NEW，确认CONFIRM，取消CANCEL）',
+  `approve_status` varchar(10) NOT NULL DEFAULT 'UNSUBMIT' COMMENT '审批状态（未提交UNSUBMIT、已提交SUBMIT、已审批APPROVE、已驳回REJECT）',
+  `staff_code` varchar(45) NOT NULL COMMENT '制单人',
+  `department_code` varchar(45) NOT NULL COMMENT '制单部门',
+  `created_date` datetime NOT NULL COMMENT '创建时间',
+  `created_by` varchar(45) NOT NULL COMMENT '创建人',
+  `last_updated_date` datetime DEFAULT NULL COMMENT '最后修改日期',
+  `last_updated_by` varchar(45) DEFAULT NULL COMMENT '最后修改人',
+  `org_code` varchar(10) NOT NULL COMMENT '组织机构',
+  PRIMARY KEY (`receipt_head_id`),
+  UNIQUE KEY `receipt_head_code_UNIQUE` (`receipt_head_code`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='收款头表';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ar_receipt_line`
+--
+
+DROP TABLE IF EXISTS `ar_receipt_line`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `ar_receipt_line` (
+  `receipt_line_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '收款行id',
+  `receipt_line_code` varchar(45) NOT NULL COMMENT '收款行code',
+  `receipt_head_code` varchar(45) NOT NULL COMMENT '收款头code',
+  `invoice_head_code` varchar(45) NOT NULL COMMENT '发票头code',
+  `invoice_receipt_amount` decimal(10,2) NOT NULL COMMENT '核销金额',
+  `memo` varchar(200) DEFAULT NULL COMMENT '备注',
+  `version` int(11) NOT NULL DEFAULT '1' COMMENT '版本',
+  `status` varchar(10) NOT NULL DEFAULT 'Y' COMMENT '状态',
+  `created_date` datetime NOT NULL COMMENT '创建时间',
+  `created_by` varchar(45) NOT NULL COMMENT '创建人',
+  `last_updated_date` datetime DEFAULT NULL COMMENT '最后修改时间',
+  `last_updated_by` varchar(45) DEFAULT NULL COMMENT '最后修改人',
+  `org_code` varchar(10) NOT NULL COMMENT '组织机构',
+  PRIMARY KEY (`receipt_line_id`),
+  UNIQUE KEY `receipt_line_code_UNIQUE` (`receipt_line_code`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='收款行表';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Table structure for table `fin_voucher_bill_r`
 --
 
@@ -293,7 +547,7 @@ CREATE TABLE `inv_input_head` (
   `org_code` varchar(10) NOT NULL COMMENT '组织机构',
   PRIMARY KEY (`input_head_id`),
   UNIQUE KEY `input_head_code_UNIQUE` (`input_head_code`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='入库单头表';
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='入库单头表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -320,7 +574,7 @@ CREATE TABLE `inv_input_line` (
   `org_code` varchar(10) NOT NULL COMMENT '组织机构',
   PRIMARY KEY (`input_line_id`),
   UNIQUE KEY `input_line_code_UNIQUE` (`input_line_code`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='入库单行表';
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='入库单行表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -351,7 +605,7 @@ CREATE TABLE `inv_output_head` (
   `org_code` varchar(10) NOT NULL COMMENT '组织机构',
   PRIMARY KEY (`output_head_id`),
   UNIQUE KEY `input_head_code_UNIQUE` (`output_head_code`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='出库单头表';
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='出库单头表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -378,7 +632,7 @@ CREATE TABLE `inv_output_line` (
   `org_code` varchar(10) NOT NULL COMMENT '组织机构',
   PRIMARY KEY (`output_line_id`),
   UNIQUE KEY `input_line_code_UNIQUE` (`output_line_code`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='出库单行表';
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='出库单行表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -410,7 +664,7 @@ CREATE TABLE `inv_stock` (
   PRIMARY KEY (`stock_id`),
   UNIQUE KEY `stock_code_UNIQUE` (`stock_code`),
   UNIQUE KEY `UK_inv_stock_bill` (`material_code`,`bill_type`,`bill_head_code`,`bill_line_code`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='库存表';
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='库存表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -853,71 +1107,6 @@ CREATE TABLE `md_vendor_license` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `pay_head`
---
-
-DROP TABLE IF EXISTS `pay_head`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
-CREATE TABLE `pay_head` (
-  `pay_head_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '付款头id',
-  `pay_head_code` varchar(45) NOT NULL COMMENT '付款头编码',
-  `pay_source_type` varchar(45) NOT NULL COMMENT '付款来源类型（采购订单PO、入库单INPUT）',
-  `pay_source_head_code` varchar(45) NOT NULL COMMENT '付款来源头编码（采购订单头编码、入库单头编码）',
-  `payer` varchar(45) NOT NULL COMMENT '付款方',
-  `receiver` varchar(45) NOT NULL COMMENT '收款方',
-  `currency_code` varchar(45) NOT NULL COMMENT '币种',
-  `pay_date` date NOT NULL COMMENT '付款时间',
-  `prepay_flag` char(1) NOT NULL DEFAULT 'N' COMMENT '预付款标识',
-  `pay_mode` varchar(45) NOT NULL COMMENT '付款方式',
-  `bank_code` varchar(45) DEFAULT NULL COMMENT '银行编码',
-  `sub_bank_code` varchar(45) DEFAULT NULL COMMENT '分行编码',
-  `bank_account` varchar(45) DEFAULT NULL COMMENT '银行账户',
-  `memo` varchar(200) DEFAULT NULL COMMENT '摘要',
-  `version` int(11) NOT NULL DEFAULT '1' COMMENT '版本',
-  `status` varchar(10) NOT NULL DEFAULT 'NEW' COMMENT '状态（新建NEW，确认CONFIRM，取消CANCEL）',
-  `approve_status` varchar(10) NOT NULL DEFAULT 'UNSUBMIT' COMMENT '审批状态（未提交UNSUBMIT、已提交SUBMIT、已审批APPROVE、已驳回REJECT）',
-  `paid_status` varchar(10) DEFAULT NULL COMMENT '付款状态（未付款N，已付款Y）',
-  `staff_code` varchar(45) NOT NULL COMMENT '制单人',
-  `department_code` varchar(45) NOT NULL COMMENT '制单部门',
-  `created_date` datetime NOT NULL COMMENT '创建时间',
-  `created_by` varchar(45) NOT NULL COMMENT '创建人',
-  `last_updated_date` datetime DEFAULT NULL COMMENT '最后修改时间',
-  `last_updated_by` varchar(45) DEFAULT NULL COMMENT '最后修改人',
-  `org_code` varchar(10) NOT NULL COMMENT '组织机构',
-  PRIMARY KEY (`pay_head_id`),
-  UNIQUE KEY `pay_head_code_UNIQUE` (`pay_head_code`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='付款单头表';
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Table structure for table `pay_line`
---
-
-DROP TABLE IF EXISTS `pay_line`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
-CREATE TABLE `pay_line` (
-  `pay_line_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '付款行id',
-  `pay_line_code` varchar(45) NOT NULL COMMENT '付款行编码',
-  `pay_head_code` varchar(45) NOT NULL COMMENT '付款头编码',
-  `pay_source_line_code` varchar(45) NOT NULL COMMENT '付款来源行编码（采购订单行编码、入库单行编码）',
-  `amount` decimal(10,2) NOT NULL COMMENT '行金额',
-  `memo` varchar(200) DEFAULT NULL COMMENT '摘要',
-  `version` int(11) NOT NULL DEFAULT '1' COMMENT '版本',
-  `status` varchar(10) NOT NULL DEFAULT 'Y' COMMENT '状态',
-  `created_date` datetime NOT NULL COMMENT '创建时间',
-  `created_by` varchar(45) NOT NULL COMMENT '创建人',
-  `last_updated_date` datetime DEFAULT NULL COMMENT '最后修改时间',
-  `last_updated_by` varchar(45) DEFAULT NULL COMMENT '最后修改人',
-  `org_code` varchar(10) NOT NULL COMMENT '组织机构',
-  PRIMARY KEY (`pay_line_id`),
-  UNIQUE KEY `pay_line_code_UNIQUE` (`pay_line_code`),
-  KEY `IX_pay_line_pay_head_code` (`pay_head_code`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='付款单行表';
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
 -- Table structure for table `po_head`
 --
 
@@ -984,72 +1173,7 @@ CREATE TABLE `po_line` (
   PRIMARY KEY (`po_line_id`),
   UNIQUE KEY `po_line_code_UNIQUE` (`po_line_code`),
   KEY `IX_po_line_po_head_code` (`po_head_code`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='采购订单行表';
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Table structure for table `receipt_head`
---
-
-DROP TABLE IF EXISTS `receipt_head`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
-CREATE TABLE `receipt_head` (
-  `receipt_head_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '收款头id',
-  `receipt_head_code` varchar(45) NOT NULL COMMENT '收款头编码',
-  `receipt_source_type` varchar(45) NOT NULL COMMENT '收款来源类型（采购订单SO、入库单OUTPUT）',
-  `receipt_source_head_code` varchar(45) NOT NULL COMMENT '收款来源头编码（销售订单头编码、出库单头编码）',
-  `payer` varchar(45) NOT NULL COMMENT '付款方',
-  `receiver` varchar(45) NOT NULL COMMENT '收款方',
-  `currency_code` varchar(45) NOT NULL COMMENT '币种',
-  `receipt_date` date NOT NULL COMMENT '收款时间',
-  `pre_receipt_flag` char(1) NOT NULL COMMENT '预收款标识',
-  `receipt_mode` varchar(45) NOT NULL DEFAULT 'N' COMMENT '收款方式',
-  `bank_code` varchar(45) DEFAULT NULL COMMENT '银行编码',
-  `sub_bank_code` varchar(45) DEFAULT NULL COMMENT '分行编码',
-  `bank_account` varchar(45) DEFAULT NULL COMMENT '银行账户',
-  `memo` varchar(200) DEFAULT NULL COMMENT '摘要',
-  `version` int(11) NOT NULL DEFAULT '1' COMMENT '版本',
-  `status` varchar(10) NOT NULL DEFAULT 'NEW' COMMENT '状态（新建NEW，确认CONFIRM，取消CANCEL）',
-  `approve_status` varchar(10) NOT NULL DEFAULT 'UNSUBMIT' COMMENT '审批状态（未提交UNSUBMIT、已提交SUBMIT、已审批APPROVE、已驳回REJECT）',
-  `received_status` varchar(10) DEFAULT NULL COMMENT '收款状态（未付款N，已付款Y）',
-  `staff_code` varchar(45) NOT NULL COMMENT '制单人',
-  `department_code` varchar(45) NOT NULL COMMENT '制单人部门',
-  `created_date` datetime NOT NULL COMMENT '创建时间',
-  `created_by` varchar(45) NOT NULL COMMENT '创建人',
-  `last_updated_date` datetime DEFAULT NULL COMMENT '最后修改时间',
-  `last_updated_by` varchar(45) DEFAULT NULL COMMENT '最后修改人',
-  `org_code` varchar(10) NOT NULL COMMENT '组织机构',
-  PRIMARY KEY (`receipt_head_id`),
-  UNIQUE KEY `receipt_head_code_UNIQUE` (`receipt_head_code`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='收款单头表';
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Table structure for table `receipt_line`
---
-
-DROP TABLE IF EXISTS `receipt_line`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
-CREATE TABLE `receipt_line` (
-  `receipt_line_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '收款行id',
-  `receipt_line_code` varchar(45) NOT NULL COMMENT '收款行编码',
-  `receipt_head_code` varchar(45) NOT NULL COMMENT '收款头编码',
-  `receipt_source_line_code` varchar(45) NOT NULL COMMENT '收款来源行编码',
-  `amount` decimal(10,2) NOT NULL COMMENT '行金额',
-  `memo` varchar(200) DEFAULT NULL COMMENT '摘要',
-  `version` int(11) NOT NULL DEFAULT '1' COMMENT '版本',
-  `status` char(1) NOT NULL DEFAULT 'Y' COMMENT '状态',
-  `created_date` datetime NOT NULL COMMENT '创建时间',
-  `created_by` varchar(45) NOT NULL COMMENT '创建人',
-  `last_updated_date` datetime DEFAULT NULL COMMENT '最后修改时间',
-  `last_updated_by` varchar(45) DEFAULT NULL COMMENT '最后修改人',
-  `org_code` varchar(10) NOT NULL COMMENT '组织机构',
-  PRIMARY KEY (`receipt_line_id`),
-  UNIQUE KEY `receipt_line_code_UNIQUE` (`receipt_line_code`),
-  KEY `IX_receipt_line_receipt_head_code` (`receipt_head_code`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='收款单行表';
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='采购订单行表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1143,7 +1267,7 @@ CREATE TABLE `sys_auth` (
   PRIMARY KEY (`auth_id`),
   UNIQUE KEY `auth_code_UNIQUE` (`auth_code`),
   UNIQUE KEY `auth_name_UNIQUE` (`auth_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=68 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='系统权限表';
+) ENGINE=InnoDB AUTO_INCREMENT=72 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='系统权限表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1235,7 +1359,7 @@ CREATE TABLE `sys_role_auth_r` (
   `org_code` varchar(10) NOT NULL COMMENT '组织机构',
   PRIMARY KEY (`ra_id`),
   UNIQUE KEY `UK_sys_role_auth_r` (`role_code`,`auth_code`)
-) ENGINE=InnoDB AUTO_INCREMENT=356 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='系统角色与权限关联表';
+) ENGINE=InnoDB AUTO_INCREMENT=413 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='系统角色与权限关联表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1290,4 +1414,4 @@ CREATE TABLE `sys_user_role_r` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-09-05 16:01:20
+-- Dump completed on 2020-09-20 14:05:35

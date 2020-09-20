@@ -37,7 +37,7 @@ $.validator.addMethod("dotNum",function(value,element,params){
 	}
 });
 
-//日期比较
+//数字比较
 $.validator.addMethod("compareNumber",function(value, element, param) {
 	
   var cnum = jQuery(param).val();

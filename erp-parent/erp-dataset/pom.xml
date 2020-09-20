@@ -21,6 +21,7 @@
   </build>
 
   <dependencies>
+    <!--  
   	<dependency>
 	    <groupId>redragon</groupId>
 	    <artifactId>redragon</artifactId>
@@ -28,5 +29,6 @@
 	    <scope>system</scope>
 	    <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/redragon.jar</systemPath>
 	</dependency>
+	-->
   </dependencies>
 </project>

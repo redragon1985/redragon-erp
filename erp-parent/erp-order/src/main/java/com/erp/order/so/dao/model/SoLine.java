@@ -25,6 +25,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
@@ -232,5 +233,18 @@ public class SoLine implements java.io.Serializable {
         this.orgCode = orgCode;
     }
     
+
     
+    //用于显示的字段
+    //出库数量
+    @Transient
+    private Double outputQuantity;
+
+    public Double getOutputQuantity() {
+        return outputQuantity;
+    }
+    public void setOutputQuantity(Double outputQuantity) {
+        this.outputQuantity = outputQuantity;
+    }
+
 }

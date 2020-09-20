@@ -21,7 +21,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 
 <div class="footer">
-	<div class="float-right">受Apache-2.0许可协议保护，未经开发者允许，不得用于商业用途</div>
+	<div class="float-right">受GPL-2.0许可协议保护，未经开发者允许，不得用于商业用途</div>
 	<div>
 		<strong>Copyright</strong> Redragon &copy; 2020-2021
 	</div>

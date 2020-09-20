@@ -52,4 +52,4 @@ CREATE TABLE `inv_stock_check_line` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-08-29 21:31:26
+-- Dump completed on 2020-09-20 14:04:53
