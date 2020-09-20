@@ -38,6 +38,11 @@
 #### - 单点登录
 ###### 集成成熟的解决方案，保证登陆安全和高效
 
+## 演示地址
+[https://www.redragon-erp.com/erp](https://www.redragon-erp.com/erp "https://www.redragon-erp.com/erp")
+######账号：redragon
+######密码：123
+
 ## 产品展示
 
 ![赤龙ERP](https://www.redragon-erp.com/images/1.jpg "赤龙ERP")
