@@ -25,10 +25,10 @@ DROP TABLE IF EXISTS `ar_invoice_line`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `ar_invoice_line` (
-  `invoice_line_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '收款行id',
-  `invoice_line_code` varchar(45) NOT NULL COMMENT '收款行编码',
-  `invoice_head_code` varchar(45) NOT NULL COMMENT '收款头编码',
-  `invoice_source_line_code` varchar(45) NOT NULL COMMENT '收款来源行编码',
+  `invoice_line_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '发票行id',
+  `invoice_line_code` varchar(45) NOT NULL COMMENT '发票行编码',
+  `invoice_head_code` varchar(45) NOT NULL COMMENT '发票头编码',
+  `invoice_source_line_code` varchar(45) NOT NULL COMMENT '发票来源行编码',
   `quantity` double NOT NULL COMMENT '发票行数量',
   `amount` decimal(10,2) NOT NULL COMMENT '行金额',
   `tax_rate` double NOT NULL COMMENT '税率（带小数）',
@@ -44,7 +44,7 @@ CREATE TABLE `ar_invoice_line` (
   PRIMARY KEY (`invoice_line_id`),
   UNIQUE KEY `receipt_line_code_UNIQUE` (`invoice_line_code`),
   KEY `IX_receipt_line_receipt_head_code` (`invoice_head_code`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='收款单行表';
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='销售发票行表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -56,4 +56,4 @@ CREATE TABLE `ar_invoice_line` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-09-12 23:02:09
+-- Dump completed on 2020-09-20 14:04:46

@@ -56,4 +56,4 @@ CREATE TABLE `fin_voucher_model_head` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-09-12 23:02:11
+-- Dump completed on 2020-09-20 14:04:49

@@ -50,4 +50,4 @@ CREATE TABLE `md_vendor_contact` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-09-12 23:02:02
+-- Dump completed on 2020-09-20 14:04:40
