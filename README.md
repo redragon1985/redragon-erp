@@ -41,7 +41,6 @@
 ## 产品展示
 
 ![赤龙ERP](https://www.redragon-erp.com/images/1.jpg "赤龙ERP")
-<<<<<<< HEAD
 
 ------------
 
@@ -69,35 +68,6 @@
 
 ------------
 
-=======
-
-------------
-
-![赤龙ERP](https://www.redragon-erp.com/images/2.jpg "赤龙ERP")
-
-------------
-
-![赤龙ERP](https://www.redragon-erp.com/images/3.jpg "赤龙ERP")
-
-------------
-
-![赤龙ERP](https://www.redragon-erp.com/images/4.jpg "赤龙ERP")
-
-------------
-
-![赤龙ERP](https://www.redragon-erp.com/images/5.jpg "赤龙ERP")
-
-------------
-
-![赤龙ERP](https://www.redragon-erp.com/images/6.jpg "赤龙ERP")
-
-------------
-
-![赤龙ERP](https://www.redragon-erp.com/images/7.jpg "赤龙ERP")
-
-------------
-
->>>>>>> 0.7.x
 ![赤龙ERP](https://www.redragon-erp.com/images/8.jpg "赤龙ERP")
 
 ------------
