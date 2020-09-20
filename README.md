@@ -40,8 +40,10 @@
 
 ## 演示地址
 [https://www.redragon-erp.com/erp](https://www.redragon-erp.com/erp "https://www.redragon-erp.com/erp")
-######账号：redragon
-######密码：123
+
+**账号：redragon**
+
+**密码：123**
 
 ## 产品展示
 
