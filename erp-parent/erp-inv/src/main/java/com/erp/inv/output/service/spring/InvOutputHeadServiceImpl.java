@@ -18,8 +18,11 @@
  */
 package com.erp.inv.output.service.spring;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
+
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -32,6 +35,9 @@ import com.framework.util.ShiroUtil;
 
 import redragon.frame.hibernate.SnowFlake;
 
+import com.erp.common.voucher.service.FinVoucherBillRService;
+import com.erp.common.voucher.service.FinVoucherHeadService;
+import com.erp.common.voucher.service.FinVoucherModelHeadService;
 import com.erp.hr.dao.model.HrStaffInfoRO;
 import com.erp.hr.service.HrCommonService;
 import com.erp.inv.input.dao.model.InvInputHead;
@@ -46,6 +52,10 @@ import com.erp.inv.output.service.InvOutputHeadService;
 import com.erp.inv.output.service.InvOutputLineService;
 import com.erp.inv.stock.dao.model.InvStock;
 import com.erp.inv.stock.service.InvStockService;
+import com.erp.order.po.dao.model.PoLine;
+import com.erp.order.po.service.PoLineService;
+import com.erp.order.so.dao.model.SoLine;
+import com.erp.order.so.service.SoLineService;
 
 @Service
 @Transactional(rollbackFor=Exception.class)
@@ -60,6 +70,17 @@ public class InvOutputHeadServiceImpl implements InvOutputHeadService {
     private InvStockService invStockService;
     @Autowired
     private HrCommonService hrCommonService;
+    @Autowired
+    @Qualifier("finVoucherModelHeadServiceCommon")
+    private FinVoucherModelHeadService finVoucherModelHeadService;
+    @Autowired
+    @Qualifier("finVoucherHeadServiceCommon")
+    private FinVoucherHeadService finVoucherHeadService;
+    @Autowired
+    @Qualifier("finVoucherBillRServiceCommon")
+    private FinVoucherBillRService finVoucherBillRService;
+    @Autowired
+    private SoLineService soLineService;
     
     @Override
     public void insertDataObject(InvOutputHead obj) {
@@ -125,8 +146,9 @@ public class InvOutputHeadServiceImpl implements InvOutputHeadService {
     @Override
     public void updateApproveStatus(String code, String approveStatus) {
         this.invOutputHeadDao.updateApproveStatus(code, approveStatus);
-        //修改库存明细
+        //出库审批通过后修改出库成功后的关联数据
         if(approveStatus.equals("APPROVE")) {
+            //===========================修改库存明细
             //获取头
             InvOutputHead head = this.invOutputHeadDao.getDataObject(code);
             //获取行
@@ -158,9 +180,38 @@ public class InvOutputHeadServiceImpl implements InvOutputHeadService {
                 
                 this.invStockService.insertDataObject(stock);
             }
+            
+            //===========================自动生成凭证和分录
+            //计算分录的金额
+            //获取入库行
+            List<InvOutputLine> outputLineList = this.invOutputLineService.getInvOutputLineListByOutputHeadCode(code);
+            
+            BigDecimal voucherAmount = new BigDecimal(0D);
+            //循环获取加和入库数量和物料单价
+            for(InvOutputLine invOutputLine: outputLineList) {
+                BigDecimal quantity = new BigDecimal(invOutputLine.getOutputQuantity());
+                //获取采购订单行
+                SoLine soLine = this.soLineService.getDataObject(invOutputLine.getOutputSourceLineCode());
+                BigDecimal price = new BigDecimal(soLine.getPrice());
+                //计算行金额
+                BigDecimal lineAmount = quantity.multiply(price);
+                //计算合计金额
+                voucherAmount = voucherAmount.add(lineAmount);
+            }
+            
+            //调用自动创建方法
+            this.finVoucherModelHeadService.autoCreateVoucher(code, new Double[]{voucherAmount.doubleValue()}, "OUTPUT");
         }else if(approveStatus.equals("UNSUBMIT")) {
-            //删除入库库存
+            //===========================//删除入库库存
             this.invStockService.deleteInvStockByBillHeadCode("OUTPUT", code);
+            
+            //===========================删除自动生成的凭证和分录
+            //根据单据头code获取凭证头code
+            String voucherHeadCode = this.finVoucherBillRService.getVoucherHeadCodeByBillHeadCode("OUTPUT", code);
+            //删除凭证
+            if(StringUtils.isNotBlank(voucherHeadCode)) {
+                this.finVoucherHeadService.deleteFinVoucherHeadByVoucherHeadCode(voucherHeadCode);
+            }
         }
     }
     

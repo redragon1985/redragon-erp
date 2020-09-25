@@ -28,7 +28,7 @@ import com.erp.inv.input.dao.model.InvInputLineCO;
 
 public interface InvInputLineDao extends DaoCRUDIF<InvInputLine, InvInputLineCO>{
     
-    //获取行列表（根据头code）
+    //获取行分页列表（根据头code）
     public abstract List<InvInputLine> getInvInputLineListByInputHeadCode(Pages pages, InvInputLineCO paramObj);
     
     //删除行（根据头code）
@@ -37,4 +37,6 @@ public interface InvInputLineDao extends DaoCRUDIF<InvInputLine, InvInputLineCO>
     //获取物料的入库数量（根据采购订单行）
     public abstract Double getInputQuantityByPoLineCode(String poLineCode);
     
+    //获取行列表（根据头code）
+    public abstract List<InvInputLine> getInvInputLineListByInputHeadCode(String inputHeadCode);
 }

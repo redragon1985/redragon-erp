@@ -62,6 +62,18 @@
     	<version>${redragon.erp.version}</version>
     	<type>war</type>
     </dependency>
+    <dependency>
+    	<groupId>redragon</groupId>
+    	<artifactId>erp-ledger</artifactId>
+    	<version>${redragon.erp.version}</version>
+    	<type>war</type>
+    </dependency>
+    <dependency>
+    	<groupId>redragon</groupId>
+    	<artifactId>erp-common</artifactId>
+    	<version>${redragon.erp.version}</version>
+    	<type>war</type>
+    </dependency>
   </dependencies>
   
   <build>
@@ -107,6 +119,14 @@
                   <overlay>    
                    <groupId>redragon</groupId>
                    <artifactId>erp-inv</artifactId>
+                  </overlay> 
+                  <overlay>    
+                   <groupId>redragon</groupId>
+                   <artifactId>erp-ledger</artifactId>
+                  </overlay> 
+                  <overlay>    
+                   <groupId>redragon</groupId>
+                   <artifactId>erp-common</artifactId>
                   </overlay> 
               </overlays>   
           </configuration>    

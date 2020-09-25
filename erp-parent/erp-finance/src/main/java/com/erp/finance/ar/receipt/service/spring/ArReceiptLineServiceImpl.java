@@ -111,4 +111,9 @@ public class ArReceiptLineServiceImpl implements ArReceiptLineService {
         this.arReceiptLineDao.deleteLineByHeadCode(headCode);
     }
     
+    @Override
+    public List<ArReceiptLine> getArReceiptLineListByHeadCode(String headCode) {
+        return this.arReceiptLineDao.getArReceiptLineListByHeadCode(headCode);
+    }
+    
 }

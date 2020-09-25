@@ -33,4 +33,7 @@ public interface FinVoucherHeadDao extends DaoCRUDIF<FinVoucherHead, FinVoucherH
     //获取凭证数量
     public abstract int getVoucherHeadNum(String startDate, String endDate);
     
+    //根据单据类型和头编码获取凭证头（分录）
+    public abstract FinVoucherHead getVoucherHead(String billType, String billHeadCode);
+    
 }

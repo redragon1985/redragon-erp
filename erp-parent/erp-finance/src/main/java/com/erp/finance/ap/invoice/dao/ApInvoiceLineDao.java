@@ -44,4 +44,7 @@ public interface ApInvoiceLineDao extends DaoCRUDIF<ApInvoiceLine, ApInvoiceLine
     //获取发票行不含税金额和税额汇总
     public abstract BigDecimal[] getInvoiceLineAmountSumByHeadCode(String headCode);
     
+    //获取列表行（根据头code）
+    public abstract List<ApInvoiceLine> getApInvoiceLineListByHeadCode(String headCode);
+    
 }

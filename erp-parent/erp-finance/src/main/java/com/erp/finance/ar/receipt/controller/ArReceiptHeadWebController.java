@@ -18,6 +18,7 @@
  */
 package com.erp.finance.ar.receipt.controller;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 import javax.validation.Valid;
@@ -26,23 +27,31 @@ import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.framework.controller.ControllerSupport;
 import com.framework.dao.data.GlobalDataBox;
 import com.framework.dao.model.Pages;
 import com.framework.util.JsonResultUtil;
 import com.framework.util.JsonUtil;
 import com.framework.util.ShiroUtil;
+import com.erp.common.voucher.service.FinVoucherBillRService;
+import com.erp.common.voucher.service.FinVoucherHeadService;
+import com.erp.common.voucher.service.FinVoucherModelHeadService;
 import com.erp.dataset.service.DatasetCommonService;
 import com.erp.finance.ap.pay.dao.model.ApPayHead;
+import com.erp.finance.ap.pay.dao.model.ApPayLine;
 import com.erp.finance.ap.pay.service.ApPayLineService;
 import com.erp.finance.ar.receipt.dao.data.DataBox;
 import com.erp.finance.ar.receipt.dao.model.ArReceiptHead;
 import com.erp.finance.ar.receipt.dao.model.ArReceiptHeadCO;
+import com.erp.finance.ar.receipt.dao.model.ArReceiptLine;
 import com.erp.finance.ar.receipt.service.ArReceiptHeadService;
 import com.erp.finance.ar.receipt.service.ArReceiptLineService;
 import com.erp.hr.dao.model.HrStaffInfoRO;
@@ -69,7 +78,16 @@ public class ArReceiptHeadWebController extends ControllerSupport{
     @Autowired
     private MasterDataCommonService masterDataCommonService;
     @Autowired
-    private MdVendorBankService mdVendorBankService;
+    @Qualifier("finVoucherModelHeadServiceCommon")
+    private FinVoucherModelHeadService finVoucherModelHeadService;
+    @Autowired
+    @Qualifier("finVoucherHeadServiceCommon")
+    private FinVoucherHeadService finVoucherHeadService;
+    @Autowired
+    @Qualifier("finVoucherBillRServiceCommon")
+    private FinVoucherBillRService finVoucherBillRService;
+    
+    
     
     @Override
     public String getExceptionRedirectURL() {
@@ -274,5 +292,50 @@ public class ArReceiptHeadWebController extends ControllerSupport{
         }
         
         return "redirect:getArReceiptHead";
+    }
+    
+    
+    
+    /**
+     * 
+     * @description 自动创建凭证分录
+     * @date 2020年9月25日
+     * @author dongbin
+     * @param headCode
+     * @return
+     * @return String
+     *
+     */
+    @RequestMapping("autoCreateVoucherEntry")
+    @ResponseBody
+    public String autoCreateVoucherEntry(String headCode){
+        try {
+            //删除自动生成的凭证和分录
+            //根据单据头code获取凭证头code
+            String voucherHeadCode = this.finVoucherBillRService.getVoucherHeadCodeByBillHeadCode("RECEIPT", headCode);
+            //删除凭证
+            if(StringUtils.isNotBlank(voucherHeadCode)) {
+                this.finVoucherHeadService.deleteFinVoucherHeadByVoucherHeadCode(voucherHeadCode);
+            }
+            
+            //自动生成凭证和分录
+            //计算分录的金额
+            //获取入库行
+            List<ArReceiptLine> lineList = this.arReceiptLineService.getArReceiptLineListByHeadCode(headCode);
+            
+            BigDecimal voucherAmount = new BigDecimal(0D);
+            //循环获取加和
+            for(ArReceiptLine line: lineList) {
+                BigDecimal amount = new BigDecimal(line.getInvoiceReceiptAmount());
+                //计算合计金额
+                voucherAmount = voucherAmount.add(amount);
+            }
+            
+            //调用自动创建方法
+            this.finVoucherModelHeadService.autoCreateVoucher(headCode, new Double[]{voucherAmount.doubleValue()}, "RECEIPT");
+            return JsonResultUtil.getErrorJson(0);
+        }catch(Exception e) {
+            return JsonResultUtil.getErrorJson(-1, "重新生成分录错误");
+        }
     }
 }

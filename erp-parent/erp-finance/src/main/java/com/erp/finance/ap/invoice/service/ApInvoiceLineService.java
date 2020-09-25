@@ -29,7 +29,7 @@ import com.framework.dao.model.Pages;
 
 public interface ApInvoiceLineService extends DaoCRUDIF<ApInvoiceLine, ApInvoiceLineCO> {
     
-    //获取行列表（根据头code）
+    //获取行列表分页（根据头code）
     public abstract List<ApInvoiceLine> getApInvoiceLineListByHeadCode(Pages pages, ApInvoiceLineCO paramObj);
     
     //获取采购订单历史付款金额
@@ -43,5 +43,8 @@ public interface ApInvoiceLineService extends DaoCRUDIF<ApInvoiceLine, ApInvoice
     
     //获取发票行不含税金额和税额汇总
     public abstract BigDecimal[] getInvoiceLineAmountSumByHeadCode(String headCode);
+    
+    //获取列表行（根据头code）
+    public abstract List<ApInvoiceLine> getApInvoiceLineListByHeadCode(String headCode);
     
 }

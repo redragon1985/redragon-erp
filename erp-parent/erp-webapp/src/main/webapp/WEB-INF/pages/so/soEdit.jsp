@@ -51,7 +51,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<div class="row">
 		<div class="col-lg-12">
 			<div class="ibox ">
-				<div class="ibox-title btn-success btn-outline panel-success collapse-link" style="cursor: pointer;" title="展开/收起">
+				<div class="ibox-title btn-success btn-outline panel-success collapse-link" title="展开/收起">
 					<h5>销售订单头信息&nbsp;<span style="color: black;">（<i class="fa fa-tag"></i>${requestScope.approveStatusMap[requestScope.soHead.approveStatus]}）</span></h5>
 					<div class="ibox-tools">
 						<i class="fa fa-chevron-up"></i> 
@@ -302,17 +302,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <script>
 	$(document).ready(function() {
-	
-		//设置收起的title效果
-		$(".collapse-link").on("click", function(){
-			if($(this).find("h5").html().indexOf("</i>")==-1){
-				$(this).find("h5").append("<i class=\"fa fa-chrome fa-spin\"></i>");
-			}else{
-				$(this).find("h5").find("i").remove();
-			}
-			
-		});
-	
 		//初始化soType
 		if("${requestScope.soHead.soType}"!=""){
 			$("#soType").val("${requestScope.soHead.soType}");

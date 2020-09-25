@@ -41,6 +41,11 @@
   		<artifactId>erp-order</artifactId>
   		<version>${redragon.erp.version}</version>
   	</dependency>
+  	<dependency>
+  		<groupId>redragon</groupId>
+  		<artifactId>erp-common</artifactId>
+  		<version>${redragon.erp.version}</version>
+  	</dependency>
   </dependencies>
 
 </project>

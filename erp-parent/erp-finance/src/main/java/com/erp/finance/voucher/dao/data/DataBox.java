@@ -34,10 +34,14 @@ public class DataBox {
     public static Map<String, String> getVoucherBusinessType(){
         Map<String, String> map = new LinkedHashMap<String, String>();
         map.put("CUSTOM", "自定义");
-        map.put("PAY", "付款单(系统默认)");
-        map.put("RECEIPT", "收款单(系统默认)");
+        //map.put("PO", "采购订单(系统默认)");
+        //map.put("SO", "销售订单(系统默认)");
         map.put("INPUT", "入库单(系统默认)");
         map.put("OUTPUT", "出库单(系统默认)");
+        map.put("AP_INVOICE", "采购发票(系统默认)");
+        map.put("AR_INVOICE", "销售发票(系统默认)");
+        map.put("PAY", "付款单(系统默认)");
+        map.put("RECEIPT", "收款单(系统默认)");
         return map;
     }
 

@@ -43,9 +43,25 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<div class="row">
 		<div class="col-lg-12">
 			<div class="ibox ">
-				<div class="ibox-title btn-success btn-outline panel-success collapse-link" style="cursor: pointer;" title="展开/收起">
+				<div class="ibox-title btn-success btn-outline panel-success collapse-link" title="展开/收起">
 					<h5>入库单头信息&nbsp;<span style="color: black;">（<i class="fa fa-tag"></i>${requestScope.approveStatusMap[requestScope.invInputHead.approveStatus]}）</span></h5>
 					<div class="ibox-tools">
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+                            <i class="fa fa-wrench btn-redragon-tools" style="color: black; font-size: 14px;" title="工具栏"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-user">
+                        	<c:choose>
+                        		<c:when test="${requestScope.invInputHead.approveStatus=='APPROVE' }">
+                        			<li><a href="javascript:void(0)" title="查看会计分录" onclick="getVoucherEntryModal('INPUT','${param.inputHeadCode}')"><i class="fa fa-list-alt text-success"></i>&nbsp;&nbsp;<strong>查看会计分录</strong></a></li>
+                        			<li><a href="javascript:void(0)" title="重新生成分录" onclick="autoCreateVoucherEntry('${param.inputHeadCode}')"><i class="fa fa-calculator text-warning"></i>&nbsp;&nbsp;<strong>重新生成分录</strong></a></li>
+                        		</c:when>
+                        		<c:otherwise>
+                        			<li><a href="javascript:void(0)" title="查看会计分录" onclick="redragonJS.alert('请在审批通过后操作');"><i class="fa fa-list-alt text-success"></i>&nbsp;&nbsp;<strong style="color: silver;">查看会计分录</strong></a></li>
+                        			<li><a href="javascript:void(0)" title="重新生成分录" onclick="redragonJS.alert('请在审批通过后操作');"><i class="fa fa-calculator text-warning"></i>&nbsp;&nbsp;<strong style="color: silver;">重新生成分录</strong></a></li>
+                        		</c:otherwise>
+                        	</c:choose>
+                        </ul>
+                        &nbsp;
 						<i class="fa fa-chevron-up"></i> 
 					</div>
 				</div>
@@ -225,11 +241,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <!-- pay模式对话框 -->
 <div id="headModal"></div>
+<!-- 会计分录 -->
+<div id="voucherEntryModal"></div>
 
 <!-- select2 -->
 <script src="js/plugins/select2/select2.full.min.js"></script>
 
+<!-- editPage -->
 <script src="js/editPage.js"></script>
+
 <script>
 	$(document).ready(function() {
 		//初始化inputType
@@ -389,4 +409,27 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			}
 		});
 	}
+	
+	//重新创建凭证分录
+	function autoCreateVoucherEntry(headCode){
+		$.ajax({
+			type: "post",
+			url: "web/invInputHead/autoCreateVoucherEntry",
+			data: {"headCode": headCode},
+			async: false,
+			dataType: "json",
+			cache: false,
+			success: function(data){
+				if(data.errCode==0){
+					redragonJS.alert("重新生成分录成功");
+				}else{
+					redragonJS.alert(data.errMsg);
+				}
+			},
+			error: function(XMLHttpRequest, textStatus, errorThrown){
+				redragonJS.alert(textStatus);
+			}
+		});
+	}
+	
 </script>

@@ -18,8 +18,11 @@
  */
 package com.erp.finance.ar.receipt.service.spring;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
+
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -28,9 +31,14 @@ import com.framework.annotation.Cache;
 import com.framework.annotation.Cache.CacheType;
 import com.framework.annotation.Log;
 import com.framework.dao.model.Pages;
+import com.erp.common.voucher.service.FinVoucherBillRService;
+import com.erp.common.voucher.service.FinVoucherHeadService;
+import com.erp.common.voucher.service.FinVoucherModelHeadService;
+import com.erp.finance.ap.pay.dao.model.ApPayLine;
 import com.erp.finance.ar.receipt.dao.ArReceiptHeadDao;
 import com.erp.finance.ar.receipt.dao.model.ArReceiptHead;
 import com.erp.finance.ar.receipt.dao.model.ArReceiptHeadCO;
+import com.erp.finance.ar.receipt.dao.model.ArReceiptLine;
 import com.erp.finance.ar.receipt.service.ArReceiptHeadService;
 import com.erp.finance.ar.receipt.service.ArReceiptLineService;
 
@@ -43,6 +51,15 @@ public class ArReceiptHeadServiceImpl implements ArReceiptHeadService {
     private ArReceiptHeadDao arReceiptHeadDao;
     @Autowired
     private ArReceiptLineService arReceiptLineService;
+    @Autowired
+    @Qualifier("finVoucherModelHeadServiceCommon")
+    private FinVoucherModelHeadService finVoucherModelHeadService;
+    @Autowired
+    @Qualifier("finVoucherHeadServiceCommon")
+    private FinVoucherHeadService finVoucherHeadService;
+    @Autowired
+    @Qualifier("finVoucherBillRServiceCommon")
+    private FinVoucherBillRService finVoucherBillRService;
     
     @Override
     public void insertDataObject(ArReceiptHead obj) {
@@ -108,6 +125,33 @@ public class ArReceiptHeadServiceImpl implements ArReceiptHeadService {
     @Override
     public void updateApproveStatus(String code, String approveStatus) {
         this.arReceiptHeadDao.updateApproveStatus(code, approveStatus);
+        
+        //发票审批通过后修改关联数据
+        if(approveStatus.equals("APPROVE")) {
+            //===========================自动生成凭证和分录
+            //计算分录的金额
+            //获取行
+            List<ArReceiptLine> lineList = this.arReceiptLineService.getArReceiptLineListByHeadCode(code);
+            
+            BigDecimal voucherAmount = new BigDecimal(0D);
+            //循环获取加和
+            for(ArReceiptLine line: lineList) {
+                BigDecimal amount = new BigDecimal(line.getInvoiceReceiptAmount());
+                //计算合计金额
+                voucherAmount = voucherAmount.add(amount);
+            }
+            
+            //调用自动创建方法
+            this.finVoucherModelHeadService.autoCreateVoucher(code, new Double[]{voucherAmount.doubleValue()}, "RECEIPT");
+        }else if(approveStatus.equals("UNSUBMIT")) {
+            //===========================删除自动生成的凭证和分录
+            //根据单据头code获取凭证头code
+            String voucherHeadCode = this.finVoucherBillRService.getVoucherHeadCodeByBillHeadCode("RECEIPT", code);
+            //删除凭证
+            if(StringUtils.isNotBlank(voucherHeadCode)) {
+                this.finVoucherHeadService.deleteFinVoucherHeadByVoucherHeadCode(voucherHeadCode);
+            }
+        }
     }
     
 }

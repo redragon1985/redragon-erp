@@ -28,16 +28,23 @@ import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.erp.common.voucher.service.FinVoucherBillRService;
+import com.erp.common.voucher.service.FinVoucherHeadService;
+import com.erp.common.voucher.service.FinVoucherModelHeadService;
 import com.erp.dataset.service.DatasetCommonService;
+import com.erp.finance.ap.invoice.dao.model.ApInvoiceLine;
 import com.erp.finance.ar.invoice.dao.data.DataBox;
 import com.erp.finance.ar.invoice.dao.model.ArInvoiceHead;
 import com.erp.finance.ar.invoice.dao.model.ArInvoiceHeadCO;
+import com.erp.finance.ar.invoice.dao.model.ArInvoiceLine;
 import com.erp.finance.ar.invoice.service.ArInvoiceHeadService;
 import com.erp.finance.ar.invoice.service.ArInvoiceLineService;
 import com.erp.hr.dao.model.HrStaffInfoRO;
@@ -53,6 +60,7 @@ import com.erp.order.so.service.SoLineService;
 import com.framework.controller.ControllerSupport;
 import com.framework.dao.data.GlobalDataBox;
 import com.framework.dao.model.Pages;
+import com.framework.util.JsonResultUtil;
 import com.framework.util.ShiroUtil;
 
 @Controller
@@ -79,6 +87,17 @@ public class ArInvoiceHeadWebController extends ControllerSupport{
     private SoHeadService soHeadService;
     @Autowired
     private SoLineService soLineService;
+    @Autowired
+    @Qualifier("finVoucherModelHeadServiceCommon")
+    private FinVoucherModelHeadService finVoucherModelHeadService;
+    @Autowired
+    @Qualifier("finVoucherHeadServiceCommon")
+    private FinVoucherHeadService finVoucherHeadService;
+    @Autowired
+    @Qualifier("finVoucherBillRServiceCommon")
+    private FinVoucherBillRService finVoucherBillRService;
+    
+    
     
     @Override
     public String getExceptionRedirectURL() {
@@ -393,5 +412,55 @@ public class ArInvoiceHeadWebController extends ControllerSupport{
         }
         
         return "redirect:getArInvoiceHead";
+    }
+    
+    
+    
+    /**
+     * 
+     * @description 自动创建凭证分录
+     * @date 2020年9月25日
+     * @author dongbin
+     * @param headCode
+     * @return
+     * @return String
+     *
+     */
+    @RequestMapping("autoCreateVoucherEntry")
+    @ResponseBody
+    public String autoCreateVoucherEntry(String headCode){
+        try {
+            //删除自动生成的凭证和分录
+            //根据单据头code获取凭证头code
+            String voucherHeadCode = this.finVoucherBillRService.getVoucherHeadCodeByBillHeadCode("AR_INVOICE", headCode);
+            //删除凭证
+            if(StringUtils.isNotBlank(voucherHeadCode)) {
+                this.finVoucherHeadService.deleteFinVoucherHeadByVoucherHeadCode(voucherHeadCode);
+            }
+            
+          //计算分录的金额
+            //获取入库行
+            List<ArInvoiceLine> lineList = this.arInvoiceLineService.getArInvoiceLineListByHeadCode(headCode);
+            
+            BigDecimal voucherAmount = new BigDecimal(0D);
+            BigDecimal amountSum = new BigDecimal(0D);
+            BigDecimal taxAmountSum = new BigDecimal(0D);
+            //循环获取加和
+            for(ArInvoiceLine line: lineList) {
+                BigDecimal amount = new BigDecimal(line.getAmount());
+                BigDecimal taxAmount = new BigDecimal(line.getTaxAmount());
+                //计算合计金额
+                amountSum = amountSum.add(amount);
+                taxAmountSum = taxAmountSum.add(taxAmount);
+                voucherAmount = voucherAmount.add(amount).add(taxAmount);
+            }
+            
+            //调用自动创建方法
+            this.finVoucherModelHeadService.autoCreateVoucher(headCode, new Double[]{voucherAmount.doubleValue(),amountSum.doubleValue(),taxAmountSum.doubleValue()}, "AR_INVOICE");
+            
+            return JsonResultUtil.getErrorJson(0);
+        }catch(Exception e) {
+            return JsonResultUtil.getErrorJson(-1, "重新生成分录错误");
+        }
     }
 }

@@ -37,4 +37,7 @@ public interface FinVoucherLineService extends DaoCRUDIF<FinVoucherLine, FinVouc
     //获取凭证金额
     public abstract BigDecimal getFinVoucherAmountByVoucherHeadCode(String voucherHeadCode);
     
+    //根据单据类型和头编码获取凭证行列表（分录）
+    public abstract List<FinVoucherLine> getVoucherLineList(String billType, String billHeadCode);
+    
 }

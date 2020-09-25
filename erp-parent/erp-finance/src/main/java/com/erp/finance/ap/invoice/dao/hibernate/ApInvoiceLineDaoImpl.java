@@ -184,4 +184,18 @@ public class ApInvoiceLineDaoImpl implements ApInvoiceLineDao{
         return sumAmount;
     }
     
+    @Override
+    public List<ApInvoiceLine> getApInvoiceLineListByHeadCode(String headCode) {
+        String sql = "select p.* from ap_invoice_line p where invoice_head_code=:payheadcode";
+        
+        Map<String, Object> args = new HashMap<String, Object>();
+        args.put("payheadcode", headCode);
+        sql = sql + " order by p.invoice_line_id";
+        
+        Map<String, Class<?>> entity = new HashMap<String, Class<?>>();
+        entity.put("p", ApInvoiceLine.class);
+        
+        return this.daoSupport.selectDataSql(sql, entity, args);
+    }
+    
 }

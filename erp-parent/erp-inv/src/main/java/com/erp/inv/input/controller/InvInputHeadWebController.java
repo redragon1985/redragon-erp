@@ -28,23 +28,30 @@ import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.framework.controller.ControllerSupport;
 import com.framework.dao.data.GlobalDataBox;
 import com.framework.dao.model.Pages;
 import com.framework.util.JsonResultUtil;
 import com.framework.util.JsonUtil;
 import com.framework.util.ShiroUtil;
+import com.erp.common.voucher.service.FinVoucherBillRService;
+import com.erp.common.voucher.service.FinVoucherHeadService;
+import com.erp.common.voucher.service.FinVoucherModelHeadService;
 import com.erp.dataset.service.DatasetCommonService;
 import com.erp.hr.dao.model.HrStaffInfoRO;
 import com.erp.hr.service.HrCommonService;
 import com.erp.inv.input.dao.data.DataBox;
 import com.erp.inv.input.dao.model.InvInputHead;
 import com.erp.inv.input.dao.model.InvInputHeadCO;
+import com.erp.inv.input.dao.model.InvInputLine;
 import com.erp.inv.input.service.InvInputHeadService;
 import com.erp.inv.input.service.InvInputLineService;
 import com.erp.inv.stock.service.InvStockService;
@@ -58,6 +65,7 @@ import com.erp.masterdata.vendor.service.MdVendorBankService;
 import com.erp.masterdata.vendor.service.MdVendorContactService;
 import com.erp.order.po.dao.model.PoHead;
 import com.erp.order.po.dao.model.PoHeadCO;
+import com.erp.order.po.dao.model.PoLine;
 import com.erp.order.po.service.PoHeadService;
 import com.erp.order.po.service.PoLineService;
 
@@ -85,6 +93,15 @@ public class InvInputHeadWebController extends ControllerSupport{
     private PoLineService poLineService;
     @Autowired
     private InvWarehouseService invWarehouseService;
+    @Autowired
+    @Qualifier("finVoucherModelHeadServiceCommon")
+    private FinVoucherModelHeadService finVoucherModelHeadService;
+    @Autowired
+    @Qualifier("finVoucherHeadServiceCommon")
+    private FinVoucherHeadService finVoucherHeadService;
+    @Autowired
+    @Qualifier("finVoucherBillRServiceCommon")
+    private FinVoucherBillRService finVoucherBillRService;
     
     
     
@@ -374,5 +391,56 @@ public class InvInputHeadWebController extends ControllerSupport{
         }
         
         return "redirect:getInvInputHead";
+    }
+    
+    
+    
+    /**
+     * 
+     * @description 自动创建凭证分录
+     * @date 2020年9月25日
+     * @author dongbin
+     * @param headCode
+     * @return
+     * @return String
+     *
+     */
+    @RequestMapping("autoCreateVoucherEntry")
+    @ResponseBody
+    public String autoCreateVoucherEntry(String headCode){
+        try {
+            //删除自动生成的凭证和分录
+            //根据单据头code获取凭证头code
+            String voucherHeadCode = this.finVoucherBillRService.getVoucherHeadCodeByBillHeadCode("INPUT", headCode);
+            //删除凭证
+            if(StringUtils.isNotBlank(voucherHeadCode)) {
+                this.finVoucherHeadService.deleteFinVoucherHeadByVoucherHeadCode(voucherHeadCode);
+            }
+            
+            //自动生成凭证和分录
+            //计算分录的金额
+            //获取入库行
+            List<InvInputLine> inputLineList = this.invInputLineService.getInvInputLineListByInputHeadCode(headCode);
+            
+            BigDecimal voucherAmount = new BigDecimal(0D);
+            //循环获取加和入库数量和物料单价
+            for(InvInputLine invInputLine: inputLineList) {
+                BigDecimal quantity = new BigDecimal(invInputLine.getInputQuantity());
+                //获取采购订单行
+                PoLine poLine = this.poLineService.getDataObject(invInputLine.getInputSourceLineCode());
+                BigDecimal price = new BigDecimal(poLine.getPrice());
+                //计算行金额
+                BigDecimal lineAmount = quantity.multiply(price);
+                //计算合计金额
+                voucherAmount = voucherAmount.add(lineAmount);
+            }
+            
+            //调用自动创建方法
+            this.finVoucherModelHeadService.autoCreateVoucher(headCode, new Double[]{voucherAmount.doubleValue()}, "INPUT");
+            
+            return JsonResultUtil.getErrorJson(0);
+        }catch(Exception e) {
+            return JsonResultUtil.getErrorJson(-1, "重新生成分录错误");
+        }
     }
 }

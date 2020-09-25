@@ -166,4 +166,25 @@ public class FinVoucherHeadDaoImpl implements FinVoucherHeadDao{
         return 0;
     }
     
+    @Override
+    public FinVoucherHead getVoucherHead(String billType, String billHeadCode) {
+        String sql = "select h.* from fin_voucher_head h,fin_voucher_bill_r b "
+                   + "where h.voucher_head_code = b.voucher_head_code "
+                   + "and b.bill_type = :billType and b.bill_head_code = :billHeadCode";
+        
+        Map<String, Object> args = new HashMap<String, Object>();
+        args.put("billType", billType);
+        args.put("billHeadCode", billHeadCode);
+        
+        Map<String, Class<?>> entity = new HashMap<String, Class<?>>();
+        entity.put("h", FinVoucherHead.class);
+        
+        List<FinVoucherHead> list = this.daoSupport.selectDataSql(sql, entity, args);
+        if(list!=null&&list.size()>0) {
+            return list.get(0);
+        }
+        
+        return null;
+    }
+    
 }

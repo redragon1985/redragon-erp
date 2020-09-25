@@ -36,4 +36,7 @@ public interface ApPayLineDao extends DaoCRUDIF<ApPayLine, ApPayLineCO>{
     //删除付款行（根据头）
     public abstract void deleteLineByHeadCode(String headCode);
     
+    //获取列表行（根据头code）
+    public abstract List<ApPayLine> getApPayLineListByHeadCode(String headCode);
+    
 }

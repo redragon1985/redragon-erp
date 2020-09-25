@@ -30,6 +30,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <%-- 导入面包屑 --%>
 <jsp:include page="../common/nav.jsp"></jsp:include>
 
+<form id="editForm" method="post" action="web/finVoucherHead/editFinVoucherHead">
 <div class="wrapper wrapper-content animated fadeInRight">
 
 	<%-- 导入提示信息框 --%>
@@ -43,7 +44,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 
 	<div class="row">
-		<form id="editForm" method="post" action="web/finVoucherHead/editFinVoucherHead">
 		<div class="col-lg-12">
 			<div class="ibox ">
 				<div class="ibox-title" style="text-align: left;">
@@ -288,10 +288,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<input type="hidden" name="departmentCode" value="${requestScope.finVoucherHead.departmentCode}">
 			<input type="hidden" name="createdDate" value="${requestScope.finVoucherHead.createdDate}">
 			<input type="hidden" name="createdBy" value="${requestScope.finVoucherHead.createdBy}">
-		</form>
+		
 	</div>
 </div>
-
+</form>
 
 <jsp:include page="pop/subjectTreeModal.jsp"></jsp:include>
 

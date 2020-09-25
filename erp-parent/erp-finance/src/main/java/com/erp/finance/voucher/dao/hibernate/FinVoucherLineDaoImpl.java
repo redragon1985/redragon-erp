@@ -33,6 +33,7 @@ import com.framework.dao.DaoSupport;
 import com.framework.dao.model.Pages;
 import com.framework.util.DaoUtil;
 import com.erp.finance.voucher.dao.FinVoucherLineDao;
+import com.erp.finance.voucher.dao.model.FinVoucherHead;
 import com.erp.finance.voucher.dao.model.FinVoucherLine;
 import com.erp.finance.voucher.dao.model.FinVoucherLineCO;
 
@@ -140,6 +141,24 @@ public class FinVoucherLineDaoImpl implements FinVoucherLineDao{
         }
         
         return new BigDecimal(0D);
+    }
+    
+    @Override
+    public List<FinVoucherLine> getVoucherLineList(String billType, String billHeadCode) {
+        String sql = "select l.* from fin_voucher_line l,fin_voucher_bill_r b "
+                + "where l.voucher_head_code = b.voucher_head_code "
+                + "and b.bill_type = :billType and b.bill_head_code = :billHeadCode";
+     
+         Map<String, Object> args = new HashMap<String, Object>();
+         args.put("billType", billType);
+         args.put("billHeadCode", billHeadCode);
+         
+         Map<String, Class<?>> entity = new HashMap<String, Class<?>>();
+         entity.put("l", FinVoucherLine.class);
+         
+         List<FinVoucherLine> list = this.daoSupport.selectDataSql(sql, entity, args);
+         
+         return list;
     }
     
 }

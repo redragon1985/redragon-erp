@@ -145,4 +145,18 @@ public class InvOutputLineDaoImpl implements InvOutputLineDao{
         return 0D;
     }
     
+    @Override
+    public List<InvOutputLine> getInvOutputLineListByOutputHeadCode(String outputHeadCode) {
+        String sql = "select l.* from inv_output_line l where output_head_code=:outputheadcode";
+        
+        Map<String, Object> args = new HashMap<String, Object>();
+        args.put("outputheadcode", outputHeadCode);
+        sql = sql + " order by l.output_line_id";
+        
+        Map<String, Class<?>> entity = new HashMap<String, Class<?>>();
+        entity.put("l", InvOutputLine.class);
+        
+        return this.daoSupport.selectDataSql(sql, entity, args);
+    }
+    
 }

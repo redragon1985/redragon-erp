@@ -144,4 +144,18 @@ public class InvInputLineDaoImpl implements InvInputLineDao{
         return 0D;
     }
     
+    @Override
+    public List<InvInputLine> getInvInputLineListByInputHeadCode(String inputHeadCode) {
+        String sql = "select l.* from inv_input_line l where input_head_code=:inputheadcode";
+        
+        Map<String, Object> args = new HashMap<String, Object>();
+        args.put("inputheadcode", inputHeadCode);
+        sql = sql + " order by l.input_line_id";
+        
+        Map<String, Class<?>> entity = new HashMap<String, Class<?>>();
+        entity.put("l", InvInputLine.class);
+        
+        return this.daoSupport.selectDataSql(sql, entity, args);
+    }
+    
 }

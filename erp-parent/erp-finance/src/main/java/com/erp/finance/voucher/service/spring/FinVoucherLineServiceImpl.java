@@ -117,4 +117,9 @@ public class FinVoucherLineServiceImpl implements FinVoucherLineService {
         return this.finVoucherLineDao.getFinVoucherAmountByVoucherHeadCode(voucherHeadCode);
     }
     
+    @Override
+    public List<FinVoucherLine> getVoucherLineList(String billType, String billHeadCode) {
+        return this.finVoucherLineDao.getVoucherLineList(billType, billHeadCode);
+    }
+    
 }

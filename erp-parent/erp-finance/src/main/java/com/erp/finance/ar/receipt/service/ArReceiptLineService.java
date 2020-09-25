@@ -23,15 +23,19 @@ import com.framework.dao.model.Pages;
 
 import java.util.List;
 
+import com.erp.finance.ap.pay.dao.model.ApPayLine;
 import com.erp.finance.ar.receipt.dao.model.ArReceiptLine;
 import com.erp.finance.ar.receipt.dao.model.ArReceiptLineCO;
 
 public interface ArReceiptLineService extends DaoCRUDIF<ArReceiptLine, ArReceiptLineCO> {
     
-    //获取行列表（根据头code）
+    //获取行列表分页（根据头code）
     public abstract List<ArReceiptLine> getReceiptLineListByHeadCode(Pages pages, ArReceiptLineCO paramObj);
     
     //删除收款行（根据头）
     public abstract void deleteLineByHeadCode(String headCode);
+    
+    //获取列表行（根据头code）
+    public abstract List<ArReceiptLine> getArReceiptLineListByHeadCode(String headCode);
     
 }

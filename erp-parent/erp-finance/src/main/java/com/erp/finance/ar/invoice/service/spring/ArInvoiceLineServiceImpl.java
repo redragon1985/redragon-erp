@@ -125,4 +125,9 @@ public class ArInvoiceLineServiceImpl implements ArInvoiceLineService {
         return this.receiptLineDao.getInvoiceLineAmountSumByHeadCode(headCode);
     }
     
+    @Override
+    public List<ArInvoiceLine> getArInvoiceLineListByHeadCode(String headCode) {
+        return this.receiptLineDao.getArInvoiceLineListByHeadCode(headCode);
+    }
+    
 }

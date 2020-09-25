@@ -23,6 +23,7 @@ import com.framework.api.DaoCRUDIF;
 import java.math.BigDecimal;
 import java.util.List;
 
+import com.erp.finance.voucher.dao.model.FinVoucherHead;
 import com.erp.finance.voucher.dao.model.FinVoucherLine;
 import com.erp.finance.voucher.dao.model.FinVoucherLineCO;
 
@@ -36,5 +37,8 @@ public interface FinVoucherLineDao extends DaoCRUDIF<FinVoucherLine, FinVoucherL
     
     //获取凭证金额
     public abstract BigDecimal getFinVoucherAmountByVoucherHeadCode(String voucherHeadCode);
+    
+    //根据单据类型和头编码获取凭证行列表（分录）
+    public abstract List<FinVoucherLine> getVoucherLineList(String billType, String billHeadCode);
     
 }

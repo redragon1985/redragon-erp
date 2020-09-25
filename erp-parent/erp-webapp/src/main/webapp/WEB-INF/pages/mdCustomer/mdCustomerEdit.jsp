@@ -57,7 +57,7 @@ response.setDateHeader ("Expires", 0);
 	<div class="row">
 		<div class="col-lg-12">
 			<div class="ibox ">
-				<div class="ibox-title btn-success btn-outline panel-success collapse-link" style="cursor: pointer;" title="展开/收起">
+				<div class="ibox-title btn-success btn-outline panel-success collapse-link" title="展开/收起">
 					<h5>客户基本信息&nbsp;<span style="color: black;">（<i class="fa fa-tag"></i>${requestScope.approveStatusMap[requestScope.mdCustomer.approveStatus]}）</span></h5>
 					<div class="ibox-tools">
 						<i class="fa fa-chevron-up"></i> 
@@ -231,16 +231,6 @@ response.setDateHeader ("Expires", 0);
 
 <script>
 	$(document).ready(function() {
-		//设置收起的title效果
-		$(".collapse-link").on("click", function(){
-			if($(this).find("h5").html().indexOf("</i>")==-1){
-				$(this).find("h5").append("<i class=\"fa fa-chrome fa-spin\"></i>");
-			}else{
-				$(this).find("h5").find("i").remove();
-			}
-			
-		});
-	
 		//初始化ownFlag
 		if("${requestScope.mdCustomer.ownFlag}"!=""){
 			$("#ownFlag").val("${requestScope.mdCustomer.ownFlag}");

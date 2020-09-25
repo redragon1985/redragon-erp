@@ -18,6 +18,7 @@
  */
 package com.erp.finance.voucher.controller;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -49,9 +50,13 @@ import com.erp.finance.ar.invoice.dao.model.ArInvoiceHeadCO;
 import com.erp.finance.ar.invoice.service.ArInvoiceHeadService;
 import com.erp.finance.ar.invoice.service.ArInvoiceLineService;
 import com.erp.finance.voucher.dao.data.DataBox;
+import com.erp.finance.voucher.dao.model.FinVoucherHead;
+import com.erp.finance.voucher.dao.model.FinVoucherLine;
 import com.erp.finance.voucher.dao.model.FinVoucherModelHead;
 import com.erp.finance.voucher.dao.model.FinVoucherModelHeadCO;
 import com.erp.finance.voucher.dao.model.FinVoucherModelLine;
+import com.erp.finance.voucher.service.FinVoucherHeadService;
+import com.erp.finance.voucher.service.FinVoucherLineService;
 import com.erp.finance.voucher.service.FinVoucherModelHeadService;
 import com.erp.finance.voucher.service.FinVoucherModelLineService;
 import com.erp.finance.voucher.util.FinVoucherUtil;
@@ -92,6 +97,10 @@ public class FinVoucherModelHeadWebController extends ControllerSupport{
     private ArInvoiceHeadService receiptHeadService;
     @Autowired
     private ArInvoiceLineService receiptLineService;
+    @Autowired
+    private FinVoucherHeadService finVoucherHeadService;
+    @Autowired
+    private FinVoucherLineService finVoucherLineService;
     
     @Override
     public String getExceptionRedirectURL() {
@@ -489,5 +498,47 @@ public class FinVoucherModelHeadWebController extends ControllerSupport{
         }
         
         return "redirect:getVoucherTypeNumber";
+    }
+    
+    
+    
+    /**
+     * 
+     * @description 获取财务分录Modal
+     * @date 2020年9月23日
+     * @author dongbin
+     * @param billType
+     * @param billHeadCode
+     * @param model
+     * @return
+     * @return String
+     *
+     */
+    @RequestMapping("getVoucherEntryModal")
+    public String getVoucherEntryModal(String billType, String billHeadCode, Model model) {
+        Double drAmount = 0D;
+        Double crAmount = 0D;
+        //获取分录头
+        FinVoucherHead finVoucherHead = this.finVoucherHeadService.getVoucherHead(billType, billHeadCode);
+        //获取分录行
+        List<FinVoucherLine> finVoucherLineList = this.finVoucherLineService.getVoucherLineList(billType, billHeadCode);
+        for(FinVoucherLine line: finVoucherLineList) {
+            drAmount = drAmount + line.getDrAmount();
+            crAmount = crAmount + line.getCrAmount();
+            //设置科目
+            line.setSubjectDesc(this.masterDataCommonService.getSubjectMap().get(line.getSubjectCode()));
+        }
+        //设置头金额
+        finVoucherHead.setDrAmount(drAmount);
+        finVoucherHead.setCrAmount(crAmount);
+        finVoucherHead.setAmount(new BigDecimal(drAmount));
+        
+        
+        //页面属性设置
+        model.addAttribute("finVoucherHead", finVoucherHead);
+        model.addAttribute("finVoucherLineList", finVoucherLineList);
+        
+        return "finVoucher/pop/voucherEntryModal";
+        
     }
 }

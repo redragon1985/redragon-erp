@@ -37,4 +37,7 @@ public interface InvInputLineService extends DaoCRUDIF<InvInputLine, InvInputLin
     //获取物料的入库数量（根据采购订单行）
     public abstract Double getInputQuantityByPoLineCode(String poLineCode);
     
+    //获取行列表（根据头code）
+    public abstract List<InvInputLine> getInvInputLineListByInputHeadCode(String inputHeadCode);
+    
 }

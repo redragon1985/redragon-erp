@@ -128,4 +128,18 @@ public class ArReceiptLineDaoImpl implements ArReceiptLineDao{
         this.daoSupport.executeSQLTransaction(sql, args);
     }
     
+    @Override
+    public List<ArReceiptLine> getArReceiptLineListByHeadCode(String headCode) {
+        String sql = "select l.* from ar_receipt_line l where l.receipt_head_code=:headcode";
+        
+        Map<String, Object> args = new HashMap<String, Object>();
+        args.put("headcode", headCode);
+        sql = sql + " order by l.receipt_line_id";
+        
+        Map<String, Class<?>> entity = new HashMap<String, Class<?>>();
+        entity.put("l", ArReceiptLine.class);
+        
+        return this.daoSupport.selectDataSql(sql, entity, args);
+    }
+    
 }

@@ -43,4 +43,7 @@ public interface ArInvoiceLineService extends DaoCRUDIF<ArInvoiceLine, ArInvoice
     //获取发票行不含税金额和税额汇总
     public abstract BigDecimal[] getInvoiceLineAmountSumByHeadCode(String headCode);
     
+    //获取列表行（根据头code）
+    public abstract List<ArInvoiceLine> getArInvoiceLineListByHeadCode(String headCode);
+    
 }

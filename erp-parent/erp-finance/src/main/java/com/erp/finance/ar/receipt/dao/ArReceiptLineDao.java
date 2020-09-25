@@ -36,4 +36,7 @@ public interface ArReceiptLineDao extends DaoCRUDIF<ArReceiptLine, ArReceiptLine
     //删除收款行（根据头）
     public abstract void deleteLineByHeadCode(String headCode);
     
+    //获取列表行（根据头code）
+    public abstract List<ArReceiptLine> getArReceiptLineListByHeadCode(String headCode);
+    
 }

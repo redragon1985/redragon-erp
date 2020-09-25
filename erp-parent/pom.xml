@@ -339,5 +339,7 @@
     <module>erp-finance</module>
     <module>erp-global</module>
     <module>erp-inv</module>
+    <module>erp-ledger</module>
+    <module>erp-common</module>
   </modules>
 </project>

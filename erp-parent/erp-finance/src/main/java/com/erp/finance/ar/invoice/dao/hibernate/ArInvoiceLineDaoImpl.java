@@ -184,4 +184,18 @@ public class ArInvoiceLineDaoImpl implements ArInvoiceLineDao{
         return sumAmount;
     }
     
+    @Override
+    public List<ArInvoiceLine> getArInvoiceLineListByHeadCode(String headCode) {
+        String sql = "select p.* from ar_invoice_line p where invoice_head_code=:receiptheadcode";
+        
+        Map<String, Object> args = new HashMap<String, Object>();
+        args.put("receiptheadcode", headCode);
+        sql = sql + " order by p.invoice_line_id";
+        
+        Map<String, Class<?>> entity = new HashMap<String, Class<?>>();
+        entity.put("p", ArInvoiceLine.class);
+        
+        return this.daoSupport.selectDataSql(sql, entity, args);
+    }
+    
 }

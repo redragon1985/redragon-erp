@@ -26,13 +26,17 @@ import java.util.List;
 import com.erp.finance.ap.invoice.dao.model.ApInvoiceLine;
 import com.erp.finance.ap.pay.dao.model.ApPayLine;
 import com.erp.finance.ap.pay.dao.model.ApPayLineCO;
+import com.erp.finance.ar.invoice.dao.model.ArInvoiceLine;
 
 public interface ApPayLineService extends DaoCRUDIF<ApPayLine, ApPayLineCO> {
     
-    //获取行列表（根据头code）
+    //获取行列表分页（根据头code）
     public abstract List<ApPayLine> getPayLineListByHeadCode(Pages pages, ApPayLineCO paramObj);
     
     //删除付款行（根据头）
     public abstract void deleteLineByHeadCode(String headCode);
+    
+    //获取列表行（根据头code）
+    public abstract List<ApPayLine> getApPayLineListByHeadCode(String headCode);
     
 }

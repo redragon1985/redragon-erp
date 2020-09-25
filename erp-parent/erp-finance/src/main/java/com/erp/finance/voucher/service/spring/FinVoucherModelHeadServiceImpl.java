@@ -159,7 +159,7 @@ public class FinVoucherModelHeadServiceImpl implements FinVoucherModelHeadServic
         //获取凭证模板头
         FinVoucherModelHead finVoucherModelHead = this.finVoucherModelHeadDao.getFinVoucherModelHeadByBusinessType(businessType);
         
-        //获取凭证模板头
+        //获取凭证模板行
         if(finVoucherModelHead!=null) {
            List<FinVoucherModelLine> finVoucherModelLineList = this.finVoucherModelLineDao.getFinVoucherModelLineListByVoucherHeadCode(finVoucherModelHead.getVoucherHeadCode());
            

@@ -128,4 +128,18 @@ public class ApPayLineDaoImpl implements ApPayLineDao{
         this.daoSupport.executeSQLTransaction(sql, args);        
     }
     
+    @Override
+    public List<ApPayLine> getApPayLineListByHeadCode(String headCode) {
+        String sql = "select l.* from ap_pay_line l where l.pay_head_code=:payheadcode";
+        
+        Map<String, Object> args = new HashMap<String, Object>();
+        args.put("payheadcode", headCode);
+        sql = sql + " order by l.pay_line_id";
+        
+        Map<String, Class<?>> entity = new HashMap<String, Class<?>>();
+        entity.put("l", ApPayLine.class);
+        
+        return this.daoSupport.selectDataSql(sql, entity, args);
+    }
+    
 }

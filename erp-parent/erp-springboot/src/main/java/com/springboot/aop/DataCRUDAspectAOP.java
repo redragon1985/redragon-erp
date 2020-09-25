@@ -46,6 +46,8 @@ public class DataCRUDAspectAOP extends DataCRUDAspect {
 	        + "execution(* com.erp.masterdata.*.dao.*.*(..))||"
 	        + "execution(* com.erp.order.*.dao.*.*(..))||"
 	        + "execution(* com.erp.finance..*.dao.*.*(..))||"
+	        + "execution(* com.erp.common..*.dao.*.*(..))||"
+	        + "execution(* com.erp.ledger..*.dao.*.*(..))||"
 	        + "execution(* com.erp.inv.*.dao.*.*(..))")
 	public void pointcut(){}
 	

@@ -112,4 +112,9 @@ public class ApPayLineServiceImpl implements ApPayLineService {
         this.apPayLineDao.deleteLineByHeadCode(headCode);
     }
     
+    @Override
+    public List<ApPayLine> getApPayLineListByHeadCode(String headCode) {
+        return this.apPayLineDao.getApPayLineListByHeadCode(headCode);
+    }
+    
 }

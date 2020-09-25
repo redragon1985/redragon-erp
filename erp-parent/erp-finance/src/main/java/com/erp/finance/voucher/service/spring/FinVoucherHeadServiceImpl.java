@@ -137,4 +137,9 @@ public class FinVoucherHeadServiceImpl implements FinVoucherHeadService {
         return this.finVoucherHeadDao.getVoucherHeadNum(startDate, endDate);
     }
     
+    @Override
+    public FinVoucherHead getVoucherHead(String billType, String billHeadCode) {
+        return this.finVoucherHeadDao.getVoucherHead(billType, billHeadCode);
+    }
+    
 }
