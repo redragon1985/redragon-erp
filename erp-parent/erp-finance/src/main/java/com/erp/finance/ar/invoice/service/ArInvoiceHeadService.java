@@ -27,9 +27,6 @@ import com.framework.dao.model.Pages;
 
 public interface ArInvoiceHeadService extends DaoCRUDIF<ArInvoiceHead, ArInvoiceHeadCO> {
     
-    //获取未创建凭证的收款单
-    public List<ArInvoiceHead> getArInvoiceHeadListForNotCreateVoucher(Pages pages, ArInvoiceHeadCO paramObj);
-    
     //修改审批状态
     public abstract void updateApproveStatus(String code, String approveStatus);
     

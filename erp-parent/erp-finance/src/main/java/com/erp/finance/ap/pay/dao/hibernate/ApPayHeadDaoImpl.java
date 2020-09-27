@@ -141,4 +141,24 @@ public class ApPayHeadDaoImpl implements ApPayHeadDao{
         this.daoSupport.executeSQLTransaction(sql, args);        
     }
     
+    @Override
+    public List<ApPayHead> getApPayHeadListForNotCreateVoucher(Pages pages, ApPayHeadCO paramObj) {
+        String sql = "select p.* from ap_pay_head p where 1=1";
+        
+        Map<String, Object> args = new HashMap<String, Object>();
+        sql = sql + DaoUtil.getSQLCondition(paramObj, "payHeadCode", "and p.", args);
+        sql = sql + DaoUtil.getSQLCondition(paramObj, "vendorCode", "and p.", args);
+        sql = sql + DaoUtil.getSQLCondition(paramObj, "amount", "and p.", args);
+        sql = sql + DaoUtil.getSQLCondition(paramObj, "payDate", "and p.", args);
+        sql = sql + DaoUtil.getSQLCondition(paramObj, "status", "and p.", args);
+        
+        sql = sql + " and not exists (select 1 from fin_voucher_bill_r where bill_type = 'PAY' and bill_head_code = p.pay_head_code)";
+        sql = sql + " order by p.pay_head_id desc";
+        
+        Map<String, Class<?>> entity = new HashMap<String, Class<?>>();
+        entity.put("p", ApPayHead.class);
+        
+        return this.daoSupport.getDataSqlByPage(sql, entity, args, pages);
+    }
+    
 }

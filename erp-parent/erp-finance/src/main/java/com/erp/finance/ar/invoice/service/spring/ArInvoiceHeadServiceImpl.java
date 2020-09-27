@@ -123,11 +123,6 @@ public class ArInvoiceHeadServiceImpl implements ArInvoiceHeadService {
     }
     
     @Override
-    public List<ArInvoiceHead> getArInvoiceHeadListForNotCreateVoucher(Pages pages, ArInvoiceHeadCO paramObj) {
-        return this.receiptHeadDao.getArInvoiceHeadListForNotCreateVoucher(pages, paramObj);
-    }
-    
-    @Override
     public void updateApproveStatus(String code, String approveStatus) {
         this.receiptHeadDao.updateApproveStatus(code, approveStatus);
         

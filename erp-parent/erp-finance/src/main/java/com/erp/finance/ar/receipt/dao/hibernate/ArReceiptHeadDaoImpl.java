@@ -32,6 +32,7 @@ import com.framework.dao.DaoSupport;
 import com.framework.dao.model.Pages;
 import com.framework.util.DaoUtil;
 import com.erp.finance.ap.pay.dao.model.ApPayHead;
+import com.erp.finance.ar.invoice.dao.model.ArInvoiceHead;
 import com.erp.finance.ar.receipt.dao.ArReceiptHeadDao;
 import com.erp.finance.ar.receipt.dao.model.ArReceiptHead;
 import com.erp.finance.ar.receipt.dao.model.ArReceiptHeadCO;
@@ -139,6 +140,26 @@ public class ArReceiptHeadDaoImpl implements ArReceiptHeadDao{
         args.put("approveStatus", approveStatus);
         
         this.daoSupport.executeSQLTransaction(sql, args);  
+    }
+    
+    @Override
+    public List<ArReceiptHead> getArReceiptHeadListForNotCreateVoucher(Pages pages, ArReceiptHeadCO paramObj) {
+        String sql = "select p.* from ar_receipt_head p where 1=1";
+        
+        Map<String, Object> args = new HashMap<String, Object>();
+        sql = sql + DaoUtil.getSQLCondition(paramObj, "receiptHeadCode", "and p.", args);
+        sql = sql + DaoUtil.getSQLCondition(paramObj, "customerCode", "and p.", args);
+        sql = sql + DaoUtil.getSQLCondition(paramObj, "amount", "and p.", args);
+        sql = sql + DaoUtil.getSQLCondition(paramObj, "receiptDate", "and p.", args);
+        sql = sql + DaoUtil.getSQLCondition(paramObj, "status", "and p.", args);
+        
+        sql = sql + " and not exists (select 1 from fin_voucher_bill_r where bill_type = 'RECEIPT' and bill_head_code = p.receipt_head_code)";
+        sql = sql + " order by p.receipt_head_id desc";
+        
+        Map<String, Class<?>> entity = new HashMap<String, Class<?>>();
+        entity.put("p", ArReceiptHead.class);
+        
+        return this.daoSupport.getDataSqlByPage(sql, entity, args, pages);
     }
     
 }

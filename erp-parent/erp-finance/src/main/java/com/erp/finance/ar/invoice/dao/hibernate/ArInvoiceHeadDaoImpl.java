@@ -146,27 +146,6 @@ public class ArInvoiceHeadDaoImpl implements ArInvoiceHeadDao{
     }
     
     @Override
-    public List<ArInvoiceHead> getArInvoiceHeadListForNotCreateVoucher(Pages pages, ArInvoiceHeadCO paramObj) {
-        String sql = "select p.* from ar_invoice_head p where 1=1";
-        
-        Map<String, Object> args = new HashMap<String, Object>();
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "invoiceHeadCode", "and p.", args);
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "invoiceSourceType", "and p.", args);
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "invoiceSourceHeadCode", "and p.", args);
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "payer", "and p.", args);
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "preReceiptFlag", "and p.", args);
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "status", "and p.", args);
-        
-        sql = sql + " and not exists (select 1 from fin_voucher_bill_r where bill_type = 'RECEIPT' and bill_head_code = p.invoice_head_code)";
-        sql = sql + " order by p.invoice_head_id desc";
-        
-        Map<String, Class<?>> entity = new HashMap<String, Class<?>>();
-        entity.put("p", ArInvoiceHead.class);
-        
-        return this.daoSupport.getDataSqlByPage(sql, entity, args, pages);
-    }
-    
-    @Override
     public void updateApproveStatus(String code, String approveStatus) {
         String sql = "update ar_invoice_head set approve_status = :approveStatus where invoice_head_code = :code";
         

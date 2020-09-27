@@ -21,6 +21,8 @@ package com.erp.finance.voucher.dao.hibernate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
@@ -96,6 +98,12 @@ public class FinVoucherHeadDaoImpl implements FinVoucherHeadDao{
         sql = sql + DaoUtil.getSQLCondition(paramObj, "voucherNumber", "and v.", args);
         sql = sql + DaoUtil.getSQLCondition(paramObj, "voucherDate", "and v.", args);
         sql = sql + DaoUtil.getSQLCondition(paramObj, "status", "and v.", args);
+        
+        if(StringUtils.isNotBlank(paramObj.getBusinessType())) {
+            sql = sql + " and exists(select 1 from fin_voucher_bill_r where bill_type = :billtype and voucher_head_code = v.voucher_head_code) ";
+            args.put("billtype", paramObj.getBusinessType());
+        }
+        
         sql = sql + " order by v.voucher_head_id desc";
         
         Map<String, Class<?>> entity = new HashMap<String, Class<?>>();
@@ -120,6 +128,12 @@ public class FinVoucherHeadDaoImpl implements FinVoucherHeadDao{
         sql = sql + DaoUtil.getSQLCondition(paramObj, "voucherDate", "and v.", args);
         sql = sql + DaoUtil.getSQLCondition(paramObj, "status", "and v.", args);
         sql = sql + DaoUtil.getDataAuthSQL(dataAuthSQL, "v.", "v.");
+        
+        if(StringUtils.isNotBlank(paramObj.getBusinessType())) {
+            sql = sql + " and exists(select 1 from fin_voucher_bill_r where bill_type = :billtype and voucher_head_code = v.voucher_head_code) ";
+            args.put("billtype", paramObj.getBusinessType());
+        }
+        
         sql = sql + " order by v.voucher_head_id desc";
         
         Map<String, Class<?>> entity = new HashMap<String, Class<?>>();

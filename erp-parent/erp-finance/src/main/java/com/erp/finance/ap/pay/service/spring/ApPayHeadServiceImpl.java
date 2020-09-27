@@ -154,4 +154,9 @@ public class ApPayHeadServiceImpl implements ApPayHeadService {
         }
     }
     
+    @Override
+    public List<ApPayHead> getApPayHeadListForNotCreateVoucher(Pages pages, ApPayHeadCO paramObj) {
+        return this.apPayHeadDao.getApPayHeadListForNotCreateVoucher(pages, paramObj);
+    }
+    
 }

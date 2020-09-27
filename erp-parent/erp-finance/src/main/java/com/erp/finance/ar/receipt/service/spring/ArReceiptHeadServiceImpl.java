@@ -154,4 +154,9 @@ public class ArReceiptHeadServiceImpl implements ArReceiptHeadService {
         }
     }
     
+    @Override
+    public List<ArReceiptHead> getArReceiptHeadListForNotCreateVoucher(Pages pages, ArReceiptHeadCO paramObj) {
+        return this.arReceiptHeadDao.getArReceiptHeadListForNotCreateVoucher(pages, paramObj);
+    }
+    
 }

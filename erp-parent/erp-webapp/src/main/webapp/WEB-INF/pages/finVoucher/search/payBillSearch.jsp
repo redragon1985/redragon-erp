@@ -35,27 +35,36 @@
 	
 	<div class="ibox-content m-b-sm border-bottom" style="padding-bottom: 0px; padding-top: 5px;">
 		<div class="row">
-			<div class="col-sm-4">
+			<div class="col-sm-3">
 				<div class="form-group" style="margin-bottom: 5px;">
 					<label class="control-label" for="payHeadCodeSearch">付款单编码</label> 
 					<input type="text" id="payHeadCodeSearch" name="payHeadCodeSearch" value="${param.payHeadCode}" class="form-control">
 				</div>
 			</div>
-			<div class="col-sm-4">
+			<div class="col-sm-3">
 				<div class="form-group" style="margin-bottom: 5px;">
-					<label class="control-label" for="paySourceHeadCodeSearch">采购订单编码</label> 
-					<input type="text" id="paySourceHeadCodeSearch" name="paySourceHeadCodeSearch" value="${param.paySourceHeadCode}" class="form-control">
+					<label class="control-label" for="payAmountSearch">付款金额</label> 
+					<input type="text" id="payAmountSearch" name="payAmountSearch" value="${param.amount}" class="form-control">
 				</div>
 			</div>
-			<div class="col-sm-4">
+			<div class="col-sm-3">
 				<div class="form-group">
-					<label class="control-label" for="receiverSearch">收款方</label> 
-                    <select class="chosen-select form-control" name="receiverSearch" id="receiverSearch">
+					<label class="control-label" for="receiverSearch">供应商</label> 
+                    <select class="chosen-select form-control" name="vendorCodeSearch" id="vendorCodeSearch">
                     	<option value="" selected="selected">请选择...</option>
                     	<c:forEach items="${requestScope.vendorMap}" var="vendor">
                     		<option value="${vendor.key}">${vendor.value}</option>
                     	</c:forEach>
                     </select>					
+				</div>
+			</div>
+			<div class="col-sm-3">
+				<div class="form-group" style="margin-bottom: 5px;">
+					<label class="control-label" for="payDateSearch">付款日期</label> 
+					<div class="input-group date">
+						<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+						<input id="payDateSearch" name="payDateSearch" type="text" class="form-control" value="${param.payDate}" autocomplete="off">
+					</div>
 				</div>
 			</div>
 		</div>	
@@ -81,8 +90,8 @@
 <script>
 $(document).ready(function(){
 	//设置receiver
-	if("${param.receiver}"!=""){
-		$("#receiverSearch").val("${param.receiver}");
+	if("${param.vendorCode}"!=""){
+		$("#vendorCodeSearch").val("${param.vendorCode}");
 	}
 	
 	//初始化chosen-select
@@ -91,6 +100,17 @@ $(document).ready(function(){
 	//查询按钮
 	$("#searchBillConfirmButton").click(function(){
 		getSelectBillModal("PAY");
+	});
+	
+	//设置日期插件
+	$('#payDateSearch').datepicker({
+		todayBtn : "linked",
+		keyboardNavigation : true,
+		forceParse : false,
+		calendarWeeks : false,
+		autoclose : true,
+		format: 'yyyy-mm-dd',
+		language: 'zh-CN',
 	});
 });
 </script>

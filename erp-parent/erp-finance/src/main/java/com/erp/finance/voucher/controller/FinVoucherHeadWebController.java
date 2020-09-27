@@ -36,6 +36,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.erp.dataset.service.DatasetCommonService;
+import com.erp.finance.voucher.dao.data.DataBox;
 import com.erp.finance.voucher.dao.model.FinVoucherHead;
 import com.erp.finance.voucher.dao.model.FinVoucherHeadCO;
 import com.erp.finance.voucher.dao.model.FinVoucherLine;
@@ -123,12 +124,16 @@ public class FinVoucherHeadWebController extends ControllerSupport{
         Map voucherTypeMap = this.datasetCommonService.getVoucherType();
         //获取审批状态
         Map approveStatusMap = GlobalDataBox.getApproveStatusMap();
+        //获取凭证业务类型
+        Map voucherBusinessTypeMap = DataBox.getVoucherBusinessType();
+        voucherBusinessTypeMap.remove("CUSTOM");
         
         //页面属性设置
         model.addAttribute("finVoucherHeadList", finVoucherHeadList);
         model.addAttribute("pages", pages);
         model.addAttribute("voucherTypeMap", voucherTypeMap);
         model.addAttribute("approveStatusMap", approveStatusMap);
+        model.addAttribute("voucherBusinessTypeMap", voucherBusinessTypeMap);
         
         return "basic.jsp?content=finVoucher/voucherList";
     }

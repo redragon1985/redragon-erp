@@ -75,6 +75,19 @@
 			</div>
 		</div>
 		<div class="row">
+			<div class="col-sm-6">
+				<div class="form-group">
+					<label class="control-label" for="businessType">业务类型</label> 
+					<select id="businessType" name="businessType" class="form-control">
+						<option value="">请选择...</option>
+						<c:forEach items="${requestScope.voucherBusinessTypeMap}" var="voucherBusinessType">
+                       		<option value="${voucherBusinessType.key}">${voucherBusinessType.value}</option>
+                       	</c:forEach>
+					</select>
+				</div>
+			</div>
+		</div>
+		<div class="row">
 			<div class="col-sm-12 text-right">
 				<div class="form-group">
 					<button type="submit" class="btn btn-w-m btn-primary">查询</button>
@@ -100,7 +113,9 @@ $(document).ready(function(){
 		$("#voucherType").val("${param.voucherType}");
 	}
 	
-	
+	if("${param.businessType}"!=""){
+		$("#businessType").val("${param.businessType}");
+	}
 	
 	//设置日期插件
 	$('#voucherDate').datepicker({

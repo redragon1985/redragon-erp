@@ -58,14 +58,13 @@
 							<tr>
 								<th></th>
 								<th>收款单编码</th>
-								<th>来源</th>
-								<th>来源编码</th>
-								<th>付款方</th>
+								<th>收款类型</th>
+								<th>客户编码</th>
+								<th>客户</th>
 								<th>收款日期</th>
 								<th>收款金额</th>
 								<th>制单人</th>
 								<th>状态</th>
-								<th>出纳状态</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -74,14 +73,13 @@
 								<tr>
 									<td><input type="checkbox" class="i-checks" name="input[]"></td>
 									<td class="billHeadCode">${data.receiptHeadCode}</td>
-									<td>${requestScope.receiptSourceTypeMap[data.receiptSourceType]}</td>
-									<td>${data.receiptSourceHeadCode}</td>
-									<td>${requestScope.customerMap[data.payer]}</td>
+									<td>${requestScope.receiptTypeMap[data.receiptType]}</td>
+									<td>${data.customerCode}</td>
+									<td>${requestScope.customerMap[data.customerCode]}</td>
 									<td><fmt:formatDate value="${data.receiptDate}" pattern="yyyy-MM-dd" /></td>
 									<td class="amount">${data.amount}</td>
 									<td>${data.staffName}-${data.departmentName}</td>
 									<td><span class="label">${requestScope.receiptStatusMap[data.status]}</span></td>
-									<td><span class="label">${requestScope.receivedStatusMap[data.receivedStatus]}</span></td>
 									
 									<td class="businessType" style="display: none;">RECEIPT</td>
 								</tr>

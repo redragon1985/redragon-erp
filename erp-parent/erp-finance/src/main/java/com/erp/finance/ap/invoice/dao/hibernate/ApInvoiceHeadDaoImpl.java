@@ -150,29 +150,6 @@ public class ApInvoiceHeadDaoImpl implements ApInvoiceHeadDao{
     }
     
     @Override
-    public List<ApInvoiceHead> getApInvoiceHeadListForNotCreateVoucher(Pages pages, ApInvoiceHeadCO paramObj) {
-        String sql = "select p.* from ap_invoice_head p where 1=1";
-        
-        Map<String, Object> args = new HashMap<String, Object>();
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "invoiceHeadCode", "and p.", args);
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "paySourceType", "and p.", args);
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "invoiceSourceHeadCode", "and p.", args);
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "receiver", "and p.", args);
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "prepayFlag", "and p.", args);
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "amount", "and p.", args);
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "invoiceDate", "and p.", args);
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "status", "and p.", args);
-        
-        sql = sql + " and not exists (select 1 from fin_voucher_bill_r where bill_type = 'PAY' and bill_head_code = p.invoice_head_code)";
-        sql = sql + " order by p.invoice_head_id desc";
-        
-        Map<String, Class<?>> entity = new HashMap<String, Class<?>>();
-        entity.put("p", ApInvoiceHead.class);
-        
-        return this.daoSupport.getDataSqlByPage(sql, entity, args, pages);
-    }
-    
-    @Override
     public void updateApproveStatus(String code, String approveStatus) {
         String sql = "update ap_invoice_head set approve_status = :approveStatus where invoice_head_code = :code";
         

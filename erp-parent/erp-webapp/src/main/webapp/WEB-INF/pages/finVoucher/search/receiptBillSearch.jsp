@@ -35,27 +35,36 @@
 	
 	<div class="ibox-content m-b-sm border-bottom" style="padding-bottom: 0px; padding-top: 5px;">
 		<div class="row">
-			<div class="col-sm-4">
+			<div class="col-sm-3">
 				<div class="form-group" style="margin-bottom: 5px;">
 					<label class="control-label" for="receiptHeadCodeSearch">收款单编码</label> 
 					<input type="text" id="receiptHeadCodeSearch" name="receiptHeadCodeSearch" value="${param.receiptHeadCode}" class="form-control">
 				</div>
 			</div>
-			<div class="col-sm-4">
+			<div class="col-sm-3">
 				<div class="form-group" style="margin-bottom: 5px;">
-					<label class="control-label" for="receiptSourceHeadCodeSearch">销售订单编码</label> 
-					<input type="text" id="receiptSourceHeadCodeSearch" name="receiptSourceHeadCodeSearch" value="${param.receiptSourceHeadCode}" class="form-control">
+					<label class="control-label" for="receiptSourceHeadCodeSearch">付款金额</label> 
+					<input type="text" id="receiptAmountSearch" name="receiptAmountSearch" value="${param.amount}" class="form-control">
 				</div>
 			</div>
-			<div class="col-sm-4">
+			<div class="col-sm-3">
 				<div class="form-group">
-					<label class="control-label" for="payerSearch">收款方</label> 
-                    <select class="chosen-select form-control" name="payerSearch" id="payerSearch">
+					<label class="control-label" for="customerCodeSearch">客户</label> 
+                    <select class="chosen-select form-control" name="customerCodeSearch" id="customerCodeSearch">
                     	<option value="" selected="selected">请选择...</option>
                     	<c:forEach items="${requestScope.customerMap}" var="customer">
                     		<option value="${customer.key}">${customer.value}</option>
                     	</c:forEach>
                     </select>					
+				</div>
+			</div>
+			<div class="col-sm-3">
+				<div class="form-group" style="margin-bottom: 5px;">
+					<label class="control-label" for="receiptDateSearch">收款日期</label> 
+					<div class="input-group date">
+						<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+						<input id="receiptDateSearch" name="receiptDateSearch" type="text" class="form-control" value="${param.receiptDate}" autocomplete="off">
+					</div>
 				</div>
 			</div>
 		</div>	
@@ -81,8 +90,8 @@
 <script>
 $(document).ready(function(){
 	//设置receiver
-	if("${param.payer}"!=""){
-		$("#payerSearch").val("${param.payer}");
+	if("${param.customerCode}"!=""){
+		$("#customerCodeSearch").val("${param.customerCode}");
 	}
 	
 	//初始化chosen-select
@@ -91,6 +100,17 @@ $(document).ready(function(){
 	//查询按钮
 	$("#searchBillConfirmButton").click(function(){
 		getSelectBillModal("RECEIPT");
+	});
+	
+	//设置日期插件
+	$('#receiptDateSearch').datepicker({
+		todayBtn : "linked",
+		keyboardNavigation : true,
+		forceParse : false,
+		calendarWeeks : false,
+		autoclose : true,
+		format: 'yyyy-mm-dd',
+		language: 'zh-CN',
 	});
 });
 </script>

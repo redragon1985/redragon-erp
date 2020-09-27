@@ -58,14 +58,13 @@
 							<tr>
 								<th></th>
 								<th>付款单编码</th>
-								<th>来源</th>
-								<th>来源编码</th>
-								<th>收款方</th>
+								<th>付款类型</th>
+								<th>供应商编码</th>
+								<th>供应商</th>
 								<th>付款日期</th>
 								<th>付款金额</th>
 								<th>制单人</th>
 								<th>状态</th>
-								<th>出纳状态</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -74,14 +73,13 @@
 								<tr>
 									<td><input type="checkbox" class="i-checks" name="input[]"></td>
 									<td class="billHeadCode">${data.payHeadCode}</td>
-									<td>${requestScope.paySourceTypeMap[data.paySourceType]}</td>
-									<td>${data.paySourceHeadCode}</td>
-									<td>${requestScope.vendorMap[data.receiver]}</td>
+									<td>${requestScope.payTypeMap[data.payType]}</td>
+									<td>${data.vendorCode}</td>
+									<td>${requestScope.vendorMap[data.vendorCode]}</td>
 									<td><fmt:formatDate value="${data.payDate}" pattern="yyyy-MM-dd" /></td>
 									<td class="amount">${data.amount}</td>
 									<td>${data.staffName}-${data.departmentName}</td>
 									<td><span class="label">${requestScope.payStatusMap[data.status]}</span></td>
-									<td><span class="label">${requestScope.paidStatusMap[data.paidStatus]}</span></td>
 									
 									<td class="businessType" style="display: none;">PAY</td>
 								</tr>

@@ -19,6 +19,12 @@
 package com.erp.finance.ar.receipt.dao;
 
 import com.framework.api.DaoCRUDIF;
+import com.framework.dao.model.Pages;
+
+import java.util.List;
+
+import com.erp.finance.ar.invoice.dao.model.ArInvoiceHead;
+import com.erp.finance.ar.invoice.dao.model.ArInvoiceHeadCO;
 import com.erp.finance.ar.receipt.dao.model.ArReceiptHead;
 import com.erp.finance.ar.receipt.dao.model.ArReceiptHeadCO;
 
@@ -26,5 +32,8 @@ public interface ArReceiptHeadDao extends DaoCRUDIF<ArReceiptHead, ArReceiptHead
     
     //修改审批状态
     public abstract void updateApproveStatus(String code, String approveStatus);
+    
+    //获取未创建凭证的收款单
+    public List<ArReceiptHead> getArReceiptHeadListForNotCreateVoucher(Pages pages, ArReceiptHeadCO paramObj);
     
 }

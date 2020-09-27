@@ -19,6 +19,12 @@
 package com.erp.finance.ap.pay.dao;
 
 import com.framework.api.DaoCRUDIF;
+import com.framework.dao.model.Pages;
+
+import java.util.List;
+
+import com.erp.finance.ap.invoice.dao.model.ApInvoiceHead;
+import com.erp.finance.ap.invoice.dao.model.ApInvoiceHeadCO;
 import com.erp.finance.ap.pay.dao.model.ApPayHead;
 import com.erp.finance.ap.pay.dao.model.ApPayHeadCO;
 
@@ -26,5 +32,8 @@ public interface ApPayHeadDao extends DaoCRUDIF<ApPayHead, ApPayHeadCO>{
     
     //修改审批状态
     public abstract void updateApproveStatus(String code, String approveStatus);
+    
+    //获取未创建凭证的付款单
+    public List<ApPayHead> getApPayHeadListForNotCreateVoucher(Pages pages, ApPayHeadCO paramObj);
     
 }

@@ -24,5 +24,16 @@ public class FinVoucherHeadCO extends FinVoucherHead implements java.io.Serializ
 	
 	// serialVersionUID
 	private static final long serialVersionUID = 1L;
+	
+	//查询字段
+	private String businessType;
 
+    public String getBusinessType() {
+        return businessType;
+    }
+
+    public void setBusinessType(String businessType) {
+        this.businessType = businessType;
+    }
+	
 }

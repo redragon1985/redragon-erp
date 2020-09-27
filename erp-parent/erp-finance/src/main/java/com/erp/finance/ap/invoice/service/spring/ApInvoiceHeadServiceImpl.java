@@ -131,11 +131,6 @@ public class ApInvoiceHeadServiceImpl implements ApInvoiceHeadService {
     }
     
     @Override
-    public List<ApInvoiceHead> getApInvoiceHeadListForNotCreateVoucher(Pages pages, ApInvoiceHeadCO paramObj) {
-        return this.payHeadDao.getApInvoiceHeadListForNotCreateVoucher(pages, paramObj);
-    }
-    
-    @Override
     public void updateApproveStatus(String code, String approveStatus) {
         this.payHeadDao.updateApproveStatus(code, approveStatus);
         

@@ -45,10 +45,18 @@ import com.erp.finance.ap.invoice.dao.model.ApInvoiceHead;
 import com.erp.finance.ap.invoice.dao.model.ApInvoiceHeadCO;
 import com.erp.finance.ap.invoice.service.ApInvoiceHeadService;
 import com.erp.finance.ap.invoice.service.ApInvoiceLineService;
+import com.erp.finance.ap.pay.dao.model.ApPayHead;
+import com.erp.finance.ap.pay.dao.model.ApPayHeadCO;
+import com.erp.finance.ap.pay.service.ApPayHeadService;
+import com.erp.finance.ap.pay.service.ApPayLineService;
 import com.erp.finance.ar.invoice.dao.model.ArInvoiceHead;
 import com.erp.finance.ar.invoice.dao.model.ArInvoiceHeadCO;
 import com.erp.finance.ar.invoice.service.ArInvoiceHeadService;
 import com.erp.finance.ar.invoice.service.ArInvoiceLineService;
+import com.erp.finance.ar.receipt.dao.model.ArReceiptHead;
+import com.erp.finance.ar.receipt.dao.model.ArReceiptHeadCO;
+import com.erp.finance.ar.receipt.service.ArReceiptHeadService;
+import com.erp.finance.ar.receipt.service.ArReceiptLineService;
 import com.erp.finance.voucher.dao.data.DataBox;
 import com.erp.finance.voucher.dao.model.FinVoucherHead;
 import com.erp.finance.voucher.dao.model.FinVoucherLine;
@@ -64,6 +72,7 @@ import com.erp.hr.dao.model.HrStaffInfoRO;
 import com.erp.hr.service.HrCommonService;
 import com.erp.masterdata.common.service.MasterDataCommonService;
 import com.framework.controller.ControllerSupport;
+import com.framework.dao.data.GlobalDataBox;
 import com.framework.dao.model.Pages;
 import com.framework.util.JsonResultUtil;
 import com.framework.util.JsonUtil;
@@ -90,13 +99,13 @@ public class FinVoucherModelHeadWebController extends ControllerSupport{
     @Autowired
     private MasterDataCommonService masterDataCommonService;
     @Autowired
-    private ApInvoiceHeadService payHeadService;
+    private ApPayHeadService payHeadService;
     @Autowired
-    private ApInvoiceLineService payLineService;
+    private ApPayLineService payLineService;
     @Autowired
-    private ArInvoiceHeadService receiptHeadService;
+    private ArReceiptHeadService receiptHeadService;
     @Autowired
-    private ArInvoiceLineService receiptLineService;
+    private ArReceiptLineService receiptLineService;
     @Autowired
     private FinVoucherHeadService finVoucherHeadService;
     @Autowired
@@ -235,7 +244,7 @@ public class FinVoucherModelHeadWebController extends ControllerSupport{
      *
      */
     @RequestMapping("getSelectBillModal")
-    public String getSelectBillModal(String businessType, Pages pages, ApInvoiceHeadCO poHeadCO, ArInvoiceHeadCO receiptHeadCO, Model model) {
+    public String getSelectBillModal(String businessType, Pages pages, ApPayHeadCO payHeadCO, ArReceiptHeadCO receiptHeadCO, Model model) {
         //分页查询数据
         if(pages.getPage()==0) {
             pages.setPage(1);
@@ -243,59 +252,51 @@ public class FinVoucherModelHeadWebController extends ControllerSupport{
         
         if(businessType.equals("PAY")) {
             //分页查询数据
-            List<ApInvoiceHead> payHeadList = this.payHeadService.getApInvoiceHeadListForNotCreateVoucher(pages, poHeadCO);
+            List<ApPayHead> payHeadList = this.payHeadService.getApPayHeadListForNotCreateVoucher(pages, payHeadCO);
             //循环获取金额
             //循环设置职员和组织信息
-            for(ApInvoiceHead payHead: payHeadList) {
-                payHead.setAmount(this.payLineService.getApInvoiceAmountByHeadCode(payHead.getInvoiceHeadCode()).doubleValue());
+            for(ApPayHead payHead: payHeadList) {
                 payHead.setStaffName(this.hrCommonService.getHrStaff(payHead.getStaffCode()).getStaffName());
                 payHead.setDepartmentName(this.hrCommonService.getHrDepartment(payHead.getDepartmentCode()).getDepartmentName());
             }
             
-            //付款来源类型
-            Map paySourceTypeMap = com.erp.finance.ap.invoice.dao.data.DataBox.getApInvoiceSourceType();
+            //付款类型
+            Map payTypeMap = com.erp.finance.ap.pay.dao.data.DataBox.getApPayType();
             //状态
-            Map payStatusMap = com.erp.finance.ap.invoice.dao.data.DataBox.getApInvoiceStatusMap();
-            //获取出纳状态
-            Map paidStatusMap = com.erp.finance.ap.invoice.dao.data.DataBox.getPaidStatusMap();
+            Map payStatusMap = GlobalDataBox.getStatusMap();
             //获取供应商
             Map vendorMap = this.masterDataCommonService.getVendorMap();
             
             //页面属性设置
             model.addAttribute("payHeadList", payHeadList);
             model.addAttribute("pages", pages);
-            model.addAttribute("paySourceTypeMap", paySourceTypeMap);
+            model.addAttribute("payTypeMap", payTypeMap);
             model.addAttribute("payStatusMap", payStatusMap);
-            model.addAttribute("paidStatusMap", paidStatusMap);
             model.addAttribute("vendorMap", vendorMap);
             
             return "finVoucher/pop/selectPayBillModal";
         }else if(businessType.equals("RECEIPT")) {
           //分页查询数据
-            List<ArInvoiceHead> receiptHeadList = this.receiptHeadService.getArInvoiceHeadListForNotCreateVoucher(pages, receiptHeadCO);
+            List<ArReceiptHead> receiptHeadList = this.receiptHeadService.getArReceiptHeadListForNotCreateVoucher(pages, receiptHeadCO);
             //循环获取金额
             //循环设置职员和组织信息
-            for(ArInvoiceHead receiptHead: receiptHeadList) {
-                receiptHead.setAmount(this.receiptLineService.getArInvoiceAmountByHeadCode(receiptHead.getInvoiceHeadCode()).doubleValue());
+            for(ArReceiptHead receiptHead: receiptHeadList) {
                 receiptHead.setStaffName(this.hrCommonService.getHrStaff(receiptHead.getStaffCode()).getStaffName());
                 receiptHead.setDepartmentName(this.hrCommonService.getHrDepartment(receiptHead.getDepartmentCode()).getDepartmentName());
             }
             
             //收款来源类型
-            Map receiptSourceTypeMap = com.erp.finance.ar.invoice.dao.data.DataBox.getArInvoiceSourceType();
+            Map receiptTypeMap = com.erp.finance.ar.receipt.dao.data.DataBox.getArReceiptType();
             //状态
-            Map receiptStatusMap = com.erp.finance.ar.invoice.dao.data.DataBox.getArInvoiceStatusMap();
-            //获取出纳状态
-            Map receivedStatusMap = com.erp.finance.ar.invoice.dao.data.DataBox.getReceivedStatusMap();
+            Map receiptStatusMap = GlobalDataBox.getStatusMap();
             //获取客户
             Map customerMap = this.masterDataCommonService.getCustomerMap();
             
             //页面属性设置
             model.addAttribute("receiptHeadList", receiptHeadList);
             model.addAttribute("pages", pages);
-            model.addAttribute("receiptSourceTypeMap", receiptSourceTypeMap);
+            model.addAttribute("receiptTypeMap", receiptTypeMap);
             model.addAttribute("receiptStatusMap", receiptStatusMap);
-            model.addAttribute("receivedStatusMap", receivedStatusMap);
             model.addAttribute("customerMap", customerMap);
             
             return "finVoucher/pop/selectReceiptBillModal";
