@@ -1,10 +1,27 @@
-# 赤龙ERP
+# 赤龙简介
 
-旨在为小微企业提供一款**免费开源**、**业务闭环**、**灵活稳定**的ERP管理系统
+###  将【赤龙ERP】打造成开源ERP中的“领跑者”
 
-我们 **承诺** 【赤龙ERP】软件 **永久免费** ，请帮助我们 **点亮星标** ，您的支持是我们前进的动力！
+#### 系统特色：
+
+    软件永久免费、持续迭代
+    轻量设计、易于上手
+    业务、财务流程闭环
+    快速部署、便捷的客户化
+    不断发布的衍生产品
+
+# 赤龙声明
+
+【赤龙ERP】软件将 **永久免费** ，并承诺**不断迭代**产品及衍生产品，**点亮star** ，是您对我们最大的支持！
 
 `未经开发者授权，本产品及衍生产品不得用于任何形式的商业用途`
+
+# 演示地址
+[https://www.redragon-erp.com/erp](https://www.redragon-erp.com/erp "https://www.redragon-erp.com/erp")
+
+`由于服务器资源有限，测试账号需联系开发者，请谅解！`
+
+![赤龙ERP开发者](http://www.redragon-erp.com/images/redragon.png "赤龙ERP开发者")
 
 ## 主要功能
 
@@ -12,13 +29,16 @@
 ###### 整合客商、物料数据，实现更加自动化的管控
 
 #### - 入库/出库管理
-###### 与订单集成，实现对库存的管控，以及仓库的盘点
+###### 与订单集成，实现对库存的实时管理，以及仓库的盘点
 
 #### - 发票管理
 ###### 完成采购销售开票，与订单、出入库实现三单匹配
 
 #### - 付款/收款单管理
 ###### 完成与发票的核销，实现一体化业务流程
+
+#### - 自动分录
+###### 实现业务数据与财务数据的无缝连接
 
 #### - 凭证管理
 ###### 实现自动生成、模板生成及手工处理的凭证管理
@@ -36,49 +56,51 @@
 ###### 提供更灵活的系统配置解决方案
 
 #### - 单点登录
-###### 集成成熟的解决方案，保证登陆安全和高效
-
-## 演示地址
-[https://www.redragon-erp.com/erp](https://www.redragon-erp.com/erp "https://www.redragon-erp.com/erp")
-
-**账号：redragon**
-
-**密码：123**
+###### 集成成熟的SSO解决方案，保证登陆安全和高效
 
 ## 产品展示
 
+主界面
 ![赤龙ERP](https://www.redragon-erp.com/images/1.jpg "赤龙ERP")
 
 ------------
 
+权限模块
 ![赤龙ERP](https://www.redragon-erp.com/images/2.jpg "赤龙ERP")
 
 ------------
 
+职员与组织
 ![赤龙ERP](https://www.redragon-erp.com/images/3.jpg "赤龙ERP")
 
 ------------
 
+科目结构
 ![赤龙ERP](https://www.redragon-erp.com/images/4.jpg "赤龙ERP")
 
 ------------
 
+库存管理
 ![赤龙ERP](https://www.redragon-erp.com/images/5.jpg "赤龙ERP")
 
 ------------
 
+库存盘点
 ![赤龙ERP](https://www.redragon-erp.com/images/6.jpg "赤龙ERP")
 
 ------------
 
+订单管理
 ![赤龙ERP](https://www.redragon-erp.com/images/7.jpg "赤龙ERP")
 
 ------------
 
+出入库管理
 ![赤龙ERP](https://www.redragon-erp.com/images/8.jpg "赤龙ERP")
 
 ------------
 
+凭证管理
 ![赤龙ERP](https://www.redragon-erp.com/images/9.jpg "赤龙ERP")
 
 ------------
@@ -123,7 +145,7 @@
 2. 优化maven jar包依赖关系
 3. 软件分发时同步发布war包
 
-###### 2020年10月 v0.7（已上线）
+###### 2020年9月 v0.7（已上线）
 
 1. 增加应收发票管理
 2. 增加应付发票管理
@@ -133,13 +155,12 @@
 
 ###### 2020年10月 v0.8（开发中）
 
-1. 增加财务分录功能
-2. 增加记账凭证生成方式
+1. 增加会计分录功能
+2. 增加凭证的导出功能，用于与第三方财务系统集成
 3. 自动生成付款、收款、转账凭证
 
 ## 交流与分享
 
 > 扫描二维码与开发者沟通交流
 
-![赤龙ERP交流群](http://123.57.68.109/images/redragon.png "赤龙ERP交流群")
-
+![赤龙ERP开发者](http://www.redragon-erp.com/images/redragon.png "赤龙ERP开发者")

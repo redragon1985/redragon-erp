@@ -2,7 +2,7 @@
 
 ##### 1. 安装必须的组件，包括：JDK（推荐1.8及以上）、MYSQL（推荐5.7及以上）、Tomcat（推荐8.5及以上）、Redis（推荐3.0及以上）
 
-##### 2. 构建表结构，找到目录/build/sql，执行所有SQL文件，
+##### 2. 构建表结构，找到目录/build/sql，执行所有SQL文件；初始化数据，找到目录/build/data，执行SQL文件
 
 ##### 3. 配置ERP应用，进入子项目erp-springboot，修改相关配置文件
 
@@ -77,5 +77,5 @@
 
 > 如对上述配置有任何疑问，可直接与开发者交流
 
-![赤龙ERP交流群](https://raw.githubusercontent.com/redragon1985/redragon-erp/master/docs/images/redragon.png "赤龙ERP交流群")
+![赤龙ERP开发者](http://www.redragon-erp.com/images/redragon.png "赤龙ERP开发者")
 
