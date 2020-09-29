@@ -18,35 +18,14 @@ USE `erp`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `md_material`
+-- Dumping data for table `md_material`
 --
 
-DROP TABLE IF EXISTS `md_material`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
-CREATE TABLE `md_material` (
-  `material_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
-  `material_code` varchar(45) NOT NULL COMMENT '物料编码',
-  `material_name` varchar(45) NOT NULL COMMENT '物料名称',
-  `material_type` varchar(45) NOT NULL COMMENT '物料或事项（MATERIAL、MATTER）',
-  `category_code` varchar(45) NOT NULL COMMENT '类别编码',
-  `material_unit` varchar(45) DEFAULT NULL COMMENT '物料单位',
-  `valid_day` int(11) DEFAULT NULL COMMENT '效期（天数）',
-  `standard` varchar(45) DEFAULT NULL COMMENT '规格',
-  `standard_unit` varchar(45) DEFAULT NULL COMMENT '规格单位',
-  `pack_standard` varchar(45) DEFAULT NULL COMMENT '包装规格',
-  `status` char(1) NOT NULL DEFAULT 'Y' COMMENT '状态',
-  `approve_status` varchar(45) NOT NULL DEFAULT 'UNSUBMIT' COMMENT '审批状态（未提交UNSUBMIT、已提交SUBMIT、已审批APPROVE、已驳回REJECT）',
-  `created_date` datetime NOT NULL COMMENT '创建时间',
-  `created_by` varchar(45) NOT NULL COMMENT '创建人',
-  `last_updated_date` datetime DEFAULT NULL COMMENT '最后修改日期',
-  `last_updated_by` varchar(45) DEFAULT NULL COMMENT '最后修改人',
-  `org_code` varchar(10) NOT NULL COMMENT '组织机构',
-  PRIMARY KEY (`material_id`),
-  UNIQUE KEY `material_code_UNIQUE` (`material_code`),
-  UNIQUE KEY `material_name_UNIQUE` (`material_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='主数据物料表';
-/*!40101 SET character_set_client = @saved_cs_client */;
+LOCK TABLES `md_material` WRITE;
+/*!40000 ALTER TABLE `md_material` DISABLE KEYS */;
+INSERT INTO `md_material` VALUES (1,'M001','笔记本','MATERIAL','MC121-1','AN',NULL,'IBM X1','AN','','Y','UNSUBMIT','2020-07-14 23:36:12','dongbin','2020-08-02 22:52:26','redragon','erp.com'),(3,'Material-001','软件运维服务','MATTER','MC221','AN',NULL,'1','AN','','Y','UNSUBMIT','2020-07-31 23:59:46','dongbin','2020-09-04 22:57:17','redragon','erp.com'),(4,'Matter-001','软件二次开发','MATTER','MC211',NULL,NULL,'',NULL,'','Y','REJECT','2020-08-02 23:36:21','redragon',NULL,NULL,'erp.com'),(5,'Material-002','IBM服务器','MATERIAL','MC122-1','AN',NULL,'IBX最新型号','AN','','Y','SUBMIT','2020-08-02 23:44:35','redragon','2020-08-02 23:47:14','redragon','erp.com'),(6,'Material-003','赤龙ERP','MATERIAL','MC123-1','AN',NULL,'基础产品','AN','电子版','Y','UNSUBMIT','2020-08-26 21:17:17','redragon',NULL,NULL,'erp.com');
+/*!40000 ALTER TABLE `md_material` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -57,4 +36,4 @@ CREATE TABLE `md_material` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-09-20 14:04:34
+-- Dump completed on 2020-09-29 20:58:14

@@ -18,30 +18,14 @@ USE `erp`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `inv_stock_check_line`
+-- Dumping data for table `inv_stock_check_line`
 --
 
-DROP TABLE IF EXISTS `inv_stock_check_line`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
-CREATE TABLE `inv_stock_check_line` (
-  `check_line_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
-  `check_line_code` varchar(45) NOT NULL COMMENT '盘点行编码',
-  `check_head_code` varchar(45) NOT NULL COMMENT '盘点头编码',
-  `material_code` varchar(45) NOT NULL COMMENT '物料编码',
-  `check_before_quantity` double NOT NULL COMMENT '盘点前数量',
-  `check_after_quantity` double NOT NULL COMMENT '盘点后数量',
-  `memo` varchar(200) DEFAULT NULL COMMENT '备注',
-  `status` varchar(45) NOT NULL DEFAULT 'Y' COMMENT '状态',
-  `created_date` datetime NOT NULL COMMENT '创建时间',
-  `created_by` varchar(45) NOT NULL COMMENT '创建人',
-  `last_updated_date` datetime DEFAULT NULL COMMENT '最后修改时间',
-  `last_updated_by` varchar(45) DEFAULT NULL COMMENT '最后修改人',
-  `org_code` varchar(10) NOT NULL COMMENT '组织机构',
-  PRIMARY KEY (`check_line_id`),
-  UNIQUE KEY `check_line_code_UNIQUE` (`check_line_code`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='库存盘点表行';
-/*!40101 SET character_set_client = @saved_cs_client */;
+LOCK TABLES `inv_stock_check_line` WRITE;
+/*!40000 ALTER TABLE `inv_stock_check_line` DISABLE KEYS */;
+INSERT INTO `inv_stock_check_line` VALUES (16,'459263763488362496','check459263763475779584','M001',98,90,'11','Y','2020-08-28 18:03:03','redragon',NULL,NULL,'erp.com'),(17,'459263763488362497','check459263763475779584','Material-002',50,60,'22','Y','2020-08-28 18:03:03','redragon',NULL,NULL,'erp.com'),(18,'459263763488362498','check459263763475779584','Material-003',10000,10000,'33','Y','2020-08-28 18:03:03','redragon',NULL,NULL,'erp.com'),(19,'470872472803004416','check470872472794615808','M001',90,60,'','Y','2020-09-29 18:50:10','redragon',NULL,NULL,'erp.com'),(20,'470872472803004417','check470872472794615808','Material-002',60,90,'','Y','2020-09-29 18:50:10','redragon',NULL,NULL,'erp.com'),(21,'470872472803004418','check470872472794615808','Material-003',10001,10001,'','Y','2020-09-29 18:50:10','redragon',NULL,NULL,'erp.com'),(22,'470873754318065664','check470873610067562496','M001',90,90,'','Y','2020-09-29 18:51:03','redragon',NULL,NULL,'erp.com'),(23,'470873757132443648','check470873610067562496','Material-002',60,60,'','Y','2020-09-29 18:51:03','redragon',NULL,NULL,'erp.com'),(24,'470873759925850112','check470873610067562496','Material-003',10001,10000,'','Y','2020-09-29 18:51:03','redragon',NULL,NULL,'erp.com');
+/*!40000 ALTER TABLE `inv_stock_check_line` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -52,4 +36,4 @@ CREATE TABLE `inv_stock_check_line` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-09-20 14:04:53
+-- Dump completed on 2020-09-29 20:58:35

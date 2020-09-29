@@ -18,35 +18,14 @@ USE `erp`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `ar_receipt_head`
+-- Dumping data for table `ar_receipt_head`
 --
 
-DROP TABLE IF EXISTS `ar_receipt_head`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
-CREATE TABLE `ar_receipt_head` (
-  `receipt_head_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '收款头id',
-  `receipt_head_code` varchar(45) NOT NULL COMMENT '收款头code',
-  `receipt_type` varchar(45) NOT NULL COMMENT '收款类型',
-  `customer_code` varchar(45) NOT NULL COMMENT '客户编码',
-  `currency_code` varchar(45) NOT NULL COMMENT '币种',
-  `amount` decimal(10,2) NOT NULL COMMENT '收款金额',
-  `receipt_date` date NOT NULL COMMENT '收款日期',
-  `memo` varchar(200) DEFAULT NULL COMMENT '备注',
-  `version` int(11) NOT NULL DEFAULT '1' COMMENT '版本',
-  `status` varchar(10) NOT NULL DEFAULT 'NEW' COMMENT '状态（新建NEW，确认CONFIRM，取消CANCEL）',
-  `approve_status` varchar(10) NOT NULL DEFAULT 'UNSUBMIT' COMMENT '审批状态（未提交UNSUBMIT、已提交SUBMIT、已审批APPROVE、已驳回REJECT）',
-  `staff_code` varchar(45) NOT NULL COMMENT '制单人',
-  `department_code` varchar(45) NOT NULL COMMENT '制单部门',
-  `created_date` datetime NOT NULL COMMENT '创建时间',
-  `created_by` varchar(45) NOT NULL COMMENT '创建人',
-  `last_updated_date` datetime DEFAULT NULL COMMENT '最后修改日期',
-  `last_updated_by` varchar(45) DEFAULT NULL COMMENT '最后修改人',
-  `org_code` varchar(10) NOT NULL COMMENT '组织机构',
-  PRIMARY KEY (`receipt_head_id`),
-  UNIQUE KEY `receipt_head_code_UNIQUE` (`receipt_head_code`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='收款头表';
-/*!40101 SET character_set_client = @saved_cs_client */;
+LOCK TABLES `ar_receipt_head` WRITE;
+/*!40000 ALTER TABLE `ar_receipt_head` DISABLE KEYS */;
+INSERT INTO `ar_receipt_head` VALUES (3,'receipt-0001','MONEY','CUSTOMER-001','rmb',8500.00,'2020-09-25','',1,'NEW','UNSUBMIT','STAFF-001','java','2020-09-25 22:32:02','redragon','2020-09-25 22:32:18','redragon','erp.com');
+/*!40000 ALTER TABLE `ar_receipt_head` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -57,4 +36,4 @@ CREATE TABLE `ar_receipt_head` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-09-20 14:04:39
+-- Dump completed on 2020-09-29 20:58:20

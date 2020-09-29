@@ -18,36 +18,14 @@ USE `erp`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `inv_stock`
+-- Dumping data for table `inv_stock`
 --
 
-DROP TABLE IF EXISTS `inv_stock`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
-CREATE TABLE `inv_stock` (
-  `stock_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
-  `stock_code` varchar(45) NOT NULL COMMENT '库存记录编码',
-  `warehouse_code` varchar(45) NOT NULL COMMENT '仓库编码',
-  `material_code` varchar(45) NOT NULL COMMENT '物料编码',
-  `stock_number` double NOT NULL COMMENT '库存数量',
-  `retain_flag` char(1) NOT NULL DEFAULT 'N' COMMENT '保留标识（用于出库时的库存保留判定）',
-  `bill_type` varchar(45) DEFAULT NULL COMMENT '关联单据类型（入库INPUT、出库OUTPUT）',
-  `bill_head_code` varchar(45) DEFAULT NULL COMMENT '关联单据头编码（入库、出库）',
-  `bill_line_code` varchar(45) DEFAULT NULL COMMENT '关联单据行编码（入库、出库）',
-  `memo` varchar(200) DEFAULT NULL COMMENT '备注',
-  `status` char(1) NOT NULL DEFAULT 'Y' COMMENT '状态',
-  `staff_code` varchar(45) NOT NULL COMMENT '职员编码',
-  `department_code` varchar(45) NOT NULL COMMENT '部门编码',
-  `created_date` datetime NOT NULL COMMENT '创建时间',
-  `created_by` varchar(45) NOT NULL COMMENT '创建人',
-  `last_updated_date` datetime DEFAULT NULL COMMENT '最后修改时间',
-  `last_updated_by` varchar(45) DEFAULT NULL COMMENT '最后修改人',
-  `org_code` varchar(10) NOT NULL COMMENT '组织机构',
-  PRIMARY KEY (`stock_id`),
-  UNIQUE KEY `stock_code_UNIQUE` (`stock_code`),
-  UNIQUE KEY `UK_inv_stock_bill` (`material_code`,`bill_type`,`bill_head_code`,`bill_line_code`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='库存表';
-/*!40101 SET character_set_client = @saved_cs_client */;
+LOCK TABLES `inv_stock` WRITE;
+/*!40000 ALTER TABLE `inv_stock` DISABLE KEYS */;
+INSERT INTO `inv_stock` VALUES (1,'455667810432897024','warehouse-001','M001',100,'N',NULL,NULL,NULL,'','Y','STAFF-001','java','2020-08-18 19:48:02','redragon',NULL,NULL,'erp.com'),(7,'455692439159492608','warehouse-001','Material-002',50,'N',NULL,NULL,NULL,'服务器','Y','STAFF-001','java','2020-08-18 21:25:54','redragon',NULL,NULL,'erp.com'),(17,'457897424462991360','warehouse-001','M001',-2,'Y','OUTPUT','output-001','457897424169390080','出库单自动创建','Y','STAFF-001','java','2020-08-24 23:27:43','redragon',NULL,NULL,'erp.com'),(20,'458590351220723712','warehouse-001','Material-003',10000,'N',NULL,NULL,NULL,'库存初始化，基础版本，限量发售','Y','STAFF-001','java','2020-08-26 21:21:10','redragon',NULL,NULL,'erp.com'),(23,'459336978747281408','warehouse-001','M001',-8,'N','CHECK','check459263763475779584','459263763488362496','库存盘点[盘亏]自动创建','Y','STAFF-001','java','2020-08-28 22:48:00','redragon',NULL,NULL,'erp.com'),(24,'459336979380621312','warehouse-001','Material-002',10,'N','CHECK','check459263763475779584','459263763488362497','库存盘点[盘盈]自动创建','Y','STAFF-001','java','2020-08-28 22:48:00','redragon',NULL,NULL,'erp.com'),(29,'470131792744992768','warehouse-001','Material-003',1,'N','INPUT','input-003','464007507156586496','入库单自动创建','Y','STAFF-001','java','2020-09-27 17:42:44','redragon',NULL,NULL,'erp.com');
+/*!40000 ALTER TABLE `inv_stock` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -58,4 +36,4 @@ CREATE TABLE `inv_stock` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-09-20 14:04:40
+-- Dump completed on 2020-09-29 20:58:20

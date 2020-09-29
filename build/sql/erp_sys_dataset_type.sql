@@ -18,27 +18,14 @@ USE `erp`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `sys_dataset_type`
+-- Dumping data for table `sys_dataset_type`
 --
 
-DROP TABLE IF EXISTS `sys_dataset_type`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
-CREATE TABLE `sys_dataset_type` (
-  `dataset_type_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
-  `dataset_type_code` varchar(45) NOT NULL COMMENT '值集类型编码',
-  `dataset_type_name` varchar(45) NOT NULL COMMENT '值集类型名称',
-  `status` char(1) NOT NULL DEFAULT 'Y' COMMENT '状态',
-  `created_date` datetime NOT NULL COMMENT '创建时间',
-  `created_by` varchar(45) NOT NULL COMMENT '创建人',
-  `last_updated_date` datetime DEFAULT NULL COMMENT '最后修改时间',
-  `last_updated_by` varchar(45) DEFAULT NULL COMMENT '最后修改人',
-  `org_code` varchar(10) NOT NULL COMMENT '组织机构',
-  PRIMARY KEY (`dataset_type_id`),
-  UNIQUE KEY `type_code_UNIQUE` (`dataset_type_code`),
-  UNIQUE KEY `type_name_UNIQUE` (`dataset_type_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='系统数据字典类型';
-/*!40101 SET character_set_client = @saved_cs_client */;
+LOCK TABLES `sys_dataset_type` WRITE;
+/*!40000 ALTER TABLE `sys_dataset_type` DISABLE KEYS */;
+INSERT INTO `sys_dataset_type` VALUES (2,'city','城市','Y','2020-07-03 16:16:11','dongbin','2020-07-13 23:24:21','dongbin','erp.com'),(3,'currency','币种','Y','2020-07-03 16:17:36','dongbin',NULL,NULL,'erp.com'),(6,'country','国家','Y','2020-07-13 22:49:10','dongbin',NULL,NULL,'erp.com'),(7,'bank','银行','Y','2020-07-13 23:24:33','dongbin',NULL,NULL,'erp.com'),(9,'material_unit','物料单位','Y','2020-07-14 23:25:41','dongbin',NULL,NULL,'erp.com'),(10,'project_type','项目类型','Y','2020-07-15 13:23:31','dongbin',NULL,NULL,'erp.com'),(11,'po_type','采购订单类型','Y','2020-07-15 15:34:49','dongbin',NULL,NULL,'erp.com'),(12,'tax_type','计税种类','Y','2020-07-15 15:41:10','dongbin',NULL,NULL,'erp.com'),(13,'so_type','销售订单类型','Y','2020-07-17 22:33:49','dongbin',NULL,NULL,'erp.com'),(14,'pay_mode','付款方式','Y','2020-07-19 16:12:53','dongbin',NULL,NULL,'erp.com'),(15,'voucher_type','凭证字','Y','2020-07-25 17:19:22','dongbin',NULL,NULL,'erp.com');
+/*!40000 ALTER TABLE `sys_dataset_type` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -49,4 +36,4 @@ CREATE TABLE `sys_dataset_type` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-09-20 14:04:38
+-- Dump completed on 2020-09-29 20:58:18

@@ -18,34 +18,14 @@ USE `erp`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `hr_staff`
+-- Dumping data for table `hr_staff`
 --
 
-DROP TABLE IF EXISTS `hr_staff`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
-CREATE TABLE `hr_staff` (
-  `staff_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
-  `staff_code` varchar(45) NOT NULL COMMENT '职员编码',
-  `staff_number` varchar(45) NOT NULL COMMENT '职员工号',
-  `staff_name` varchar(45) NOT NULL COMMENT '职员名称',
-  `staff_sex` varchar(10) DEFAULT NULL COMMENT '性别（MALE、FEMALE）',
-  `staff_entry_date` date DEFAULT NULL COMMENT '入职日期',
-  `staff_status` varchar(10) NOT NULL DEFAULT 'WORK' COMMENT '职员状态（WORK、LEAVE）',
-  `staff_mobile` varchar(45) DEFAULT NULL COMMENT '手机',
-  `staff_email` varchar(45) DEFAULT NULL COMMENT '邮箱',
-  `username` varchar(45) NOT NULL COMMENT '关联的用户名',
-  `created_date` datetime NOT NULL COMMENT '创建时间',
-  `created_by` varchar(45) NOT NULL COMMENT '创建人',
-  `last_updated_date` datetime DEFAULT NULL COMMENT '最后修改时间',
-  `last_updated_by` varchar(45) DEFAULT NULL COMMENT '最后修改人',
-  `org_code` varchar(10) NOT NULL COMMENT '组织机构',
-  PRIMARY KEY (`staff_id`),
-  UNIQUE KEY `staff_code_UNIQUE` (`staff_code`),
-  UNIQUE KEY `staff_number_UNIQUE` (`staff_number`),
-  UNIQUE KEY `UK_hr_staff_username` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='人力职员表';
-/*!40101 SET character_set_client = @saved_cs_client */;
+LOCK TABLES `hr_staff` WRITE;
+/*!40000 ALTER TABLE `hr_staff` DISABLE KEYS */;
+INSERT INTO `hr_staff` VALUES (1,'RD001','RD001','李四','MALE','2020-07-02','WORK','','','dongbin','2020-07-04 22:17:10','dongbin','2020-08-04 14:59:42','redragon','erp.com'),(3,'RD000','RD000','王五','MALE','2020-07-04','WORK','130111111','aaa@163.com','admin','2020-07-04 23:01:51','dongbin','2020-08-01 15:37:10','redragon','erp.com'),(4,'STAFF-001','STAFF-001','张三','MALE',NULL,'WORK','','','redragon','2020-08-01 15:25:51','redragon',NULL,NULL,'erp.com');
+/*!40000 ALTER TABLE `hr_staff` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -56,4 +36,4 @@ CREATE TABLE `hr_staff` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-09-20 14:04:51
+-- Dump completed on 2020-09-29 20:58:33

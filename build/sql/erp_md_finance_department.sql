@@ -18,33 +18,13 @@ USE `erp`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `md_finance_department`
+-- Dumping data for table `md_finance_department`
 --
 
-DROP TABLE IF EXISTS `md_finance_department`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
-CREATE TABLE `md_finance_department` (
-  `fi_department_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
-  `fi_department_code` varchar(45) NOT NULL COMMENT '部门编码',
-  `fi_department_name` varchar(45) NOT NULL COMMENT '部门名称',
-  `parent_fi_department_code` varchar(45) DEFAULT NULL COMMENT '父部门编码',
-  `segment_code` varchar(200) NOT NULL COMMENT '部门段值编码',
-  `segment_desc` varchar(200) NOT NULL COMMENT '部门段值描述',
-  `sort` int(11) NOT NULL DEFAULT '0' COMMENT '排序',
-  `status` char(1) NOT NULL DEFAULT 'Y' COMMENT '状态',
-  `created_date` datetime NOT NULL COMMENT '创建时间',
-  `created_by` varchar(45) NOT NULL COMMENT '创建人',
-  `last_updated_date` datetime DEFAULT NULL COMMENT '最后修改时间',
-  `last_updated_by` varchar(45) DEFAULT NULL COMMENT '最后修改人',
-  `org_code` varchar(10) NOT NULL COMMENT '组织机构',
-  PRIMARY KEY (`fi_department_id`),
-  UNIQUE KEY `fi_department_code_UNIQUE` (`fi_department_code`),
-  UNIQUE KEY `fi_department_name_UNIQUE` (`fi_department_name`),
-  UNIQUE KEY `segment_code_UNIQUE` (`segment_code`),
-  UNIQUE KEY `segment_desc_UNIQUE` (`segment_desc`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='主数据财务组织机构树';
-/*!40101 SET character_set_client = @saved_cs_client */;
+LOCK TABLES `md_finance_department` WRITE;
+/*!40000 ALTER TABLE `md_finance_department` DISABLE KEYS */;
+/*!40000 ALTER TABLE `md_finance_department` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -55,4 +35,4 @@ CREATE TABLE `md_finance_department` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-09-20 14:04:47
+-- Dump completed on 2020-09-29 20:58:28

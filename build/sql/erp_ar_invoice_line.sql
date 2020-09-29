@@ -18,34 +18,14 @@ USE `erp`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `ar_invoice_line`
+-- Dumping data for table `ar_invoice_line`
 --
 
-DROP TABLE IF EXISTS `ar_invoice_line`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
-CREATE TABLE `ar_invoice_line` (
-  `invoice_line_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '发票行id',
-  `invoice_line_code` varchar(45) NOT NULL COMMENT '发票行编码',
-  `invoice_head_code` varchar(45) NOT NULL COMMENT '发票头编码',
-  `invoice_source_line_code` varchar(45) NOT NULL COMMENT '发票来源行编码',
-  `quantity` double NOT NULL COMMENT '发票行数量',
-  `amount` decimal(10,2) NOT NULL COMMENT '行金额',
-  `tax_rate` double NOT NULL COMMENT '税率（带小数）',
-  `tax_amount` decimal(10,2) NOT NULL COMMENT '税额',
-  `memo` varchar(200) DEFAULT NULL COMMENT '摘要',
-  `version` int(11) NOT NULL DEFAULT '1' COMMENT '版本',
-  `status` char(1) NOT NULL DEFAULT 'Y' COMMENT '状态',
-  `created_date` datetime NOT NULL COMMENT '创建时间',
-  `created_by` varchar(45) NOT NULL COMMENT '创建人',
-  `last_updated_date` datetime DEFAULT NULL COMMENT '最后修改时间',
-  `last_updated_by` varchar(45) DEFAULT NULL COMMENT '最后修改人',
-  `org_code` varchar(10) NOT NULL COMMENT '组织机构',
-  PRIMARY KEY (`invoice_line_id`),
-  UNIQUE KEY `receipt_line_code_UNIQUE` (`invoice_line_code`),
-  KEY `IX_receipt_line_receipt_head_code` (`invoice_head_code`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='销售发票行表';
-/*!40101 SET character_set_client = @saved_cs_client */;
+LOCK TABLES `ar_invoice_line` WRITE;
+/*!40000 ALTER TABLE `ar_invoice_line` DISABLE KEYS */;
+INSERT INTO `ar_invoice_line` VALUES (6,'464012464417067008','RECEIPT-001','444118220411949056',5,50000.00,0.17,8500.00,'开票',1,'Y','2020-09-10 20:26:42','redragon',NULL,NULL,'erp.com'),(7,'464711162738429952','RECEIPT-002','450964139417718784',2,20000.00,0.17,3400.00,'111',1,'Y','2020-09-12 18:43:05','redragon','2020-09-12 18:43:10','redragon','erp.com');
+/*!40000 ALTER TABLE `ar_invoice_line` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -56,4 +36,4 @@ CREATE TABLE `ar_invoice_line` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-09-20 14:04:46
+-- Dump completed on 2020-09-29 20:58:27

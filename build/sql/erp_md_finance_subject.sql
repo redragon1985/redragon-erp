@@ -18,33 +18,14 @@ USE `erp`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `md_finance_subject`
+-- Dumping data for table `md_finance_subject`
 --
 
-DROP TABLE IF EXISTS `md_finance_subject`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
-CREATE TABLE `md_finance_subject` (
-  `subject_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
-  `subject_code` varchar(45) NOT NULL COMMENT '科目编码',
-  `subject_name` varchar(45) NOT NULL COMMENT '科目名称',
-  `parent_subject_code` varchar(45) DEFAULT NULL COMMENT '父科目编码',
-  `segment_code` varchar(200) NOT NULL COMMENT '科目段值编码',
-  `segment_desc` varchar(200) NOT NULL COMMENT '科目段值描述',
-  `sort` int(11) NOT NULL DEFAULT '0' COMMENT '排序',
-  `status` char(1) NOT NULL DEFAULT 'Y' COMMENT '状态',
-  `created_date` datetime NOT NULL COMMENT '创建时间',
-  `created_by` varchar(45) NOT NULL COMMENT '创建人',
-  `last_updated_date` datetime DEFAULT NULL COMMENT '最后修改时间',
-  `last_updated_by` varchar(45) DEFAULT NULL COMMENT '最后修改人',
-  `org_code` varchar(10) NOT NULL COMMENT '组织机构',
-  PRIMARY KEY (`subject_id`),
-  UNIQUE KEY `subject_code_UNIQUE` (`subject_code`),
-  UNIQUE KEY `subject_name_UNIQUE` (`subject_name`),
-  UNIQUE KEY `segment_code_UNIQUE` (`segment_code`),
-  UNIQUE KEY `segment_desc_UNIQUE` (`segment_desc`)
-) ENGINE=InnoDB AUTO_INCREMENT=57 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='主数据财务科目表';
-/*!40101 SET character_set_client = @saved_cs_client */;
+LOCK TABLES `md_finance_subject` WRITE;
+/*!40000 ALTER TABLE `md_finance_subject` DISABLE KEYS */;
+INSERT INTO `md_finance_subject` VALUES (2,'0','根科目',NULL,'0','根科目',0,'Y','2020-07-27 17:44:20','dongbin',NULL,NULL,'erp.com'),(5,'10','资产类','0','0_1','根科目_资产类',0,'Y','2020-07-27 17:55:17','dongbin',NULL,NULL,'erp.com'),(6,'20','负债类','0','0_2','根科目_负债类',0,'Y','2020-07-27 17:55:27','dongbin',NULL,NULL,'erp.com'),(7,'30','共同类','0','0_3','根科目_共同类',0,'Y','2020-07-27 17:56:07','dongbin',NULL,NULL,'erp.com'),(8,'40','所有者权益类','0','0_4','根科目_所有者权益类',0,'Y','2020-07-27 17:56:50','dongbin',NULL,NULL,'erp.com'),(9,'50','成本类','0','0_5','根科目_成本类',0,'Y','2020-07-27 18:03:00','dongbin',NULL,NULL,'erp.com'),(11,'60','损益类','0','0_6','根科目_损益类',0,'Y','2020-07-27 18:03:20','dongbin',NULL,NULL,'erp.com'),(12,'1001','库存现金','1','0_1_1001','根科目_资产类_库存现金',0,'Y','2020-07-27 18:05:38','dongbin',NULL,NULL,'erp.com'),(13,'1002','银行存款','1','0_1_1002','根科目_资产类_银行存款',0,'Y','2020-07-27 18:05:50','dongbin',NULL,NULL,'erp.com'),(14,'1122','应收账款','1','0_1_1122','根科目_资产类_应收账款',0,'Y','2020-07-27 18:06:09','dongbin',NULL,NULL,'erp.com'),(16,'2202','应付账款','2','0_2_2202','根科目_负债类_应付账款',0,'Y','2020-07-27 18:06:57','dongbin',NULL,NULL,'erp.com'),(17,'5201','劳务成本','5','0_5_5201','根科目_成本类_劳务成本',0,'Y','2020-07-27 18:07:47','dongbin',NULL,NULL,'erp.com'),(19,'6401','主营业务成本','6','0_6_6401','根科目_损益类_主营业务成本',0,'Y','2020-07-27 18:08:34','dongbin',NULL,NULL,'erp.com'),(20,'6801','所得税','6','0_6_6801','根科目_损益类_所得税',0,'Y','2020-07-27 18:08:59','dongbin',NULL,NULL,'erp.com'),(22,'1121','应收票据','10','0_1_1121','根科目_资产类_应收票据',0,'Y','2020-08-05 17:07:56','redragon',NULL,NULL,'erp.com'),(24,'1123','预付帐款','10','0_1_1123','根科目_资产类_预付帐款',0,'Y','2020-08-05 17:08:23','redragon',NULL,NULL,'erp.com'),(26,'1231','其它应收款','10','0_1_1231','根科目_资产类_其它应收款',0,'Y','2020-08-05 17:08:58','redragon',NULL,NULL,'erp.com'),(27,'1401','材料采购','10','0_1_1401','根科目_资产类_材料采购',0,'Y','2020-08-05 17:09:20','redragon',NULL,NULL,'erp.com'),(28,'1403','原材料','10','0_1_1403','根科目_资产类_原材料',0,'Y','2020-08-05 17:09:37','redragon',NULL,NULL,'erp.com'),(29,'1406','库存商品','10','0_1_1406','根科目_资产类_库存商品',0,'Y','2020-08-05 17:09:56','redragon',NULL,NULL,'erp.com'),(30,'1601','固定资产','10','0_1_1601','根科目_资产类_固定资产',0,'Y','2020-08-05 17:10:33','redragon',NULL,NULL,'erp.com'),(31,'1602','累计折旧','10','0_1_1602','根科目_资产类_累计折旧',0,'Y','2020-08-05 17:10:44','redragon',NULL,NULL,'erp.com'),(32,'2001','短期借款','20','0_2_2001','根科目_负债类_短期借款',0,'Y','2020-08-05 17:11:30','redragon',NULL,NULL,'erp.com'),(33,'2201','应付票据','20','0_2_2201','根科目_负债类_应付票据',0,'Y','2020-08-05 17:11:57','redragon',NULL,NULL,'erp.com'),(34,'2205','预收帐款','20','0_2_2205','根科目_负债类_预收帐款',0,'Y','2020-08-05 17:12:19','redragon',NULL,NULL,'erp.com'),(35,'2211','应付职工薪酬','20','0_2_2211','根科目_负债类_应付职工薪酬',0,'Y','2020-08-05 17:12:44','redragon',NULL,NULL,'erp.com'),(36,'2221','应交税费','20','0_2_2221','根科目_负债类_应交税费',0,'Y','2020-08-05 17:13:02','redragon',NULL,NULL,'erp.com'),(37,'2241','其他应付款','20','0_2_2241','根科目_负债类_其他应付款',0,'Y','2020-08-05 17:13:17','redragon',NULL,NULL,'erp.com'),(38,'3001','清算资金往来','30','0_3_3001','根科目_共同类_清算资金往来',0,'Y','2020-08-05 17:14:18','redragon',NULL,NULL,'erp.com'),(39,'3002','外汇买卖','30','0_3_3002','根科目_共同类_外汇买卖',0,'Y','2020-08-05 17:14:28','redragon',NULL,NULL,'erp.com'),(40,'4001','实收资本','40','0_4_4001','根科目_所有者权益类_实收资本',0,'Y','2020-08-05 17:14:45','redragon',NULL,NULL,'erp.com'),(41,'4002','资本公积','40','0_4_4002','根科目_所有者权益类_资本公积',0,'Y','2020-08-05 17:14:59','redragon',NULL,NULL,'erp.com'),(42,'4103','本年利润','40','0_4_4103','根科目_所有者权益类_本年利润',0,'Y','2020-08-05 17:15:19','redragon',NULL,NULL,'erp.com'),(43,'4104','利润分配','40','0_4_4104','根科目_所有者权益类_利润分配',0,'Y','2020-08-05 17:15:34','redragon',NULL,NULL,'erp.com'),(44,'5001','生产成本','50','0_5_5001','根科目_成本类_生产成本',0,'Y','2020-08-05 17:15:56','redragon',NULL,NULL,'erp.com'),(45,'5101','制造费用','50','0_5_5101','根科目_成本类_制造费用',0,'Y','2020-08-05 17:16:12','redragon',NULL,NULL,'erp.com'),(46,'5301','研发支出','50','0_5_5301','根科目_成本类_研发支出',0,'Y','2020-08-05 17:16:26','redragon',NULL,NULL,'erp.com'),(47,'6001','主营业务收入','60','0_6_6001','根科目_损益类_主营业务收入',0,'Y','2020-08-05 17:18:17','redragon',NULL,NULL,'erp.com'),(48,'6051','其他业务收入','60','0_6_6051','根科目_损益类_其他业务收入',0,'Y','2020-08-05 17:18:53','redragon',NULL,NULL,'erp.com'),(49,'6111','投资收益','60','0_6_6111','根科目_损益类_投资收益',0,'Y','2020-08-05 17:19:15','redragon',NULL,NULL,'erp.com'),(50,'6301','营业外收入','60','0_6_6301','根科目_损益类_营业外收入',0,'Y','2020-08-05 17:19:33','redragon',NULL,NULL,'erp.com'),(51,'6402','其它业务成本','60','0_6_6402','根科目_损益类_其它业务成本',0,'Y','2020-08-05 17:19:50','redragon',NULL,NULL,'erp.com'),(52,'6601','销售费用','60','0_6_6601','根科目_损益类_销售费用',0,'Y','2020-08-05 17:20:42','redragon',NULL,NULL,'erp.com'),(53,'6602','管理费用','60','0_6_6602','根科目_损益类_管理费用',0,'Y','2020-08-05 17:20:55','redragon',NULL,NULL,'erp.com'),(54,'6603','财务费用','60','0_6_6603','根科目_损益类_财务费用',0,'Y','2020-08-05 17:21:20','redragon',NULL,NULL,'erp.com'),(55,'6711','营业外支出','60','0_6_6711','根科目_损益类_营业外支出',0,'Y','2020-08-05 17:22:32','redragon',NULL,NULL,'erp.com'),(57,'1402','在途物资','10','0_1_1402','根科目_资产类_在途物资',0,'Y','2020-09-21 21:48:06','redragon',NULL,NULL,'erp.com'),(58,'220201','应计负债','2202','0_2_2202_220201','根科目_负债类_应付账款_应计负债',0,'Y','2020-09-21 22:37:06','redragon',NULL,NULL,'erp.com'),(59,'220202','经营性','2202','0_2_2202_220202','根科目_负债类_应付账款_经营性',0,'Y','2020-09-21 22:37:35','redragon',NULL,NULL,'erp.com'),(60,'220203','应付暂估','2202','0_2_2202_220203','根科目_负债类_应付账款_应付暂估',0,'Y','2020-09-21 22:38:33','redragon',NULL,NULL,'erp.com'),(61,'222101','增值税','2221','0_2_2221_222101','根科目_负债类_应交税费_增值税',0,'Y','2020-09-21 22:42:13','redragon',NULL,NULL,'erp.com'),(62,'22210101','进项税','222101','0_2_2221_222101_2220101','根科目_负债类_应交税费_增值税_进项税',0,'Y','2020-09-21 22:42:46','redragon',NULL,NULL,'erp.com'),(63,'22210102','销项税','222101','0_2_2221_222101_22210102','根科目_负债类_应交税费_增值税_销项税',0,'Y','2020-09-21 22:43:00','redragon',NULL,NULL,'erp.com');
+/*!40000 ALTER TABLE `md_finance_subject` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -55,4 +36,4 @@ CREATE TABLE `md_finance_subject` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-09-20 14:04:34
+-- Dump completed on 2020-09-29 20:58:13

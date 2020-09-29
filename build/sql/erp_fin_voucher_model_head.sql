@@ -18,34 +18,14 @@ USE `erp`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `fin_voucher_model_head`
+-- Dumping data for table `fin_voucher_model_head`
 --
 
-DROP TABLE IF EXISTS `fin_voucher_model_head`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
-CREATE TABLE `fin_voucher_model_head` (
-  `voucher_head_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '凭证头id',
-  `voucher_head_code` varchar(45) NOT NULL COMMENT '凭证头编码',
-  `model_name` varchar(45) NOT NULL COMMENT '模板名称',
-  `business_type` varchar(45) NOT NULL COMMENT '业务类型(CUSTOM，PAY，RECEIPT，INPUT，OUTPUT)',
-  `voucher_type` varchar(10) NOT NULL COMMENT '凭单字',
-  `voucher_number` varchar(45) DEFAULT NULL COMMENT '凭证号',
-  `voucher_date` date DEFAULT NULL COMMENT '凭证日期',
-  `bill_num` int(11) DEFAULT NULL COMMENT '单据数量',
-  `version` int(11) NOT NULL DEFAULT '1' COMMENT '版本',
-  `status` varchar(10) NOT NULL DEFAULT 'Y' COMMENT '状态',
-  `staff_code` varchar(45) NOT NULL COMMENT '制单人',
-  `department_code` varchar(45) NOT NULL COMMENT '制单部门',
-  `created_date` datetime NOT NULL COMMENT '创建时间',
-  `created_by` varchar(45) NOT NULL COMMENT '创建人',
-  `last_updated_date` datetime DEFAULT NULL COMMENT '最后修改时间',
-  `last_updated_by` varchar(45) DEFAULT NULL COMMENT '最后修改人',
-  `org_code` varchar(10) NOT NULL COMMENT '组织机构',
-  PRIMARY KEY (`voucher_head_id`),
-  UNIQUE KEY `voucher_head_code_UNIQUE` (`voucher_head_code`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='财务凭证模板头';
-/*!40101 SET character_set_client = @saved_cs_client */;
+LOCK TABLES `fin_voucher_model_head` WRITE;
+/*!40000 ALTER TABLE `fin_voucher_model_head` DISABLE KEYS */;
+INSERT INTO `fin_voucher_model_head` VALUES (1,'447998260606324736','工资付款凭证','CUSTOM','ji','',NULL,NULL,1,'Y','RD001','produce','2020-07-28 15:51:58','dongbin','2020-07-31 00:35:43','dongbin','erp.com'),(3,'448366117370384384','付款单(系统默认)凭证模板','PAY','fu','',NULL,NULL,1,'Y','RD001','produce','2020-07-29 16:13:42','dongbin','2020-09-21 22:50:15','redragon','erp.com'),(5,'449086343363874816','收款单(系统默认)凭证模板','RECEIPT','shou','',NULL,NULL,1,'Y','RD001','produce','2020-07-31 15:55:38','dongbin','2020-09-21 23:04:20','redragon','erp.com'),(7,'468033862575771648','入库单(系统默认)凭证模板','INPUT','zhuan','',NULL,NULL,1,'Y','STAFF-001','java','2020-09-21 22:46:18','redragon','2020-09-23 19:46:54','redragon','erp.com'),(8,'468034618632622080','采购发票(系统默认)凭证模板','AP_INVOICE','zhuan','',NULL,NULL,1,'Y','STAFF-001','java','2020-09-21 22:49:18','redragon','2020-09-21 22:52:01','redragon','erp.com'),(10,'468037950046654464','出库单(系统默认)凭证模板','OUTPUT','zhuan','',NULL,NULL,1,'Y','STAFF-001','java','2020-09-21 23:02:33','redragon',NULL,NULL,'erp.com'),(11,'468038253194170368','销售发票(系统默认)凭证模板','AR_INVOICE','zhuan','',NULL,NULL,1,'Y','STAFF-001','java','2020-09-21 23:03:45','redragon','2020-09-21 23:03:53','redragon','erp.com');
+/*!40000 ALTER TABLE `fin_voucher_model_head` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -56,4 +36,4 @@ CREATE TABLE `fin_voucher_model_head` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-09-20 14:04:49
+-- Dump completed on 2020-09-29 20:58:30

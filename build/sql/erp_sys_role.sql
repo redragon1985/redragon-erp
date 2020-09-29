@@ -18,27 +18,14 @@ USE `erp`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `sys_role`
+-- Dumping data for table `sys_role`
 --
 
-DROP TABLE IF EXISTS `sys_role`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
-CREATE TABLE `sys_role` (
-  `role_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
-  `role_code` varchar(45) NOT NULL COMMENT '角色编码',
-  `role_name` varchar(45) NOT NULL COMMENT '角色名称',
-  `status` char(1) NOT NULL DEFAULT 'Y' COMMENT '状态',
-  `created_date` datetime NOT NULL COMMENT '创建时间',
-  `created_by` varchar(30) NOT NULL COMMENT '创建人',
-  `last_updated_date` datetime DEFAULT NULL COMMENT '最后修改时间',
-  `last_updated_by` varchar(30) DEFAULT NULL COMMENT '最后修改人',
-  `org_code` varchar(10) NOT NULL COMMENT '组织机构',
-  PRIMARY KEY (`role_id`),
-  UNIQUE KEY `role_code_UNIQUE` (`role_code`),
-  UNIQUE KEY `role_name_UNIQUE` (`role_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='系统角色表';
-/*!40101 SET character_set_client = @saved_cs_client */;
+LOCK TABLES `sys_role` WRITE;
+/*!40000 ALTER TABLE `sys_role` DISABLE KEYS */;
+INSERT INTO `sys_role` VALUES (6,'admin_role','超级管理员角色','Y','2020-07-31 16:29:37','dongbin','2020-08-15 13:19:51','redragon','erp.com'),(7,'sys_role','系统管理角色','Y','2020-08-01 13:43:54','dongbin','2020-08-15 12:56:22','redragon','erp.com'),(10,'fin_role','财务管理角色','Y','2020-08-15 12:52:04','redragon',NULL,NULL,'erp.com'),(11,'hr_role','人力管理角色','Y','2020-08-15 12:52:57','redragon',NULL,NULL,'erp.com'),(12,'md_role','主数据管理角色','Y','2020-08-15 12:53:41','redragon',NULL,NULL,'erp.com'),(13,'pay_role','应付管理角色','Y','2020-08-15 12:54:49','redragon',NULL,NULL,'erp.com'),(14,'po_role','采购管理角色','Y','2020-08-15 12:55:13','redragon',NULL,NULL,'erp.com'),(15,'receipt_role','应收管理角色','Y','2020-08-15 12:55:42','redragon',NULL,NULL,'erp.com'),(16,'so_role','销售管理角色','Y','2020-08-15 12:56:04','redragon',NULL,NULL,'erp.com'),(18,'data_auth_role','数据权限角色','Y','2020-08-16 18:08:57','redragon',NULL,NULL,'erp.com'),(19,'inv_role','库房管理角色','Y','2020-08-17 23:23:14','redragon',NULL,NULL,'erp.com');
+/*!40000 ALTER TABLE `sys_role` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -49,4 +36,4 @@ CREATE TABLE `sys_role` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-09-20 14:04:46
+-- Dump completed on 2020-09-29 20:58:27
