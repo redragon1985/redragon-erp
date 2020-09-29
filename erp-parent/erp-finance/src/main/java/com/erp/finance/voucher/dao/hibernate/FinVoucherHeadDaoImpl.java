@@ -96,8 +96,8 @@ public class FinVoucherHeadDaoImpl implements FinVoucherHeadDao{
         Map<String, Object> args = new HashMap<String, Object>();
         sql = sql + DaoUtil.getSQLCondition(paramObj, "voucherType", "and v.", args);
         sql = sql + DaoUtil.getSQLCondition(paramObj, "voucherNumber", "and v.", args);
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "voucherDate", "and v.", args);
         sql = sql + DaoUtil.getSQLCondition(paramObj, "status", "and v.", args);
+        sql = sql + DaoUtil.getSQLConditionForDateTime(paramObj, "voucherDate", "voucherStartDate", "voucherEndDate", "and v.", args);
         
         if(StringUtils.isNotBlank(paramObj.getBusinessType())) {
             sql = sql + " and exists(select 1 from fin_voucher_bill_r where bill_type = :billtype and voucher_head_code = v.voucher_head_code) ";
@@ -125,8 +125,8 @@ public class FinVoucherHeadDaoImpl implements FinVoucherHeadDao{
         Map<String, Object> args = new HashMap<String, Object>();
         sql = sql + DaoUtil.getSQLCondition(paramObj, "voucherType", "and v.", args);
         sql = sql + DaoUtil.getSQLCondition(paramObj, "voucherNumber", "and v.", args);
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "voucherDate", "and v.", args);
         sql = sql + DaoUtil.getSQLCondition(paramObj, "status", "and v.", args);
+        sql = sql + DaoUtil.getSQLConditionForDateTime(paramObj, "voucherDate", "voucherStartDate", "voucherEndDate", "and v.", args);
         sql = sql + DaoUtil.getDataAuthSQL(dataAuthSQL, "v.", "v.");
         
         if(StringUtils.isNotBlank(paramObj.getBusinessType())) {

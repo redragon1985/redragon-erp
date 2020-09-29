@@ -55,22 +55,22 @@
 		<div class="row">
 			<div class="col-sm-6">
 				<div class="form-group">
-					<label class="control-label" for="voucherDate">凭证日期</label> 
+					<label class="control-label" for="voucherStartDate">凭证开始日期</label> 
 					<div class="input-group date">
 						<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-						<input id="voucherDate" name="voucherDate" type="text" class="form-control"
-							value="${param.voucherDate}" autocomplete="off">
+						<input id="voucherStartDate" name="voucherStartDate" type="text" class="form-control"
+							value="${param.voucherStartDate}" autocomplete="off">
 					</div>
 				</div>
 			</div>
 			<div class="col-sm-6">
 				<div class="form-group">
-					<label class="control-label" for="status">状态</label> 
-					<select name="status" id="status" class="form-control">
-						<option value="" selected="">请选择</option>
-						<option value="Y">有效</option>
-						<option value="N">作废</option>
-					</select>
+					<label class="control-label" for="voucherEndDate">凭证结束日期</label> 
+					<div class="input-group date">
+						<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+						<input id="voucherEndDate" name="voucherEndDate" type="text" class="form-control"
+							value="${param.voucherEndDate}" autocomplete="off">
+					</div>
 				</div>
 			</div>
 		</div>
@@ -83,6 +83,16 @@
 						<c:forEach items="${requestScope.voucherBusinessTypeMap}" var="voucherBusinessType">
                        		<option value="${voucherBusinessType.key}">${voucherBusinessType.value}</option>
                        	</c:forEach>
+					</select>
+				</div>
+			</div>
+			<div class="col-sm-6">
+				<div class="form-group">
+					<label class="control-label" for="status">状态</label> 
+					<select name="status" id="status" class="form-control">
+						<option value="" selected="">请选择</option>
+						<option value="Y">有效</option>
+						<option value="N">作废</option>
 					</select>
 				</div>
 			</div>
@@ -118,7 +128,18 @@ $(document).ready(function(){
 	}
 	
 	//设置日期插件
-	$('#voucherDate').datepicker({
+	$('#voucherStartDate').datepicker({
+		todayBtn : "linked",
+		keyboardNavigation : true,
+		forceParse : true,
+		calendarWeeks : false,
+		autoclose : true,
+		format: 'yyyy-mm-dd',
+		language: 'zh-CN',
+	});
+	
+		//设置日期插件
+	$('#voucherEndDate').datepicker({
 		todayBtn : "linked",
 		keyboardNavigation : true,
 		forceParse : true,

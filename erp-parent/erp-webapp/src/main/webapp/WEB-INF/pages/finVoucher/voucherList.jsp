@@ -62,6 +62,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		                
 		                <button id="addButton" class="btn btn-success btn-sm" type="button"><i class="fa fa-plus"></i>&nbsp;&nbsp;<span class="bold">手工凭证</span></button>
 		                <button id="searchButton" class="btn btn-default btn-sm btn-notcontrol" type="button"><i class="fa fa-search"></i>&nbsp;&nbsp;展开查询</button>
+		            
+		            	<div class="btn-group">
+							<button type="button" class="btn btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						    	<i class="fa fa-download"></i>&nbsp;&nbsp;报表下载 <span class="caret"></span>
+							</button>
+							<ul class="dropdown-menu">
+					    		<li><a href="web/voucherReport/getVoucherReportList?voucherStartDate=${param.voucherStartDate}&voucherEndDate=${param.voucherEndDate}">导出凭证数据</a></li>
+							</ul>
+						</div>
 		            </div>
 		        </div>
 				<div class="ibox-content border-bottom" style="padding-bottom: 0px;">

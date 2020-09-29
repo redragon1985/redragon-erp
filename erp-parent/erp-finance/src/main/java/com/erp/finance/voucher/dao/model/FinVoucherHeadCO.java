@@ -18,6 +18,8 @@
  */
 package com.erp.finance.voucher.dao.model;
 
+import org.apache.commons.lang.StringUtils;
+
 import com.erp.finance.voucher.dao.model.FinVoucherHead;
 
 public class FinVoucherHeadCO extends FinVoucherHead implements java.io.Serializable {
@@ -27,6 +29,8 @@ public class FinVoucherHeadCO extends FinVoucherHead implements java.io.Serializ
 	
 	//查询字段
 	private String businessType;
+	private String voucherStartDate;
+	private String voucherEndDate;
 
     public String getBusinessType() {
         return businessType;
@@ -34,6 +38,31 @@ public class FinVoucherHeadCO extends FinVoucherHead implements java.io.Serializ
 
     public void setBusinessType(String businessType) {
         this.businessType = businessType;
+    }
+
+    public String getVoucherStartDate() {
+        if(StringUtils.isNotBlank(voucherStartDate)) {
+            return voucherStartDate+" 00:00:00";
+        }else {
+            return voucherStartDate;
+        }
+        
+    }
+
+    public void setVoucherStartDate(String voucherStartDate) {
+        this.voucherStartDate = voucherStartDate;
+    }
+
+    public String getVoucherEndDate() {
+        if(StringUtils.isNotBlank(voucherEndDate)) {
+            return voucherEndDate+" 23:59:59";
+        }else {
+            return voucherEndDate;
+        }
+    }
+
+    public void setVoucherEndDate(String voucherEndDate) {
+        this.voucherEndDate = voucherEndDate;
     }
 	
 }

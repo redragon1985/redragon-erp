@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
-                                                    
+                                                        
+    
     
     
     
@@ -12,7 +13,8 @@
     
     
     <wb-module deploy-name="erp">
-                                                                                                        
+                                                                                                                
+        
         
         
         
@@ -25,7 +27,8 @@
         
         
         <wb-resource deploy-path="/" source-path="/target/m2e-jee/web-resources"/>
-                                                                                                        
+                                                                                                                
+        
         
         
         
@@ -38,7 +41,8 @@
         
         
         <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
-                                                                                                        
+                                                                                                                
+        
         
         
         
@@ -51,7 +55,8 @@
         
         
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
-                                                                                                        
+                                                                                                                
+        
         
         
         
@@ -66,6 +71,9 @@
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
         <dependent-module archiveName="erp-springboot-0.6.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/erp-springboot/erp-springboot">
             <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module deploy-path="/" handle="module:/overlay/prj/erp-report?includes=**/**&amp;excludes=META-INF/MANIFEST.MF">
+            <dependency-type>consumes</dependency-type>
         </dependent-module>
         <dependent-module deploy-path="/" handle="module:/overlay/prj/erp-common?includes=**/**&amp;excludes=META-INF/MANIFEST.MF">
             <dependency-type>consumes</dependency-type>
@@ -100,7 +108,8 @@
         <dependent-module deploy-path="/" handle="module:/overlay/slf/?includes=**/**&amp;excludes=META-INF/MANIFEST.MF">
             <dependency-type>consumes</dependency-type>
         </dependent-module>
-                                                                                                        
+                                                                                                                
+        
         
         
         
@@ -113,7 +122,8 @@
         
         
         <property name="context-root" value="erp"/>
-                                                                                                        
+                                                                                                                
+        
         
         
         
@@ -126,7 +136,8 @@
         
         
         <property name="java-output-path" value="/erp-webapp/target/classes"/>
-                                                                                                    
+                                                                                                            
+    
     
     
     
@@ -139,7 +150,8 @@
     
     
     </wb-module>
-                                                
+                                                    
+
 
 
 

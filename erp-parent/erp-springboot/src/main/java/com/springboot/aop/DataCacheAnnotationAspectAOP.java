@@ -45,6 +45,7 @@ public class DataCacheAnnotationAspectAOP extends DataCacheAnnotationAspect {
 	        + "execution(* com.erp.order.*.service.*.*(..))||"
 	        + "execution(* com.erp.finance..*.service.*.*(..))||"
 	        + "execution(* com.erp.common..*.service.*.*(..))||"
+	        + "execution(* com.erp.report..*.service.*.*(..))||"
 	        + "execution(* com.erp.ledger..*.service.*.*(..))")
 	public void pointcut(){}
 	
