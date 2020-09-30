@@ -12,9 +12,9 @@
 
 # 赤龙声明
 
-【赤龙ERP】软件将 **永久免费** ，并承诺**不断迭代**产品及衍生产品，**点亮star** ，是您对我们最大的支持！
+【赤龙ERP】软件将 **永久免费** ，并承诺**不断迭代**产品及衍生产品，:fa-hand-o-right: **点亮star** ，是您对我们最大的支持！
 
-`未经开发者授权，本产品及衍生产品不得用于任何形式的商业用途`
+:fa-exclamation-triangle:`未经开发者授权，本产品及衍生产品不得用于任何形式的商业用途`
 
 # 演示地址
 [https://www.redragon-erp.com/erp](https://www.redragon-erp.com/erp "https://www.redragon-erp.com/erp")
@@ -172,6 +172,6 @@
 
 ## 交流与分享
 
-> 扫描二维码与开发者沟通交流
+:fa-wechat: 扫描二维码与开发者沟通交流
 
 ![赤龙ERP开发者](http://www.redragon-erp.com/images/redragon.png "赤龙ERP开发者")
