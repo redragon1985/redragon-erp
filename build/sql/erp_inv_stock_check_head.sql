@@ -18,14 +18,32 @@ USE `erp`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Dumping data for table `inv_stock_check_head`
+-- Table structure for table `inv_stock_check_head`
 --
 
-LOCK TABLES `inv_stock_check_head` WRITE;
-/*!40000 ALTER TABLE `inv_stock_check_head` DISABLE KEYS */;
-INSERT INTO `inv_stock_check_head` VALUES (3,'check459263763475779584','中央仓库[2020-08]盘点','warehouse-001','2020-08','2020.8.28-库管员','NEW','APPROVE','STAFF-001','java','2020-08-28 18:03:03','redragon',NULL,NULL,'erp.com'),(4,'check470872472794615808','中央仓库[2020-09]盘点','warehouse-001','2020-09','','NEW','UNSUBMIT','STAFF-001','java','2020-09-29 18:50:10','redragon',NULL,NULL,'erp.com'),(5,'check470873610067562496','中央仓库[2020-09]盘点','warehouse-001','2020-09','','NEW','UNSUBMIT','STAFF-001','java','2020-09-29 18:51:03','redragon',NULL,NULL,'erp.com');
-/*!40000 ALTER TABLE `inv_stock_check_head` ENABLE KEYS */;
-UNLOCK TABLES;
+DROP TABLE IF EXISTS `inv_stock_check_head`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `inv_stock_check_head` (
+  `check_head_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `check_head_code` varchar(45) NOT NULL COMMENT '盘点头编码',
+  `check_name` varchar(45) NOT NULL COMMENT '盘点名称',
+  `warehouse_code` varchar(45) NOT NULL COMMENT '仓库编码',
+  `check_date` varchar(45) NOT NULL COMMENT '盘点日期（一般是年月）',
+  `memo` varchar(200) DEFAULT NULL COMMENT '备注',
+  `status` varchar(10) NOT NULL DEFAULT 'NEW' COMMENT '状态（新建NEW，确认CONFIRM，取消CANCEL）',
+  `approve_status` varchar(10) NOT NULL DEFAULT 'UNSUBMIT' COMMENT '审批状态（未提交UNSUBMIT、已提交SUBMIT、已审批APPROVE、已驳回REJECT）',
+  `staff_code` varchar(45) NOT NULL COMMENT '制单人',
+  `department_code` varchar(45) NOT NULL COMMENT '制单部门',
+  `created_date` datetime NOT NULL COMMENT '创建时间',
+  `created_by` varchar(45) NOT NULL COMMENT '创建人',
+  `last_updated_date` datetime DEFAULT NULL COMMENT '最后修改日期',
+  `last_updated_by` varchar(45) DEFAULT NULL COMMENT '最后修改人',
+  `org_code` varchar(10) NOT NULL COMMENT '组织机构',
+  PRIMARY KEY (`check_head_id`),
+  UNIQUE KEY `check_head_code_UNIQUE` (`check_head_code`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='库存盘点表头';
+/*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -36,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-09-29 20:58:21
+-- Dump completed on 2020-10-09 10:57:18

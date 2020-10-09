@@ -18,14 +18,25 @@ USE `erp`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Dumping data for table `sys_user_role_r`
+-- Table structure for table `sys_user_role_r`
 --
 
-LOCK TABLES `sys_user_role_r` WRITE;
-/*!40000 ALTER TABLE `sys_user_role_r` DISABLE KEYS */;
-INSERT INTO `sys_user_role_r` VALUES (11,'admin','sys_role','2020-08-01 15:18:43','dongbin',NULL,NULL,''),(59,'redragon','data_auth_role','2020-08-17 23:15:48','redragon',NULL,NULL,'erp.com'),(60,'redragon','admin_role','2020-08-17 23:15:48','redragon',NULL,NULL,'erp.com'),(61,'dongbin','inv_role','2020-09-04 22:15:27','redragon',NULL,NULL,'erp.com'),(62,'dongbin','data_auth_role','2020-09-04 22:15:27','redragon',NULL,NULL,'erp.com'),(63,'dongbin','fin_role','2020-09-04 22:15:27','redragon',NULL,NULL,'erp.com'),(64,'dongbin','hr_role','2020-09-04 22:15:27','redragon',NULL,NULL,'erp.com'),(65,'dongbin','md_role','2020-09-04 22:15:27','redragon',NULL,NULL,'erp.com'),(66,'dongbin','pay_role','2020-09-04 22:15:27','redragon',NULL,NULL,'erp.com'),(67,'dongbin','po_role','2020-09-04 22:15:27','redragon',NULL,NULL,'erp.com'),(68,'dongbin','receipt_role','2020-09-04 22:15:27','redragon',NULL,NULL,'erp.com'),(69,'dongbin','so_role','2020-09-04 22:15:27','redragon',NULL,NULL,'erp.com'),(70,'dongbin','sys_role','2020-09-04 22:15:27','redragon',NULL,NULL,'erp.com');
-/*!40000 ALTER TABLE `sys_user_role_r` ENABLE KEYS */;
-UNLOCK TABLES;
+DROP TABLE IF EXISTS `sys_user_role_r`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `sys_user_role_r` (
+  `ur_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `username` varchar(45) NOT NULL COMMENT '用户名',
+  `role_code` varchar(45) NOT NULL COMMENT '角色编码',
+  `created_date` datetime NOT NULL,
+  `created_by` varchar(30) NOT NULL,
+  `last_updated_date` datetime DEFAULT NULL,
+  `last_updated_by` varchar(30) DEFAULT NULL,
+  `org_code` varchar(10) NOT NULL COMMENT '组织机构',
+  PRIMARY KEY (`ur_id`),
+  UNIQUE KEY `UK_sys_user_role_r` (`username`,`role_code`)
+) ENGINE=InnoDB AUTO_INCREMENT=72 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='系统用户与角色关联表';
+/*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -36,4 +47,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-09-29 20:58:31
+-- Dump completed on 2020-10-09 10:57:29

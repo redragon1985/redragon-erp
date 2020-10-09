@@ -18,14 +18,34 @@ USE `erp`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Dumping data for table `po_line`
+-- Table structure for table `po_line`
 --
 
-LOCK TABLES `po_line` WRITE;
-/*!40000 ALTER TABLE `po_line` DISABLE KEYS */;
-INSERT INTO `po_line` VALUES (1,'443745645320130560','order-001','M001',2,2350.00,4700.00,'AN','办公',1,'Y','2020-07-16 22:13:36','dongbin','2020-07-17 00:06:23','dongbin','erp.com'),(2,'443768355916009472','order-001','M001',1,1550.00,1550.00,'AN','礼物',1,'Y','2020-07-16 23:43:51','dongbin','2020-07-17 00:06:26','dongbin','erp.com'),(5,'445075866568806400','order-002','M001',10,1000.00,10000.00,'AN','',1,'Y','2020-07-20 14:19:25','dongbin',NULL,NULL,'erp.com'),(7,'450962333199421440','order-003','M001',10,10000.00,100000.00,'AN','',1,'Y','2020-08-05 20:10:08','redragon','2020-09-10 19:56:14','redragon','erp.com'),(8,'451655028259606528','order-002','Material-002',1,1500.00,1500.00,'AN','',1,'Y','2020-08-07 18:02:40','redragon',NULL,NULL,'erp.com'),(9,'463998263413886976','order-002','Matter-001',1,20000.00,20000.00,'CI','',1,'Y','2020-09-10 19:30:16','redragon',NULL,NULL,'erp.com'),(10,'464004763909804032','order-003','Matter-001',1,10000.00,10000.00,'CI','',1,'Y','2020-09-10 19:56:06','redragon',NULL,NULL,'erp.com'),(11,'464004911691911168','order-003','Material-003',1,12000.00,12000.00,'AN','',1,'Y','2020-09-10 19:56:41','redragon',NULL,NULL,'erp.com');
-/*!40000 ALTER TABLE `po_line` ENABLE KEYS */;
-UNLOCK TABLES;
+DROP TABLE IF EXISTS `po_line`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `po_line` (
+  `po_line_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '采购订单行id',
+  `po_line_code` varchar(45) NOT NULL COMMENT '采购订单行编码',
+  `po_head_code` varchar(45) NOT NULL COMMENT '采购订单头编码',
+  `material_code` varchar(45) NOT NULL COMMENT '物料编码',
+  `quantity` double NOT NULL COMMENT '数量',
+  `price` decimal(10,2) NOT NULL COMMENT '单价',
+  `amount` decimal(10,2) NOT NULL COMMENT '金额',
+  `unit` varchar(45) NOT NULL COMMENT '单位',
+  `memo` varchar(500) DEFAULT NULL COMMENT '摘要',
+  `version` int(11) NOT NULL DEFAULT '1' COMMENT '版本',
+  `status` varchar(10) NOT NULL DEFAULT 'Y' COMMENT '状态',
+  `created_date` datetime NOT NULL COMMENT '创建时间',
+  `created_by` varchar(45) NOT NULL COMMENT '创建人',
+  `last_updated_date` datetime DEFAULT NULL COMMENT '最后修改时间',
+  `last_updated_by` varchar(45) DEFAULT NULL COMMENT '最后修改人',
+  `org_code` varchar(10) NOT NULL COMMENT '组织机构',
+  PRIMARY KEY (`po_line_id`),
+  UNIQUE KEY `po_line_code_UNIQUE` (`po_line_code`),
+  KEY `IX_po_line_po_head_code` (`po_head_code`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='采购订单行表';
+/*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -36,4 +56,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-09-29 20:58:24
+-- Dump completed on 2020-10-09 10:57:21

@@ -18,14 +18,26 @@ USE `erp`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Dumping data for table `sys_user`
+-- Table structure for table `sys_user`
 --
 
-LOCK TABLES `sys_user` WRITE;
-/*!40000 ALTER TABLE `sys_user` DISABLE KEYS */;
-INSERT INTO `sys_user` VALUES (8,'dongbin','40bd001563085fc35165329ea1ff5c5ecbdbbeef','Y','2020-06-09 17:39:55','admin',NULL,NULL,'test.com'),(30,'admin','40bd001563085fc35165329ea1ff5c5ecbdbbeef','Y','2020-06-17 21:16:30','sys',NULL,NULL,'test.com'),(45,'redragon','40bd001563085fc35165329ea1ff5c5ecbdbbeef','Y','2020-08-01 13:41:56','admin','2020-08-03 19:02:10','redragon','erp.com');
-/*!40000 ALTER TABLE `sys_user` ENABLE KEYS */;
-UNLOCK TABLES;
+DROP TABLE IF EXISTS `sys_user`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `sys_user` (
+  `user_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `username` varchar(45) NOT NULL COMMENT '用户名',
+  `password` varchar(50) NOT NULL COMMENT '密码',
+  `status` char(1) NOT NULL DEFAULT 'Y' COMMENT '状态',
+  `created_date` datetime NOT NULL COMMENT '创建时间',
+  `created_by` varchar(30) NOT NULL COMMENT '创建人',
+  `last_updated_date` datetime DEFAULT NULL COMMENT '修改时间',
+  `last_updated_by` varchar(30) DEFAULT NULL COMMENT '修改人',
+  `org_code` varchar(10) NOT NULL COMMENT '组织机构',
+  PRIMARY KEY (`user_id`),
+  UNIQUE KEY `username_UNIQUE` (`username`)
+) ENGINE=InnoDB AUTO_INCREMENT=76 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='系统用户表';
+/*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -36,4 +48,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-09-29 20:58:24
+-- Dump completed on 2020-10-09 10:57:21

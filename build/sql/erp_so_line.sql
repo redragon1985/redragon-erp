@@ -18,14 +18,34 @@ USE `erp`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Dumping data for table `so_line`
+-- Table structure for table `so_line`
 --
 
-LOCK TABLES `so_line` WRITE;
-/*!40000 ALTER TABLE `so_line` DISABLE KEYS */;
-INSERT INTO `so_line` VALUES (1,'444118157677744128','SO-001','M001',1,1500.00,1500.00,'AN','',1,'Y','2020-07-17 22:53:50','dongbin',NULL,NULL,'erp.com'),(2,'444118220411949056','SO-001','M001',20,10000.00,200000.00,'AN','办公',1,'Y','2020-07-17 22:54:05','dongbin','2020-07-17 22:54:18','dongbin','erp.com'),(4,'450964139417718784','SO-002','M001',2,10000.00,20000.00,'AN','',1,'Y','2020-08-05 20:17:19','redragon',NULL,NULL,'erp.com');
-/*!40000 ALTER TABLE `so_line` ENABLE KEYS */;
-UNLOCK TABLES;
+DROP TABLE IF EXISTS `so_line`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `so_line` (
+  `so_line_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '销售订单行id',
+  `so_line_code` varchar(45) NOT NULL COMMENT '销售订单行编码',
+  `so_head_code` varchar(45) NOT NULL COMMENT '销售订单头编码',
+  `material_code` varchar(45) NOT NULL COMMENT '物料编码',
+  `quantity` double NOT NULL COMMENT '数量',
+  `price` decimal(10,2) NOT NULL COMMENT '单价',
+  `amount` decimal(10,2) NOT NULL COMMENT '金额',
+  `unit` varchar(45) NOT NULL COMMENT '单位',
+  `memo` varchar(500) DEFAULT NULL COMMENT '摘要',
+  `version` int(11) NOT NULL DEFAULT '1' COMMENT '版本',
+  `status` varchar(10) NOT NULL DEFAULT 'Y' COMMENT '状态',
+  `created_date` datetime NOT NULL COMMENT '创建时间',
+  `created_by` varchar(45) NOT NULL COMMENT '创建人',
+  `last_updated_date` datetime DEFAULT NULL COMMENT '最后修改时间',
+  `last_updated_by` varchar(45) DEFAULT NULL COMMENT '最后修改人',
+  `org_code` varchar(10) NOT NULL COMMENT '组织机构',
+  PRIMARY KEY (`so_line_id`),
+  UNIQUE KEY `so_line_code_UNIQUE` (`so_line_code`),
+  KEY `IX_so_line_so_head_code` (`so_head_code`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='销售订单行表';
+/*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -36,4 +56,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-09-29 20:58:34
+-- Dump completed on 2020-10-09 10:57:31

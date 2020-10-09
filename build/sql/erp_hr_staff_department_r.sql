@@ -18,14 +18,27 @@ USE `erp`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Dumping data for table `hr_staff_department_r`
+-- Table structure for table `hr_staff_department_r`
 --
 
-LOCK TABLES `hr_staff_department_r` WRITE;
-/*!40000 ALTER TABLE `hr_staff_department_r` DISABLE KEYS */;
-INSERT INTO `hr_staff_department_r` VALUES (4,'STAFF-001','java','java','Y','2020-08-01 15:35:52','redragon',NULL,NULL,''),(5,'RD001','java','manager','Y','2020-08-01 15:36:36','redragon',NULL,NULL,''),(6,'RD000','jishu','manager','Y','2020-08-01 15:37:24','redragon',NULL,NULL,'');
-/*!40000 ALTER TABLE `hr_staff_department_r` ENABLE KEYS */;
-UNLOCK TABLES;
+DROP TABLE IF EXISTS `hr_staff_department_r`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `hr_staff_department_r` (
+  `sd_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `staff_code` varchar(45) NOT NULL COMMENT '职员编码',
+  `department_code` varchar(45) NOT NULL COMMENT '部门编码',
+  `position_code` varchar(45) NOT NULL COMMENT '岗位编码',
+  `status` char(1) NOT NULL DEFAULT 'Y' COMMENT '状态',
+  `created_date` datetime NOT NULL COMMENT '创建时间',
+  `created_by` varchar(45) NOT NULL COMMENT '创建人',
+  `last_updated_date` datetime DEFAULT NULL COMMENT '最后修改时间',
+  `last_updated_by` varchar(45) DEFAULT NULL COMMENT '最后修改人',
+  `org_code` varchar(10) NOT NULL COMMENT '组织机构',
+  PRIMARY KEY (`sd_id`),
+  UNIQUE KEY `uk_staff_department_position` (`staff_code`,`department_code`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='人力职员与部门关联表';
+/*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -36,4 +49,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-09-29 20:58:16
+-- Dump completed on 2020-10-09 10:57:13

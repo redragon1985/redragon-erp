@@ -18,14 +18,28 @@ USE `erp`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Dumping data for table `hr_position`
+-- Table structure for table `hr_position`
 --
 
-LOCK TABLES `hr_position` WRITE;
-/*!40000 ALTER TABLE `hr_position` DISABLE KEYS */;
-INSERT INTO `hr_position` VALUES (7,'java','java工程师','EMPLOYEE','Y','2020-07-10 17:26:46','dongbin','2020-08-03 16:26:44','redragon','erp.com'),(8,'product','产品经理','EMPLOYEE','Y','2020-07-10 17:27:06','dongbin','2020-08-03 16:26:39','redragon','erp.com'),(9,'employee','普通员工','EMPLOYEE','Y','2020-07-10 17:27:44','dongbin','2020-08-03 16:26:33','redragon','erp.com'),(10,'manager','经理','MANAGER','Y','2020-08-01 15:34:54','redragon','2020-08-03 16:26:26','redragon','erp.com'),(11,'hr','HR','EMPLOYEE','Y','2020-08-01 15:35:07','redragon','2020-08-03 16:26:20','redragon','erp.com'),(12,'finance','财务','EMPLOYEE','Y','2020-08-01 15:35:23','redragon','2020-08-03 16:26:13','redragon','erp.com');
-/*!40000 ALTER TABLE `hr_position` ENABLE KEYS */;
-UNLOCK TABLES;
+DROP TABLE IF EXISTS `hr_position`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `hr_position` (
+  `position_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `position_code` varchar(45) NOT NULL COMMENT '岗位编码',
+  `position_name` varchar(45) NOT NULL COMMENT '岗位名称',
+  `position_type` varchar(45) NOT NULL COMMENT '岗位类型（经理MANAGER、职员EMPLOYEE）',
+  `status` char(1) NOT NULL DEFAULT 'Y' COMMENT '状态',
+  `created_date` datetime NOT NULL COMMENT '创建时间',
+  `created_by` varchar(45) NOT NULL COMMENT '创建人',
+  `last_updated_date` datetime DEFAULT NULL COMMENT '最后修改时间',
+  `last_updated_by` varchar(45) DEFAULT NULL COMMENT '最后修改人',
+  `org_code` varchar(10) NOT NULL COMMENT '组织机构',
+  PRIMARY KEY (`position_id`),
+  UNIQUE KEY `position_code_UNIQUE` (`position_code`),
+  UNIQUE KEY `position_name_UNIQUE` (`position_name`)
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='人力职位表';
+/*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -36,4 +50,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-09-29 20:58:26
+-- Dump completed on 2020-10-09 10:57:23

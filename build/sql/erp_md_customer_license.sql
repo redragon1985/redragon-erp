@@ -18,14 +18,31 @@ USE `erp`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Dumping data for table `md_customer_license`
+-- Table structure for table `md_customer_license`
 --
 
-LOCK TABLES `md_customer_license` WRITE;
-/*!40000 ALTER TABLE `md_customer_license` DISABLE KEYS */;
-INSERT INTO `md_customer_license` VALUES (1,'CUST001','COM123','法人','yxzr','','2020-07-12','Y','2020-07-12 21:11:16','dongbin','2020-08-04 23:30:44','redragon','erp.com'),(3,'CUSTOMER-001','911101081111100000','王五','yxzr','123','2020-07-31','Y','2020-07-31 23:50:36','dongbin',NULL,NULL,'erp.com');
-/*!40000 ALTER TABLE `md_customer_license` ENABLE KEYS */;
-UNLOCK TABLES;
+DROP TABLE IF EXISTS `md_customer_license`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `md_customer_license` (
+  `license_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `customer_code` varchar(45) NOT NULL COMMENT '客户编码',
+  `license_number` varchar(45) NOT NULL COMMENT '营业执照号',
+  `legal_person` varchar(45) NOT NULL COMMENT '法人代表',
+  `company_type` varchar(45) NOT NULL COMMENT '公司类型',
+  `business_scope` varchar(200) DEFAULT NULL COMMENT '经营范围',
+  `start_date` date NOT NULL COMMENT '成立日期',
+  `status` char(1) NOT NULL DEFAULT 'Y' COMMENT '状态',
+  `created_date` datetime NOT NULL COMMENT '创建时间',
+  `created_by` varchar(45) NOT NULL COMMENT '创建人',
+  `last_updated_date` datetime DEFAULT NULL COMMENT '最后修改时间',
+  `last_updated_by` varchar(45) DEFAULT NULL COMMENT '最后修改人',
+  `org_code` varchar(10) NOT NULL COMMENT '组织机构',
+  PRIMARY KEY (`license_id`),
+  UNIQUE KEY `license_number_UNIQUE` (`license_number`),
+  KEY `IX_md_customer_license_customer_code` (`customer_code`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='主数据客户营业执照表';
+/*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -36,4 +53,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-09-29 20:58:15
+-- Dump completed on 2020-10-09 10:57:12

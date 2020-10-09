@@ -18,14 +18,44 @@ USE `erp`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Dumping data for table `so_head`
+-- Table structure for table `so_head`
 --
 
-LOCK TABLES `so_head` WRITE;
-/*!40000 ALTER TABLE `so_head` DISABLE KEYS */;
-INSERT INTO `so_head` VALUES (2,'SO-001','SOTYPE01','北京分公司2020-07销售合同','','P001','CUST001','rmb',0.00,NULL,NULL,'2020-07-23','',NULL,1,'NEW','UNSUBMIT','N','N','RD001','produce','2020-07-23 21:17:27','dongbin','2020-09-10 20:12:08','redragon','erp.com'),(3,'SO-002','SOTYPE01','本部员工老旧电脑销售订单20200801','','PROJECT-001','CUSTOMER-001','rmb',20000.00,NULL,NULL,'2020-08-01','',NULL,1,'NEW','SUBMIT','N','N','STAFF-001','java','2020-08-01 15:43:33','redragon','2020-08-05 20:17:33','redragon','erp.com');
-/*!40000 ALTER TABLE `so_head` ENABLE KEYS */;
-UNLOCK TABLES;
+DROP TABLE IF EXISTS `so_head`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `so_head` (
+  `so_head_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '销售订单头id',
+  `so_head_code` varchar(45) NOT NULL COMMENT '销售订单头编码',
+  `so_type` varchar(45) NOT NULL COMMENT '销售订单类型',
+  `so_name` varchar(45) NOT NULL COMMENT '销售订单名称',
+  `so_desc` varchar(500) DEFAULT NULL COMMENT '销售订单描述',
+  `project_code` varchar(45) DEFAULT NULL COMMENT '项目编码',
+  `customer_code` varchar(45) NOT NULL COMMENT '客户编码',
+  `currency_code` varchar(45) NOT NULL COMMENT '销售订单币种',
+  `pre_receipt_amount` decimal(10,2) NOT NULL DEFAULT '0.00' COMMENT '销售订单预收款金额',
+  `start_date` date DEFAULT NULL COMMENT '销售订单开始日期',
+  `end_date` date DEFAULT NULL COMMENT '销售订单结束日期',
+  `sign_date` date NOT NULL COMMENT '销售订单签订日期',
+  `tax_type` varchar(45) DEFAULT NULL COMMENT '计税类型',
+  `tax_percent` double DEFAULT NULL COMMENT '计税比率',
+  `version` int(11) NOT NULL DEFAULT '1' COMMENT '版本',
+  `status` varchar(10) NOT NULL DEFAULT 'NEW' COMMENT '状态（新建NEW，确认CONFIRM，取消CANCEL）',
+  `approve_status` varchar(45) NOT NULL DEFAULT 'UNSUBMIT' COMMENT '审批状态（未提交UNSUBMIT、已提交SUBMIT、已审批APPROVE、已驳回REJECT）',
+  `shipment_status` varchar(10) DEFAULT NULL COMMENT '发运状态（未出库N，已出库Y，部分出库PART）',
+  `receipt_status` varchar(10) DEFAULT NULL COMMENT '收款状态（未收款N，已收款Y，部分收款PART）',
+  `staff_code` varchar(45) NOT NULL COMMENT '销售员',
+  `department_code` varchar(45) NOT NULL COMMENT '销售部门',
+  `created_date` datetime NOT NULL COMMENT '创建时间',
+  `created_by` varchar(45) NOT NULL COMMENT '创建人',
+  `last_updated_date` datetime DEFAULT NULL COMMENT '最后修改时间',
+  `last_updated_by` varchar(45) DEFAULT NULL COMMENT '最后修改人',
+  `org_code` varchar(10) NOT NULL COMMENT '组织机构',
+  PRIMARY KEY (`so_head_id`),
+  UNIQUE KEY `po_head_code_UNIQUE` (`so_head_code`),
+  UNIQUE KEY `so_name_UNIQUE` (`so_name`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='销售订单头表';
+/*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -36,4 +66,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-09-29 20:58:36
+-- Dump completed on 2020-10-09 10:57:33
