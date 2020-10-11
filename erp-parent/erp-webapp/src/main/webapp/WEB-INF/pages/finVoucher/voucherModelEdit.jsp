@@ -33,14 +33,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <div class="wrapper wrapper-content animated fadeInRight">
 
 	<%-- 导入提示信息框 --%>
-	<c:if test="${requestScope.hints!=null&&requestScope.hints!=''}">
-		<jsp:include page="../common/alert/alert.jsp">
-			<jsp:param value="hint" name="alertType" />
-			<jsp:param value="${fn:replace(requestScope.hints,';', '<br/>')}"
-				name="alertMessage" />
-		</jsp:include>
-	</c:if>
-
+    <c:if test="${hint!=null&&hint!=''}">
+   		<jsp:include page="../common/alert/alert.jsp">
+   			<jsp:param value="${hint}" name="alertType"/>
+   			<jsp:param value="${alertMessage}" name="alertMessage"/>
+   		</jsp:include>
+    </c:if>
 
 	<div class="row">
 		<form id="editForm" method="post" action="web/finVoucherModelHead/editFinVoucherModelHead">
@@ -551,6 +549,35 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					sumitFlag = "N";
 					redragonJS.alert("凭证行必须超过两行");
 					return false;
+				}
+				
+				//判断借方、贷方金额的填写方式
+				var drFlag = "N";
+				var crFlag = "N";
+				$(".dataTr").each(function(){
+					var drAmountSelectVal = $(this).find("td .drAmountSelect").val();
+					var crAmountSelectVal = $(this).find("td .crAmountSelect").val();
+					
+					if(drAmountSelectVal==crAmountSelectVal){
+						sumitFlag = "N";
+						redragonJS.alert("凭证行借方或贷方金额只能填写一个");
+						return false;
+					}
+					
+					if(drAmountSelectVal=="AMOUNT"){
+						drFlag = "Y";
+					}
+					if(crAmountSelectVal=="AMOUNT"){
+						crFlag = "Y";
+					}
+				});
+				
+				if(sumitFlag=="Y"){
+					if(drFlag=="N"||crFlag=="N"){
+						sumitFlag = "N";
+						redragonJS.alert("借方和贷方金额至少填写一个");
+						return false;
+					}
 				}
 				
 				/*

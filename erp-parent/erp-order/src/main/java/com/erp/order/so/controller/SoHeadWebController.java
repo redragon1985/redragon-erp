@@ -26,6 +26,7 @@ import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -37,6 +38,10 @@ import com.framework.dao.model.Pages;
 import com.framework.util.JsonResultUtil;
 import com.framework.util.JsonUtil;
 import com.framework.util.ShiroUtil;
+import com.erp.common.ap.invoice.service.ApInvoiceHeadService;
+import com.erp.common.ar.invoice.service.ArInvoiceHeadService;
+import com.erp.common.inv.input.service.InvInputHeadService;
+import com.erp.common.inv.output.service.InvOutputHeadService;
 import com.erp.dataset.service.DatasetCommonService;
 import com.erp.hr.dao.model.HrStaffInfoRO;
 import com.erp.hr.service.HrCommonService;
@@ -66,6 +71,12 @@ public class SoHeadWebController extends ControllerSupport{
     private MasterDataCommonService masterDataCommonService;
     @Autowired
     private SoLineService soLineService;
+    @Autowired
+    @Qualifier("invOutputHeadServiceCommon")
+    private InvOutputHeadService invOutputHeadService;
+    @Autowired
+    @Qualifier("arInvoiceHeadServiceCommon")
+    private ArInvoiceHeadService arInvoiceHeadService;
     
     @Override
     public String getExceptionRedirectURL() {
@@ -276,6 +287,26 @@ public class SoHeadWebController extends ControllerSupport{
     public String updateApproveStatus(String code, String approveStatus, RedirectAttributes attr) {
         
         if(StringUtils.isNotBlank(code)&&StringUtils.isNotBlank(approveStatus)) {
+            if(approveStatus.equals("UNSUBMIT")) {
+                boolean outputFlag = this.invOutputHeadService.isExistInvOutputHeadRelateSO(code);
+                if(!outputFlag) {
+                    boolean invoiceFlag = this.arInvoiceHeadService.isExistArInvoiceRelateSO(code);
+                    if(invoiceFlag) {
+                        //提示信息
+                        attr.addFlashAttribute("hint", "hint");
+                        attr.addFlashAttribute("alertMessage", "当前销售订单已开票不能变更");
+                        attr.addAttribute("soHeadCode", code);
+                        return "redirect:getSoHead";
+                    }
+                }else {
+                    //提示信息
+                    attr.addFlashAttribute("hint", "hint");
+                    attr.addFlashAttribute("alertMessage", "当前销售订单已入库不能变更");
+                    attr.addAttribute("soHeadCode", code);
+                    return "redirect:getSoHead";
+                }
+            }
+            
             //更新审核状态
             this.soHeadService.updateApproveStatus(code, approveStatus);
           //提示信息

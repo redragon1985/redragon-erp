@@ -131,11 +131,19 @@ public class InvStockCheckHeadDaoImpl implements InvStockCheckHeadDao{
     
     @Override
     public void updateApproveStatus(String code, String approveStatus) {
-        String sql = "update inv_stock_check_head set approve_status = :approveStatus where check_head_code = :code";
+        String sql = "update inv_stock_check_head set approve_status = :approveStatus";
         
         Map<String, Object> args = new HashMap<String, Object>();
         args.put("code", code);
         args.put("approveStatus", approveStatus);
+        
+        if(approveStatus.equals("APPROVE")) {
+            sql = sql + " ,status = 'CONFIRM'";
+        }else if(approveStatus.equals("UNSUBMIT")) {
+            sql = sql + " ,status = 'ALTER'";
+        }
+        
+        sql = sql + " where check_head_code = :code";
         
         this.daoSupport.executeSQLTransaction(sql, args);
     }

@@ -111,6 +111,7 @@ public class SoHeadDaoImpl implements SoHeadDao{
         sql = sql + DaoUtil.getSQLCondition(paramObj, "soName", "and s.", args);
         sql = sql + DaoUtil.getSQLCondition(paramObj, "customerCode", "and s.", args);
         sql = sql + DaoUtil.getSQLCondition(paramObj, "projectCode", "and s.", args);
+        sql = sql + DaoUtil.getSQLCondition(paramObj, "approveStatus", "and s.", args);
         sql = sql + DaoUtil.getSQLCondition(paramObj, "status", "and s.", args);
         sql = sql + " order by s.so_head_id desc";
         
@@ -136,6 +137,7 @@ public class SoHeadDaoImpl implements SoHeadDao{
         sql = sql + DaoUtil.getSQLCondition(paramObj, "soName", "and s.", args);
         sql = sql + DaoUtil.getSQLCondition(paramObj, "customerCode", "and s.", args);
         sql = sql + DaoUtil.getSQLCondition(paramObj, "projectCode", "and s.", args);
+        sql = sql + DaoUtil.getSQLCondition(paramObj, "approveStatus", "and s.", args);
         sql = sql + DaoUtil.getSQLCondition(paramObj, "status", "and s.", args);
         sql = sql + DaoUtil.getDataAuthSQL(dataAuthSQL, "s.", "s.");
         sql = sql + " order by s.so_head_id desc";
@@ -148,11 +150,19 @@ public class SoHeadDaoImpl implements SoHeadDao{
     
     @Override
     public void updateApproveStatus(String code, String approveStatus) {
-        String sql = "update so_head set approve_status = :approveStatus where so_head_code = :code";
+        String sql = "update so_head set approve_status = :approveStatus";
         
         Map<String, Object> args = new HashMap<String, Object>();
         args.put("code", code);
         args.put("approveStatus", approveStatus);
+        
+        if(approveStatus.equals("APPROVE")) {
+            sql = sql + " ,status = 'CONFIRM'";
+        }else if(approveStatus.equals("UNSUBMIT")) {
+            sql = sql + " ,status = 'ALTER'";
+        }
+        
+        sql = sql + " where so_head_code = :code";
         
         this.daoSupport.executeSQLTransaction(sql, args);
     }

@@ -129,4 +129,40 @@ public class FinVoucherBillRDaoImpl implements FinVoucherBillRDao{
         return null;
     }
     
+    @Override
+    public boolean isExistVoucherRelateArPay(String headCode) {
+        String sql = "select count(*) from fin_voucher_bill_r h where h.bill_type = 'PAY' and h.bill_head_code = :headCode";
+        
+        Map<String, Object> args = new HashMap<String, Object>();
+        args.put("headCode", headCode);
+        
+        List list = this.daoSupport.selectDataSqlCount(sql, args);
+        if(list.size()>0) {
+            int count = this.daoSupport.convertSQLCount(list.get(0));
+            if(count>0) {
+                return true;
+            }
+        }
+        
+        return false;
+    }
+    
+    @Override
+    public boolean isExistVoucherRelateArReceipt(String headCode) {
+        String sql = "select count(*) from fin_voucher_bill_r h where h.bill_type = 'RECEIPT' and h.bill_head_code = :headCode";
+        
+        Map<String, Object> args = new HashMap<String, Object>();
+        args.put("headCode", headCode);
+        
+        List list = this.daoSupport.selectDataSqlCount(sql, args);
+        if(list.size()>0) {
+            int count = this.daoSupport.convertSQLCount(list.get(0));
+            if(count>0) {
+                return true;
+            }
+        }
+        
+        return false;
+    }
+    
 }

@@ -198,4 +198,22 @@ public class ArInvoiceLineDaoImpl implements ArInvoiceLineDao{
         return this.daoSupport.selectDataSql(sql, entity, args);
     }
     
+    @Override
+    public Double getMadeInvoiceQuantityBySoLine(String soLineCode, Integer invoiceLineId) {
+        String sql = "select sum(l.quantity) from ar_invoice_line l where l.invoice_source_line_code = :code and l.invoice_line_id <> :id";
+        
+        Map<String, Object> args = new HashMap<String, Object>();
+        args.put("code", soLineCode);
+        args.put("id", invoiceLineId);
+        
+        List list = this.daoSupport.selectDataSqlCount(sql, args);
+        if(list!=null&&list.size()>0) {
+            if(list.get(0)!=null) {
+                return Double.valueOf(String.valueOf(list.get(0)));
+            }
+        }
+        
+        return 0D;
+    }
+    
 }

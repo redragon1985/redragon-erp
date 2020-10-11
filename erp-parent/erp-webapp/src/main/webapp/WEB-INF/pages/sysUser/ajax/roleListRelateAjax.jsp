@@ -29,10 +29,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<span class="text-info"><label class="col-form-label"><strong>角色选择</strong></label></span>
 		<select id="roleCode" name="roleCode" class="form-control dual_select" multiple>
 			<c:forEach items="${sysRoleList}" var="data">
-				<option value="${data.roleCode}">${data.roleName}</option>
+				<option value="${data.roleCode}">${data.roleName}
+					<c:if test="${data.status=='N'}">
+               		(无效)
+               		</c:if>
+				</option>
 			</c:forEach>
 			<c:forEach items="${sysRoleRelateList}" var="data">
-				<option selected value="${data.roleCode}">${data.roleName}</option>
+				<option selected value="${data.roleCode}">${data.roleName}
+					<c:if test="${data.status=='N'}">
+               		(无效)
+               		</c:if>
+				</option>
 			</c:forEach>
 		</select>
 </div>

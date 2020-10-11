@@ -30,4 +30,10 @@ public interface FinVoucherBillRService extends DaoCRUDIF<FinVoucherBillR, FinVo
     //根据单据头code获取凭证头code
     public abstract String getVoucherHeadCodeByBillHeadCode(String billType, String billHeadCode);
     
+    //是否存在关联付款的凭证
+    public abstract boolean isExistVoucherRelateArPay(String headCode);
+    
+    //是否存在关联收款的凭证
+    public abstract boolean isExistVoucherRelateArReceipt(String headCode);
+    
 }

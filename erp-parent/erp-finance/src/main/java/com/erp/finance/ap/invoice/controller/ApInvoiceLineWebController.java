@@ -139,7 +139,7 @@ public class ApInvoiceLineWebController extends ControllerSupport{
         if(pages.getPage()==0) {
             pages.setPage(1);
         }
-        pages.setMax(100);
+        pages.setMax(1000);
         
         //分页查询采购订单行数据
         List<PoLine> poLineList = this.poLineService.getPoLineListByPoHeadCode(pages, poLineCO);
@@ -150,7 +150,7 @@ public class ApInvoiceLineWebController extends ControllerSupport{
                 //如果是物料则取入库数量
                 poLine.setInputQuantity(this.invInputLineService.getInputQuantityByPoLineCode(poLine.getPoLineCode()));
             }else {
-                //如果是事项则入库数量直接取采购数量
+                //如果是服务则入库数量直接取采购数量
                 poLine.setInputQuantity(poLine.getQuantity());
             }
         }
@@ -163,11 +163,9 @@ public class ApInvoiceLineWebController extends ControllerSupport{
         
         //剔除已经做了发票行的采购订单行
         Iterator<PoLine> poLineIt = poLineList.iterator();
-        Iterator<ApInvoiceLine> payLineIt = payLineList.iterator();
         while(poLineIt.hasNext()) {
             PoLine poLineTemp = poLineIt.next();
-            while(payLineIt.hasNext()) {
-                ApInvoiceLine payLineTemp = payLineIt.next();
+            for(ApInvoiceLine payLineTemp: payLineList) {
                 if(poLineTemp.getPoLineCode().equals(payLineTemp.getInvoiceSourceLineCode())) {
                     poLineIt.remove();
                     break;
@@ -221,13 +219,34 @@ public class ApInvoiceLineWebController extends ControllerSupport{
                     payLine.setMaterialName(materialMap.get(poLine.getMaterialCode()).toString());
                     payLine.setStandard(this.masterDataCommonService.getMdMaterialInfoCache(poLine.getMaterialCode()).getStandard());
                     payLine.setPrice(poLine.getPrice());
-                    payLine.setInputQuantity(poLine.getQuantity());
+                    
+                    //货物入库数量
+                    MdMaterial mdMaterial = this.masterDataCommonService.getMdMaterialInfoCache(poLine.getMaterialCode());
+                    if(mdMaterial.getMaterialType().equals("MATERIAL")) {
+                        //如果是物料则取入库数量
+                        payLine.setInputQuantity(this.invInputLineService.getInputQuantityByPoLineCode(poLine.getPoLineCode()));
+                    }else {
+                        //如果是服务则入库数量直接取采购数量
+                        payLine.setInputQuantity(poLine.getQuantity());
+                    }
+                    
+                    //订单已开票数量
+                    payLine.setMadeInvoiceQuantity(this.apInvoiceLineService.getMadeInvoiceQuantityByPoLine(poLine.getPoLineCode(), payLine.getInvoiceLineId()));
+                    
                     payLine.setUnit(materialUnitMap.get(poLine.getUnit()).toString());
                     payLine.setPoLineAmount(poLine.getAmount());
                 }
             }
         }else {
-            //payLine.setAmount(0D);
+            //根据来源获取单据数据
+            if(StringUtils.isNotBlank(invoiceSourceType)) {
+                if(invoiceSourceType.equals("PO")) {
+                    PoLine poLine = this.poLineService.getDataObject(payLine.getInvoiceSourceLineCode());
+                    //订单已开票数量
+                    payLine.setMadeInvoiceQuantity(this.apInvoiceLineService.getMadeInvoiceQuantityByPoLine(poLine.getPoLineCode(), 0));
+                }
+            }
+            
             payLine.setStandard(this.masterDataCommonService.getMdMaterialInfoCache(payLine.getMaterialCode()).getStandard());
         }
         

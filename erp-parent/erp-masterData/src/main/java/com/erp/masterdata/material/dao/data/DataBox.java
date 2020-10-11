@@ -33,7 +33,7 @@ public class DataBox {
     public static Map<String, String> getMaterialTypeMap(){
         Map<String, String> map = new LinkedHashMap<String, String>();
         map.put("MATERIAL", "物料");
-        map.put("MATTER", "事项");
+        map.put("MATTER", "服务");
         return map;
     }
 

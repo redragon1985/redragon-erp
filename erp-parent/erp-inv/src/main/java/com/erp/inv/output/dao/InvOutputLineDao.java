@@ -42,4 +42,7 @@ public interface InvOutputLineDao extends DaoCRUDIF<InvOutputLine, InvOutputLine
     //获取行列表（根据头code）
     public abstract List<InvOutputLine> getInvOutputLineListByOutputHeadCode(String outputHeadCode);
     
+    //获取销售订单已出库数量
+    public abstract Double getOutputedQuantityBySoLine(String soLineCode, Integer outputLineId);
+    
 }

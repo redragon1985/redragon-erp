@@ -117,10 +117,15 @@ public class SysAuthDaoImpl implements SysAuthDao{
     
     @Override
     public List<SysAuth> getSysAuthListByStatus(String status) {
-        String sql = "select a.* from sys_auth a where a.status = :status order by a.auth_code";
+        String sql = "select a.* from sys_auth a where 1=1";
         
         Map<String, Object> args = new HashMap<String, Object>();
-        args.put("status", status);
+        if(status!=null) {
+            sql = sql + " and a.status = :status";
+            args.put("status", status);
+        }
+
+        sql = sql + " order by a.auth_code";
         
         Map<String, Class<?>> entity = new HashMap<String, Class<?>>();
         entity.put("a", SysAuth.class);

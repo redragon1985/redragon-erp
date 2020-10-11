@@ -34,7 +34,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<div class="modal-content animated bounceInRight">
 
 			<div class="modal-header">
-				<h4 class="modal-title">物料/事项类型选择</h4>
+				<h4 class="modal-title">物料/服务类型选择</h4>
 				<button type="button" class="close" data-dismiss="modal"
 					aria-label="Close">
 					<span aria-hidden="true">&times;</span>

@@ -83,8 +83,8 @@ public class MdMaterial implements java.io.Serializable {
         this.materialName = materialName;
     }
     
-    //是物料或事项（MATERIAL、MATTER）
-    @NotBlank(message="物料或事项必须选择")
+    //是物料或服务（MATERIAL、MATTER）
+    @NotBlank(message="物料或服务必须选择")
     @Column(name = "material_type", unique = false, nullable = false, length = 45)
     private String materialType;
     

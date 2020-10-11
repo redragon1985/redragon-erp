@@ -94,7 +94,17 @@ public class MdVendorDaoImpl implements MdVendorDao{
     
     @Override
     public List<MdVendor> getDataObjects(MdVendorCO paramObj) {
-        return null;
+        String sql = "select c.* from md_vendor c where 1=1";
+        
+        Map<String, Object> args = new HashMap<String, Object>();
+        sql = sql + DaoUtil.getSQLCondition(paramObj, "approveStatus", "and c.", args);
+        sql = sql + DaoUtil.getSQLCondition(paramObj, "status", "and c.", args);
+        sql = sql + " order by c.vendor_id desc";
+        
+        Map<String, Class<?>> entity = new HashMap<String, Class<?>>();
+        entity.put("c", MdVendor.class);
+        
+        return this.daoSupport.selectDataSql(sql, entity, args);
     }
     
     @Override
@@ -133,7 +143,7 @@ public class MdVendorDaoImpl implements MdVendorDao{
     
     @Override
     public List<MdVendor> getMdVendorListForOwn() {
-        String sql = "select c.* from md_vendor c where c.own_flag = 'Y' order by c.vendor_id desc";
+        String sql = "select c.* from md_vendor c where c.own_flag = 'Y' and c.status = 'Y' and c.approve_status = 'APPROVE' order by c.vendor_id desc";
         
         Map<String, Class<?>> entity = new HashMap<String, Class<?>>();
         entity.put("c", MdVendor.class);

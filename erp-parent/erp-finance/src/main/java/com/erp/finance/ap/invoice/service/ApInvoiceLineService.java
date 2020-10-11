@@ -47,4 +47,7 @@ public interface ApInvoiceLineService extends DaoCRUDIF<ApInvoiceLine, ApInvoice
     //获取列表行（根据头code）
     public abstract List<ApInvoiceLine> getApInvoiceLineListByHeadCode(String headCode);
     
+    //获取采购订单行已开票数量
+    public abstract Double getMadeInvoiceQuantityByPoLine(String poLineCode, Integer invoiceLineId);
+    
 }

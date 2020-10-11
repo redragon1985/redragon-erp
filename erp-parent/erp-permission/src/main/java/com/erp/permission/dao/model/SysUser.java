@@ -73,7 +73,7 @@ public class SysUser implements java.io.Serializable {
     }
     
     //密码
-    @NotBlank(message="{password.NotBlank}")
+    //@NotBlank(message="{password.NotBlank}")
     @Length(min=6, message="{password.Length}")
     @Column(name = "password", unique = false, nullable = false, length = 50)
     private String password;

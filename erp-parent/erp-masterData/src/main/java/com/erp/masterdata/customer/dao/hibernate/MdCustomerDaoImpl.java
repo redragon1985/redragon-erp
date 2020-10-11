@@ -92,7 +92,17 @@ public class MdCustomerDaoImpl implements MdCustomerDao{
     
     @Override
     public List<MdCustomer> getDataObjects(MdCustomerCO paramObj) {
-        return null;
+        String sql = "select c.* from md_customer c where 1=1";
+        
+        Map<String, Object> args = new HashMap<String, Object>();
+        sql = sql + DaoUtil.getSQLCondition(paramObj, "approveStatus", "and c.", args);
+        sql = sql + DaoUtil.getSQLCondition(paramObj, "status", "and c.", args);
+        sql = sql + " order by c.customer_id desc";
+        
+        Map<String, Class<?>> entity = new HashMap<String, Class<?>>();
+        entity.put("c", MdCustomer.class);
+        
+        return this.daoSupport.selectDataSql(sql, entity, args);
     }
     
     @Override
@@ -131,7 +141,7 @@ public class MdCustomerDaoImpl implements MdCustomerDao{
     
     @Override
     public List<MdCustomer> getMdCustomerListForOwn() {
-        String sql = "select c.* from md_customer c where c.own_flag = 'Y' order by c.customer_id desc";
+        String sql = "select c.* from md_customer c where c.own_flag = 'Y' and c.status = 'Y' and c.approve_status = 'APPROVE' order by c.customer_id desc";
         
         Map<String, Class<?>> entity = new HashMap<String, Class<?>>();
         entity.put("c", MdCustomer.class);

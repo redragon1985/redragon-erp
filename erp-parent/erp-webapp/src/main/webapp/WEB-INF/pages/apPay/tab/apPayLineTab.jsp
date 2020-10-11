@@ -205,15 +205,15 @@
 		});
 	}
 	
-	//返回采购订单行选择框
-	function getSelectApInvoiceModal(){
+	//返回发票行选择框
+	function getSelectApInvoiceModal(page){
 		$('#selectBillLineDiv').modal('hide');
 		redragonJS.loading("ibox-content1");
 		$.ajax({
 			type: "post",
 			url: "web/apPayLine/getSelectApInvoiceModal",
 			data: {"receiver": $("#vendorCode").val(),"payHeadCode": "${param.payHeadCode}", "invoiceHeadCode": $("#invoiceHeadCodeLS").val(),
-				   "invoiceSourceHeadCode": $("#invoiceSourceHeadCodeLS").val(), "prepayFlag": $("#prepayFlagLS").val(), 
+				   "invoiceSourceHeadCode": $("#invoiceSourceHeadCodeLS").val(), "prepayFlag": $("#prepayFlagLS").val(), "page": page,
 				   "amount": $("#amountLS").val(), "invoiceDate": $("#invoiceDateLS").val()},
 			async: false,
 			dataType: "html",

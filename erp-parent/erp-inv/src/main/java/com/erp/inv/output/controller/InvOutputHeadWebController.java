@@ -42,12 +42,14 @@ import com.framework.dao.model.Pages;
 import com.framework.util.JsonResultUtil;
 import com.framework.util.JsonUtil;
 import com.framework.util.ShiroUtil;
+import com.erp.common.ar.invoice.service.ArInvoiceHeadService;
 import com.erp.common.voucher.service.FinVoucherBillRService;
 import com.erp.common.voucher.service.FinVoucherHeadService;
 import com.erp.common.voucher.service.FinVoucherModelHeadService;
 import com.erp.dataset.service.DatasetCommonService;
 import com.erp.hr.dao.model.HrStaffInfoRO;
 import com.erp.hr.service.HrCommonService;
+import com.erp.inv.input.dao.model.InvInputHead;
 import com.erp.inv.input.dao.model.InvInputLine;
 import com.erp.inv.output.dao.data.DataBox;
 import com.erp.inv.output.dao.model.InvOutputHead;
@@ -109,6 +111,9 @@ public class InvOutputHeadWebController extends ControllerSupport{
     @Autowired
     @Qualifier("finVoucherBillRServiceCommon")
     private FinVoucherBillRService finVoucherBillRService;
+    @Autowired
+    @Qualifier("arInvoiceHeadServiceCommon")
+    private ArInvoiceHeadService arInvoiceHeadService;
     
     
     
@@ -266,6 +271,8 @@ public class InvOutputHeadWebController extends ControllerSupport{
         }
         
         //分页查询数据
+        soHeadCO.setStatus("CONFIRM");
+        soHeadCO.setApproveStatus("APPROVE");
         List<SoHead> soHeadList = this.soHeadService.getDataObjects(pages, soHeadCO);
         
         //采购订单类型
@@ -383,6 +390,18 @@ public class InvOutputHeadWebController extends ControllerSupport{
     public String updateApproveStatus(String code, String approveStatus, RedirectAttributes attr) {
         
         if(StringUtils.isNotBlank(code)&&StringUtils.isNotBlank(approveStatus)) {
+            if(approveStatus.equals("UNSUBMIT")) {
+                InvOutputHead invOutputHead = this.invOutputHeadService.getDataObject(code);
+                boolean invoiceFlag = this.arInvoiceHeadService.isExistArInvoiceRelateSO(invOutputHead.getOutputSourceHeadCode());
+                if(invoiceFlag) {
+                    //提示信息
+                    attr.addFlashAttribute("hint", "hint");
+                    attr.addFlashAttribute("alertMessage", "当前出库关联的销售订单已开票不能变更");
+                    attr.addAttribute("outputHeadCode", code);
+                    return "redirect:getInvOutputHead";
+                }
+            }
+            
             //更新审核状态
             this.invOutputHeadService.updateApproveStatus(code, approveStatus);
             //提示信息

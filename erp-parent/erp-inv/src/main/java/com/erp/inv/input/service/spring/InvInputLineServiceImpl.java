@@ -121,4 +121,9 @@ public class InvInputLineServiceImpl implements InvInputLineService {
         return this.invInputLineDao.getInvInputLineListByInputHeadCode(inputHeadCode);
     }
     
+    @Override
+    public Double getInputedQuantityByPoLine(String poLineCode, Integer inputLineId) {
+        return this.invInputLineDao.getInputedQuantityByPoLine(poLineCode, inputLineId);
+    }
+    
 }

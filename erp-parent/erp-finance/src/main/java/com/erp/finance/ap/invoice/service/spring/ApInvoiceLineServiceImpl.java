@@ -130,4 +130,9 @@ public class ApInvoiceLineServiceImpl implements ApInvoiceLineService {
         return this.payLineDao.getApInvoiceLineListByHeadCode(headCode);
     }
     
+    @Override
+    public Double getMadeInvoiceQuantityByPoLine(String poLineCode, Integer invoiceLineId) {
+        return this.payLineDao.getMadeInvoiceQuantityByPoLine(poLineCode, invoiceLineId);
+    }
+    
 }

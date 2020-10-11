@@ -42,6 +42,7 @@ import com.framework.dao.model.Pages;
 import com.framework.util.JsonResultUtil;
 import com.framework.util.JsonUtil;
 import com.framework.util.ShiroUtil;
+import com.erp.common.ap.invoice.service.ApInvoiceHeadService;
 import com.erp.common.voucher.service.FinVoucherBillRService;
 import com.erp.common.voucher.service.FinVoucherHeadService;
 import com.erp.common.voucher.service.FinVoucherModelHeadService;
@@ -102,6 +103,9 @@ public class InvInputHeadWebController extends ControllerSupport{
     @Autowired
     @Qualifier("finVoucherBillRServiceCommon")
     private FinVoucherBillRService finVoucherBillRService;
+    @Autowired
+    @Qualifier("apInvoiceHeadServiceCommon")
+    private ApInvoiceHeadService apInvoiceHeadService;
     
     
     
@@ -261,6 +265,8 @@ public class InvInputHeadWebController extends ControllerSupport{
         }
         
         //分页查询数据
+        poHeadCO.setStatus("CONFIRM");
+        poHeadCO.setApproveStatus("APPROVE");
         List<PoHead> poHeadList = this.poHeadService.getDataObjects(pages, poHeadCO);
         
         //采购订单类型
@@ -378,6 +384,18 @@ public class InvInputHeadWebController extends ControllerSupport{
     public String updateApproveStatus(String code, String approveStatus, RedirectAttributes attr) {
         
         if(StringUtils.isNotBlank(code)&&StringUtils.isNotBlank(approveStatus)) {
+            if(approveStatus.equals("UNSUBMIT")) {
+                InvInputHead invInputHead = this.invInputHeadService.getDataObject(code);
+                boolean invoiceFlag = this.apInvoiceHeadService.isExistApInvoiceRelatePO(invInputHead.getInputSourceHeadCode());
+                if(invoiceFlag) {
+                    //提示信息
+                    attr.addFlashAttribute("hint", "hint");
+                    attr.addFlashAttribute("alertMessage", "当前入库关联的采购订单已开票不能变更");
+                    attr.addAttribute("inputHeadCode", code);
+                    return "redirect:getInvInputHead";
+                }
+            }
+            
             //更新审核状态
             this.invInputHeadService.updateApproveStatus(code, approveStatus);
             //提示信息

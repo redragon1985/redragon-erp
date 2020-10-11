@@ -33,6 +33,7 @@ public class DataBox {
     public static Map<String, String> getInputStatusMap(){
         Map<String, String> map = new LinkedHashMap<String, String>();
         map.put("NEW", "新建");
+        map.put("ALTER", "变更");
         map.put("CONFIRM", "确认");
         map.put("CANCEL", "取消");
         return map;

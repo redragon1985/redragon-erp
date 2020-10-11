@@ -162,4 +162,9 @@ public class InvOutputLineServiceImpl implements InvOutputLineService {
         return this.invOutputLineDao.getInvOutputLineListByOutputHeadCode(outputHeadCode);
     }
     
+    @Override
+    public Double getOutputedQuantityBySoLine(String soLineCode, Integer outputLineId) {
+        return this.invOutputLineDao.getOutputedQuantityBySoLine(soLineCode, outputLineId);
+    }
+    
 }

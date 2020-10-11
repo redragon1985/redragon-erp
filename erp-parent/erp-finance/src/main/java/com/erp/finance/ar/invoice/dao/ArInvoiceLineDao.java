@@ -47,4 +47,7 @@ public interface ArInvoiceLineDao extends DaoCRUDIF<ArInvoiceLine, ArInvoiceLine
     //获取列表行（根据头code）
     public abstract List<ArInvoiceLine> getArInvoiceLineListByHeadCode(String headCode);
     
+    //获取销售订单行已开票数量
+    public abstract Double getMadeInvoiceQuantityBySoLine(String soLineCode, Integer invoiceLineId);
+    
 }

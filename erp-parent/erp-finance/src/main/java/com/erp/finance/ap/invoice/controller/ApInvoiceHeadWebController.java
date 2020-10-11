@@ -41,6 +41,8 @@ import com.framework.dao.model.Pages;
 import com.framework.util.JsonResultUtil;
 import com.framework.util.JsonUtil;
 import com.framework.util.ShiroUtil;
+import com.erp.common.ap.pay.service.ApPayHeadService;
+import com.erp.common.ar.invoice.service.ArInvoiceHeadService;
 import com.erp.common.voucher.service.FinVoucherBillRService;
 import com.erp.common.voucher.service.FinVoucherHeadService;
 import com.erp.common.voucher.service.FinVoucherModelHeadService;
@@ -54,6 +56,7 @@ import com.erp.finance.ap.invoice.service.ApInvoiceLineService;
 import com.erp.hr.dao.model.HrStaffInfoRO;
 import com.erp.hr.service.HrCommonService;
 import com.erp.inv.input.dao.model.InvInputLine;
+import com.erp.inv.output.dao.model.InvOutputHead;
 import com.erp.masterdata.common.service.MasterDataCommonService;
 import com.erp.masterdata.customer.dao.model.MdCustomerBank;
 import com.erp.masterdata.customer.dao.model.MdCustomerBankCO;
@@ -99,6 +102,9 @@ public class ApInvoiceHeadWebController extends ControllerSupport{
     @Autowired
     @Qualifier("finVoucherBillRServiceCommon")
     private FinVoucherBillRService finVoucherBillRService;
+    @Autowired
+    @Qualifier("apPayHeadServiceCommon")
+    private ApPayHeadService apPayHeadService;
     
     
     
@@ -222,7 +228,7 @@ public class ApInvoiceHeadWebController extends ControllerSupport{
         //获取供应商
         Map vendorMap = this.masterDataCommonService.getVendorMap();
         //获取本公司
-        Map vendorOwnMap = this.masterDataCommonService.getOwnVendorMap();
+        Map vendorOwnMap = this.masterDataCommonService.getOwnCustomerMap();
         //审批状态
         Map approveStatusMap = GlobalDataBox.getApproveStatusMap();
         
@@ -259,6 +265,8 @@ public class ApInvoiceHeadWebController extends ControllerSupport{
         }
         
         //分页查询数据
+        poHeadCO.setStatus("CONFIRM");
+        poHeadCO.setApproveStatus("APPROVE");
         List<PoHead> poHeadList = this.poHeadService.getDataObjects(pages, poHeadCO);
         
         //采购订单类型
@@ -402,6 +410,17 @@ public class ApInvoiceHeadWebController extends ControllerSupport{
     public String updateApproveStatus(String code, String approveStatus, RedirectAttributes attr) {
         
         if(StringUtils.isNotBlank(code)&&StringUtils.isNotBlank(approveStatus)) {
+            if(approveStatus.equals("UNSUBMIT")) {
+                boolean payFlag = this.apPayHeadService.isExistApPayRelateApInvoice(code);
+                if(payFlag) {
+                    //提示信息
+                    attr.addFlashAttribute("hint", "hint");
+                    attr.addFlashAttribute("alertMessage", "当前发票已付款核销不能变更");
+                    attr.addAttribute("invoiceHeadCode", code);
+                    return "redirect:getApInvoiceHead";
+                }
+            }
+            
             //更新审核状态
             this.apInvoiceHeadService.updateApproveStatus(code, approveStatus);
           //提示信息

@@ -200,9 +200,9 @@ public class SysRoleWebController extends ControllerSupport{
     public String beforeRelateSysRoleAuth(String roleCode, Model model) {
         
         //获取要关联的角色
-        List<SysRole> sysRoleList = this.sysRoleService.getSysRoleListByStatus("Y");
+        List<SysRole> sysRoleList = this.sysRoleService.getSysRoleListByStatus(null);
         //获取要关联的权限
-        List<SysAuth> sysAuthList = this.sysAuthService.getSysAuthListByStatus("Y");
+        List<SysAuth> sysAuthList = this.sysAuthService.getSysAuthListByStatus(null);
         
         if(StringUtils.isNotBlank(roleCode)) {
             //获取用户已关联的权限
@@ -246,7 +246,7 @@ public class SysRoleWebController extends ControllerSupport{
         
         if(StringUtils.isNotBlank(roleCode)) {
             //获取要关联的权限
-            List<SysAuth> sysAuthList = this.sysAuthService.getSysAuthListByStatus("Y");
+            List<SysAuth> sysAuthList = this.sysAuthService.getSysAuthListByStatus(null);
             //获取用户已关联的权限
             List<SysAuth> sysAuthRelateList = this.sysAuthService.getRelateSysAuthListByRoleCode(roleCode);
             

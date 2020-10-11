@@ -222,6 +222,8 @@ public class InvInputLine implements java.io.Serializable {
     @Transient
     private Double quantity;
     @Transient
+    private Double inputedQuantity;
+    @Transient
     private String unit;
     @Transient
     private Double poLineAmount;
@@ -261,6 +263,12 @@ public class InvInputLine implements java.io.Serializable {
     }
     public void setPoLineAmount(Double poLineAmount) {
         this.poLineAmount = poLineAmount;
+    }
+    public Double getInputedQuantity() {
+        return inputedQuantity;
+    }
+    public void setInputedQuantity(Double inputedQuantity) {
+        this.inputedQuantity = inputedQuantity;
     }
 
 }

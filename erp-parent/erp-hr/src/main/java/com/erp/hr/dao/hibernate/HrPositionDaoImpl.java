@@ -79,7 +79,16 @@ public class HrPositionDaoImpl implements HrPositionDao{
     
     @Override
     public List<HrPosition> getDataObjects(HrPositionCO paramObj) {
-        return null;
+        String sql = "select p.* from hr_position p where 1=1";
+        
+        Map<String, Object> args = new HashMap<String, Object>();
+        sql = sql + DaoUtil.getSQLCondition(paramObj, "status", "and p.", args);
+        sql = sql + " order by p.position_id desc";
+        
+        Map<String, Class<?>> entity = new HashMap<String, Class<?>>();
+        entity.put("p", HrPosition.class);
+        
+        return this.daoSupport.selectDataSql(sql, entity, args);
     }
     
     @Override

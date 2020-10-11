@@ -216,7 +216,7 @@ public class SysUserWebController extends ControllerSupport{
         //获取要关联的用户
         List<SysUserRO> sysUserROList = this.sysUserService.getSysUserROListForRelate();
         //获取要关联的角色
-        List<SysRole> sysRoleList = this.sysRoleService.getSysRoleListByStatus("Y");
+        List<SysRole> sysRoleList = this.sysRoleService.getSysRoleListByStatus(null);
         if(StringUtils.isNotBlank(username)) {
             //获取用户已关联的角色
             List<SysRole> sysRoleRelateList = this.sysRoleService.getRelateSysRoleListByUsername(username);
@@ -259,7 +259,7 @@ public class SysUserWebController extends ControllerSupport{
         
         if(StringUtils.isNotBlank(username)) {
             //获取要关联的角色
-            List<SysRole> sysRoleList = this.sysRoleService.getSysRoleListByStatus("Y");
+            List<SysRole> sysRoleList = this.sysRoleService.getSysRoleListByStatus(null);
             //获取用户已关联的角色
             List<SysRole> sysRoleRelateList = this.sysRoleService.getRelateSysRoleListByUsername(username);
             

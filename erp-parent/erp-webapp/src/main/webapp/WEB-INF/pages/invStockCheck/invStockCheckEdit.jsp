@@ -57,11 +57,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								<button class="btn btn-primary btn-lg" type="button" onclick="window.location.href='web/invStockCheckHead/updateApproveStatus?code=${requestScope.invStockCheckHead.checkHeadCode}&warehouseCode=${param.warehouseCode}&approveStatus=SUBMIT'">&nbsp;&nbsp;提交&nbsp;&nbsp;<i class="fa fa-arrow-circle-right"></i></button>&nbsp;
 							</c:if>
 							<c:if test="${requestScope.invStockCheckHead.approveStatus=='SUBMIT' }">
-								<button class="btn btn-warning btn-lg" type="button" onclick="window.location.href='web/invStockCheckHead/updateApproveStatus?code=${requestScope.invStockCheckHead.checkHeadCode}&warehouseCode=${param.warehouseCode}&approveStatus=APPROVE'">&nbsp;&nbsp;审核通过&nbsp;&nbsp;<i class="fa fa-check-circle"></i></button>&nbsp;
-								<button class="btn btn-danger btn-lg" type="button" onclick="window.location.href='web/invStockCheckHead/updateApproveStatus?code=${requestScope.invStockCheckHead.checkHeadCode}&warehouseCode=${param.warehouseCode}&approveStatus=REJECT'">&nbsp;&nbsp;驳回&nbsp;&nbsp;<i class="fa fa-times-circle"></i></button>&nbsp;
+								<button class="btn btn-warning btn-lg btn-redragon-approve" type="button" onclick="approveData()">&nbsp;&nbsp;审核通过&nbsp;&nbsp;<i class="fa fa-check-circle"></i></button>&nbsp;
+								<button class="btn btn-danger btn-lg btn-redragon-approve" type="button" onclick="window.location.href='web/invStockCheckHead/updateApproveStatus?code=${requestScope.invStockCheckHead.checkHeadCode}&warehouseCode=${param.warehouseCode}&approveStatus=REJECT'">&nbsp;&nbsp;驳回&nbsp;&nbsp;<i class="fa fa-times-circle"></i></button>&nbsp;
 							</c:if>
 							<c:if test="${requestScope.invStockCheckHead.approveStatus=='APPROVE' }">
-								<button class="btn btn-success btn-lg" type="button" onclick="window.location.href='web/invStockCheckHead/updateApproveStatus?code=${requestScope.invStockCheckHead.checkHeadCode}&warehouseCode=${param.warehouseCode}&approveStatus=UNSUBMIT'">&nbsp;&nbsp;变更&nbsp;&nbsp;<i class="fa fa-retweet"></i></button>&nbsp;
+								<button class="btn btn-success btn-lg" type="button" onclick="alterData()">&nbsp;&nbsp;变更&nbsp;&nbsp;<i class="fa fa-retweet"></i></button>&nbsp;
 							</c:if>
 						</c:if>
 					</div>
@@ -214,5 +214,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 	function setCheckName(){
 		$("#checkName").val("${requestScope.invWarehouse.warehouseName}"+"["+$("#checkDate").val()+"]盘点");
+	}
+	
+	//审批通过
+	function approveData(){
+		redragonJS.confirm("确认审批通过？", function(){
+			window.location.href='web/invStockCheckHead/updateApproveStatus?code=${requestScope.invStockCheckHead.checkHeadCode}&warehouseCode=${param.warehouseCode}&approveStatus=APPROVE';
+		});
+	}
+	
+	//数据变更
+	function alterData(){
+		redragonJS.confirm("确认变更数据？数据变更后将产生变更历史信息！", function(){
+			window.location.href='web/invStockCheckHead/updateApproveStatus?code=${requestScope.invStockCheckHead.checkHeadCode}&warehouseCode=${param.warehouseCode}&approveStatus=UNSUBMIT';
+		});
 	}
 </script>

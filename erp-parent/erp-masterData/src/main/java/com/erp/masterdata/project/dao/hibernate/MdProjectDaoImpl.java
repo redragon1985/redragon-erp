@@ -79,7 +79,17 @@ public class MdProjectDaoImpl implements MdProjectDao{
     
     @Override
     public List<MdProject> getDataObjects(MdProjectCO paramObj) {
-        return null;
+        String sql = "select p.* from md_project p where 1=1";
+        
+        Map<String, Object> args = new HashMap<String, Object>();
+        sql = sql + DaoUtil.getSQLCondition(paramObj, "approveStatus", "and p.", args);
+        sql = sql + DaoUtil.getSQLCondition(paramObj, "status", "and p.", args);
+        sql = sql + " order by p.project_id desc";
+        
+        Map<String, Class<?>> entity = new HashMap<String, Class<?>>();
+        entity.put("p", MdProject.class);
+        
+        return this.daoSupport.selectDataSql(sql, entity, args);
     }
     
     @Override

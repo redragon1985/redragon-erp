@@ -57,6 +57,9 @@ response.setDateHeader ("Expires", 0);
 				                	<c:if test="${data.userRoleNum==0}">
 				                		(未分配)
 				                	</c:if>
+				                	<c:if test="${data.status=='N'}">
+				                		(无效)
+				                	</c:if>
 			                	</option>
 			                </c:forEach>
 		                </select>
@@ -69,11 +72,19 @@ response.setDateHeader ("Expires", 0);
 								<select id="roleCode" name="roleCode" class="form-control dual_select" multiple>
 									<%-- 未选择项 --%>
 									<c:forEach items="${sysRoleList}" var="data">
-										<option value="${data.roleCode}">${data.roleName}</option>
+										<option value="${data.roleCode}">${data.roleName}
+											<c:if test="${data.status=='N'}">
+					                		(无效)
+					                		</c:if>
+										</option>
 									</c:forEach>
 									<%-- 已选择项 --%>
 									<c:forEach items="${sysRoleRelateList}" var="data">
-										<option selected value="${data.roleCode}">${data.roleName}</option>
+										<option selected value="${data.roleCode}">${data.roleName}
+											<c:if test="${data.status=='N'}">
+					                		(无效)
+					                		</c:if>
+										</option>
 									</c:forEach>
 								</select>
 						</div>

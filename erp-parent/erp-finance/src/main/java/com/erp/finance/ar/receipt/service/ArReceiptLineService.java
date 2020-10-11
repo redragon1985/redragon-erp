@@ -38,4 +38,7 @@ public interface ArReceiptLineService extends DaoCRUDIF<ArReceiptLine, ArReceipt
     //获取列表行（根据头code）
     public abstract List<ArReceiptLine> getArReceiptLineListByHeadCode(String headCode);
     
+    //获取销售发票已收款金额
+    public abstract Double getInvoiceReceiveAmount(String invoiceHeadCode, Integer receiptLineId);
+    
 }

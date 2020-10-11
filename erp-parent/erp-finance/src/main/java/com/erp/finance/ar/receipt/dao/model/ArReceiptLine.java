@@ -201,6 +201,8 @@ public class ArReceiptLine implements java.io.Serializable {
     @Transient
     private Double invoiceAmount;
     @Transient
+    private Double invoiceReceivedAmount;
+    @Transient
     private Double taxAmount;
     @Transient
     private String soHeadCode;
@@ -238,6 +240,12 @@ public class ArReceiptLine implements java.io.Serializable {
     }
     public void setInvoiceDate(Date invoiceDate) {
         this.invoiceDate = invoiceDate;
+    }
+    public Double getInvoiceReceivedAmount() {
+        return invoiceReceivedAmount;
+    }
+    public void setInvoiceReceivedAmount(Double invoiceReceivedAmount) {
+        this.invoiceReceivedAmount = invoiceReceivedAmount;
     }
     
 }

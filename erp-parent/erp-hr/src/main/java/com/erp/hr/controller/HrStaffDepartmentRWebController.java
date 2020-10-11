@@ -35,7 +35,9 @@ import com.framework.util.JsonResultUtil;
 import com.framework.util.JsonUtil;
 import com.erp.hr.dao.model.HrDepartment;
 import com.erp.hr.dao.model.HrPosition;
+import com.erp.hr.dao.model.HrPositionCO;
 import com.erp.hr.dao.model.HrStaff;
+import com.erp.hr.dao.model.HrStaffCO;
 import com.erp.hr.dao.model.HrStaffDepartmentR;
 import com.erp.hr.dao.model.HrStaffDepartmentRCO;
 import com.erp.hr.service.HrDepartmentService;
@@ -137,10 +139,14 @@ public class HrStaffDepartmentRWebController extends ControllerSupport{
         HrDepartment hrDepartment = this.hrDepartmentService.getDataObject(departmentId);
         
         //获取职员列表
-        List<HrStaff> hrStaffList = this.hrStaffService.getDataObjects();
+        HrStaffCO hrStaffCO = new HrStaffCO();
+        hrStaffCO.setStaffStatus("WORK");
+        List<HrStaff> hrStaffList = this.hrStaffService.getDataObjects(hrStaffCO);
         
         //获取岗位列表
-        List<HrPosition> hrPositionList = this.hrPositionService.getDataObjects();
+        HrPositionCO hrPositionCO = new HrPositionCO();
+        hrPositionCO.setStatus("Y");
+        List<HrPosition> hrPositionList = this.hrPositionService.getDataObjects(hrPositionCO);
         
         //页面属性设置
         model.addAttribute("hrStaffDepartmentR", hrStaffDepartmentR);

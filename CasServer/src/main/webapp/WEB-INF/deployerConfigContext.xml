@@ -136,7 +136,7 @@
     <!-- username,password validate --> 
     <bean id="jdbcAuthenticationHandler" class="org.jasig.cas.adaptors.jdbc.QueryDatabaseAuthenticationHandler"> 
     	<property name="dataSource" ref="dataSource"></property> 
-	    <property name="sql" value="select password from sys_user where username=?"></property> 
+	    <property name="sql" value="select password from sys_user where status = 'Y' and username=?"></property> 
 	    <property name="passwordEncoder" ref="MD5PasswordEncoder"></property>
 	</bean>
 	
@@ -154,8 +154,9 @@
 			  ra.role_code as roles,
 			  ra.auth_code as perms
 			  
-			FROM sys_user t,sys_user_role_r ur,sys_role_auth_r ra 
-			where t.username=ur.username and ur.role_code=ra.role_code and {0}
+			FROM sys_user t,sys_user_role_r ur,sys_role_auth_r ra,sys_role r,sys_auth a
+			where t.username=ur.username and ur.role_code=ra.role_code and ur.role_code = r.role_code and ra.auth_code = a.auth_code
+			and t.status = 'Y' and r.status = 'Y' and a.status = 'Y' and {0}
         	</value>
         </constructor-arg>
          

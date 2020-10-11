@@ -145,9 +145,10 @@ public class ApPayLineWebController extends ControllerSupport{
         if(pages.getPage()==0) {
             pages.setPage(1);
         }
-        pages.setMax(100);
         
         //分页查询采购订单行数据
+        apInvoiceHeadCO.setStatus("CONFIRM");
+        apInvoiceHeadCO.setApproveStatus("APPROVE");
         List<ApInvoiceHead> invoiceHeadList = this.apInvoiceHeadService.getDataObjects(pages, apInvoiceHeadCO);
         //循环设置发票信息
         for(ApInvoiceHead apInvoiceHead: invoiceHeadList) {
@@ -165,11 +166,9 @@ public class ApPayLineWebController extends ControllerSupport{
         
         //剔除已经做了发票行的采购订单行
         Iterator<ApInvoiceHead> invoiceIt = invoiceHeadList.iterator();
-        Iterator<ApPayLine> payLineIt = payLineList.iterator();
         while(invoiceIt.hasNext()) {
             ApInvoiceHead apInvoiceHeadTemp = invoiceIt.next();
-            while(payLineIt.hasNext()) {
-                ApPayLine payLineTemp = payLineIt.next();
+            for(ApPayLine payLineTemp: payLineList) {
                 if(apInvoiceHeadTemp.getInvoiceHeadCode().equals(payLineTemp.getInvoiceHeadCode())) {
                     invoiceIt.remove();
                     break;
@@ -208,14 +207,19 @@ public class ApPayLineWebController extends ControllerSupport{
             ApInvoiceHead apInvoiceHead = this.apInvoiceHeadService.getDataObject(apPayLine.getInvoiceHeadCode());
             //获取税额
             BigDecimal[] sumAmount = this.apInvoiceLineService.getInvoiceLineAmountSumByHeadCode(apInvoiceHead.getInvoiceHeadCode());
+            //获取发票已核销金额
+            Double invoicePaidAmount = this.apPayLineService.getInvoicePaidAmount(apPayLine.getInvoiceHeadCode(), apPayLine.getPayLineId());
             
+            apPayLine.setInvoicePaidAmount(invoicePaidAmount);
             apPayLine.setInvoiceAmount(apInvoiceHead.getAmount());
             apPayLine.setTaxAmount(sumAmount[1].doubleValue());
             apPayLine.setPoHeadCode(apInvoiceHead.getInvoiceSourceHeadCode());
             apPayLine.setReferenceNumber(apInvoiceHead.getReferenceNumber());
             apPayLine.setInvoiceDate(apInvoiceHead.getInvoiceDate());
         }else {
-            
+            //获取发票已核销金额
+            Double invoicePaidAmount = this.apPayLineService.getInvoicePaidAmount(apPayLine.getInvoiceHeadCode(), 0);
+            apPayLine.setInvoicePaidAmount(invoicePaidAmount);
         }
         
         //页面属性设置

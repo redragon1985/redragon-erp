@@ -53,6 +53,12 @@ contentPage=contentPage.substring(contentPage.lastIndexOf("/")+1, contentPage.le
 			
 			<%if(contentPage.equalsIgnoreCase("main")){ %>
 				<li class="active"><a href="index"><i class="fa fa-home"></i> <span class="nav-label">首页</span></a></li>
+				<%-- 职员和组织信息获取失败提示 --%>
+				<script>
+				if("${staffInfo.staffName}"==""||"${staffInfo.departmentName}"==""){
+					redragonJS.alert("获取当前用户的职员和组织信息失败，业务操作可能会报错！请重新登陆或检查职员组织的关联是否正确！");
+				}
+				</script>
 			<%}else{ %>
 				<li><a href="index"><i class="fa fa-home"></i> <span class="nav-label">首页</span></a></li>
 			<%} %>
@@ -115,9 +121,16 @@ contentPage=contentPage.substring(contentPage.lastIndexOf("/")+1, contentPage.le
 				
 				if(index!=-1&&index<urlArray.length){
 					if(urlArray[index]!="main"){
+						//判断操作按钮权限
 						var controlKey = urlArray[index]+"_control_auth";
 						if(perms.indexOf(controlKey)==-1){
 							$("#page-content .btn:not(.btn-notcontrol)").remove();
+						}
+						
+						//判断审批按钮权限
+						var approveKey = urlArray[index]+"_approve_control_auth";
+						if(perms.indexOf(approveKey)==-1){
+							$("#page-content .btn-redragon-approve").remove();
 						}
 					}
 				}
@@ -219,15 +232,15 @@ contentPage=contentPage.substring(contentPage.lastIndexOf("/")+1, contentPage.le
 					<%} %>
 					
 					<%if(contentPage.equalsIgnoreCase("mdMaterialCategoryList")){ %>
-						<li class="active"><a href="web/mdMaterialCategory/getMdMaterialCategoryList">物料与事项类型</a></li>
+						<li class="active"><a href="web/mdMaterialCategory/getMdMaterialCategoryList">物料与服务类型</a></li>
 					<%}else{ %>
-						<li><a href="web/mdMaterialCategory/getMdMaterialCategoryList">物料与事项类型</a></li>
+						<li><a href="web/mdMaterialCategory/getMdMaterialCategoryList">物料与服务类型</a></li>
 					<%} %>
 					
 					<%if(contentPage.equalsIgnoreCase("mdMaterialList")||contentPage.equalsIgnoreCase("mdMaterialEdit")){ %>
-						<li class="active"><a href="web/mdMaterial/getMdMaterialList">物料与事项</a></li>
+						<li class="active"><a href="web/mdMaterial/getMdMaterialList">物料与服务</a></li>
 					<%}else{ %>
-						<li><a href="web/mdMaterial/getMdMaterialList">物料与事项</a></li>
+						<li><a href="web/mdMaterial/getMdMaterialList">物料与服务</a></li>
 					<%} %>
 					
 					<%if(contentPage.equalsIgnoreCase("mdProjectList")||contentPage.equalsIgnoreCase("mdProjectEdit")){ %>

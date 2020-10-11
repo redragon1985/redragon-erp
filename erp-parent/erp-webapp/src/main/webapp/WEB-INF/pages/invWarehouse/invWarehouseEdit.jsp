@@ -33,12 +33,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <div class="wrapper wrapper-content animated fadeInRight">
 
 	<%-- 导入提示信息框 --%>
-	<c:if test="${requestScope.hints!=null&&requestScope.hints!=''}">
-		<jsp:include page="../common/alert/alert.jsp">
-			<jsp:param value="hint" name="alertType"/>
-			<jsp:param value="${fn:replace(requestScope.hints,';', '<br/>')}" name="alertMessage"/>
-		</jsp:include>
-	</c:if>
+    <c:if test="${hint!=null&&hint!=''}">
+   		<jsp:include page="../common/alert/alert.jsp">
+   			<jsp:param value="${hint}" name="alertType"/>
+   			<jsp:param value="${alertMessage}" name="alertMessage"/>
+   		</jsp:include>
+    </c:if>
 
 	<div class="row">
 		<div class="col-lg-12">

@@ -206,14 +206,14 @@
 	}
 	
 	//返回采购订单行选择框
-	function getSelectArInvoiceModal(){
+	function getSelectArInvoiceModal(page){
 		$('#selectBillLineDiv').modal('hide');
 		redragonJS.loading("ibox-content1");
 		$.ajax({
 			type: "post",
 			url: "web/arReceiptLine/getSelectArInvoiceModal",
 			data: {"payer": $("#customerCode").val(),"receiptHeadCode": "${param.receiptHeadCode}", "invoiceHeadCode": $("#invoiceHeadCodeLS").val(),
-				   "invoiceSourceHeadCode": $("#invoiceSourceHeadCodeLS").val(), "preReceiptFlag": $("#preReceiptFlagLS").val(), 
+				   "invoiceSourceHeadCode": $("#invoiceSourceHeadCodeLS").val(), "preReceiptFlag": $("#preReceiptFlagLS").val(), "page": page,
 				   "amount": $("#amountLS").val(), "invoiceDate": $("#invoiceDateLS").val()},
 			async: false,
 			dataType: "html",

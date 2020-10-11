@@ -158,4 +158,22 @@ public class InvInputLineDaoImpl implements InvInputLineDao{
         return this.daoSupport.selectDataSql(sql, entity, args);
     }
     
+    @Override
+    public Double getInputedQuantityByPoLine(String poLineCode, Integer inputLineId) {
+        String sql = "select sum(l.input_quantity) from inv_input_line l where l.input_source_line_code = :code and l.input_line_id <> :id";
+        
+        Map<String, Object> args = new HashMap<String, Object>();
+        args.put("code", poLineCode);
+        args.put("id", inputLineId);
+        
+        List list = this.daoSupport.selectDataSqlCount(sql, args);
+        if(list!=null&&list.size()>0) {
+            if(list.get(0)!=null) {
+                return Double.valueOf(String.valueOf(list.get(0)));
+            }
+        }
+        
+        return 0D;
+    }
+    
 }

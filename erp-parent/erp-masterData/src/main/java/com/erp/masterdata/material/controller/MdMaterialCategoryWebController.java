@@ -99,7 +99,7 @@ public class MdMaterialCategoryWebController extends ControllerSupport{
     public String getMdMaterialCategoryTree(Model model) {
         
         model.addAttribute("treeType", "write");
-        model.addAttribute("title", "物料与事项类型");
+        model.addAttribute("title", "物料与服务类型");
         model.addAttribute("editNodeModalUrl", "web/mdMaterialCategory/getMdMaterialCategoryEditModal");
         model.addAttribute("getTreeDataUrl", "web/mdMaterialCategory/getMdMaterialCategoryTreeData");
         model.addAttribute("deleteNodeUrl", "web/mdMaterialCategory/deleteMdMaterialCategory?categoryId=");
@@ -111,7 +111,7 @@ public class MdMaterialCategoryWebController extends ControllerSupport{
     public String getMdMaterialCategoryTreeReadOnly(Model model) {
         
         model.addAttribute("treeType", "read");
-        model.addAttribute("title", "物料与事项类型");
+        model.addAttribute("title", "物料与服务类型");
         model.addAttribute("editNodeModalUrl", "web/mdMaterialCategory/getMdMaterialCategoryEditModal");
         model.addAttribute("getTreeDataUrl", "web/mdMaterialCategory/getMdMaterialCategoryTreeData");
         model.addAttribute("deleteNodeUrl", "web/mdMaterialCategory/deleteMdMaterialCategory?categoryId=");

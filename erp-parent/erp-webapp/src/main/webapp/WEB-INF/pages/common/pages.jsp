@@ -33,11 +33,11 @@
 			
 			<c:forEach items="${requestScope.pages.paginationList}" var="data">
 			    <c:choose>
-			        <c:when test="${data==requestScope.pages.page}">
+			        <c:when test="${data.toString()==requestScope.pages.page.toString()}">
 			            <li class="footable-page active"><a data-page="0" href="javascript:void(0)">${data}</a></li>
 			        </c:when>
 			        <c:when test="${data=='...'}">
-                        <li class="footable-page active"><a data-page="0" href="javascript:void(0)">${data}</a></li>
+                        <li class="footable-page"><a data-page="0" href="javascript:void(0)">${data}</a></li>
                     </c:when>
 			        <c:otherwise>
 			            <li class="footable-page"><a data-page="1" href="javascript:void(0)" onclick="gotoPage(${data})">${data}</a></li>

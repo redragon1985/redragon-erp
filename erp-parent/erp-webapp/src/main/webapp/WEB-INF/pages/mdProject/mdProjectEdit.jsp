@@ -33,12 +33,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <div class="wrapper wrapper-content animated fadeInRight">
 
 	<%-- 导入提示信息框 --%>
-	<c:if test="${requestScope.hints!=null&&requestScope.hints!=''}">
-		<jsp:include page="../common/alert/alert.jsp">
-			<jsp:param value="hint" name="alertType"/>
-			<jsp:param value="${fn:replace(requestScope.hints,';', '<br/>')}" name="alertMessage"/>
-		</jsp:include>
-	</c:if>
+    <c:if test="${hint!=null&&hint!=''}">
+   		<jsp:include page="../common/alert/alert.jsp">
+   			<jsp:param value="${hint}" name="alertType"/>
+   			<jsp:param value="${alertMessage}" name="alertMessage"/>
+   		</jsp:include>
+    </c:if>
 
 	<div class="row">
 		<div class="col-lg-12">
@@ -136,11 +136,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 										<button class="btn btn-primary btn-lg" type="button" onclick="window.location.href='web/mdProject/updateApproveStatus?id=${param.projectId}&approveStatus=SUBMIT'">&nbsp;&nbsp;提交&nbsp;&nbsp;<i class="fa fa-arrow-circle-right"></i></button>&nbsp;
 									</c:if>
 									<c:if test="${requestScope.mdProject.approveStatus=='SUBMIT' }">
-										<button class="btn btn-warning btn-lg" type="button" onclick="window.location.href='web/mdProject/updateApproveStatus?id=${param.projectId}&approveStatus=APPROVE'">&nbsp;&nbsp;审核通过&nbsp;&nbsp;<i class="fa fa-check-circle"></i></button>&nbsp;
-										<button class="btn btn-danger btn-lg" type="button" onclick="window.location.href='web/mdProject/updateApproveStatus?id=${param.projectId}&approveStatus=REJECT'">&nbsp;&nbsp;驳回&nbsp;&nbsp;<i class="fa fa-times-circle"></i></button>&nbsp;
+										<button class="btn btn-warning btn-lg btn-redragon-approve" type="button" onclick="approveData()">&nbsp;&nbsp;审核通过&nbsp;&nbsp;<i class="fa fa-check-circle"></i></button>&nbsp;
+										<button class="btn btn-danger btn-lg btn-redragon-approve" type="button" onclick="window.location.href='web/mdProject/updateApproveStatus?id=${param.projectId}&approveStatus=REJECT'">&nbsp;&nbsp;驳回&nbsp;&nbsp;<i class="fa fa-times-circle"></i></button>&nbsp;
 									</c:if>
 									<c:if test="${requestScope.mdProject.approveStatus=='APPROVE' }">
-										<button class="btn btn-success btn-lg" type="button" onclick="window.location.href='web/mdProject/updateApproveStatus?id=${param.projectId}&approveStatus=UNSUBMIT'">&nbsp;&nbsp;变更&nbsp;&nbsp;<i class="fa fa-retweet"></i></button>&nbsp;
+										<button class="btn btn-success btn-lg" type="button" onclick="alterData()">&nbsp;&nbsp;变更&nbsp;&nbsp;<i class="fa fa-retweet"></i></button>&nbsp;
 									</c:if>
 								</c:if>
 							</div>
@@ -221,4 +221,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		    }
 		});
 	});
+	
+	//审批通过
+	function approveData(){
+		redragonJS.confirm("确认审批通过？", function(){
+			window.location.href='web/mdProject/updateApproveStatus?id=${param.projectId}&approveStatus=APPROVE';
+		});
+	}
+	
+	//数据变更
+	function alterData(){
+		redragonJS.confirm("确认变更数据？数据变更可能会影响到已有的业务！", function(){
+			window.location.href='web/mdProject/updateApproveStatus?id=${param.projectId}&approveStatus=UNSUBMIT';
+		});
+	}
 </script>

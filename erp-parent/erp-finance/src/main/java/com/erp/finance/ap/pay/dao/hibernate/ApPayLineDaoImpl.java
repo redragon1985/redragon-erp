@@ -142,4 +142,22 @@ public class ApPayLineDaoImpl implements ApPayLineDao{
         return this.daoSupport.selectDataSql(sql, entity, args);
     }
     
+    @Override
+    public Double getInvoicePaidAmount(String invoiceHeadCode, Integer payLineId) {
+        String sql = "select sum(l.invoice_pay_amount) from ap_pay_line l where l.invoice_head_code = :code and l.pay_line_id <> :id";
+        
+        Map<String, Object> args = new HashMap<String, Object>();
+        args.put("code", invoiceHeadCode);
+        args.put("id", payLineId);
+        
+        List list = this.daoSupport.selectDataSqlCount(sql, args);
+        if(list!=null&&list.size()>0) {
+            if(list.get(0)!=null) {
+                return Double.valueOf(String.valueOf(list.get(0)));
+            }
+        }
+        
+        return 0D;
+    }
+    
 }

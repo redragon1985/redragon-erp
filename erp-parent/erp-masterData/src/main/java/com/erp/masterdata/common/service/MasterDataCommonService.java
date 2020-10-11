@@ -44,13 +44,13 @@ public interface MasterDataCommonService {
     //获取供应商Map(本公司)
     public abstract Map<String, String> getOwnVendorMap();
     
-    //获取所有物料和事项Map
+    //获取所有物料和服务Map
     public abstract Map<String, String> getMaterialMap();
     
     //获取物料Map
     public abstract Map<String, String> getMaterialForMaterialMap();
     
-    //获取事项Map
+    //获取服务Map
     public abstract Map<String, String> getMaterialForMatterMap();
     
     //获取项目Map

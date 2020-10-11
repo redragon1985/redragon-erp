@@ -39,14 +39,6 @@ response.setDateHeader ("Expires", 0);
 <div class="wrapper wrapper-content animated fadeInRight">
 
 	<%-- 导入提示信息框 --%>
-	<c:if test="${requestScope.hints!=null&&requestScope.hints!=''}">
-		<jsp:include page="../common/alert/alert.jsp">
-			<jsp:param value="hint" name="alertType"/>
-			<jsp:param value="${fn:replace(requestScope.hints,';', '<br/>')}" name="alertMessage"/>
-		</jsp:include>
-	</c:if>
-	
-	<%-- 导入提示信息框 --%>
     <c:if test="${hint!=null&&hint!=''}">
    		<jsp:include page="../common/alert/alert.jsp">
    			<jsp:param value="${hint}" name="alertType"/>
@@ -178,11 +170,11 @@ response.setDateHeader ("Expires", 0);
 										<button class="btn btn-primary btn-lg" type="button" onclick="window.location.href='web/mdVendor/updateApproveStatus?code=${requestScope.mdVendor.vendorCode}&approveStatus=SUBMIT'">&nbsp;&nbsp;提交&nbsp;&nbsp;<i class="fa fa-arrow-circle-right"></i></button>&nbsp;
 									</c:if>
 									<c:if test="${requestScope.mdVendor.approveStatus=='SUBMIT' }">
-										<button class="btn btn-warning btn-lg" type="button" onclick="window.location.href='web/mdVendor/updateApproveStatus?code=${requestScope.mdVendor.vendorCode}&approveStatus=APPROVE'">&nbsp;&nbsp;审核通过&nbsp;&nbsp;<i class="fa fa-check-circle"></i></button>&nbsp;
-										<button class="btn btn-danger btn-lg" type="button" onclick="window.location.href='web/mdVendor/updateApproveStatus?code=${requestScope.mdVendor.vendorCode}&approveStatus=REJECT'">&nbsp;&nbsp;驳回&nbsp;&nbsp;<i class="fa fa-times-circle"></i></button>&nbsp;
+										<button class="btn btn-warning btn-lg btn-redragon-approve" type="button" onclick="approveData()">&nbsp;&nbsp;审核通过&nbsp;&nbsp;<i class="fa fa-check-circle"></i></button>&nbsp;
+										<button class="btn btn-danger btn-lg btn-redragon-approve" type="button" onclick="window.location.href='web/mdVendor/updateApproveStatus?code=${requestScope.mdVendor.vendorCode}&approveStatus=REJECT'">&nbsp;&nbsp;驳回&nbsp;&nbsp;<i class="fa fa-times-circle"></i></button>&nbsp;
 									</c:if>
 									<c:if test="${requestScope.mdVendor.approveStatus=='APPROVE' }">
-										<button class="btn btn-success btn-lg" type="button" onclick="window.location.href='web/mdVendor/updateApproveStatus?code=${requestScope.mdVendor.vendorCode}&approveStatus=UNSUBMIT'">&nbsp;&nbsp;变更&nbsp;&nbsp;<i class="fa fa-retweet"></i></button>&nbsp;
+										<button class="btn btn-success btn-lg" type="button" onclick="alterData()">&nbsp;&nbsp;变更&nbsp;&nbsp;<i class="fa fa-retweet"></i></button>&nbsp;
 									</c:if>
 								</c:if>
 							</div>
@@ -374,6 +366,20 @@ response.setDateHeader ("Expires", 0);
 			error: function(XMLHttpRequest, textStatus, errorThrown){
 				redragonJS.alert(textStatus);
 			}
+		});
+	}
+	
+	//审批通过
+	function approveData(){
+		redragonJS.confirm("确认审批通过？", function(){
+			window.location.href='web/mdVendor/updateApproveStatus?code=${requestScope.mdVendor.vendorCode}&approveStatus=APPROVE';
+		});
+	}
+	
+	//数据变更
+	function alterData(){
+		redragonJS.confirm("确认变更数据？数据变更可能会影响到已有的业务！", function(){
+			window.location.href='web/mdVendor/updateApproveStatus?code=${requestScope.mdVendor.vendorCode}&approveStatus=UNSUBMIT';
 		});
 	}
 </script>

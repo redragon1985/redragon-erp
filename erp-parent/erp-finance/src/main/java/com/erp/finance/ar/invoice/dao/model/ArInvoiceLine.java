@@ -247,6 +247,8 @@ public class ArInvoiceLine implements java.io.Serializable {
     @Transient
     private Double outputQuantity;
     @Transient
+    private Double madeInvoiceQuantity;
+    @Transient
     private String unit;
     @Transient
     private Double soLineAmount;
@@ -292,6 +294,12 @@ public class ArInvoiceLine implements java.io.Serializable {
     }
     public void setStandard(String standard) {
         this.standard = standard;
+    }
+    public Double getMadeInvoiceQuantity() {
+        return madeInvoiceQuantity;
+    }
+    public void setMadeInvoiceQuantity(Double madeInvoiceQuantity) {
+        this.madeInvoiceQuantity = madeInvoiceQuantity;
     }
     
 }

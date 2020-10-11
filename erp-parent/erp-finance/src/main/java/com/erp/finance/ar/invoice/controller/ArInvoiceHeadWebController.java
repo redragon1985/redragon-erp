@@ -36,6 +36,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.erp.common.ar.receipt.service.ArReceiptHeadService;
 import com.erp.common.voucher.service.FinVoucherBillRService;
 import com.erp.common.voucher.service.FinVoucherHeadService;
 import com.erp.common.voucher.service.FinVoucherModelHeadService;
@@ -96,6 +97,9 @@ public class ArInvoiceHeadWebController extends ControllerSupport{
     @Autowired
     @Qualifier("finVoucherBillRServiceCommon")
     private FinVoucherBillRService finVoucherBillRService;
+    @Autowired
+    @Qualifier("arReceiptHeadServiceCommon")
+    private ArReceiptHeadService arReceiptHeadService;
     
     
     
@@ -256,6 +260,8 @@ public class ArInvoiceHeadWebController extends ControllerSupport{
         }
         
         //分页查询数据
+        soHeadCO.setStatus("CONFIRM");
+        soHeadCO.setApproveStatus("APPROVE");
         List<SoHead> soHeadList = this.soHeadService.getDataObjects(pages, soHeadCO);
         
         //采购订单类型
@@ -399,6 +405,17 @@ public class ArInvoiceHeadWebController extends ControllerSupport{
     public String updateApproveStatus(String code, String approveStatus, RedirectAttributes attr) {
         
         if(StringUtils.isNotBlank(code)&&StringUtils.isNotBlank(approveStatus)) {
+            if(approveStatus.equals("UNSUBMIT")) {
+                boolean receiptFlag = this.arReceiptHeadService.isExistArReceiptRelateArInvoice(code);
+                if(receiptFlag) {
+                    //提示信息
+                    attr.addFlashAttribute("hint", "hint");
+                    attr.addFlashAttribute("alertMessage", "当前发票已收款核销不能变更");
+                    attr.addAttribute("invoiceHeadCode", code);
+                    return "redirect:getArInvoiceHead";
+                }
+            }
+            
             //更新审核状态
             this.arInvoiceHeadService.updateApproveStatus(code, approveStatus);
             //提示信息

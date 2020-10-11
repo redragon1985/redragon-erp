@@ -33,14 +33,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <div class="wrapper wrapper-content animated fadeInRight">
 
 	<%-- 导入提示信息框 --%>
-	<c:if test="${requestScope.hints!=null&&requestScope.hints!=''}">
-		<jsp:include page="../common/alert/alert.jsp">
-			<jsp:param value="hint" name="alertType"/>
-			<jsp:param value="${fn:replace(requestScope.hints,';', '<br/>')}" name="alertMessage"/>
-		</jsp:include>
-	</c:if>
-	
-	<%-- 导入提示信息框 --%>
     <c:if test="${hint!=null&&hint!=''}">
    		<jsp:include page="../common/alert/alert.jsp">
    			<jsp:param value="${hint}" name="alertType"/>
@@ -261,11 +253,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 										<button class="btn btn-primary btn-lg" type="button" onclick="submitInvoiceApprove()">&nbsp;&nbsp;提交&nbsp;&nbsp;<i class="fa fa-arrow-circle-right"></i></button>&nbsp;
 									</c:if>
 									<c:if test="${requestScope.receiptHead.approveStatus=='SUBMIT' }">
-										<button class="btn btn-warning btn-lg" type="button" onclick="window.location.href='web/arInvoiceHead/updateApproveStatus?code=${requestScope.receiptHead.invoiceHeadCode}&approveStatus=APPROVE'">&nbsp;&nbsp;审核通过&nbsp;&nbsp;<i class="fa fa-check-circle"></i></button>&nbsp;
-										<button class="btn btn-danger btn-lg" type="button" onclick="window.location.href='web/arInvoiceHead/updateApproveStatus?code=${requestScope.receiptHead.invoiceHeadCode}&approveStatus=REJECT'">&nbsp;&nbsp;驳回&nbsp;&nbsp;<i class="fa fa-times-circle"></i></button>&nbsp;
+										<button class="btn btn-warning btn-lg btn-redragon-approve" type="button" onclick="approveData()">&nbsp;&nbsp;审核通过&nbsp;&nbsp;<i class="fa fa-check-circle"></i></button>&nbsp;
+										<button class="btn btn-danger btn-lg btn-redragon-approve" type="button" onclick="window.location.href='web/arInvoiceHead/updateApproveStatus?code=${requestScope.receiptHead.invoiceHeadCode}&approveStatus=REJECT'">&nbsp;&nbsp;驳回&nbsp;&nbsp;<i class="fa fa-times-circle"></i></button>&nbsp;
 									</c:if>
 									<c:if test="${requestScope.receiptHead.approveStatus=='APPROVE' }">
-										<button class="btn btn-success btn-lg" type="button" onclick="window.location.href='web/arInvoiceHead/updateApproveStatus?code=${requestScope.receiptHead.invoiceHeadCode}&approveStatus=UNSUBMIT'">&nbsp;&nbsp;变更&nbsp;&nbsp;<i class="fa fa-retweet"></i></button>&nbsp;
+										<button class="btn btn-success btn-lg" type="button" onclick="alterData()">&nbsp;&nbsp;变更&nbsp;&nbsp;<i class="fa fa-retweet"></i></button>&nbsp;
 									</c:if>
 								</c:if>
 							</div>
@@ -474,8 +466,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				},*/
 			},
 			submitHandler: function(form) {
-				l.ladda('start');
-		        form.submit();
+				var submitFlag = "Y";
+				
+				if($("#receiptMode").val()=="transfer"){
+					if($("#bankName").val()==""||$("#bankAccount").val()==""){
+						redragonJS.alert("银行与账户不能为空");
+						submitFlag = "N";
+					}
+				}
+			
+				//表单提交
+				if(submitFlag=="Y"){
+					l.ladda('start');
+		        	form.submit();
+				}
 		    }
 		});
 		
@@ -575,13 +579,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	}
 	
 	//返回采购订单选择框
-	function getSelectSOModal(){
+	function getSelectSOModal(page){
 		$('#selectSODiv').modal('hide');
 		redragonJS.loading("ibox-content");
 		$.ajax({
 			type: "post",
 			url: "web/arInvoiceHead/getSelectSOModal",
-			data: {"status": "NEW", "soHeadCode": $("#soHeadCode").val(), "soName": $("#soName").val(), 
+			data: {"status": "NEW", "soHeadCode": $("#soHeadCode").val(), "soName": $("#soName").val(), "page": page,
 				   "soType": $("#soType").val(), "customerCode": $("#customerCode").val(), "projectCode": $("#projectCode").val()},
 			async: false,
 			dataType: "html",
@@ -601,19 +605,27 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 	//发票头提交
 	function submitInvoiceApprove(){
-		var lAmount = parseFloat($("#lineAmountSum").text());
-		var hAmount = parseFloat($("#amount").val());
+		var submitFlag = "Y";
 		
-		if(hAmountHis==hAmount){
-			if(lAmount==hAmount){
-				window.location.href='web/arInvoiceHead/updateApproveStatus?code=${requestScope.receiptHead.invoiceHeadCode}&approveStatus=SUBMIT'
-			}else{
-				redragonJS.alert("发票金额("+hAmount+"元)与发票行合计金额("+lAmount+"元)不相等，金额不匹配无法提交发票");
-			}
-		}else{
-			redragonJS.alert("请先保存发票头");
+		if($("#lineTab tbody tr").length<=1){
+			submitFlag = "N";
+			redragonJS.alert("至少新增一行后，才能提交数据");
 		}
-		
+	
+		if(submitFlag=="Y"){
+			var lAmount = parseFloat($("#lineAmountSum").text());
+			var hAmount = parseFloat($("#amount").val());
+			
+			if(hAmountHis==hAmount){
+				if(lAmount==hAmount){
+					window.location.href='web/arInvoiceHead/updateApproveStatus?code=${requestScope.receiptHead.invoiceHeadCode}&approveStatus=SUBMIT'
+				}else{
+					redragonJS.alert("发票金额("+hAmount+"元)与发票行合计金额("+lAmount+"元)不相等，金额不匹配无法提交发票");
+				}
+			}else{
+				redragonJS.alert("请先保存发票头");
+			}
+		}
 	}
 	
 	//重新创建凭证分录
@@ -635,6 +647,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			error: function(XMLHttpRequest, textStatus, errorThrown){
 				redragonJS.alert(textStatus);
 			}
+		});
+	}
+	
+	//审批通过
+	function approveData(){
+		redragonJS.confirm("确认审批通过？", function(){
+			window.location.href='web/arInvoiceHead/updateApproveStatus?code=${requestScope.receiptHead.invoiceHeadCode}&approveStatus=APPROVE';
+		});
+	}
+	
+	//数据变更
+	function alterData(){
+		redragonJS.confirm("确认变更数据？数据变更后将产生变更历史信息！", function(){
+			window.location.href='web/arInvoiceHead/updateApproveStatus?code=${requestScope.receiptHead.invoiceHeadCode}&approveStatus=UNSUBMIT';
 		});
 	}
 </script>

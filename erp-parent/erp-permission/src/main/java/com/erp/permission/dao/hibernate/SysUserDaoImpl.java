@@ -120,7 +120,7 @@ public class SysUserDaoImpl implements SysUserDao{
     
     @Override
     public List<SysUserRO> getSysUserROListForRelate() {
-        String sql = "select u.*,(select count(*) from sys_user_role_r ur where ur.username=u.username) as user_role_num from sys_user u where u.status='Y' order by u.user_id desc";
+        String sql = "select u.*,(select count(*) from sys_user_role_r ur where ur.username=u.username) as user_role_num from sys_user u order by u.user_id desc";
         
         Map<String, Class<?>> entity = new HashMap<String, Class<?>>();
         entity.put("u", SysUserRO.class);

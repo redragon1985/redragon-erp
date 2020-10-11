@@ -120,6 +120,8 @@ public class MdCustomerServiceImpl implements MdCustomerService {
     @Override
     public void updateApproveStatus(String code, String approveStatus) {
         this.mdCustomerDao.updateApproveStatus(code, approveStatus);
+        //清除缓存
+        this.clearCache();
     }
     
     @Override

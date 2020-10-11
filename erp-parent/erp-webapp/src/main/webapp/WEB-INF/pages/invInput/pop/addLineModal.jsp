@@ -92,10 +92,10 @@
 					<div class="hr-line-dashed"></div>
 					
 					<div class="form-group row">
-						<label class="col-sm-3 col-form-label">行金额</label>
+						<label class="col-sm-3 col-form-label">已入库数量</label>
 						<div class="col-sm-9 input-group">
-							<input id="lineAmount" type="text" class="form-control" value="${requestScope.invInputLine.poLineAmount}" readonly="readonly">
-							<span class="input-group-addon">(元)</span>
+							<input id="inputedQuantity" type="text" class="form-control" value="${requestScope.invInputLine.inputedQuantity}" readonly="readonly">
+							<span class="input-group-addon">(${requestScope.invInputLine.unit})</span>
 						</div>
 					</div>
 					<div class="hr-line-dashed"></div>
@@ -158,17 +158,26 @@
 			rules : {
 				inputQuantity : {
 					required : true,
-					compareNumber: "#quantity"
-				},
-			},
-			messages : {
-				inputQuantity : {
-					compareNumber: "入库数量不能大于行数量"
+					gtZero : true,
 				},
 			},
 			submitHandler: function(form) {
-				l.ladda('start');
-				editLine();
+				var submitFlag = "Y"
+				
+				//验证发票行数量 
+				var quantity = parseFloat($("#quantity").val());
+				var inputedQuantity = parseFloat($("#inputedQuantity").val());
+				var inputQuantity = parseFloat($("#inputQuantity").val());
+				if(inputQuantity>redragonJS.numberSub(quantity, inputedQuantity)){
+					submitFlag = "N";
+					redragonJS.alert("入库数量("+inputQuantity+")不能大于采购订单行数量("+quantity+")-已入库数量("+inputedQuantity+")");
+				}
+			
+				//表单提交
+				if(submitFlag=="Y"){
+					l.ladda('start');
+					editLine();
+				}
 		    }
 		});
 		

@@ -201,6 +201,8 @@ public class ApPayLine implements java.io.Serializable {
     @Transient
     private Double invoiceAmount;
     @Transient
+    private Double invoicePaidAmount;
+    @Transient
     private Double taxAmount;
     @Transient
     private String poHeadCode;
@@ -238,6 +240,12 @@ public class ApPayLine implements java.io.Serializable {
     }
     public void setInvoiceDate(Date invoiceDate) {
         this.invoiceDate = invoiceDate;
+    }
+    public Double getInvoicePaidAmount() {
+        return invoicePaidAmount;
+    }
+    public void setInvoicePaidAmount(Double invoicePaidAmount) {
+        this.invoicePaidAmount = invoicePaidAmount;
     }
     
 }

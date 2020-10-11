@@ -88,7 +88,7 @@
 						</tbody>
 						<tfoot>
 							<%-- 导入页码 --%>
-							<jsp:include page="../../common/pages.jsp"></jsp:include>
+							<jsp:include page="../../common/popPages.jsp"></jsp:include>
 						</tfoot>
 					</table>
 				</div>
@@ -183,4 +183,16 @@
 			}
 		});
 	});
+	
+//跳转页面
+function gotoPage(page){
+	var pageNumber = ${requestScope.pages.pageNumber};
+	var currentPage = ${requestScope.pages.page};
+	//首页和尾页无需跳转
+	if((currentPage==1&&page==1)||(currentPage==pageNumber&&page==pageNumber)){
+		
+	}else{
+		getSelectArInvoiceModal(page);
+	}
+}
 </script>

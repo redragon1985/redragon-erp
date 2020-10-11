@@ -248,6 +248,8 @@ public class ApInvoiceLine implements java.io.Serializable {
     @Transient
     private Double inputQuantity;
     @Transient
+    private Double madeInvoiceQuantity;
+    @Transient
     private String unit;
     @Transient
     private Double poLineAmount;
@@ -293,6 +295,12 @@ public class ApInvoiceLine implements java.io.Serializable {
     }
     public void setStandard(String standard) {
         this.standard = standard;
+    }
+    public Double getMadeInvoiceQuantity() {
+        return madeInvoiceQuantity;
+    }
+    public void setMadeInvoiceQuantity(Double madeInvoiceQuantity) {
+        this.madeInvoiceQuantity = madeInvoiceQuantity;
     }
     
 }

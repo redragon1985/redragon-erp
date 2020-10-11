@@ -96,7 +96,7 @@ public class MdMaterialWebController extends ControllerSupport{
         
         //获取物料单位
         Map materialUnitMap = this.datasetCommonService.getMaterialUnit();
-        //获取物料或事项选择
+        //获取物料或服务选择
         Map materialTypeMap = DataBox.getMaterialTypeMap();
         //审批状态
         Map approveStatusMap = GlobalDataBox.getApproveStatusMap();
@@ -137,7 +137,7 @@ public class MdMaterialWebController extends ControllerSupport{
         
         //获取物料单位
         Map materialUnitMap = this.datasetCommonService.getMaterialUnit();
-        //获取物料或事项选择
+        //获取物料或服务选择
         Map materialTypeMap = DataBox.getMaterialTypeMap();
         //审批状态
         Map approveStatusMap = GlobalDataBox.getApproveStatusMap();

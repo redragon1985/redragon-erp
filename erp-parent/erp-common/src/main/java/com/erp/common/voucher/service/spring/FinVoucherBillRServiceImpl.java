@@ -112,4 +112,14 @@ public class FinVoucherBillRServiceImpl implements FinVoucherBillRService {
         return this.finVoucherBillRDao.getVoucherHeadCodeByBillHeadCode(billType, billHeadCode);
     }
     
+    @Override
+    public boolean isExistVoucherRelateArPay(String headCode) {
+        return this.finVoucherBillRDao.isExistVoucherRelateArPay(headCode);
+    }
+    
+    @Override
+    public boolean isExistVoucherRelateArReceipt(String headCode) {
+        return this.finVoucherBillRDao.isExistVoucherRelateArReceipt(headCode);
+    }
+    
 }

@@ -11,7 +11,7 @@ $.validator.addMethod("gtZero",function(value,element,params){
 	}else{
 		return false;
 	}
-});
+}, "字段必须大于0");
 
 //字段大于等于0
 $.validator.addMethod("gteZero",function(value,element,params){
@@ -22,7 +22,7 @@ $.validator.addMethod("gteZero",function(value,element,params){
 	}else{
 		return false;
 	}
-});
+}, "字段必须大于等于0");
 
 //小数点后几位
 $.validator.addMethod("dotNum",function(value,element,params){

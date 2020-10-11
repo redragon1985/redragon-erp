@@ -117,4 +117,9 @@ public class ApPayLineServiceImpl implements ApPayLineService {
         return this.apPayLineDao.getApPayLineListByHeadCode(headCode);
     }
     
+    @Override
+    public Double getInvoicePaidAmount(String invoiceHeadCode, Integer payLineId) {
+        return this.apPayLineDao.getInvoicePaidAmount(invoiceHeadCode, payLineId);
+    }
+    
 }

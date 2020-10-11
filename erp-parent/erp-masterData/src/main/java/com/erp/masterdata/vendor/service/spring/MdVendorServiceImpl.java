@@ -120,6 +120,8 @@ public class MdVendorServiceImpl implements MdVendorService {
     @Override
     public void updateApproveStatus(String code, String approveStatus) {
         this.mdVendorDao.updateApproveStatus(code, approveStatus);
+        //清除缓存
+        this.clearCache();
     }
     
     @Override

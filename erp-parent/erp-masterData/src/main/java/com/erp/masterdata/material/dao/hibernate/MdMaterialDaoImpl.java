@@ -99,6 +99,7 @@ public class MdMaterialDaoImpl implements MdMaterialDao{
         sql = sql + DaoUtil.getSQLCondition(paramObj, "materialName", "and m.", args);
         sql = sql + DaoUtil.getSQLCondition(paramObj, "materialType", "and m.", args);
         sql = sql + DaoUtil.getSQLCondition(paramObj, "categoryCode", "and m.", args);
+        sql = sql + DaoUtil.getSQLCondition(paramObj, "approveStatus", "and m.", args);
         sql = sql + DaoUtil.getSQLCondition(paramObj, "status", "and m.", args);
         
         sql = sql + " order by m.material_id desc";

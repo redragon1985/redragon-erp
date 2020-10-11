@@ -31,6 +31,7 @@ import com.erp.masterdata.common.service.MasterDataCommonService;
 import com.erp.masterdata.customer.dao.MdCustomerContactDao;
 import com.erp.masterdata.customer.dao.MdCustomerDao;
 import com.erp.masterdata.customer.dao.model.MdCustomer;
+import com.erp.masterdata.customer.dao.model.MdCustomerCO;
 import com.erp.masterdata.customer.dao.model.MdCustomerContact;
 import com.erp.masterdata.customer.dao.model.MdCustomerContactCO;
 import com.erp.masterdata.material.dao.MdMaterialDao;
@@ -38,11 +39,13 @@ import com.erp.masterdata.material.dao.model.MdMaterial;
 import com.erp.masterdata.material.dao.model.MdMaterialCO;
 import com.erp.masterdata.project.dao.MdProjectDao;
 import com.erp.masterdata.project.dao.model.MdProject;
+import com.erp.masterdata.project.dao.model.MdProjectCO;
 import com.erp.masterdata.subject.dao.MdFinanceSubjectDao;
 import com.erp.masterdata.subject.dao.model.MdFinanceSubject;
 import com.erp.masterdata.vendor.dao.MdVendorContactDao;
 import com.erp.masterdata.vendor.dao.MdVendorDao;
 import com.erp.masterdata.vendor.dao.model.MdVendor;
+import com.erp.masterdata.vendor.dao.model.MdVendorCO;
 import com.erp.masterdata.vendor.dao.model.MdVendorContact;
 import com.erp.masterdata.vendor.dao.model.MdVendorContactCO;
 import com.erp.masterdata.vendor.service.MdVendorContactService;
@@ -82,7 +85,10 @@ public class MasterDataCommonServiceImpl implements MasterDataCommonService {
     public Map<String, String> getCustomerMap() {
         Map<String, String> map = new HashMap<String, String>();
         
-        List<MdCustomer> list = this.mdCustomerDao.getDataObjects();
+        MdCustomerCO mdCustomerCO = new MdCustomerCO();
+        mdCustomerCO.setStatus("Y");
+        mdCustomerCO.setApproveStatus("APPROVE");
+        List<MdCustomer> list = this.mdCustomerDao.getDataObjects(mdCustomerCO);
         for(MdCustomer mdCustomer: list) {
             map.put(mdCustomer.getCustomerCode(), mdCustomer.getCustomerName());
         }
@@ -108,7 +114,10 @@ public class MasterDataCommonServiceImpl implements MasterDataCommonService {
     public Map<String, String> getMaterialMap() {
         Map<String, String> map = new HashMap<String, String>();
         
-        List<MdMaterial> list = this.mdMaterialDao.getDataObjects();
+        MdMaterialCO mdMaterialCO = new MdMaterialCO();
+        mdMaterialCO.setStatus("Y");
+        mdMaterialCO.setApproveStatus("APPROVE");
+        List<MdMaterial> list = this.mdMaterialDao.getDataObjects(mdMaterialCO);
         for(MdMaterial mdMaterial: list) {
             map.put(mdMaterial.getMaterialCode(), mdMaterial.getMaterialName());
         }
@@ -123,6 +132,8 @@ public class MasterDataCommonServiceImpl implements MasterDataCommonService {
         
         MdMaterialCO mdMaterialCO = new MdMaterialCO();
         mdMaterialCO.setMaterialType("MATERIAL");
+        mdMaterialCO.setStatus("Y");
+        mdMaterialCO.setApproveStatus("APPROVE");
         
         List<MdMaterial> list = this.mdMaterialDao.getDataObjects(mdMaterialCO);
         for(MdMaterial mdMaterial: list) {
@@ -139,6 +150,8 @@ public class MasterDataCommonServiceImpl implements MasterDataCommonService {
         
         MdMaterialCO mdMaterialCO = new MdMaterialCO();
         mdMaterialCO.setMaterialType("MATTER");
+        mdMaterialCO.setStatus("Y");
+        mdMaterialCO.setApproveStatus("APPROVE");
         
         List<MdMaterial> list = this.mdMaterialDao.getDataObjects(mdMaterialCO);
         for(MdMaterial mdMaterial: list) {
@@ -153,7 +166,10 @@ public class MasterDataCommonServiceImpl implements MasterDataCommonService {
     public Map<String, String> getProjectMap() {
         Map<String, String> map = new HashMap<String, String>();
         
-        List<MdProject> list = this.mdProjectDao.getDataObjects();
+        MdProjectCO mdProjectCO = new MdProjectCO();
+        mdProjectCO.setStatus("Y");
+        mdProjectCO.setApproveStatus("APPROVE");
+        List<MdProject> list = this.mdProjectDao.getDataObjects(mdProjectCO);
         for(MdProject mdProject: list) {
             map.put(mdProject.getProjectCode(), mdProject.getProjectName());
         }
@@ -166,7 +182,10 @@ public class MasterDataCommonServiceImpl implements MasterDataCommonService {
     public Map<String, String> getVendorMap() {
         Map<String, String> map = new HashMap<String, String>();
         
-        List<MdVendor> list = this.mdVendorDao.getDataObjects();
+        MdVendorCO mdVendorCO = new MdVendorCO();
+        mdVendorCO.setStatus("Y");
+        mdVendorCO.setApproveStatus("APPROVE");
+        List<MdVendor> list = this.mdVendorDao.getDataObjects(mdVendorCO);
         for(MdVendor mdVendor: list) {
             map.put(mdVendor.getVendorCode(), mdVendor.getVendorName());
         }

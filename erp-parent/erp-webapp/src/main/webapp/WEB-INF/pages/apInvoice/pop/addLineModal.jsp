@@ -41,12 +41,12 @@
 
 			<div class="modal-body" style="padding-bottom: 20px;">
 				<%-- 导入提示信息框 --%>
-				<c:if test="${requestScope.hints!=null&&requestScope.hints!=''}">
-					<jsp:include page="../../common/alert/alert.jsp">
-						<jsp:param value="hint" name="alertType"/>
-						<jsp:param value="${fn:replace(requestScope.hints,';', '<br/>')}" name="alertMessage"/>
-					</jsp:include>
-				</c:if>
+			    <c:if test="${hint!=null&&hint!=''}">
+			   		<jsp:include page="../../common/alert/alert.jsp">
+			   			<jsp:param value="${hint}" name="alertType"/>
+			   			<jsp:param value="${alertMessage}" name="alertMessage"/>
+			   		</jsp:include>
+			    </c:if>
 			
 				<form id="lineForm">
 					<div class="form-group row">
@@ -64,22 +64,28 @@
 					
 					<div class="form-group row">
 						<label class="col-sm-2 col-form-label">规格型号</label>
-						<div class="col-sm-10">
+						<div class="col-sm-4">
 							<input id="standard" type="text" class="form-control" value="${requestScope.payLine.standard}" readonly="readonly">
 						</div>
-					</div>
-					<div class="hr-line-dashed"></div>
-				
-					<div class="form-group row">
+						
 						<label class="col-sm-2 col-form-label">采购单价</label>
 						<div class="col-sm-4 input-group">
 							<input id="price" type="text" class="form-control" value="${requestScope.payLine.price}" readonly="readonly">
 							<span class="input-group-addon">(元)</span>
 						</div>
-
+					</div>
+					<div class="hr-line-dashed"></div>
+				
+					<div class="form-group row">
 						<label class="col-sm-2 col-form-label">入库数量</label>
 						<div class="col-sm-4 input-group">
 							<input id="inputQuantity" type="text" class="form-control" value="${requestScope.payLine.inputQuantity}" readonly="readonly">
+							<span class="input-group-addon">(${requestScope.payLine.unit})</span>
+						</div>
+						
+						<label class="col-sm-2 col-form-label">已开票数量</label>
+						<div class="col-sm-4 input-group">
+							<input id="madeInvoiceQuantity" type="text" class="form-control" value="${requestScope.payLine.madeInvoiceQuantity}" readonly="readonly">
 							<span class="input-group-addon">(${requestScope.payLine.unit})</span>
 						</div>
 					</div>
@@ -201,33 +207,47 @@
 				amount : {
 					required : true,
 					number : true,
+					gtZero : true,
 				},
 				quantity : {
 					required : true,
 					number : true,
-					compareNumber: "#inputQuantity"
+					gtZero : true,
 				},
 				taxRate : {
 					required : true,
 					number : true,
 					max : 1,
+					gtZero : true,
 				},
 				taxAmount : {
 					required : true,
 					number : true,
-				},
-			},
-			messages : {
-				quantity : {
-					compareNumber: "发票行数量不能大于入库数量/采购数量"
+					gtZero : true,
 				},
 			},
 			submitHandler: function(form) {
-				//税额计算
-				setTaxRate();
+				var submitFlag = "Y"
 				
-				l.ladda('start');
-				editLine();
+				//验证发票行数量 
+				var quantity = parseFloat($("#quantity").val());
+				var inputQuantity = parseFloat($("#inputQuantity").val());
+				var madeInvoiceQuantity = parseFloat($("#madeInvoiceQuantity").val());
+				if(quantity>redragonJS.numberSub(inputQuantity, madeInvoiceQuantity)){
+					submitFlag = "N";
+					redragonJS.alert("发票行数量不能大于入库数量/采购数量("+inputQuantity+")-开票数量("+madeInvoiceQuantity+")");
+				}
+				
+
+				//提交表单
+				if(submitFlag=="Y"){
+					//税额计算
+					setTaxRate();
+					
+					//提交表单
+					l.ladda('start');
+					editLine();
+				}
 		    }
 		});
 		

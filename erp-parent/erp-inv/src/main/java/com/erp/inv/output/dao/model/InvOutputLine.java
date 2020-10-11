@@ -222,6 +222,8 @@ public class InvOutputLine implements java.io.Serializable {
     @Transient
     private Double quantity;
     @Transient
+    private Double outputedQuantity;
+    @Transient
     private String unit;
     @Transient
     private Double soLineAmount;
@@ -261,6 +263,12 @@ public class InvOutputLine implements java.io.Serializable {
     }
     public void setSoLineAmount(Double soLineAmount) {
         this.soLineAmount = soLineAmount;
+    }
+    public Double getOutputedQuantity() {
+        return outputedQuantity;
+    }
+    public void setOutputedQuantity(Double outputedQuantity) {
+        this.outputedQuantity = outputedQuantity;
     }
 
 }

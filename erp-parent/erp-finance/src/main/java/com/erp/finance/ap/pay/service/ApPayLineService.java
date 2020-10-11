@@ -39,4 +39,7 @@ public interface ApPayLineService extends DaoCRUDIF<ApPayLine, ApPayLineCO> {
     //获取列表行（根据头code）
     public abstract List<ApPayLine> getApPayLineListByHeadCode(String headCode);
     
+    //获取采购发票已付款金额
+    public abstract Double getInvoicePaidAmount(String invoiceHeadCode, Integer payLineId);
+    
 }

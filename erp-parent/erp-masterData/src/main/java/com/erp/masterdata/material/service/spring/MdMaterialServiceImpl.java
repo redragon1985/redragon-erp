@@ -115,6 +115,8 @@ public class MdMaterialServiceImpl implements MdMaterialService {
     @Override
     public void updateApproveStatus(int id, String approveStatus) {
         this.mdMaterialDao.updateApproveStatus(id, approveStatus);
+        //清除缓存
+        this.clearMdMaterialCache();
     }
     
     //清理物料的所有缓存

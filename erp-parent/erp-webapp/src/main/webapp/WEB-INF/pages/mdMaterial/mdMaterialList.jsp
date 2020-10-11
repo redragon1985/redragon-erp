@@ -46,9 +46,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<div class="col-lg-12">
 			<div class="ibox ">
 		        <div class="ibox-title">
-		            <h4>物料与事项列表</h4>
+		            <h4>物料与服务列表</h4>
 		            <div class="ibox-tools">
-		                <button id="addButton" class="btn btn-success btn-sm" type="button"><i class="fa fa-plus"></i>&nbsp;&nbsp;<span class="bold">新增物料/事项</span></button>
+		                <button id="addButton" class="btn btn-success btn-sm" type="button"><i class="fa fa-plus"></i>&nbsp;&nbsp;<span class="bold">新增物料/服务</span></button>
 		                <button id="searchButton" class="btn btn-default btn-sm btn-notcontrol" type="button"><i class="fa fa-search"></i>&nbsp;&nbsp;展开查询</button>
 		            </div>
 		        </div>
@@ -61,10 +61,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 									<th></th>
 									--%>
 									<th width="5%">序号</th>
-									<th>物料/事项</th>
-									<th>物料/事项编码</th>
-									<th>物料/事项名称</th>
-									<th>物料/事项类别</th>
+									<th>物料/服务</th>
+									<th>物料/服务编码</th>
+									<th>物料/服务名称</th>
+									<th>物料/服务类别</th>
 									<th>物料单位</th>
 									<th>物料规格</th>
 									<th>规格单位</th>

@@ -150,7 +150,7 @@ public class InvOutputLineWebController extends ControllerSupport{
         if(pages.getPage()==0) {
             pages.setPage(1);
         }
-        pages.setMax(100);
+        pages.setMax(1000);
         
         //分页查询采购订单行数据
         List<SoLine> soLineList = this.soLineService.getSoLineListBySoHeadCode(pages, soLineCO);
@@ -162,11 +162,17 @@ public class InvOutputLineWebController extends ControllerSupport{
         
         //剔除已经做了入库行的采购订单行
         Iterator<SoLine> soLineIt = soLineList.iterator();
-        Iterator<InvOutputLine> invOutputLineIt = invOutputLineList.iterator();
         while(soLineIt.hasNext()) {
             SoLine soLineTemp = soLineIt.next();
-            while(invOutputLineIt.hasNext()) {
-                InvOutputLine invOutputLineTemp = invOutputLineIt.next();
+            
+            //剔除非物料的采购订单行
+            MdMaterial mdMaterial = this.masterDataCommonService.getMdMaterialInfoCache(soLineTemp.getMaterialCode());
+            if(mdMaterial!=null&&mdMaterial.getMaterialType().equals("MATTER")) {
+                soLineIt.remove();
+            }
+            
+            //判断当前出库行是否存在此物料
+            for(InvOutputLine invOutputLineTemp: invOutputLineList) {
                 if(soLineTemp.getSoLineCode().equals(invOutputLineTemp.getOutputSourceLineCode())) {
                     soLineIt.remove();
                     break;
@@ -225,6 +231,10 @@ public class InvOutputLineWebController extends ControllerSupport{
                     //获取物料规格
                     MdMaterial mdMaterial = this.masterDataCommonService.getMdMaterialInfoCache(soLine.getMaterialCode());
                     invOutputLine.setMaterialStandard(mdMaterial.getStandard());
+                    
+                    //获取销售订单行已出库数量
+                    Double outputedQuantity = this.invOutputLineService.getOutputedQuantityBySoLine(invOutputLine.getOutputSourceLineCode(), invOutputLine.getOutputLineId());
+                    invOutputLine.setOutputedQuantity(outputedQuantity);
                 }
             }
         }else {
@@ -236,6 +246,10 @@ public class InvOutputLineWebController extends ControllerSupport{
                         //获取物料规格
                         MdMaterial mdMaterial = this.masterDataCommonService.getMdMaterialInfoCache(invOutputLine.getMaterialCode());
                         invOutputLine.setMaterialStandard(mdMaterial.getStandard());
+                        
+                        //获取销售订单行已出库数量
+                        Double outputedQuantity = this.invOutputLineService.getOutputedQuantityBySoLine(invOutputLine.getOutputSourceLineCode(), 0);
+                        invOutputLine.setOutputedQuantity(outputedQuantity);
                     }
                 }
             }    

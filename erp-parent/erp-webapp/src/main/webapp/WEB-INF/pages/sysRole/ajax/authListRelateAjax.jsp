@@ -29,10 +29,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<span class="text-info"><label class="col-form-label"><strong>权限选择</strong></label></span>
 		<select id="authCode" name="authCode" class="form-control dual_select" multiple>
 			<c:forEach items="${sysAuthList}" var="data">
-				<option value="${data.authCode}">${data.authName}</option>
+				<option value="${data.authCode}">${data.authName}
+					<c:if test="${data.status=='N'}">
+	           		(无效)
+	           		</c:if>
+				</option>
 			</c:forEach>
 			<c:forEach items="${sysAuthRelateList}" var="data">
-				<option selected value="${data.authCode}">${data.authName}</option>
+				<option selected value="${data.authCode}">${data.authName}
+					<c:if test="${data.status=='N'}">
+               		(无效)
+               		</c:if>
+				</option>
 			</c:forEach>
 		</select>
 </div>

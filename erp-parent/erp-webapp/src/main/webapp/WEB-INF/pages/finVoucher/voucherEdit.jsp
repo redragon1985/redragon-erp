@@ -34,14 +34,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <div class="wrapper wrapper-content animated fadeInRight">
 
 	<%-- 导入提示信息框 --%>
-	<c:if test="${requestScope.hints!=null&&requestScope.hints!=''}">
-		<jsp:include page="../common/alert/alert.jsp">
-			<jsp:param value="hint" name="alertType" />
-			<jsp:param value="${fn:replace(requestScope.hints,';', '<br/>')}"
-				name="alertMessage" />
-		</jsp:include>
-	</c:if>
-
+    <c:if test="${hint!=null&&hint!=''}">
+   		<jsp:include page="../common/alert/alert.jsp">
+   			<jsp:param value="${hint}" name="alertType"/>
+   			<jsp:param value="${alertMessage}" name="alertMessage"/>
+   		</jsp:include>
+    </c:if>
 
 	<div class="row">
 		<div class="col-lg-12">
@@ -69,8 +67,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<button id="submitApproveButton" type="button" class="btn btn-primary btn-lg">凭证提交</button>
 						</c:if>			
 						<c:if test="${requestScope.finVoucherHead.approveStatus=='SUBMIT' }">
-							<button id="approveButton" type="button" class="btn btn-warning btn-lg">凭证审核</button>
-							<button id="rejectApproveButton" type="button" class="btn btn-danger btn-lg">凭证驳回</button>
+							<button id="approveButton" type="button" class="btn btn-warning btn-lg btn-redragon-approve">凭证审核</button>
+							<button id="rejectApproveButton" type="button" class="btn btn-danger btn-lg btn-redragon-approve">凭证驳回</button>
 						</c:if>
 						<c:if test="${requestScope.finVoucherHead.approveStatus=='APPROVE'&&requestScope.finVoucherHead.status!='N' }">
 							<button id="cancelButton" type="button" class="btn btn-danger btn-lg">凭证作废</button>

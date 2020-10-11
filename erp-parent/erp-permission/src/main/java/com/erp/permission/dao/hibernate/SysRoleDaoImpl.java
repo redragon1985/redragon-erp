@@ -116,10 +116,15 @@ public class SysRoleDaoImpl implements SysRoleDao{
     
     @Override
     public List<SysRole> getSysRoleListByStatus(String status) {
-        String sql = "select r.* from sys_role r where r.status = :status order by r.role_code";
+        String sql = "select r.* from sys_role r where 1=1";
         
         Map<String, Object> args = new HashMap<String, Object>();
-        args.put("status", status);
+        if(status!=null) {
+            sql = sql + " and r.status = :status";
+            args.put("status", status);
+        }
+
+        sql = sql + " order by r.role_code";
         
         Map<String, Class<?>> entity = new HashMap<String, Class<?>>();
         entity.put("r", SysRole.class);

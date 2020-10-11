@@ -91,8 +91,14 @@
 					<div class="hr-line-dashed"></div>
 					
 					<div class="form-group row">
+						<label class="col-sm-2 col-form-label">发票已核销金额</label>
+						<div class="col-sm-4 input-group">
+							<input id="invoiceReceivedAmount" type="text" class="form-control" value="${requestScope.receiptLine.invoiceReceivedAmount}" readonly="readonly">
+							<span class="input-group-addon">(元)</span>
+						</div>
+						
 						<label class="col-sm-2 col-form-label"><span class="text-danger">*</span>核销金额</label>
-						<div class="col-sm-10">
+						<div class="col-sm-4">
 							<input id="invoiceReceiptAmount" name="invoiceReceiptAmount" type="text" class="form-control" value="${requestScope.receiptLine.invoiceReceiptAmount}">
 						</div>
 					</div>
@@ -149,15 +155,17 @@
 				invoiceReceiptAmount : {
 					required : true,
 					number : true,
+					gtZero : true,
 				},
 			},
 			submitHandler: function(form) {
 				var invoiceReceiptAmount = $("#invoiceReceiptAmount").val();
 				var invoiceAmount = $("#invoiceAmount").val();
 				var taxAmount = $("#taxAmount").val();
-				if($.isNumeric(invoiceReceiptAmount)&&$.isNumeric(invoiceAmount)&&$.isNumeric(taxAmount)){
-					if(parseFloat(invoiceReceiptAmount)>redragonJS.numberAdd(parseFloat(invoiceAmount), parseFloat(taxAmount))){
-						redragonJS.alert("核销金额("+invoiceReceiptAmount+")不能大于发票金额("+invoiceAmount+"+"+taxAmount+")");
+				var invoiceReceivedAmount = $("#invoiceReceivedAmount").val();
+				if($.isNumeric(invoiceReceiptAmount)&&$.isNumeric(invoiceAmount)&&$.isNumeric(taxAmount)&&$.isNumeric(invoiceReceivedAmount)){
+					if(parseFloat(invoiceReceiptAmount)>redragonJS.numberSub(redragonJS.numberAdd(parseFloat(invoiceAmount), parseFloat(taxAmount)),invoiceReceivedAmount)){
+						redragonJS.alert("核销金额("+invoiceReceiptAmount+")不能大于发票金额("+invoiceAmount+"+"+taxAmount+"-"+invoiceReceivedAmount+")");
 					}else{
 						l.ladda('start');
 						editLine();

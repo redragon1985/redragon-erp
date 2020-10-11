@@ -116,4 +116,9 @@ public class ArReceiptLineServiceImpl implements ArReceiptLineService {
         return this.arReceiptLineDao.getArReceiptLineListByHeadCode(headCode);
     }
     
+    @Override
+    public Double getInvoiceReceiveAmount(String invoiceHeadCode, Integer receiptLineId) {
+        return this.arReceiptLineDao.getInvoiceReceiveAmount(invoiceHeadCode, receiptLineId);
+    }
+    
 }

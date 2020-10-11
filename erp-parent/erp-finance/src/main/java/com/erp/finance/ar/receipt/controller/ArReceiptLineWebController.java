@@ -143,9 +143,10 @@ public class ArReceiptLineWebController extends ControllerSupport{
         if(pages.getPage()==0) {
             pages.setPage(1);
         }
-        pages.setMax(100);
         
         //分页查询采购订单行数据
+        arInvoiceHeadCO.setStatus("CONFIRM");
+        arInvoiceHeadCO.setApproveStatus("APPROVE");
         List<ArInvoiceHead> invoiceHeadList = this.arInvoiceHeadService.getDataObjects(pages, arInvoiceHeadCO);
         //循环设置发票信息
         for(ArInvoiceHead arInvoiceHead: invoiceHeadList) {
@@ -163,11 +164,9 @@ public class ArReceiptLineWebController extends ControllerSupport{
         
         //剔除已经做了发票行的采购订单行
         Iterator<ArInvoiceHead> invoiceIt = invoiceHeadList.iterator();
-        Iterator<ArReceiptLine> receiptLineIt = receiptLineList.iterator();
         while(invoiceIt.hasNext()) {
             ArInvoiceHead apInvoiceHeadTemp = invoiceIt.next();
-            while(receiptLineIt.hasNext()) {
-                ArReceiptLine receiptLineTemp = receiptLineIt.next();
+            for(ArReceiptLine receiptLineTemp: receiptLineList) {
                 if(apInvoiceHeadTemp.getInvoiceHeadCode().equals(receiptLineTemp.getInvoiceHeadCode())) {
                     invoiceIt.remove();
                     break;
@@ -205,14 +204,19 @@ public class ArReceiptLineWebController extends ControllerSupport{
             ArInvoiceHead arInvoiceHead = this.arInvoiceHeadService.getDataObject(arReceiptLine.getInvoiceHeadCode());
             //获取税额
             BigDecimal[] sumAmount = this.arInvoiceLineService.getInvoiceLineAmountSumByHeadCode(arInvoiceHead.getInvoiceHeadCode());
+            //获取发票已核销金额
+            Double invoiceReceivedAmount = this.arReceiptLineService.getInvoiceReceiveAmount(arReceiptLine.getInvoiceHeadCode(), arReceiptLine.getReceiptLineId());
             
+            arReceiptLine.setInvoiceReceivedAmount(invoiceReceivedAmount);      
             arReceiptLine.setInvoiceAmount(arInvoiceHead.getAmount());
             arReceiptLine.setTaxAmount(sumAmount[1].doubleValue());
             arReceiptLine.setSoHeadCode(arInvoiceHead.getInvoiceSourceHeadCode());
             arReceiptLine.setReferenceNumber(arInvoiceHead.getReferenceNumber());
             arReceiptLine.setInvoiceDate(arInvoiceHead.getInvoiceDate());
         }else {
-            
+            //获取发票已核销金额
+            Double invoiceReceivedAmount = this.arReceiptLineService.getInvoiceReceiveAmount(arReceiptLine.getInvoiceHeadCode(), 0);
+            arReceiptLine.setInvoiceReceivedAmount(invoiceReceivedAmount); 
         }
         
         //页面属性设置

@@ -282,6 +282,17 @@ public class ApPayHeadWebController extends ControllerSupport{
     public String updateApproveStatus(String code, String approveStatus, RedirectAttributes attr) {
         
         if(StringUtils.isNotBlank(code)&&StringUtils.isNotBlank(approveStatus)) {
+            if(approveStatus.equals("UNSUBMIT")) {
+                boolean voucherFlag = this.finVoucherBillRService.isExistVoucherRelateArPay(code);
+                if(voucherFlag) {
+                    //提示信息
+                    attr.addFlashAttribute("hint", "hint");
+                    attr.addFlashAttribute("alertMessage", "当前付款已生成凭证不能变更");
+                    attr.addAttribute("payHeadCode", code);
+                    return "redirect:getApPayHead";
+                }
+            }
+            
             //更新审核状态
             this.apPayHeadService.updateApproveStatus(code, approveStatus);
             //提示信息

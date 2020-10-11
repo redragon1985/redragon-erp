@@ -119,6 +119,9 @@ public class MdProjectServiceImpl implements MdProjectService {
     @Override
     public void updateApproveStatus(int id, String approveStatus) {
         this.mdProjectDao.updateApproveStatus(id, approveStatus);
+        //清除缓存
+        EhcacheUtil.clear(MasterDataParam.PROJECT_CACHE_KEY);
+        RedisUtil.clear(MasterDataParam.PROJECT_CACHE_KEY);
     }
     
 }

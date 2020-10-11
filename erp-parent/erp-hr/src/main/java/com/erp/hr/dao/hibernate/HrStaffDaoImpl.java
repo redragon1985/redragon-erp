@@ -93,7 +93,16 @@ public class HrStaffDaoImpl implements HrStaffDao{
     
     @Override
     public List<HrStaff> getDataObjects(HrStaffCO paramObj) {
-        return null;
+        String sql = "select s.* from hr_staff s where 1=1";
+        
+        Map<String, Object> args = new HashMap<String, Object>();
+        sql = sql + DaoUtil.getSQLCondition(paramObj, "staffStatus", "and s.", args);
+        sql = sql + " order by s.staff_code desc";
+        
+        Map<String, Class<?>> entity = new HashMap<String, Class<?>>();
+        entity.put("s", HrStaff.class);
+        
+        return this.daoSupport.selectDataSql(sql, entity, args);
     }
     
     @Override
@@ -134,7 +143,7 @@ public class HrStaffDaoImpl implements HrStaffDao{
     public HrStaffInfoRO getHrStaffInfoRO(String username) {
         String sql = "select s.staff_code as staffCode,s.staff_name as staffName,d.department_code as departmentCode,d.department_name as departmentName,d.segment_code as deaprtmentSegmentCode,d.segment_desc as departmentSegmentDesc,p.position_code as positionCode,p.position_name as positionName " + 
                      "from hr_staff s,hr_staff_department_r r,hr_department d,hr_position p " + 
-                     "where s.staff_code=r.staff_code and r.department_code=d.department_code and r.position_code=p.position_code and s.username=:username and s.staff_status='WORK'";
+                     "where s.staff_code=r.staff_code and r.department_code=d.department_code and r.position_code=p.position_code and r.status = 'Y' and s.username=:username and s.staff_status='WORK'";
         
         Map<String, Object> args = new HashMap<String, Object>();
         args.put("username", username);

@@ -279,6 +279,17 @@ public class ArReceiptHeadWebController extends ControllerSupport{
     public String updateApproveStatus(String code, String approveStatus, RedirectAttributes attr) {
         
         if(StringUtils.isNotBlank(code)&&StringUtils.isNotBlank(approveStatus)) {
+            if(approveStatus.equals("UNSUBMIT")) {
+                boolean voucherFlag = this.finVoucherBillRService.isExistVoucherRelateArReceipt(code);
+                if(voucherFlag) {
+                    //提示信息
+                    attr.addFlashAttribute("hint", "hint");
+                    attr.addFlashAttribute("alertMessage", "当前收款已生成凭证不能变更");
+                    attr.addAttribute("receiptHeadCode", code);
+                    return "redirect:getArReceiptHead";
+                }
+            }
+            
             //更新审核状态
             this.arReceiptHeadService.updateApproveStatus(code, approveStatus);
             //提示信息

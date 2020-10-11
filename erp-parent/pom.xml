@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>redragon</groupId>
   <artifactId>erp-parent</artifactId>
-  <version>0.6</version>
+  <version>0.9</version>
   <packaging>pom</packaging>
   
   <!-- 定义公共资源版本 -->
@@ -15,7 +15,7 @@
   
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <redragon.erp.version>0.6</redragon.erp.version>
+    <redragon.erp.version>0.9</redragon.erp.version>
   </properties>
   
   <dependencies>

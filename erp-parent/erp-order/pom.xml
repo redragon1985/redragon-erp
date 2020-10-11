@@ -3,7 +3,7 @@
   <parent>
     <groupId>redragon</groupId>
     <artifactId>erp-parent</artifactId>
-    <version>0.6</version>
+    <version>0.9</version>
   </parent>
   <artifactId>erp-order</artifactId>
   <packaging>war</packaging>
@@ -34,6 +34,11 @@
   	<dependency>
   		<groupId>redragon</groupId>
   		<artifactId>erp-masterData</artifactId>
+  		<version>${redragon.erp.version}</version>
+  	</dependency>
+  	<dependency>
+  		<groupId>redragon</groupId>
+  		<artifactId>erp-common</artifactId>
   		<version>${redragon.erp.version}</version>
   	</dependency>
   </dependencies>

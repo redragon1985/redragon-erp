@@ -26,6 +26,7 @@ import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -37,6 +38,8 @@ import com.framework.dao.model.Pages;
 import com.framework.util.JsonResultUtil;
 import com.framework.util.JsonUtil;
 import com.framework.util.ShiroUtil;
+import com.erp.common.ap.invoice.service.ApInvoiceHeadService;
+import com.erp.common.inv.input.service.InvInputHeadService;
 import com.erp.dataset.service.DatasetCommonService;
 import com.erp.hr.dao.model.HrStaffInfoRO;
 import com.erp.hr.service.HrCommonService;
@@ -65,6 +68,12 @@ public class PoHeadWebController extends ControllerSupport{
     private MasterDataCommonService masterDataCommonService;
     @Autowired
     private PoLineService poLineService;
+    @Autowired
+    @Qualifier("invInputHeadServiceCommon")
+    private InvInputHeadService invInputHeadService;
+    @Autowired
+    @Qualifier("apInvoiceHeadServiceCommon")
+    private ApInvoiceHeadService apInvoiceHeadService;
     
     @Override
     public String getExceptionRedirectURL() {
@@ -275,9 +284,29 @@ public class PoHeadWebController extends ControllerSupport{
     public String updateApproveStatus(String code, String approveStatus, RedirectAttributes attr) {
         
         if(StringUtils.isNotBlank(code)&&StringUtils.isNotBlank(approveStatus)) {
+            if(approveStatus.equals("UNSUBMIT")) {
+                boolean inputFlag = this.invInputHeadService.isExistInvInputHeadRelatePO(code);
+                if(!inputFlag) {
+                    boolean invoiceFlag = this.apInvoiceHeadService.isExistApInvoiceRelatePO(code);
+                    if(invoiceFlag) {
+                        //提示信息
+                        attr.addFlashAttribute("hint", "hint");
+                        attr.addFlashAttribute("alertMessage", "当前采购订单已开票不能变更");
+                        attr.addAttribute("poHeadCode", code);
+                        return "redirect:getPoHead";
+                    }
+                }else {
+                    //提示信息
+                    attr.addFlashAttribute("hint", "hint");
+                    attr.addFlashAttribute("alertMessage", "当前采购订单已入库不能变更");
+                    attr.addAttribute("poHeadCode", code);
+                    return "redirect:getPoHead";
+                }
+            }
+            
             //更新审核状态
             this.poHeadService.updateApproveStatus(code, approveStatus);
-          //提示信息
+            //提示信息
             attr.addFlashAttribute("hint", "success");
             attr.addAttribute("poHeadCode", code);
         }else {

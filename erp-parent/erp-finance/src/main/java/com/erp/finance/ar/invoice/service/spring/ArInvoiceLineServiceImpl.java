@@ -130,4 +130,9 @@ public class ArInvoiceLineServiceImpl implements ArInvoiceLineService {
         return this.receiptLineDao.getArInvoiceLineListByHeadCode(headCode);
     }
     
+    @Override
+    public Double getMadeInvoiceQuantityBySoLine(String soLineCode, Integer invoiceLineId) {
+        return this.receiptLineDao.getMadeInvoiceQuantityBySoLine(soLineCode, invoiceLineId);
+    }
+    
 }

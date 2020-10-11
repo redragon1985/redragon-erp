@@ -36,19 +36,19 @@
 		<div class="row">
 			<div class="col-sm-4">
 				<div class="form-group">
-					<label class="control-label" for="materialCode">物料/事项编码</label> 
+					<label class="control-label" for="materialCode">物料/服务编码</label> 
 					<input type="text" id="materialCode" name="materialCode" value="${param.materialCode}" class="form-control">
 				</div>
 			</div>
 			<div class="col-sm-4">
 				<div class="form-group">
-					<label class="control-label" for="materialName">物料/事项名称</label> 
+					<label class="control-label" for="materialName">物料/服务名称</label> 
 					<input type="text" id="materialName" name="materialName" value="${param.materialName}" class="form-control">
 				</div>
 			</div>
 			<div class="col-sm-4">
 				<div class="form-group">
-					<label class="control-label" for="materialType">物料或事项</label>
+					<label class="control-label" for="materialType">物料或服务</label>
 					<select name="materialType" id="materialType" class="form-control">
 						<option value="" selected="">请选择</option>
 						<c:forEach items="${requestScope.materialTypeMap}" var="materialType">
@@ -61,7 +61,7 @@
 		<div class="row">	
 			<div class="col-sm-4">
 				<div class="form-group">
-					<label class="control-label" for="categoryCode">物料/事项类别</label> 
+					<label class="control-label" for="categoryCode">物料/服务类别</label> 
 					<select name="categoryCode" id="categoryCode" class="form-control">
 						<option value="" selected="">请选择</option>
 						<c:forEach items="${requestScope.materialCategoryMap}" var="materialCategory">

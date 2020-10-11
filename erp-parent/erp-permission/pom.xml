@@ -3,7 +3,7 @@
   <parent>
     <groupId>redragon</groupId>
     <artifactId>erp-parent</artifactId>
-    <version>0.6</version>
+    <version>0.9</version>
   </parent>
   <artifactId>erp-permission</artifactId>
   <packaging>war</packaging>
@@ -19,7 +19,6 @@
         </plugin>
     </plugins>
   </build>
-
 
   <dependencies>
   	<dependency>

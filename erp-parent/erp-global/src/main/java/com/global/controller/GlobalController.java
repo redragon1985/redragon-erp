@@ -35,7 +35,10 @@ import com.erp.masterdata.customer.service.MdCustomerService;
 import com.erp.masterdata.vendor.service.MdVendorService;
 import com.erp.order.po.service.PoHeadService;
 import com.erp.order.so.service.SoHeadService;
+import com.framework.util.EhcacheUtil;
+import com.framework.util.JedisUtil;
 import com.framework.util.JsonResultUtil;
+import com.framework.util.RedisUtil;
 import com.framework.util.ShiroUtil;
 
 import redragon.basic.tools.TimeToolKit;
@@ -130,6 +133,24 @@ public class GlobalController {
         return "redirect: index";
     }
     
-    
+    @RequestMapping("web/main/clearCache")
+    @ResponseBody
+    public String clearCache() {
+        try{
+            //清除缓存ehcache、redis
+            EhcacheUtil.clearBatch("DATASET_*");
+            RedisUtil.clearBatch("DATASET_*");
+            
+            EhcacheUtil.clearBatch("MD_*");
+            RedisUtil.clearBatch("MD_*");
+            
+            EhcacheUtil.clearBatch("com.erp*");
+            RedisUtil.clearBatch("com.erp*");
+            
+            return JsonResultUtil.getErrorJson(0);
+        }catch(Exception e) {
+            return JsonResultUtil.getErrorJson(-1, "清除缓存失败");
+        }
+    }
     
 }
