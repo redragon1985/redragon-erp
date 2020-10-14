@@ -58,6 +58,14 @@
 #### - 单点登录
 ###### 集成成熟的SSO解决方案，保证登陆安全和高效
 
+## 商业合作
+- [商业使用授权](https://www.redragon-erp.com/product.html "商业使用授权")
+- [区域软件代理](https://www.redragon-erp.com/partner.html "区域软件代理")
+
+:fa-wechat:`如有合作意向，可加微信详询`
+
+![赤龙ERP开发者](http://www.redragon-erp.com/images/redragonBussiness.png "赤龙ERP商业合作")
+
 ## 产品展示
 
 主界面
@@ -104,7 +112,6 @@
 ![赤龙ERP](https://www.redragon-erp.com/images/9.jpg "赤龙ERP")
 
 ------------
-
 
 ## 技术与平台
 
