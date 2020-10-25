@@ -80,7 +80,17 @@ public class MdVendorLicenseDaoImpl implements MdVendorLicenseDao{
     
     @Override
     public List<MdVendorLicense> getDataObjects(MdVendorLicenseCO paramObj) {
-        return null;
+        String sql = "select c.* from md_vendor_license c where vendor_code=:code";
+        
+        Map<String, Object> args = new HashMap<String, Object>();
+        args.put("code", paramObj.getVendorCode());
+        
+        sql = sql + " order by c.license_id desc";
+        
+        Map<String, Class<?>> entity = new HashMap<String, Class<?>>();
+        entity.put("c", MdVendorLicense.class);
+        
+        return this.daoSupport.selectDataSql(sql, entity, args);
     }
     
     @Override

@@ -80,7 +80,17 @@ public class MdCustomerLicenseDaoImpl implements MdCustomerLicenseDao{
     
     @Override
     public List<MdCustomerLicense> getDataObjects(MdCustomerLicenseCO paramObj) {
-        return null;
+        String sql = "select c.* from md_customer_license c where customer_code=:code";
+        
+        Map<String, Object> args = new HashMap<String, Object>();
+        args.put("code", paramObj.getCustomerCode());
+        
+        sql = sql + " order by c.license_id desc";
+        
+        Map<String, Class<?>> entity = new HashMap<String, Class<?>>();
+        entity.put("c", MdCustomerLicense.class);
+        
+        return this.daoSupport.selectDataSql(sql, entity, args);
     }
     
     @Override

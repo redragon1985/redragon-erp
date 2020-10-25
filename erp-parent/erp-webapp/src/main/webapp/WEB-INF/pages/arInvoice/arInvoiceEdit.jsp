@@ -116,6 +116,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<label class="col-sm-2 col-form-label"><span class="text-danger">*</span><strong>购买方/客户</strong></label>
 							<div class="col-sm-4">
 		                        <input id="payerName" name="payerName" type="text" class="form-control" value="${requestScope.receiptHead.payerName}" readonly="readonly">
+								<span class="help-block m-b-none" style="color: silver;">联系人信息：${requestScope.receiptHead.customerContact}</span>
 							</div>
 						
 	                        <label class="col-sm-2 col-form-label"><span class="text-danger">*</span><strong>销售方/供应商</strong></label>
@@ -127,6 +128,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		                        	</c:forEach>
 		                        </select>
 		                   	</div>
+	                    </div>
+	                    <div class="hr-line-dashed"></div>
+	                    
+	                    <div class="form-group row">
+							<label class="col-sm-2 col-form-label"><strong>客户地址</strong></label>
+							<div class="col-sm-4">
+		                        <input id="customerAddress" type="text" class="form-control" value="${requestScope.receiptHead.customerAddress}" readonly="readonly">
+	                        </div>
+							
+	                        <label class="col-sm-2 col-form-label"><strong>客户纳税人识别号</strong></label>
+	                        <div class="col-sm-4">
+		                        <input id="customerLicenseNumber" type="text" class="form-control" value="${requestScope.receiptHead.customerLicenseNumber}" readonly="readonly">
+	                        </div>
 	                    </div>
 	                    <div class="hr-line-dashed"></div>
 	                    

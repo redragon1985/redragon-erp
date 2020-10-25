@@ -265,4 +265,15 @@ public class MdCustomer implements java.io.Serializable {
         this.mdCustomerContactList = mdCustomerContactList;
     }
     
+    //客户营业执照
+    @Transient
+    private MdCustomerLicense mdCustomerLicense;
+
+    public MdCustomerLicense getMdCustomerLicense() {
+        return mdCustomerLicense;
+    }
+    public void setMdCustomerLicense(MdCustomerLicense mdCustomerLicense) {
+        this.mdCustomerLicense = mdCustomerLicense;
+    }
+    
 }

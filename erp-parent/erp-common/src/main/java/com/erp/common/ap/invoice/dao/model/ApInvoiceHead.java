@@ -72,6 +72,18 @@ public class ApInvoiceHead implements java.io.Serializable {
     public void setInvoiceHeadCode(String invoiceHeadCode) {
         this.invoiceHeadCode = invoiceHeadCode;
     }
+    
+    //发票类型（普通发票PO_INVOICE、预收款发票PRE_INVOICE）
+    @NotBlank(message="发票类型不能为空")
+    @Column(name = "invoice_type", unique = false, nullable = false, length = 45)
+    private String invoiceType;
+    
+    public String getInvoiceType() {
+        return invoiceType;
+    }
+    public void setInvoiceType(String invoiceType) {
+        this.invoiceType = invoiceType;
+    }
 
     //发票来源类型（采购订单PO、入库单INPUT）
     @NotBlank(message="发票来源类型不能为空")
@@ -168,18 +180,6 @@ public class ApInvoiceHead implements java.io.Serializable {
         this.invoiceDate = invoiceDate;
     }
 
-    //预付款标识
-    @NotBlank(message="预付款标识不能为空")
-    @Column(name = "prepay_flag", unique = false, nullable = false, length = 1)
-    private String prepayFlag;
-    
-    public String getPrepayFlag() {
-        return this.prepayFlag;
-    }
-    public void setPrepayFlag(String prepayFlag) {
-        this.prepayFlag = prepayFlag;
-    }
-    
     //付款方式
     @NotBlank(message="付款方式不能为空")
     @Column(name = "pay_mode", unique = false, nullable = false, length = 45)

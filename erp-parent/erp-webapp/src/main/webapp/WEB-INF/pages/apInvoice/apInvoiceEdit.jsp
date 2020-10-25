@@ -122,7 +122,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		                        	</c:forEach>
 		                        </select>
 							</div>
-						
+							
 	                        <label class="col-sm-2 col-form-label"><span class="text-danger">*</span><strong>销售方/供应商</strong></label>
 	                        <div class="col-sm-4">
 	                        	<%-- 
@@ -134,6 +134,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		                        </select>
 		                        --%>
 		                        <input id="receiverName" name="receiverName" type="text" class="form-control" value="${requestScope.payHead.receiverName}" readonly="readonly">
+	                        	<span class="help-block m-b-none" style="color: silver;">联系人信息：${requestScope.payHead.vendorContact}</span>
+	                        </div>
+	                    </div>
+	                    <div class="hr-line-dashed"></div>
+	                    
+	                    <div class="form-group row">
+							<label class="col-sm-2 col-form-label"><strong>供应商地址</strong></label>
+							<div class="col-sm-4">
+		                        <input id="vendorAddress" type="text" class="form-control" value="${requestScope.payHead.vendorAddress}" readonly="readonly">
+	                        </div>
+							
+	                        <label class="col-sm-2 col-form-label"><strong>供应商纳税人识别号</strong></label>
+	                        <div class="col-sm-4">
+		                        <input id="vendorLicenseNumber" type="text" class="form-control" value="${requestScope.payHead.vendorLicenseNumber}" readonly="readonly">
 	                        </div>
 	                    </div>
 	                    <div class="hr-line-dashed"></div>

@@ -374,6 +374,12 @@ public class ArInvoiceHead implements java.io.Serializable {
     @Transient
     private String payerName;
     @Transient
+    private String customerAddress;
+    @Transient
+    private String customerContact;
+    @Transient
+    private String customerLicenseNumber;
+    @Transient
     private String bankName;
     @Transient
     private Double taxAmount;
@@ -425,6 +431,24 @@ public class ArInvoiceHead implements java.io.Serializable {
     }
     public void setTaxAmount(Double taxAmount) {
         this.taxAmount = taxAmount;
+    }
+    public String getCustomerAddress() {
+        return customerAddress;
+    }
+    public void setCustomerAddress(String customerAddress) {
+        this.customerAddress = customerAddress;
+    }
+    public String getCustomerContact() {
+        return customerContact;
+    }
+    public void setCustomerContact(String customerContact) {
+        this.customerContact = customerContact;
+    }
+    public String getCustomerLicenseNumber() {
+        return customerLicenseNumber;
+    }
+    public void setCustomerLicenseNumber(String customerLicenseNumber) {
+        this.customerLicenseNumber = customerLicenseNumber;
     }
     
 }

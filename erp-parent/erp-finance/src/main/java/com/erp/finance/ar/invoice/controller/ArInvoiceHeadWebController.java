@@ -51,6 +51,8 @@ import com.erp.finance.ar.invoice.service.ArInvoiceLineService;
 import com.erp.hr.dao.model.HrStaffInfoRO;
 import com.erp.hr.service.HrCommonService;
 import com.erp.masterdata.common.service.MasterDataCommonService;
+import com.erp.masterdata.customer.dao.model.MdCustomer;
+import com.erp.masterdata.vendor.dao.model.MdVendor;
 import com.erp.masterdata.vendor.dao.model.MdVendorBank;
 import com.erp.masterdata.vendor.dao.model.MdVendorBankCO;
 import com.erp.masterdata.vendor.service.MdVendorBankService;
@@ -195,6 +197,13 @@ public class ArInvoiceHeadWebController extends ControllerSupport{
             receiptHead.setPayerName(this.masterDataCommonService.getCustomerMap().get(receiptHead.getPayer()));
             //获取银行信息
             receiptHead.setBankName(this.datasetCommonService.getBank().get(receiptHead.getBankCode()));
+            //获取客户相关信息
+            try {
+                MdCustomer mdCustomer = this.masterDataCommonService.getMdCustomerInfoCache(receiptHead.getPayer());
+                receiptHead.setCustomerAddress(mdCustomer.getCustomerAddress());
+                receiptHead.setCustomerContact(mdCustomer.getMdCustomerContactList().get(0).getContactName()+" "+mdCustomer.getMdCustomerContactList().get(0).getContactTelephone());
+                receiptHead.setCustomerLicenseNumber(mdCustomer.getMdCustomerLicense().getLicenseNumber());
+            }catch(Exception e) {}
         }else {
             //初始化默认字段
             //receiptHead.setAmount(0D);

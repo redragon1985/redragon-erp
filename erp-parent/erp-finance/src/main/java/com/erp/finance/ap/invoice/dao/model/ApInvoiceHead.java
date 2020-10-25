@@ -375,6 +375,12 @@ public class ApInvoiceHead implements java.io.Serializable {
     @Transient
     private String receiverName;
     @Transient
+    private String vendorAddress;
+    @Transient
+    private String vendorContact;
+    @Transient
+    private String vendorLicenseNumber;
+    @Transient
     private String bankName;
     @Transient
     private Double taxAmount;
@@ -426,6 +432,24 @@ public class ApInvoiceHead implements java.io.Serializable {
     }
     public void setTaxAmount(Double taxAmount) {
         this.taxAmount = taxAmount;
+    }
+    public String getVendorAddress() {
+        return vendorAddress;
+    }
+    public void setVendorAddress(String vendorAddress) {
+        this.vendorAddress = vendorAddress;
+    }
+    public String getVendorContact() {
+        return vendorContact;
+    }
+    public void setVendorContact(String vendorContact) {
+        this.vendorContact = vendorContact;
+    }
+    public String getVendorLicenseNumber() {
+        return vendorLicenseNumber;
+    }
+    public void setVendorLicenseNumber(String vendorLicenseNumber) {
+        this.vendorLicenseNumber = vendorLicenseNumber;
     }
     
 }

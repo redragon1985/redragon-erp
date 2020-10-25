@@ -30,10 +30,13 @@ import com.erp.masterdata.common.param.MasterDataParam;
 import com.erp.masterdata.common.service.MasterDataCommonService;
 import com.erp.masterdata.customer.dao.MdCustomerContactDao;
 import com.erp.masterdata.customer.dao.MdCustomerDao;
+import com.erp.masterdata.customer.dao.MdCustomerLicenseDao;
 import com.erp.masterdata.customer.dao.model.MdCustomer;
 import com.erp.masterdata.customer.dao.model.MdCustomerCO;
 import com.erp.masterdata.customer.dao.model.MdCustomerContact;
 import com.erp.masterdata.customer.dao.model.MdCustomerContactCO;
+import com.erp.masterdata.customer.dao.model.MdCustomerLicense;
+import com.erp.masterdata.customer.dao.model.MdCustomerLicenseCO;
 import com.erp.masterdata.material.dao.MdMaterialDao;
 import com.erp.masterdata.material.dao.model.MdMaterial;
 import com.erp.masterdata.material.dao.model.MdMaterialCO;
@@ -44,10 +47,13 @@ import com.erp.masterdata.subject.dao.MdFinanceSubjectDao;
 import com.erp.masterdata.subject.dao.model.MdFinanceSubject;
 import com.erp.masterdata.vendor.dao.MdVendorContactDao;
 import com.erp.masterdata.vendor.dao.MdVendorDao;
+import com.erp.masterdata.vendor.dao.MdVendorLicenseDao;
 import com.erp.masterdata.vendor.dao.model.MdVendor;
 import com.erp.masterdata.vendor.dao.model.MdVendorCO;
 import com.erp.masterdata.vendor.dao.model.MdVendorContact;
 import com.erp.masterdata.vendor.dao.model.MdVendorContactCO;
+import com.erp.masterdata.vendor.dao.model.MdVendorLicense;
+import com.erp.masterdata.vendor.dao.model.MdVendorLicenseCO;
 import com.erp.masterdata.vendor.service.MdVendorContactService;
 import com.framework.annotation.Cache;
 import com.framework.annotation.Cache.CacheType;
@@ -77,6 +83,10 @@ public class MasterDataCommonServiceImpl implements MasterDataCommonService {
     private MdCustomerContactDao mdCustomerContactDao;
     @Autowired
     private MdVendorContactDao mdVendorContactDao;
+    @Autowired
+    private MdCustomerLicenseDao mdCustomerLicenseDao;
+    @Autowired
+    private MdVendorLicenseDao mdVendorLicenseDao;
     
     
     
@@ -230,12 +240,22 @@ public class MasterDataCommonServiceImpl implements MasterDataCommonService {
     public MdCustomer getMdCustomerInfoCache(String customerCode) {
         //获取客户信息
         MdCustomer mdCustomer = this.mdCustomerDao.getDataObject(customerCode);
+        
         //获取客户联系人
         MdCustomerContactCO mdCustomerContactCO = new MdCustomerContactCO();
         mdCustomerContactCO.setCustomerCode(customerCode);
         List<MdCustomerContact> mdCustomerContactList = this.mdCustomerContactDao.getDataObjects(mdCustomerContactCO);
         //设置联系人
         mdCustomer.setMdCustomerContactList(mdCustomerContactList);
+        
+        //获取客户营业执照
+        MdCustomerLicenseCO mdCustomerLicenseCO = new MdCustomerLicenseCO();
+        mdCustomerLicenseCO.setCustomerCode(customerCode);
+        List<MdCustomerLicense> mdCustomerLicenseList = this.mdCustomerLicenseDao.getDataObjects(mdCustomerLicenseCO);
+        //设置营业执照
+        if(mdCustomerLicenseList!=null&&mdCustomerLicenseList.size()>0) {
+            mdCustomer.setMdCustomerLicense(mdCustomerLicenseList.get(0));
+        }
         
         return mdCustomer;
     }
@@ -251,6 +271,15 @@ public class MasterDataCommonServiceImpl implements MasterDataCommonService {
         List<MdVendorContact> mdVendorContactList = this.mdVendorContactDao.getDataObjects(mdVendorContactCO);
         //设置联系人
         mdVendor.setMdVendorContactList(mdVendorContactList);
+        
+        //获取供应商营业执照
+        MdVendorLicenseCO mdVendorLicenseCO = new MdVendorLicenseCO();
+        mdVendorLicenseCO.setVendorCode(vendorCode);
+        List<MdVendorLicense> mdVendorLicenseList = this.mdVendorLicenseDao.getDataObjects(mdVendorLicenseCO);
+        //设置营业执照
+        if(mdVendorLicenseList!=null&&mdVendorLicenseList.size()>0) {
+            mdVendor.setMdVendorLicense(mdVendorLicenseList.get(0));
+        }
         
         return mdVendor;
     }

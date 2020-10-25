@@ -60,6 +60,7 @@ import com.erp.inv.output.dao.model.InvOutputHead;
 import com.erp.masterdata.common.service.MasterDataCommonService;
 import com.erp.masterdata.customer.dao.model.MdCustomerBank;
 import com.erp.masterdata.customer.dao.model.MdCustomerBankCO;
+import com.erp.masterdata.vendor.dao.model.MdVendor;
 import com.erp.masterdata.vendor.dao.model.MdVendorBank;
 import com.erp.masterdata.vendor.dao.model.MdVendorBankCO;
 import com.erp.masterdata.vendor.service.MdVendorBankService;
@@ -200,6 +201,13 @@ public class ApInvoiceHeadWebController extends ControllerSupport{
             payHead.setReceiverName(this.masterDataCommonService.getVendorMap().get(payHead.getReceiver()));
             //获取银行信息
             payHead.setBankName(this.datasetCommonService.getBank().get(payHead.getBankCode()));
+            //获取供应商相关信息
+            try {
+                MdVendor mdVendor = this.masterDataCommonService.getMdVendorInfoCache(payHead.getReceiver());
+                payHead.setVendorAddress(mdVendor.getVendorAddress());
+                payHead.setVendorContact(mdVendor.getMdVendorContactList().get(0).getContactName()+" "+mdVendor.getMdVendorContactList().get(0).getContactTelephone());
+                payHead.setVendorLicenseNumber(mdVendor.getMdVendorLicense().getLicenseNumber());
+            }catch(Exception e) {}
         }else {
             //初始化默认字段
             //payHead.setAmount(0D);

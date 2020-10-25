@@ -266,4 +266,15 @@ public class MdVendor implements java.io.Serializable {
         this.mdVendorContactList = mdVendorContactList;
     }
     
+    //供应商营业执照
+    @Transient
+    private MdVendorLicense mdVendorLicense;
+
+    public MdVendorLicense getMdVendorLicense() {
+        return mdVendorLicense;
+    }
+    public void setMdVendorLicense(MdVendorLicense mdVendorLicense) {
+        this.mdVendorLicense = mdVendorLicense;
+    }
+    
 }
