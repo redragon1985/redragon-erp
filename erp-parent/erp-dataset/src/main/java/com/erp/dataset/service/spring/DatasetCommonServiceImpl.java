@@ -100,6 +100,18 @@ public class DatasetCommonServiceImpl implements DatasetCommonService {
     }
     
     @Override
+    @Cache(cacheType=CacheType.ALL, cacheSeconds=7200, cacheKey=DatasetParam.POA_TYPE_KEY)
+    public Map<String, String> getPOAType() {
+        return this.sysDatasetDao.getDatasetMap("poa_type");
+    }
+    
+    @Override
+    @Cache(cacheType=CacheType.ALL, cacheSeconds=7200, cacheKey=DatasetParam.SOA_TYPE_KEY)
+    public Map<String, String> getSOAType() {
+        return this.sysDatasetDao.getDatasetMap("soa_type");
+    }
+    
+    @Override
     @Cache(cacheType=CacheType.ALL, cacheSeconds=7200, cacheKey=DatasetParam.TAX_TYPE_KEY)
     public Map<String, String> getTaxType() {
         return this.sysDatasetDao.getDatasetMap("tax_type");

@@ -46,6 +46,10 @@ public class DatasetParam {
     public static final String PO_TYPE_KEY = "DATASET_PO_TYPE";
     //销售订单类型
     public static final String SO_TYPE_KEY = "DATASET_SO_TYPE";
+    //采购协议类型
+    public static final String POA_TYPE_KEY = "DATASET_POA_TYPE";
+    //销售协议类型
+    public static final String SOA_TYPE_KEY = "DATASET_SOA_TYPE";
     //计税类型
     public static final String TAX_TYPE_KEY = "DATASET_TAX_TYPE";
     //付款方式

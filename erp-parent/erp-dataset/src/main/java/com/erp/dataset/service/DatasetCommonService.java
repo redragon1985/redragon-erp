@@ -55,6 +55,12 @@ public interface DatasetCommonService {
     //获取销售订单类型
     public abstract Map<String, String> getSOType();
     
+    //获取采购协议类型
+    public abstract Map<String, String> getPOAType();
+    
+    //获取销售协议类型
+    public abstract Map<String, String> getSOAType();
+    
     //获取计税类型
     public abstract Map<String, String> getTaxType();
     
