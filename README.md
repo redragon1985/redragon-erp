@@ -53,7 +53,7 @@
 # 演示地址
 社区版：[https://www.redragon-erp.com/erp](https://www.redragon-erp.com/erp "https://www.redragon-erp.com/erp")
 
-[:fa-hand-o-right: 点击自助申请账号](https://www.redragon-erp.com/erp "https://www.redragon-erp.com/erp")
+[:fa-hand-o-right: 点击自助申请账号](https://www.redragon-erp.com/account.html "https://www.redragon-erp.com/account.html")
 
 `加开发者微信，可加入赤龙ERP沟通群，讨论技术或业务问题`
 
