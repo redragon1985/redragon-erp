@@ -53,7 +53,9 @@
 # 演示地址
 社区版：[https://www.redragon-erp.com/erp](https://www.redragon-erp.com/erp "https://www.redragon-erp.com/erp")
 
-`由于服务器资源有限，测试账号需联系开发者，请谅解！`
+[:fa-hand-o-right: 点击自助申请账号](https://www.redragon-erp.com/erp "https://www.redragon-erp.com/erp")
+
+`加开发者微信，可加入赤龙ERP沟通群，讨论技术或业务问题`
 
 ![赤龙ERP开发者](http://www.redragon-erp.com/images/redragon.png "赤龙ERP开发者")
 
@@ -106,7 +108,7 @@
 - 会员制与服务：赤龙ERP生态版提供会员制的服务并收取必要的服务费。[了解更多](https://www.redragon-erp.com/product.html "赤龙ERP会员")
 - 软件区域代理：赤龙ERP生态版招募区域代理，代理商有权代理我们的软件，并通过实施或客户化获利。[了解更多](https://www.redragon-erp.com/partner.html "区域软件代理")
 
-:fa-wechat:`如有合作意向，可加微信详询`
+:fa-wechat:`如需购买或合作，可加微信详询`
 
 ![赤龙ERP开发者](http://www.redragon-erp.com/images/redragonBussiness.png "赤龙ERP商业合作")
 
