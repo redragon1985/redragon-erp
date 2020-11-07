@@ -13,6 +13,10 @@
 
 <title>ERP登陆</title>
 
+<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+<link rel="Bookmark" type="image/x-icon" href="/favicon.ico" />
+
 <link rel="shortcut icon" href="erp/favicon.ico" />
 
 <link href="erp/css/bootstrap.min.css" rel="stylesheet">
@@ -49,10 +53,14 @@
 
 				<p>由国内经验丰富的专业人士精心打造</p>
 
-				<p>旨在为小微企业提供免费的ERP解决方案，并实现软件开源和终身免费</p>
+				<p>企业级的ERP开源解决方案：系统提供“<b>订单</b>”、“<b>库存</b>”、“<b>发票</b>”、“<b>收付款</b>”、“<b>凭证</b>”、“<b>主数据</b>”、“<b>权限</b>”等丰富的业务及财务功能</p>
+				
+				<p><span style="font-size: 14px;"><i class="fa fa-question-circle"></i> 何须高价</span>&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-thumbs-up text-danger"></i> 让所有小微企业都用得起ERP<br/>
 
-				<p>系统提供“订单”、“库存”、“收付款”、“凭证”、“审批”等多种业务及财务功能</p>
-
+				<span style="font-size: 14px;"><i class="fa fa-question-circle"></i> 何须复杂</span>&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-thumbs-up text-danger"></i> 唯一的主线流程设计，让使用变得更容易<br/>
+				
+				<span style="font-size: 14px;"><i class="fa fa-question-circle"></i> 何须定制</span>&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-thumbs-up text-danger"></i> 领先的ERP管理理念，真正提升企业的管理</p>
+				
 				<p style="color: silver;">
 					<small>受GPL-2.0许可协议保护，未经开发者允许，不得用于商业用途</small>
 				</p>
@@ -90,6 +98,11 @@
 						
 						<button type="submit" class="btn btn-primary block full-width m-b">登录</button>
                         
+                        <p class="text-muted text-center">
+                            <small>还没有账号？码云点击<i class="fa fa-star"></i>可享如下特权</small>
+                        </p>
+                        <a class="btn btn-sm btn-white btn-block" href="https://www.redragon-erp.com/account.html" target="_blank">申请赤龙ERP账号</a>
+                        
                         <%-- 隐藏字段 --%>
                         <input type="hidden" name="lt" value="${loginTicket}" />
                         <input type="hidden" name="execution" value="${flowExecutionKey}" />
@@ -124,6 +137,11 @@
 			}
 		});
 	</script>
+	
+    <!-- cnzz -->
+    <div style="display: none;">
+    	<script type="text/javascript" src="https://s9.cnzz.com/z_stat.php?id=1279413703&web_id=1279413703"></script>
+    </div>
 
 </body>
 </html>
