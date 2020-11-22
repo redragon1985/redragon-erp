@@ -35,5 +35,8 @@ public interface InvInputHeadService {
     
     //是否存在关联采购订单的入库
     public abstract boolean isExistInvInputHeadRelatePO(String headCode);
+    
+    //获取入库接收数量（已有入库单未产生库存）
+    public abstract Double getInputQuantityForNotStock(String materialCode);
 
 }

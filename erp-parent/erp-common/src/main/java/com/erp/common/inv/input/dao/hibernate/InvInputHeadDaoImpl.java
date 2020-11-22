@@ -65,5 +65,25 @@ public class InvInputHeadDaoImpl implements InvInputHeadDao {
         
         return false;
     }
+    
+    @Override
+    public Double getInputQuantityForNotStock(String materialCode) {
+        String sql = "select sum(l.input_quantity) from inv_input_head h, inv_input_line l "
+                   + "where h.input_head_code = l.input_head_code "
+                   + "and h.status <> 'CONFIRM' and l.material_code = :materialCode";
+        
+        Map<String, Object> args = new HashMap<String, Object>();
+        args.put("materialCode", materialCode);
+        
+        List list = this.daoSupport.selectDataSqlCount(sql, args);
+        if(list!=null&&list.size()>0) {
+            try {
+                return Double.valueOf(String.valueOf(list.get(0)));
+            }catch(Exception e) {
+            }
+        }
+        
+        return 0D;
+    }
 
 }

@@ -52,5 +52,10 @@ public class InvInputHeadServiceImpl implements InvInputHeadService {
     public boolean isExistInvInputHeadRelatePO(String headCode) {
         return this.invInputHeadDao.isExistInvInputHeadRelatePO(headCode);
     }
+    
+    @Override
+    public Double getInputQuantityForNotStock(String materialCode) {
+        return this.invInputHeadDao.getInputQuantityForNotStock(materialCode);
+    }
 
 }

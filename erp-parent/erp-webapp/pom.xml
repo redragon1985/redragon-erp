@@ -80,6 +80,12 @@
     	<version>${redragon.erp.version}</version>
     	<type>war</type>
     </dependency>
+    <dependency>
+    	<groupId>redragon</groupId>
+    	<artifactId>erp-produce</artifactId>
+    	<version>${redragon.erp.version}</version>
+    	<type>war</type>
+    </dependency>
   </dependencies>
   
   <build>
@@ -137,6 +143,10 @@
                   <overlay>    
                    <groupId>redragon</groupId>
                    <artifactId>erp-report</artifactId>
+                  </overlay>
+                  <overlay>    
+                   <groupId>redragon</groupId>
+                   <artifactId>erp-produce</artifactId>
                   </overlay>
               </overlays>   
           </configuration>    

@@ -50,7 +50,7 @@ public class ArInvoiceHeadDaoImpl implements ArInvoiceHeadDao {
     
     @Override
     public boolean isExistArInvoiceRelateSO(String headCode) {
-        String sql = "select count(*) from ar_invoice_head h where h.invoice_source_head_code = :headCode and h.status <> 'CANCEL'";
+        String sql = "select count(*) from ar_invoice_head h where h.invoice_source_head_code = :headCode";
         
         Map<String, Object> args = new HashMap<String, Object>();
         args.put("headCode", headCode);
