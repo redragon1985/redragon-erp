@@ -20,103 +20,76 @@
 --%>
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 
+<%-- 导出星标modal --%>
+<jsp:include page="common/gitStar.jsp"></jsp:include>
+
 <div class="wrapper wrapper-content animated fadeInRight">
 	
-	<%-- 顶部快速数据导览开始 --%>
+	<%-- 顶部版本及价格导览开始 --%>
 	<div class="row">
-		<div class="col-lg-3">
-			<div class="ibox ">
-				<div class="ibox-title">
-					<h5>订单</h5>
-					<div class="ibox-tools">
-						<span class="label label-success float-right">今日新增</span>
-					</div>
+		<div class="col-lg-4">
+			<div class="ibox" style="height:206px;">
+				<div class="ibox-title" style="padding-right:15px;">
+					<h4 class="float-right text-danger">永久免费</h4>
+					<h5>
+						<i class="fa fa-puzzle-piece"></i> 社区版<span class="label label-success">开源</span>
+					</h5>
 				</div>
 				<div class="ibox-content">
-					<h1 class="no-margins">${requestScope.poHeadNum}</h1>
-					<div class="stat-percent font-bold ">
-						<a href="web/poHead/getPoHeadList" class="text-success">点击跳转 <i class="fa fa-share-square-o"></i></a>
-					</div>
-					<small>采购订单</small>
+					<p>
+						（1）软件开源免费、功能持续迭代<br /> （2）实现ERP主流程的业务财务闭环<br /> （3）提供必备的构建文档和操作手册<br />
+						<span class="text-success" style="font-weight: bold;">（4）供个人学习或企业内部使用</span>
+					</p>
 					
-					<h1 class="no-margins">${requestScope.soHeadNum}</h1>
-					<div class="stat-percent font-bold text-success">
-						<a href="web/soHead/getSoHeadList" class="text-success">点击跳转 <i class="fa fa-share-square-o"></i></a>
-					</div>
-					<small>销售订单</small>
+					<div class="text-right"><button class="btn btn-default btn-outline btn-xs" type="button" onclick="window.open('https://www.redragon-erp.com/product.html')">了解更多</button></div>
 				</div>
 			</div>
 		</div>
-		<div class="col-lg-3">
-			<div class="ibox ">
-				<div class="ibox-title">
-					<h5>收付款</h5>
-					<div class="ibox-tools">
-						<span class="label label-info float-right">今日新增</span>
-					</div>
+		<div class="col-lg-4">
+			<div class="ibox" style="height:206px;">
+				<div class="ibox-title" style="padding-right:15px;">
+					<h4 class="float-right text-danger">
+						¥20,000.00 <span class="text-muted"
+							style="text-decoration: line-through;font-weight:400;">¥50,000.00</span>
+					</h4>
+					<h5>
+						<i class="fa fa-puzzle-piece"></i> 社区版<span class="label label-info">商业授权</span>
+					</h5>
 				</div>
 				<div class="ibox-content">
-					<h1 class="no-margins">${requestScope.payHeadNum}</h1>
-					<div class="stat-percent font-bold text-info">
-						<a href="web/payHead/getPayHeadList" class="text-info">点击跳转 <i class="fa fa-share-square-o"></i></a>
-					</div>
-					<small>付款单</small>
+					<p>
+						（1）社区版开源、功能持续迭代<br /> （2）实现ERP主流程的业务财务闭环<br /> （3）提供完备的技术文档，易于部署和二次开发<br />
+						<span class="text-info" style="font-weight: bold;">（4）获取商业授权后，可二次分发，可商用</span>
+					</p>
 					
-					<h1 class="no-margins">${requestScope.receiptHeadNum}</h1>
-					<div class="stat-percent font-bold text-info">
-						<a href="web/receiptHead/getReceiptHeadList" class="text-info">点击跳转 <i class="fa fa-share-square-o"></i></a>
-					</div>
-					<small>收款单</small>
+					<div class="text-right"><button class="btn btn-default btn-outline btn-xs" type="button" onclick="window.open('https://www.redragon-erp.com/product.html')">了解更多</button></div>
 				</div>
 			</div>
 		</div>
-		<div class="col-lg-3">
-			<div class="ibox ">
-				<div class="ibox-title">
-					<h5>凭证</h5>
-					<div class="ibox-tools">
-						<span class="label label-danger float-right">今日新增</span>
-					</div>
+		<div class="col-lg-4">
+			<div class="ibox" style="height:206px;">
+				<div class="ibox-title" style="padding-right:15px;">
+					<h4 class="float-right text-danger">
+						¥3,000.00 <span class="text-muted"
+							style="text-decoration: line-through;font-weight:400;">¥20,000.00</span>
+					</h4>
+					<h5>
+						<i class="fa fa-globe"></i> 生态版<span class="label label-primary">会员制</span>
+					</h5>
 				</div>
 				<div class="ibox-content">
-					<h1 class="no-margins">${requestScope.voucherHeadNum}</h1>
-					<div class="stat-percent font-bold text-danger">
-						<a href="web/finVoucherHead/getFinVoucherHeadList" class="text-danger">点击跳转 <i class="fa fa-share-square-o"></i></a>
-					</div>
-					<small>手工凭证</small>
+					<p>
+						（1）含社区版所有功能及服务<br /> <span class="text-navy" style="font-weight: bold;">（2）生态产品簇EHR、CRM持续发布</span><br />
+						<span class="text-navy" style="font-weight: bold;">（3）完整的企业级ERP开源解决方案</span><br /> <span
+							class="text-navy" style="font-weight: bold;">（4）更完善更专业的配套服务</span>
+					</p>
 					
-					<h1 class="no-margins">&nbsp;</h1>
-					<div class="stat-percent font-bold text-danger">
-					</div>
-					<small>&nbsp;</small>
-				</div>
-			</div>
-		</div>
-		<div class="col-lg-3">
-			<div class="ibox ">
-				<div class="ibox-title">
-					<h5>主数据</h5>
-					<div class="ibox-tools">
-						<span class="label label-muted float-right">全部数据</span>
-					</div>
-				</div>
-				<div class="ibox-content">
-					<h1 class="no-margins">${requestScope.customerNum}</h1>
-					<div class="stat-percent font-bold text-muted">
-						<a href="web/mdCustomer/getMdCustomerList" class="text-muted">点击跳转 <i class="fa fa-share-square-o"></i></a>
-					</div>
-					<small>客户</small>
-					
-					<h1 class="no-margins">${requestScope.vendorNum}</h1>
-					<div class="stat-percent font-bold text-muted">
-						<a href="web/mdVendor/getMdVendorList" class="text-muted">点击跳转 <i class="fa fa-share-square-o"></i></a>
-					</div>
-					<small>供应商</small>
+					<div class="text-right"><button class="btn btn-default btn-outline btn-xs" type="button" onclick="window.open('https://www.redragon-erp.com/product.html')">了解更多</button></div>
 				</div>
 			</div>
 		</div>
 	</div>
-	<%-- 顶部快速数据导览结束 --%>
+	<%-- 顶部版本及价格导览结束 --%>
 	
 	<%-- 中部系统初始化向导开始 --%>
 	<div class="row">
@@ -387,14 +360,87 @@
 								<p>
 								(1)&nbsp;增加应收发票管理<br/>
 								(2)&nbsp;增加应付发票管理<br/>
-								(3)&nbsp;实现三单匹配<br/>
+								(3)&nbsp;实现发票与订单和出入库的三单匹配<br/>
+								(4)&nbsp;增加付款和收款模块<br/>
+								(5)&nbsp;实现收付款对发票的核销<br/>
 								</p>
 								<a href="https://gitee.com/redragon/redragon-erp/blob/master/README.md" target="_blank" class="btn btn-sm btn-info">版本说明</a> 
-								<span class="vertical-date" style="font-weight: bold;"> v0.6 （开发中）<br /> <small>2020.10</small></span>
+								<span class="vertical-date" style="font-weight: bold;"> v0.7 （已发布）<br /> <small>2020.9</small></span>
 							</div>
 						</div>
 						
+						<div class="vertical-timeline-block">
+							<div class="vertical-timeline-icon lazur-bg">
+								<i class="fa fa-flash"></i>
+							</div>
+
+							<div class="vertical-timeline-content">
+								<h2>新功能迭代</h2>
+								<p>
+								(1)&nbsp;增加会计分录功能<br/>
+								(2)&nbsp;增加凭证的导出功能，用于与第三方财务系统集成<br/>
+								(3)&nbsp;自动生成付款、收款、转账凭证<br/>
+								</p>
+								<a href="https://gitee.com/redragon/redragon-erp/blob/master/README.md" target="_blank" class="btn btn-sm btn-info">版本说明</a> 
+								<span class="vertical-date" style="font-weight: bold;"> v0.8 （已发布）<br /> <small>2020.9</small></span>
+							</div>
+						</div>
 						
+						<div class="vertical-timeline-block">
+							<div class="vertical-timeline-icon yellow-bg">
+								<i class="fa fa-info-circle"></i>
+							</div>
+
+							<div class="vertical-timeline-content">
+								<h2>小版本更新：解决0.8之前版本 BUG，增加小功能</h2>
+								<p>
+								(1)&nbsp;修改之前版本的所有BUG<br/>
+								(2)&nbsp;优化各个模块的功能<br/>
+								(3)&nbsp;增加变更版本记录与查看功能<br/>
+								</p>
+								<span class="vertical-date" style="font-weight: bold;"> v0.9 （已发布）<br /> <small>2020.10</small>
+								</span>
+							</div>
+						</div>
+						
+						<div class="vertical-timeline-block">
+							<div class="vertical-timeline-icon lazur-bg">
+								<i class="fa fa-flash"></i>
+							</div>
+
+							<div class="vertical-timeline-content">
+								<h2>新功能迭代</h2>
+								<p>
+								(1)&nbsp;增加采购、销售协议模块<br/>
+								(2)&nbsp;增加采购、销售订单类型，并与协议联动<br/>
+								(3)&nbsp;增加杂项出入库功能<br/>
+								(4)&nbsp;增加入库退货与出库退货的流程<br/>
+								(5)&nbsp;增加预付款与预收款处理流程<br/>
+								(6)&nbsp;增加借项通知单、贷项通知单功能<br/>
+								(7)&nbsp;合并处理预付款、预收款、借项通知单、贷项通知单的收付款功能<br/>
+								(8)&nbsp;增加收付款冲销功能<br/>
+								</p>
+								<a href="https://gitee.com/redragon/redragon-erp/blob/master/README.md" target="_blank" class="btn btn-sm btn-info">版本说明</a> 
+								<span class="vertical-date" style="font-weight: bold;"> v0.9.5 （已发布）<br /> <small>2020.10</small></span>
+							</div>
+						</div>
+						
+						<div class="vertical-timeline-block">
+							<div class="vertical-timeline-icon lazur-bg">
+								<i class="fa fa-flash"></i>
+							</div>
+
+							<div class="vertical-timeline-content">
+								<h2>生产制造模块上线</h2>
+								<p>
+								(1)&nbsp;增加BOM物料清单管理<br/>
+								(2)&nbsp;增加MPS主生产计划管理<br/>
+								(3)&nbsp;增加MRP物料需求计划管理<br/>
+								</p>
+								<a href="https://gitee.com/redragon/redragon-erp/blob/master/README.md" target="_blank" class="btn btn-sm btn-info">版本说明</a> 
+								<span class="vertical-date" style="font-weight: bold;"> v1.0 （已发布）<br /> <small>2020.11</small></span>
+							</div>
+						</div>
 
 					</div>
 				</div>

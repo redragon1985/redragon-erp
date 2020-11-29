@@ -22,6 +22,7 @@
 
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
+<link href="iconfont/css/iconfont.css" rel="stylesheet">
 
 <!-- checkbox -->
 <link href="css/plugins/iCheck/custom.css" rel="stylesheet">

@@ -60,7 +60,7 @@
 								<th>订单编码</th>
 								<th>订单名称</th>
 								<th>订单类型</th>
-								<th>供应商</th>
+								<th>客户</th>
 								<th>签订日期</th>
 								<th>采购员</th>
 								<th>采购部门</th>
@@ -81,6 +81,7 @@
 									<td>${data.staffName}</td>
 									<td>${data.departmentName}</td>
 									<td><span class="label">${requestScope.soStatusMap[data.status]}</span></td>
+									<td class="preReceiptAmount" style="display: none;">${data.preReceiptAmount}</td>
 								</tr>
 							</c:forEach>
 
@@ -156,6 +157,7 @@
 				var name = "";
 				var companyCode = "";
 				var companyName = "";
+				var preReceiptAmount = "";
 			
 				$('.i-checks').each(function(){
 					if($(this).prop("checked")){
@@ -164,6 +166,7 @@
 						name = $(this).parents("tr").find("td.name").text();
 						companyCode = $(this).parents("tr").find("td.companyCode").text();
 						companyName = $(this).parents("tr").find("td.companyName").text();
+						preReceiptAmount = $(this).parents("tr").find("td.preReceiptAmount").text();
 						return false;
 					}
 				});
@@ -181,6 +184,7 @@
 					$("#payerName").val(companyName);
 					$("#invoiceSourceHeadCode").val(code);
 					$("#receiptSourceHeadName").val(name);
+					$("#amount").val(preReceiptAmount);
 					$('#selectSODiv').modal('hide');
 				}
 			}
