@@ -4,21 +4,21 @@
 
 ### 何须高价
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ERP的软件价格太高？NO！
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;** 让所有小微企业都用得起ERP**<br/><br/>
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 让所有小微企业都用得起ERP<br/><br/>
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ERP的升级维护太贵？NO！
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;** 跟着我们一起升级与迭代，您的管理提升就是我们的服务**
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 跟着我们一起升级与迭代，您的管理提升就是我们的服务
 
 ### 何须复杂
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ERP的使用门槛太高？不会用？弄不懂？NO！
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;** 唯一的主线流程设计，让使用变得更容易**<br/><br/>
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 唯一的主线流程设计，让使用变得更容易<br/><br/>
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ERP的功能越多越好？NO！
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;** 从近十款优秀软件梳理出最合理的设计思路，简约而不简单**
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 从近十款优秀软件梳理出最合理的设计思路，简约而不简单
 
 ### 何须定制
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ERP需要根据企业的特色定制？NO！
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;** 采用服务于几百家500强企业的ERP管理理念，真正提升您企业管理流程**
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 采用服务于几百家500强企业的ERP管理理念，真正提升您企业管理流程
 
 # 赤龙简介
 
