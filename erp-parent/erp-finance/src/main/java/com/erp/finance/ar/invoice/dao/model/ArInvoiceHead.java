@@ -72,6 +72,17 @@ public class ArInvoiceHead implements java.io.Serializable {
     public void setInvoiceHeadCode(String invoiceHeadCode) {
         this.invoiceHeadCode = invoiceHeadCode;
     }
+    
+    //发票类型
+    @Column(name = "invoice_type", unique = false, nullable = false, length = 45)
+    private String invoiceType;
+    
+    public String getInvoiceType() {
+        return invoiceType;
+    }
+    public void setInvoiceType(String invoiceType) {
+        this.invoiceType = invoiceType;
+    }
 
     //发票来源类型（采购订单SO、入库单OUTPUT）
     @NotBlank(message="发票来源类型不能为空")
@@ -168,18 +179,6 @@ public class ArInvoiceHead implements java.io.Serializable {
         this.invoiceDate = invoiceDate;
     }
 
-    //预收款标识
-    @NotBlank(message="预收款标识不能为空")
-    @Column(name = "pre_receipt_flag", unique = false, nullable = false, length = 1)
-    private String preReceiptFlag;
-    
-    public String getPreReceiptFlag() {
-        return this.preReceiptFlag;
-    }
-    public void setPreReceiptFlag(String preReceiptFlag) {
-        this.preReceiptFlag = preReceiptFlag;
-    }
-    
     //收款方式
     @NotBlank(message="收款方式不能为空")
     @Column(name = "receipt_mode", unique = false, nullable = false, length = 45)

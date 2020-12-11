@@ -109,7 +109,6 @@ public class ApInvoiceHeadDaoImpl implements ApInvoiceHeadDao{
         sql = sql + DaoUtil.getSQLCondition(paramObj, "invoiceSourceType", "and p.", args);
         sql = sql + DaoUtil.getSQLCondition(paramObj, "invoiceSourceHeadCode", "and p.", args);
         sql = sql + DaoUtil.getSQLCondition(paramObj, "receiver", "and p.", args);
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "prepayFlag", "and p.", args);
         sql = sql + DaoUtil.getSQLCondition(paramObj, "amount", "and p.", args);
         sql = sql + DaoUtil.getSQLCondition(paramObj, "invoiceDate", "and p.", args);
         sql = sql + DaoUtil.getSQLCondition(paramObj, "approveStatus", "and p.", args);
@@ -137,7 +136,6 @@ public class ApInvoiceHeadDaoImpl implements ApInvoiceHeadDao{
         sql = sql + DaoUtil.getSQLCondition(paramObj, "invoiceSourceType", "and p.", args);
         sql = sql + DaoUtil.getSQLCondition(paramObj, "invoiceSourceHeadCode", "and p.", args);
         sql = sql + DaoUtil.getSQLCondition(paramObj, "receiver", "and p.", args);
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "prepayFlag", "and p.", args);
         sql = sql + DaoUtil.getSQLCondition(paramObj, "amount", "and p.", args);
         sql = sql + DaoUtil.getSQLCondition(paramObj, "invoiceDate", "and p.", args);
         sql = sql + DaoUtil.getSQLCondition(paramObj, "approveStatus", "and p.", args);

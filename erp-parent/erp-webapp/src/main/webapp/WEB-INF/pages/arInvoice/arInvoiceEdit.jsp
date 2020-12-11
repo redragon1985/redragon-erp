@@ -47,7 +47,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<h5>销售发票头信息&nbsp;<span style="color: black;">（<i class="fa fa-tag"></i>${requestScope.approveStatusMap[requestScope.receiptHead.approveStatus]}）</span></h5>
 					<div class="ibox-tools">
 						<a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
-                            <i class="fa fa-wrench btn-redragon-tools" style="color: black; font-size: 14px;" title="工具栏"></i>
+                            <button type="button" class="btn btn-sm btn-white text-success" title="工具栏"> <i class="fa fa-wrench btn-redragon-tools"></i> 工具栏</button>
                         </a>
 						<ul class="dropdown-menu dropdown-user">
                         	<c:choose>
@@ -179,15 +179,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<div class="hr-line-dashed"></div>
 	                    
 						<div class="form-group row">
-							<label class="col-sm-2 col-form-label"><span class="text-danger">*</span><strong>预收款标识</strong></label>
-	                        <div class="col-sm-4">
-	                        	<select class="form-control" name="preReceiptFlag" id="preReceiptFlag">
-		                        	<option value="" selected="selected">请选择...</option>
-		                            <option value="Y">是</option>
-		                            <option value="N">否</option>
-		                        </select>
-	                        </div>
-	                        
 	                        <label class="col-sm-2 col-form-label"><span class="text-danger">*</span><strong>状态</strong></label>
 	                        <div class="col-sm-4">
 	                        	<input type="text" class="form-control" value="${requestScope.receiptStatusMap[requestScope.receiptHead.status]}" readonly="readonly">
@@ -284,7 +275,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<input type="hidden" id="receivedStatus" name="receivedStatus" value="${requestScope.receiptHead.receivedStatus}">
 						<input type="hidden" id="staffCode" name="staffCode" value="${requestScope.receiptHead.staffCode}">
 						<input type="hidden" id="departmentCode" name="departmentCode" value="${requestScope.receiptHead.departmentCode}">
-						<input type="hidden" name="invoiceHeadId" value="${requestScope.receiptHead.invoiceHeadId}">
+						<input type="hidden" id="invoiceHeadId" name="invoiceHeadId" value="${requestScope.receiptHead.invoiceHeadId}">
 						<input type="hidden" name="createdDate" value="${requestScope.receiptHead.createdDate}">
 						<input type="hidden" name="createdBy" value="${requestScope.receiptHead.createdBy}">
 					</form>
@@ -363,10 +354,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		if("${requestScope.receiptHead.currencyCode}"!=""){
 			$("#currencyCode").val("${requestScope.receiptHead.currencyCode}");
 		}
-		//初始化preReceiptFlag
-		if("${requestScope.receiptHead.preReceiptFlag}"!=""){
-			$("#preReceiptFlag").val("${requestScope.receiptHead.preReceiptFlag}");
-		}
 		//初始化receiptMode
 		if("${requestScope.receiptHead.receiptMode}"!=""){
 			$("#receiptMode").val("${requestScope.receiptHead.receiptMode}");
@@ -441,6 +428,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			rules : {
 				invoiceHeadCode : {
 					required : true,
+					isCode : true,
 				},
 				invoiceSourceType : {
 					required : true,
@@ -458,9 +446,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					required : true,
 				},
 				invoiceDate : {
-					required : true,
-				},
-				preReceiptFlag : {
 					required : true,
 				},
 				receiptMode : {
@@ -515,8 +500,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					$("#tabDiv").html(data);
 					$("#lineTab").addClass("active");
 					//隐藏保存按钮
-					if(("${param.invoiceHeadCode}"!="null"&&"${param.invoiceHeadCode}"!=""&&"${requestScope.receiptHead.approveStatus}"!="UNSUBMIT"&&"${requestScope.receiptHead.approveStatus}"!="REJECT")||
-					   "${param.invoiceHeadCode}"=="null"||"${param.invoiceHeadCode}"==""){
+					if(($("#invoiceHeadId").val()!=null&&$("#invoiceHeadId").val()!=""&&"${requestScope.receiptHead.approveStatus}"!="UNSUBMIT"&&"${requestScope.receiptHead.approveStatus}"!="REJECT")||
+					   $("#invoiceHeadId").val()==null||$("#invoiceHeadId").val()==""||$("#invoiceType").val()=="PRE_INVOICE"){
 						$("#tabDiv .btn").hide();
 					}
 					initControlAuth();

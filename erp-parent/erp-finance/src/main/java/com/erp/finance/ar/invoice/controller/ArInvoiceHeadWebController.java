@@ -208,7 +208,6 @@ public class ArInvoiceHeadWebController extends ControllerSupport{
             //初始化默认字段
             //receiptHead.setAmount(0D);
             receiptHead.setReceivedStatus("N");
-            receiptHead.setPreReceiptFlag("N");
             receiptHead.setStatus("NEW");
             
             //获取当前用户职员信息
@@ -355,6 +354,7 @@ public class ArInvoiceHeadWebController extends ControllerSupport{
         }
         
         //对当前编辑的对象初始化默认的字段
+        receiptHead.setInvoiceType("SO_INVOICE");
         
         //保存编辑的数据
         this.arInvoiceHeadService.insertOrUpdateDataObject(receiptHead);

@@ -24,6 +24,7 @@ import java.util.Map;
 import javax.validation.Valid;
 
 import org.apache.commons.lang.StringUtils;
+import org.hibernate.exception.ConstraintViolationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -212,7 +213,6 @@ public class ApInvoiceHeadWebController extends ControllerSupport{
             //初始化默认字段
             //payHead.setAmount(0D);
             payHead.setPaidStatus("N");
-            payHead.setPrepayFlag("N");
             payHead.setStatus("NEW");
             
             //获取当前用户职员信息
@@ -358,13 +358,26 @@ public class ApInvoiceHeadWebController extends ControllerSupport{
             return "forward:getApInvoiceHead";
         }
         
-        //对当前编辑的对象初始化默认的字段
-        
-        //保存编辑的数据
-        this.apInvoiceHeadService.insertOrUpdateDataObject(payHead);
-        //提示信息
-        attr.addFlashAttribute("hint", "success");
-        attr.addAttribute("invoiceHeadCode", payHead.getInvoiceHeadCode());
+        try {
+            //对当前编辑的对象初始化默认的字段
+            payHead.setApType("Invoice");
+            payHead.setInvoiceType("PO_INVOICE");
+            
+            //保存编辑的数据
+            this.apInvoiceHeadService.insertOrUpdateDataObject(payHead);
+            //提示信息
+            attr.addFlashAttribute("hint", "success");
+            attr.addAttribute("invoiceHeadCode", payHead.getInvoiceHeadCode());
+        }catch(Exception e){
+            if(e.getCause().getClass()==ConstraintViolationException.class) {
+                //提示信息
+                attr.addFlashAttribute("hint", "hint");
+                attr.addFlashAttribute("alertMessage", "发票编码已存在请重新输入");
+                return "redirect:getApInvoiceHeadList";
+            }else {
+                throw e;
+            }
+        }
         
         return "redirect:getApInvoiceHead";
     }

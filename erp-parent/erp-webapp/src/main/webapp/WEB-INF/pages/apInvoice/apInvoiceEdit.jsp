@@ -47,7 +47,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<h5>采购发票头信息&nbsp;<span style="color: black;">（<i class="fa fa-tag"></i>${requestScope.approveStatusMap[requestScope.payHead.approveStatus]}）</span></h5>
 					<div class="ibox-tools">
 						<a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
-                            <i class="fa fa-wrench btn-redragon-tools" style="color: black; font-size: 14px;" title="工具栏"></i>
+                            <button type="button" class="btn btn-sm btn-white text-success" title="工具栏"> <i class="fa fa-wrench btn-redragon-tools"></i> 工具栏</button>
                         </a>
 						<ul class="dropdown-menu dropdown-user">
                         	<c:choose>
@@ -187,15 +187,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<div class="hr-line-dashed"></div>
 	                    
 						<div class="form-group row">
-							<label class="col-sm-2 col-form-label"><span class="text-danger">*</span><strong>预付款标识</strong></label>
-	                        <div class="col-sm-4">
-	                        	<select class="form-control" name="prepayFlag" id="prepayFlag">
-		                        	<option value="" selected="selected">请选择...</option>
-		                            <option value="Y">是</option>
-		                            <option value="N">否</option>
-		                        </select>
-	                        </div>
-	                        
 	                        <label class="col-sm-2 col-form-label"><span class="text-danger">*</span><strong>状态</strong></label>
 	                        <div class="col-sm-4">
 	                        	<input type="text" class="form-control" value="${requestScope.payStatusMap[requestScope.payHead.status]}" readonly="readonly">
@@ -292,7 +283,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<input type="hidden" id="paidStatus" name="paidStatus" value="${requestScope.payHead.paidStatus}">
 						<input type="hidden" id="staffCode" name="staffCode" value="${requestScope.payHead.staffCode}">
 						<input type="hidden" id="departmentCode" name="departmentCode" value="${requestScope.payHead.departmentCode}">
-						<input type="hidden" name="invoiceHeadId" value="${requestScope.payHead.invoiceHeadId}">
+						<input type="hidden" id="invoiceHeadId" name="invoiceHeadId" value="${requestScope.payHead.invoiceHeadId}">
 						<input type="hidden" name="createdDate" value="${requestScope.payHead.createdDate}">
 						<input type="hidden" name="createdBy" value="${requestScope.payHead.createdBy}">
 					</form>
@@ -371,10 +362,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		if("${requestScope.payHead.currencyCode}"!=""){
 			$("#currencyCode").val("${requestScope.payHead.currencyCode}");
 		}
-		//初始化prepayFlag
-		if("${requestScope.payHead.prepayFlag}"!=""){
-			$("#prepayFlag").val("${requestScope.payHead.prepayFlag}");
-		}
 		//初始化payMode
 		if("${requestScope.payHead.payMode}"!=""){
 			$("#payMode").val("${requestScope.payHead.payMode}");
@@ -447,6 +434,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			rules : {
 				invoiceHeadCode : {
 					required : true,
+					isCode : true,
 				},
 				invoiceSourceType : {
 					required : true,
@@ -464,9 +452,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					required : true,
 				},
 				invoiceDate : {
-					required : true,
-				},
-				prepayFlag : {
 					required : true,
 				},
 				payMode : {
@@ -521,8 +506,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					$("#tabDiv").html(data);
 					$("#lineTab").addClass("active");
 					//隐藏保存按钮
-					if(("${param.invoiceHeadCode}"!="null"&&"${param.invoiceHeadCode}"!=""&&"${requestScope.payHead.approveStatus}"!="UNSUBMIT"&&"${requestScope.payHead.approveStatus}"!="REJECT")||
-					   "${param.invoiceHeadCode}"=="null"||"${param.invoiceHeadCode}"==""){
+					if(($("#invoiceHeadId").val()!=null&&$("#invoiceHeadId").val()!=""&&"${requestScope.payHead.approveStatus}"!="UNSUBMIT"&&"${requestScope.payHead.approveStatus}"!="REJECT")||
+					   $("#invoiceHeadId").val()==null||$("#invoiceHeadId").val()==""||$("#invoiceType").val()=="PRE_INVOICE"){
 						$("#tabDiv .btn").hide();
 					}
 					initControlAuth();
@@ -615,6 +600,31 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				if(data!=""){
 					$("#payModal").html(data);
 					$('#selectPODiv').modal('show');
+				}
+			},
+			error: function(XMLHttpRequest, textStatus, errorThrown){
+				redragonJS.alert(textStatus);
+			}
+		});
+	}
+	
+	//返回预付款发票选择框
+	function getSelectPreInvoiceModal(page){
+		$('#selectPreInvoiceDiv').modal('hide');
+		redragonJS.loading("ibox-content");
+		$.ajax({
+			type: "post",
+			url: "web/apInvoiceHead/getSelectPreInvoiceModal",
+			data: {"status": "NEW", "invoiceSourceHeadCode": $("#invoiceSourceHeadCode").val(), "apType": "${param.apType}", "invoiceType": $("#invoiceType").val(),
+				   "paySourceHeadName": $("#paySourceHeadName").val(), "page": page},
+			async: false,
+			dataType: "html",
+			cache: false,
+			success: function(data){
+				redragonJS.removeLoading("ibox-content");
+				if(data!=""){
+					$("#payModal").html(data);
+					$('#selectPreInvoiceDiv').modal('show');
 				}
 			},
 			error: function(XMLHttpRequest, textStatus, errorThrown){

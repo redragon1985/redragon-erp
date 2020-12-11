@@ -46,6 +46,36 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<div class="ibox-title btn-success btn-outline panel-success collapse-link" title="展开/收起">
 					<h5>销售订单头信息&nbsp;<span style="color: black;">（<i class="fa fa-tag"></i>${requestScope.approveStatusMap[requestScope.soHead.approveStatus]}）</span></h5>
 					<div class="ibox-tools">
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+                            <button type="button" class="btn btn-sm btn-white text-success" title="工具栏"> <i class="fa fa-wrench btn-redragon-tools"></i> 工具栏</button>
+                        </a>
+                        <ul class="dropdown-menu dropdown-user">
+                        	<li><a href="javascript:void(0)" title="选择变更历史版本">
+	                        		<strong>查看变更历史版本：</strong>&nbsp;
+	                        		<select id="modifyHistorySelect">
+	                        			<c:forEach begin="1" end="${requestScope.soHead.version==null?1:requestScope.soHead.version-1}" var="version">
+	                        				<option value="${version}">v${version}</option>
+	                        			</c:forEach>
+	                        		</select>&nbsp;&nbsp;<i id="openModifyHistory" class="fa fa-arrow-circle-right text-default fa-lg btn-redragon-tools" title="打开版本"></i>
+                        		</a>
+                        	</li>
+                        	<script>
+                        	$(document).ready(function(){
+                        		$("#modifyHistorySelect").click(function(e){
+                        			return false;
+                        		});
+                        		
+                        		$("#openModifyHistory").click(function(e){
+                        			if($("#modifyHistorySelect").val()!=""&&$("#modifyHistorySelect").val()!=null){
+                        				window.open(window.location.href+"&version="+$("#modifyHistorySelect").val());
+                        			}else{
+                        				redragonJS.alert("当前单据无变更历史版本");
+                        			}
+                        		});
+                        	});
+                        	</script>
+                        </ul>
+                        &nbsp;
 						<i class="fa fa-chevron-up"></i> 
 					</div>
 				</div>
@@ -253,7 +283,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<input type="hidden" id="receiptStatus" name="receiptStatus" value="${requestScope.soHead.receiptStatus}">
 						<input type="hidden" id="staffCode" name="staffCode" value="${requestScope.soHead.staffCode}">
 						<input type="hidden" id="departmentCode" name="departmentCode" value="${requestScope.soHead.departmentCode}">
-						<input type="hidden" name="soHeadId" value="${requestScope.soHead.soHeadId}">
+						<input type="hidden" id="soHeadId" name="soHeadId" value="${requestScope.soHead.soHeadId}">
 						<input type="hidden" name="createdDate" value="${requestScope.soHead.createdDate}">
 						<input type="hidden" name="createdBy" value="${requestScope.soHead.createdBy}">
 					</form>
@@ -389,6 +419,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			rules : {
 				soHeadCode : {
 					required : true,
+					isCode : true,
 				},
 				soName : {
 					required : true,
@@ -442,8 +473,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					$("#tabDiv").html(data);
 					$("#lineTab").addClass("active");
 					//隐藏保存按钮
-					if(("${param.soHeadCode}"!="null"&&"${param.soHeadCode}"!=""&&"${requestScope.soHead.approveStatus}"!="UNSUBMIT"&&"${requestScope.soHead.approveStatus}"!="REJECT")||
-					   "${param.soHeadCode}"=="null"||"${param.soHeadCode}"==""){
+					if(($("#soHeadId").val()!=null&&$("#soHeadId").val()!=""&&"${requestScope.soHead.approveStatus}"!="UNSUBMIT"&&"${requestScope.soHead.approveStatus}"!="REJECT")||
+					   $("#soHeadId").val()==null||$("#soHeadId").val()==""){
 						$("#tabDiv .btn").hide();
 					}
 					initControlAuth();

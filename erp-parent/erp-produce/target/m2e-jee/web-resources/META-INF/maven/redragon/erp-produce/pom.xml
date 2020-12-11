@@ -6,46 +6,7 @@
     <version>0.9</version>
   </parent>
   <artifactId>erp-produce</artifactId>
+  <version>0.9</version>
   <packaging>war</packaging>
-
-  <dependencies>
-	  <dependency>
-	  	<groupId>redragon</groupId>
-	  	<artifactId>erp-dataset</artifactId>
-	  	<version>${redragon.erp.version}</version>
-	  </dependency>
-	  <dependency>
-	  	<groupId>redragon</groupId>
-	  	<artifactId>erp-hr</artifactId>
-	  	<version>${redragon.erp.version}</version>
-	  </dependency>
-	  <dependency>
-	  	<groupId>redragon</groupId>
-	  	<artifactId>erp-masterData</artifactId>
-	  	<version>${redragon.erp.version}</version>
-	  </dependency>
-	  <dependency>
-	  	<groupId>redragon</groupId>
-	  	<artifactId>erp-common</artifactId>
-	  	<version>${redragon.erp.version}</version>
-	  </dependency>
-	  <dependency>
-	  	<groupId>redragon</groupId>
-	  	<artifactId>erp-order</artifactId>
-	  	<version>${redragon.erp.version}</version>
-	  </dependency>
-  </dependencies>
-  
-  <build>
-    <plugins>
-        <plugin>
-           <artifactId>maven-war-plugin</artifactId>
-           <configuration>
-               <version>3.0</version>
-               <failOnMissingWebXml>false</failOnMissingWebXml>
-            </configuration>
-        </plugin>
-    </plugins>
-  </build>
-
+  <build/>
 </project>

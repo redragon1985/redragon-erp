@@ -64,7 +64,6 @@
 								<th>发票日期</th>
 								<th>发票金额</th>
 								<th>税额</th>
-								<th>预付款</th>
 								<th>摘要</th>
 							</tr>
 						</thead>
@@ -80,7 +79,6 @@
 									<td class="invoiceDate"><fmt:formatDate value="${data.invoiceDate}" pattern="yyyy-MM-dd"/></td>
 									<td class="siAmount">${data.amount}</td>
 									<td class="siTaxAmount">${data.taxAmount}</td>
-									<td>${data.prepayFlag}</td>
 									<td>${data.memo}</td>
 								</tr>
 							</c:forEach>

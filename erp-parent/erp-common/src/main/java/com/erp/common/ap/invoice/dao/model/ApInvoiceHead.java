@@ -168,18 +168,6 @@ public class ApInvoiceHead implements java.io.Serializable {
         this.invoiceDate = invoiceDate;
     }
 
-    //预付款标识
-    @NotBlank(message="预付款标识不能为空")
-    @Column(name = "prepay_flag", unique = false, nullable = false, length = 1)
-    private String prepayFlag;
-    
-    public String getPrepayFlag() {
-        return this.prepayFlag;
-    }
-    public void setPrepayFlag(String prepayFlag) {
-        this.prepayFlag = prepayFlag;
-    }
-    
     //付款方式
     @NotBlank(message="付款方式不能为空")
     @Column(name = "pay_mode", unique = false, nullable = false, length = 45)

@@ -55,7 +55,7 @@
 							<select class="select2Model form-control" name="materialCode" id="materialCode">
 	                        	<option value="" selected="selected">请选择...</option>
 	                        	<c:forEach items="${requestScope.materialMap}" var="material">
-	                        		<option value="${material.key}">${material.value}</option>
+	                        		<option value="${material.key}">${material.value}（${material.key}）</option>
 	                        	</c:forEach>
 	                        </select>
 						</div>
@@ -81,7 +81,7 @@
 					<div class="form-group row">
 						<label class="col-sm-3 col-form-label"><span class="text-danger">*</span>单位</label>
 						<div class="col-sm-9">
-							<select class="form-control" name="unit" id="unit">
+							<select class="select2Model form-control" name="unit" id="unit">
 	                        	<option value="" selected="selected">请选择...</option>
 	                        	<c:forEach items="${requestScope.materialUnitMap}" var="materialUnit">
 	                        		<option value="${materialUnit.key}">${materialUnit.value}</option>
@@ -164,6 +164,17 @@
 			setAmount();
 		});
 		
+		//自动设置协议验证逻辑
+		setPoaCheck();
+		
+		//有协议的订单行编辑时，根据协议中的物料做验证
+		$("#materialCode").change(function(){
+			setPoaCheck();
+		});
+		
+		
+		
+		//表单提交
 		var l = $('.ladda-button-demo').ladda();
 
 		l.click(function() {
@@ -237,6 +248,32 @@
 		if($.isNumeric(quantity)&&$.isNumeric(price)){
 			var amount = parseFloat(price)*parseFloat(quantity);
 			$("#lineAmount").val(Math.round(amount*100)/100);
+		}
+	}
+	
+	//设置协议验证逻辑
+	function setPoaCheck(){
+		if($("#materialCode").val()!=""){
+			var lines = poaLineMap.get($("#materialCode").val());
+			var line = lines.split(":");
+			//设置单价、数量和单位
+			if($("#price").val()==""){
+				$("#price").val(line[0]);
+			}
+			if($("#unit").val()==""){
+				$("#unit").val(line[2]);
+			}
+			
+			if(line[1]!=""){
+				$("#quantityPOA").text(line[1]);
+				$("#quantityPOADesc").text("协议数量：");
+			}
+			if(line[3]!=""){
+				$("#agreementFinishQuantity").text(line[3]);
+				$("#agreementFinishQuantityDesc").text("协议已发放数量：");
+			}
+			
+			$("#quantity").focus();
 		}
 	}
 </script>

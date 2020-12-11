@@ -3811,6 +3811,11 @@ a.forum-item-title:hover {
 .tabs-container .pill-content > .active {
   display: block;
 }
+/* redragon add */
+.tabs-container > .ibox-content{
+	padding: 0;
+	border: 0;
+}
 .tabs-container .tabs-below > .nav-tabs {
   border-top: 1px solid #e7eaec;
 }

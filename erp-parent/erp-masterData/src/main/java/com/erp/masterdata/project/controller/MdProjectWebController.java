@@ -23,6 +23,7 @@ import java.util.Map;
 import javax.validation.Valid;
 
 import org.apache.commons.lang.StringUtils;
+import org.hibernate.exception.ConstraintViolationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -149,15 +150,23 @@ public class MdProjectWebController extends ControllerSupport{
             return "forward:getMdProject";
         }
         
-        //对当前编辑的对象初始化默认的字段
-        if(mdProject.getEndDate()!=null) {
-            mdProject.setStatus("N");
+        try {
+            //对当前编辑的对象初始化默认的字段
+            
+            //保存编辑的数据
+            this.mdProjectService.insertOrUpdateDataObject(mdProject);
+            //提示信息
+            attr.addFlashAttribute("hint", "success");
+        }catch(Exception e){
+            if(e.getCause().getClass()==ConstraintViolationException.class) {
+                //提示信息
+                model.addAttribute("hint", "hint");
+                model.addAttribute("alertMessage", "编码已存在，请重新输入");
+                return "forward:getMdProject";
+            }else {
+                throw e;
+            }
         }
-        
-        //保存编辑的数据
-        this.mdProjectService.insertOrUpdateDataObject(mdProject);
-        //提示信息
-        attr.addFlashAttribute("hint", "success");
         
         return "redirect:getMdProjectList";
     }

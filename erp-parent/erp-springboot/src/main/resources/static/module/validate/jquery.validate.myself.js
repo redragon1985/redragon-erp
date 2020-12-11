@@ -83,10 +83,10 @@ $.validator.addMethod("isUsername", function(value, element) {
 return this.optional(element) || /^[\u0391-\uFFE5\w]+$/.test(value); 
 }, "只能包括中文字、英文字母、数字和下划线");
 
-$.validator.addMethod("nOChinese", function(value, element) { 
-	var str=/^[a-zA-Z0-9-/]*$/;
+$.validator.addMethod("isCode", function(value, element) { 
+	var str=/^[a-zA-Z0-9-/_]*$/;
 	return this.optional(element) || (str.test(value)); 
-}, "只能输入包括英文字母、数字及(- /)");
+}, "只能输入包括英文字母、数字和字符（ - ，/，_ ）");
 
 //密码验证
 $.validator.addMethod("isPassword", function(value, element) { 

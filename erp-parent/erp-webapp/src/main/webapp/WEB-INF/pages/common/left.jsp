@@ -48,7 +48,7 @@ contentPage=contentPage.substring(contentPage.lastIndexOf("/")+1, contentPage.le
 					</ul>
 					--%>
 				</div>
-				<div class="logo-element">张三</div>
+				<div class="logo-element">赤龙<i class="iconfont icon-redragon"></i></div>
 			</li>
 			
 			<%if(contentPage.equalsIgnoreCase("main")){ %>
@@ -123,13 +123,14 @@ contentPage=contentPage.substring(contentPage.lastIndexOf("/")+1, contentPage.le
 					if(urlArray[index]!="main"){
 						//判断操作按钮权限
 						var controlKey = urlArray[index]+"_control_auth";
-						if(perms.indexOf(controlKey)==-1){
+						if(perms.indexOf(controlKey)==-1||url.indexOf("&version=")!=-1){
 							$("#page-content .btn:not(.btn-notcontrol)").remove();
+							$("#page-content .btn-redragon-tools").remove();
 						}
 						
 						//判断审批按钮权限
 						var approveKey = urlArray[index]+"_approve_control_auth";
-						if(perms.indexOf(approveKey)==-1){
+						if(perms.indexOf(approveKey)==-1||url.indexOf("&version=")!=-1){
 							$("#page-content .btn-redragon-approve").remove();
 						}
 					}
@@ -255,12 +256,96 @@ contentPage=contentPage.substring(contentPage.lastIndexOf("/")+1, contentPage.le
 						<li><a href="web/mdFinanceSubject/getMdFinanceSubjectList">科目管理</a></li>
 					<%} %>
 					
+					<%if(contentPage.equalsIgnoreCase("mdExpenseItemList")||contentPage.equalsIgnoreCase("mdExpenseItemEdit")){ %>
+						<li class="active"><a href="eco.html">费用项管理</a></li>
+					<%}else{ %>
+						<li><a href="eco.html">费用项管理</a></li>
+					<%} %>
+					
 				</ul>
 			</li>
 			
+			<%if(contentPage.contains("prod")){ %>
+				<li class="active menu"><a href="#"><i class="fa fa-industry"></i> <span class="nav-label">制造管理</span><span class="fa arrow"></span></a>
+			<%}else{ %>
+				<li class="menu"><a href="#"><i class="fa fa-industry"></i> <span class="nav-label">制造管理</span><span class="fa arrow"></span></a>
+			<%} %>
+				<ul class="nav nav-second-level collapse">
+					<%if(contentPage.equalsIgnoreCase("prodBomList")||contentPage.equalsIgnoreCase("prodBomEdit")){ %>
+						<li class="active"><a href="eco.html">物料清单</a></li>
+					<%}else{ %>
+						<li><a href="eco.html">物料清单</a></li>
+					<%} %>
+					
+					<%if(contentPage.equalsIgnoreCase("prodResourceList")||contentPage.equalsIgnoreCase("prodResourceEdit")){ %>
+						<li class="active"><a href="eco.html">资源管理</a></li>
+					<%}else{ %>
+						<li><a href="eco.html">资源管理</a></li>
+					<%} %>
+					
+					<%if(contentPage.equalsIgnoreCase("prodWorkCenterList")||contentPage.equalsIgnoreCase("prodWorkCenterEdit")){ %>
+						<li class="active"><a href="eco.html">工作中心</a></li>
+					<%}else{ %>
+						<li><a href="eco.html">工作中心</a></li>
+					<%} %>
+					
+					<%if(contentPage.equalsIgnoreCase("prodWorkProcedureList")||contentPage.equalsIgnoreCase("prodWorkProcedureEdit")){ %>
+						<li class="active"><a href="eco.html">工序</a></li>
+					<%}else{ %>
+						<li><a href="eco.html">工序</a></li>
+					<%} %>
+					
+					<%if(contentPage.equalsIgnoreCase("prodWorkCraftList")||contentPage.equalsIgnoreCase("prodWorkCraftEdit")){ %>
+						<li class="active"><a href="eco.html">工艺路线</a></li>
+					<%}else{ %>
+						<li><a href="eco.html">工艺路线</a></li>
+					<%} %>
+					
+					<%if(contentPage.equalsIgnoreCase("prodMpsList")||contentPage.equalsIgnoreCase("prodMpsEdit")){ %>
+						<li class="active"><a href="eco.html">主生产计划</a></li>
+					<%}else{ %>
+						<li><a href="eco.html">主生产计划</a></li>
+					<%} %>
+					
+					<%if(contentPage.equalsIgnoreCase("prodMrpList")||contentPage.equalsIgnoreCase("prodMrpEdit")){ %>
+						<li class="active"><a href="eco.html">物料需求计划</a></li>
+					<%}else{ %>
+						<li><a href="eco.html">物料需求计划</a></li>
+					<%} %>
+					
+					<%if(contentPage.equalsIgnoreCase("prodWipTaskList")||contentPage.equalsIgnoreCase("prodWipTaskEdit")){ %>
+						<li class="active"><a href="eco.html">离散任务</a></li>
+					<%}else{ %>
+						<li><a href="eco.html">离散任务</a></li>
+					<%} %>
+					
+					<li style="display: none;"><a href="web/prodWipTask/getProdWipTaskList">其他</a></li>
+				</ul>
+			</li>
 			
+			<%if(contentPage.contains("poa")||contentPage.contains("soa")){ %>
+				<li class="active menu"><a href="#"><i class="fa fa-handshake-o"></i> <span class="nav-label">协议管理</span><span class="fa arrow"></span></a>
+			<%}else{ %>
+				<li class="menu"><a href="#"><i class="fa fa-handshake-o"></i> <span class="nav-label">协议管理</span><span class="fa arrow"></span></a>
+			<%} %>
+				<ul class="nav nav-second-level collapse">
+					<%if(contentPage.equalsIgnoreCase("poaList")||contentPage.equalsIgnoreCase("poaEdit")){ %>
+						<li class="active"><a href="eco.html">采购协议</a></li>
+					<%}else{ %>
+						<li><a href="eco.html">采购协议</a></li>
+					<%} %>
+					
+					<%if(contentPage.equalsIgnoreCase("soaList")||contentPage.equalsIgnoreCase("soaEdit")){ %>
+						<li class="active"><a href="eco.html">销售协议</a></li>
+					<%}else{ %>
+						<li><a href="eco.html">销售协议</a></li>
+					<%} %>
+					
+					<li style="display: none;"><a href="web/soAgreementHead/getSoHeadList">其他</a></li>
+				</ul>
+			</li>
 			
-			<%if(contentPage.contains("po")||contentPage.contains("so")){ %>
+			<%if(contentPage.equalsIgnoreCase("poList")||contentPage.equalsIgnoreCase("poEdit")||contentPage.equalsIgnoreCase("soList")||contentPage.equalsIgnoreCase("soEdit")){ %>
 				<li class="active menu"><a href="#"><i class="fa fa-list-alt"></i> <span class="nav-label">订单管理</span><span class="fa arrow"></span></a>
 			<%}else{ %>
 				<li class="menu"><a href="#"><i class="fa fa-list-alt"></i> <span class="nav-label">订单管理</span><span class="fa arrow"></span></a>
@@ -277,11 +362,6 @@ contentPage=contentPage.substring(contentPage.lastIndexOf("/")+1, contentPage.le
 					<%}else{ %>
 						<li><a href="web/soHead/getSoHeadList">销售订单</a></li>
 					<%} %>
-					
-					<%-- 
-					<li><a href="graph_chartist.html">采购订单变更</a></li>
-					<li><a href="c3.html">销售订单变更</a></li>
-					--%>
 				</ul>
 			</li>
 				
@@ -315,22 +395,40 @@ contentPage=contentPage.substring(contentPage.lastIndexOf("/")+1, contentPage.le
 				
 			
 			
-			<%if(contentPage.contains("apInvoice")||contentPage.contains("arInvoice")){ %>	
-				<li class="active menu"><a href="#"><i class="fa fa-file-text-o"></i> <span class="nav-label">发票管理</span><span class="fa arrow"></span></a>
+			<%if(contentPage.contains("apInvoice")||contentPage.contains("arInvoice")||contentPage.contains("apExpense")){ %>	
+				<li class="active menu"><a href="#"><i class="fa fa-file-text-o"></i> <span class="nav-label">应收应付</span><span class="fa arrow"></span></a>
 			<%}else{ %>
-				<li class="menu"><a href="#"><i class="fa fa-file-text-o"></i> <span class="nav-label">发票管理</span><span class="fa arrow"></span></a>
+				<li class="menu"><a href="#"><i class="fa fa-file-text-o"></i> <span class="nav-label">应收应付</span><span class="fa arrow"></span></a>
 			<%} %>
 				<ul class="nav nav-second-level collapse">
 					<%if(contentPage.equalsIgnoreCase("apInvoiceList")||contentPage.equalsIgnoreCase("apInvoiceEdit")){ %>
-						<li class="active"><a href="web/apInvoiceHead/getApInvoiceHeadList">采购发票</a></li>
+						<li class="active"><a href="web/apInvoiceHead/getApInvoiceHeadList?apType=Invoice">应付发票</a></li>
 					<%}else{ %>
-						<li><a href="web/apInvoiceHead/getApInvoiceHeadList">采购发票</a></li>
+						<li><a href="web/apInvoiceHead/getApInvoiceHeadList?apType=Invoice">应付发票</a></li>
+					<%} %>
+					
+					<%if(contentPage.equalsIgnoreCase("apExpenseList")||contentPage.equalsIgnoreCase("apExpenseEdit")){ %>
+						<li class="active"><a href="eco.html">费用报销</a></li>
+					<%}else{ %>
+						<li><a href="eco.html">费用报销</a></li>
+					<%} %>
+					
+					<%if(contentPage.equalsIgnoreCase("apInvoiceMemoList")||contentPage.equalsIgnoreCase("apInvoiceMemoEdit")){ %>
+						<li class="active"><a href="eco.html">应付发票通知单</a></li>
+					<%}else{ %>
+						<li><a href="eco.html">应付发票通知单</a></li>
 					<%} %>
 					
 					<%if(contentPage.equalsIgnoreCase("arInvoiceList")||contentPage.equalsIgnoreCase("arInvoiceEdit")){ %>
-						<li class="active"><a href="web/arInvoiceHead/getArInvoiceHeadList">销售发票</a></li>
+						<li class="active"><a href="web/arInvoiceHead/getArInvoiceHeadList">应收发票</a></li>
 					<%}else{ %>
-						<li><a href="web/arInvoiceHead/getArInvoiceHeadList">销售发票</a></li>
+						<li><a href="web/arInvoiceHead/getArInvoiceHeadList">应收发票</a></li>
+					<%} %>
+					
+					<%if(contentPage.equalsIgnoreCase("arInvoiceMemoList")||contentPage.equalsIgnoreCase("arInvoiceMemoEdit")){ %>
+						<li class="active"><a href="eco.html">应收发票通知单</a></li>
+					<%}else{ %>
+						<li><a href="eco.html">应收发票通知单</a></li>
 					<%} %>
 				</ul>
 			</li>
@@ -338,9 +436,9 @@ contentPage=contentPage.substring(contentPage.lastIndexOf("/")+1, contentPage.le
 			
 			
 			<%if(contentPage.contains("apPay")||contentPage.contains("arReceipt")){ %>	
-				<li class="active menu"><a href="#"><i class="fa fa-handshake-o"></i> <span class="nav-label">收付款管理</span><span class="fa arrow"></span></a>
+				<li class="active menu"><a href="#"><i class="fa fa-bank"></i> <span class="nav-label">收付款管理</span><span class="fa arrow"></span></a>
 			<%}else{ %>
-				<li class="menu"><a href="#"><i class="fa fa-handshake-o"></i> <span class="nav-label">收付款管理</span><span class="fa arrow"></span></a>
+				<li class="menu"><a href="#"><i class="fa fa-bank"></i> <span class="nav-label">收付款管理</span><span class="fa arrow"></span></a>
 			<%} %>
 				<ul class="nav nav-second-level collapse">
 					<%if(contentPage.equalsIgnoreCase("apPayList")||contentPage.equalsIgnoreCase("apPayEdit")){ %>

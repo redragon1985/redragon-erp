@@ -226,7 +226,10 @@ public class InvStockCheckHeadWebController extends ControllerSupport{
         if(materialCode!=null&&materialCode.length>0) {
             for(int a=0;a<materialCode.length;a++) {
                 InvStockCheckLine invStockCheckLine = new InvStockCheckLine();
-                invStockCheckLine.setCheckLineId(checkLineId[a]);
+                try {
+                    invStockCheckLine.setCheckLineId(checkLineId[a]);
+                }catch(Exception e) {}
+                
                 invStockCheckLine.setCheckAfterQuantity(checkAfterQuantity[a]);
                 invStockCheckLine.setCheckBeforeQuantity(checkBeforeQuantity[a]);
                 invStockCheckLine.setCheckHeadCode(invStockCheckHead.getCheckHeadCode());

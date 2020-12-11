@@ -420,25 +420,8 @@
 								(7)&nbsp;合并处理预付款、预收款、借项通知单、贷项通知单的收付款功能<br/>
 								(8)&nbsp;增加收付款冲销功能<br/>
 								</p>
-								<a href="https://gitee.com/redragon/redragon-erp/blob/master/README.md" target="_blank" class="btn btn-sm btn-info">版本说明</a> 
+								<a href="https://gitee.com/redragon/redragon-erp/blob/master/README.md" target="_blank" class="btn btn-sm btn-info">生态板</a> 
 								<span class="vertical-date" style="font-weight: bold;"> v0.9.5 （已发布）<br /> <small>2020.10</small></span>
-							</div>
-						</div>
-						
-						<div class="vertical-timeline-block">
-							<div class="vertical-timeline-icon lazur-bg">
-								<i class="fa fa-flash"></i>
-							</div>
-
-							<div class="vertical-timeline-content">
-								<h2>生产制造模块上线</h2>
-								<p>
-								(1)&nbsp;增加BOM物料清单管理<br/>
-								(2)&nbsp;增加MPS主生产计划管理<br/>
-								(3)&nbsp;增加MRP物料需求计划管理<br/>
-								</p>
-								<a href="https://gitee.com/redragon/redragon-erp/blob/master/README.md" target="_blank" class="btn btn-sm btn-info">版本说明</a> 
-								<span class="vertical-date" style="font-weight: bold;"> v1.0 （已发布）<br /> <small>2020.11</small></span>
 							</div>
 						</div>
 

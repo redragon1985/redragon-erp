@@ -5,5 +5,6 @@
   <installed facet="jst.web" version="3.0"/>
   <installed facet="maven" version="1.0"/>
   <installed facet="me.spring" version="4.1"/>
+  <installed facet="jst.jaxrs" version="2.1"/>
   <installed facet="wst.jsdt.web" version="1.0"/>
 </faceted-project>

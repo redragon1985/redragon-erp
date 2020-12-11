@@ -109,7 +109,6 @@ public class ArInvoiceHeadDaoImpl implements ArInvoiceHeadDao{
         sql = sql + DaoUtil.getSQLCondition(paramObj, "invoiceSourceType", "and p.", args);
         sql = sql + DaoUtil.getSQLCondition(paramObj, "invoiceSourceHeadCode", "and p.", args);
         sql = sql + DaoUtil.getSQLCondition(paramObj, "payer", "and p.", args);
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "preReceiptFlag", "and p.", args);
         sql = sql + DaoUtil.getSQLCondition(paramObj, "approveStatus", "and p.", args);
         sql = sql + DaoUtil.getSQLCondition(paramObj, "status", "and p.", args);
         sql = sql + " order by p.invoice_head_id desc";
@@ -135,7 +134,6 @@ public class ArInvoiceHeadDaoImpl implements ArInvoiceHeadDao{
         sql = sql + DaoUtil.getSQLCondition(paramObj, "invoiceSourceType", "and p.", args);
         sql = sql + DaoUtil.getSQLCondition(paramObj, "invoiceSourceHeadCode", "and p.", args);
         sql = sql + DaoUtil.getSQLCondition(paramObj, "payer", "and p.", args);
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "preReceiptFlag", "and p.", args);
         sql = sql + DaoUtil.getSQLCondition(paramObj, "approveStatus", "and p.", args);
         sql = sql + DaoUtil.getSQLCondition(paramObj, "status", "and p.", args);
         sql = sql + DaoUtil.getDataAuthSQL(dataAuthSQL, "p.", "p.");

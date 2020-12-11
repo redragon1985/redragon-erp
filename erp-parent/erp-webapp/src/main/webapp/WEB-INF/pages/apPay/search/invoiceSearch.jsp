@@ -47,16 +47,6 @@
 					<input type="text" id="invoiceSourceHeadCodeLS" value="${param.invoiceSourceHeadCode}" class="form-control">
 				</div>
 			</div>
-			<div class="col-sm-4">
-				<div class="form-group" style="margin-bottom: 5px;">
-					<label class="control-label" for="prepayFlagLS">预付款标识</label> 
-					<select class="form-control" id="prepayFlagLS">
-                    	<option value="" selected="selected">请选择...</option>
-                        <option value="Y">Y</option>
-                        <option value="N">N</option>
-                    </select>
-				</div>
-			</div>
 		</div>	
 		<div class="row">	
 			<div class="col-sm-4">
@@ -107,11 +97,6 @@ $(document).ready(function(){
 		language: 'zh-CN',
 	});
 
-	//设置prepayFlagLS默认值
-	if("${param.prepayFlag}"!=""){
-		$("#prepayFlagLS").val("${param.prepayFlag}");
-	}
-	
 	//初始化chosen-select
 	$('.chosen-select').chosen({width: "100%"});
 	

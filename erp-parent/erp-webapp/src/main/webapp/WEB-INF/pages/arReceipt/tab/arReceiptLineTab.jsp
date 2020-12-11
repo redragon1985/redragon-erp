@@ -213,7 +213,7 @@
 			type: "post",
 			url: "web/arReceiptLine/getSelectArInvoiceModal",
 			data: {"payer": $("#customerCode").val(),"receiptHeadCode": "${param.receiptHeadCode}", "invoiceHeadCode": $("#invoiceHeadCodeLS").val(),
-				   "invoiceSourceHeadCode": $("#invoiceSourceHeadCodeLS").val(), "preReceiptFlag": $("#preReceiptFlagLS").val(), "page": page,
+				   "invoiceSourceHeadCode": $("#invoiceSourceHeadCodeLS").val(), "page": page,
 				   "amount": $("#amountLS").val(), "invoiceDate": $("#invoiceDateLS").val()},
 			async: false,
 			dataType: "html",

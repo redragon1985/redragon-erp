@@ -42,7 +42,7 @@
 			</li>
 		
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<li><span class="m-r-sm text-muted welcome-message">欢迎使用【赤龙ERP】V0.8.1版本</span>
+			<li><span class="m-r-sm text-muted welcome-message">欢迎使用【赤龙ERP】V1.0版本</span>
 			</li>
 			
 			<%--bcc 暂时取消 站内信功能 

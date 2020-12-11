@@ -73,16 +73,6 @@
 			</div>
 			<div class="col-sm-4">
 				<div class="form-group">
-					<label class="control-label" for="preReceiptFlag">预收款标识</label> 
-					<select class="form-control" name="preReceiptFlag" id="preReceiptFlag">
-                    	<option value="" selected="selected">请选择...</option>
-                        <option value="Y">是</option>
-                        <option value="N">否</option>
-                    </select>
-				</div>
-			</div>
-			<div class="col-sm-4">
-				<div class="form-group">
 					<label class="control-label" for="status">状态</label> 
 					<select class="form-control" name="status" id="status">
                     	<option value="" selected="selected">请选择...</option>
@@ -123,10 +113,6 @@ $(document).ready(function(){
 	//设置payer默认值
 	if("${param.payer}"!=""){
 		$("#payer").val("${param.payer}");
-	}
-	//设置prepayFlag默认值
-	if("${param.preReceiptFlag}"!=""){
-		$("#preReceiptFlag").val("${param.preReceiptFlag}");
 	}
 	
 	//初始化select2

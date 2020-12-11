@@ -66,7 +66,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 									<th>销售订单编码</th>
 									<th>客户</th>
 									<th>发票日期</th>
-									<th>预付款标识</th>
 									<th>制单人</th>
 									<th>制单部门</th>
 									<th>创建时间</th>
@@ -89,13 +88,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 									<td>${data.invoiceSourceHeadCode}</td>
 									<td>${requestScope.customerMap[data.payer]}</td>
 									<td><fmt:formatDate value="${data.invoiceDate}" pattern="yyyy-MM-dd"/></td>
-									<td>
-									<c:choose>
-									   <c:when test="${data.preReceiptFlag=='Y'}">
-									   		预收款
-									   </c:when>
-									</c:choose>
-									</td>
 									<td>${data.staffName}</td>
 									<td>${data.departmentName}</td>
 									<td><fmt:formatDate value="${data.createdDate}" pattern="yyyy-MM-dd HH:mm:ss"/></td>

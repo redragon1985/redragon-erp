@@ -213,7 +213,7 @@
 			type: "post",
 			url: "web/apPayLine/getSelectApInvoiceModal",
 			data: {"receiver": $("#vendorCode").val(),"payHeadCode": "${param.payHeadCode}", "invoiceHeadCode": $("#invoiceHeadCodeLS").val(),
-				   "invoiceSourceHeadCode": $("#invoiceSourceHeadCodeLS").val(), "prepayFlag": $("#prepayFlagLS").val(), "page": page,
+				   "invoiceSourceHeadCode": $("#invoiceSourceHeadCodeLS").val(), "page": page,
 				   "amount": $("#amountLS").val(), "invoiceDate": $("#invoiceDateLS").val()},
 			async: false,
 			dataType: "html",
