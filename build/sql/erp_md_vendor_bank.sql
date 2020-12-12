@@ -30,6 +30,7 @@ CREATE TABLE `md_vendor_bank` (
   `bank_code` varchar(45) NOT NULL COMMENT '银行编码',
   `sub_bank_code` varchar(45) DEFAULT NULL COMMENT '分行编码',
   `bank_account` varchar(45) NOT NULL COMMENT '银行账户',
+  `version` int(11) NOT NULL DEFAULT '1',
   `status` char(1) NOT NULL DEFAULT 'Y' COMMENT '状态',
   `created_date` datetime NOT NULL COMMENT '创建时间',
   `created_by` varchar(45) NOT NULL COMMENT '创建人',
@@ -38,7 +39,7 @@ CREATE TABLE `md_vendor_bank` (
   `org_code` varchar(10) NOT NULL COMMENT '组织机构',
   PRIMARY KEY (`bank_id`),
   UNIQUE KEY `UK_md_vendor_bank` (`vendor_code`,`bank_code`,`bank_account`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='主数据供应商银行表';
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='主数据供应商银行表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -50,4 +51,4 @@ CREATE TABLE `md_vendor_bank` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-10-09 10:57:25
+-- Dump completed on 2020-12-12 16:00:31

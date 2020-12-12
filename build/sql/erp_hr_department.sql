@@ -43,7 +43,7 @@ CREATE TABLE `hr_department` (
   UNIQUE KEY `department_name_UNIQUE` (`department_name`),
   UNIQUE KEY `segment_code_UNIQUE` (`segment_code`),
   UNIQUE KEY `segment_desc_UNIQUE` (`segment_desc`)
-) ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='人力部门表';
+) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='人力部门表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -55,4 +55,4 @@ CREATE TABLE `hr_department` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-10-09 10:57:28
+-- Dump completed on 2020-12-12 16:00:54

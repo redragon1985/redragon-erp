@@ -36,6 +36,7 @@ CREATE TABLE `md_vendor` (
   `vendor_category` varchar(45) DEFAULT NULL COMMENT '供应商类别',
   `vendor_label` varchar(100) DEFAULT NULL COMMENT '供应商标签',
   `own_flag` char(1) NOT NULL DEFAULT 'N' COMMENT '本公司标识',
+  `version` int(11) NOT NULL DEFAULT '1',
   `status` char(1) NOT NULL DEFAULT 'Y' COMMENT '状态',
   `approve_status` varchar(45) NOT NULL DEFAULT 'UNSUBMIT' COMMENT '审批状态（未提交UNSUBMIT、已提交SUBMIT、已审批APPROVE、已驳回REJECT）',
   `created_date` datetime NOT NULL COMMENT '创建时间',
@@ -46,7 +47,7 @@ CREATE TABLE `md_vendor` (
   PRIMARY KEY (`vendor_id`),
   UNIQUE KEY `vendor_code_UNIQUE` (`vendor_code`),
   UNIQUE KEY `vendor_name_UNIQUE` (`vendor_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='主数据供应商表';
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='主数据供应商表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -58,4 +59,4 @@ CREATE TABLE `md_vendor` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-10-09 10:57:29
+-- Dump completed on 2020-12-12 16:00:51

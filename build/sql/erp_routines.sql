@@ -58,6 +58,41 @@ SET character_set_client = @saved_cs_client;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Dumping routines for database 'erp'
+--
+/*!50003 DROP PROCEDURE IF EXISTS `save_history_data_proc` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `save_history_data_proc`(in p_table_name varchar(50), in p_primary_key varchar(30), in p_primary_key_value varchar(50), out error_code int)
+BEGIN
+	# 异常处理
+	DECLARE CONTINUE HANDLER FOR SQLWARNING,NOT FOUND,SQLEXCEPTION SET error_code = 1;
+    # 错误编码默认值
+	set error_code = 0;
+    
+	# 拼接SQL
+    SET @strsql = CONCAT('insert into ',p_table_name,'_m select * from ',p_table_name,' where ',p_primary_key,'= ''',p_primary_key_value,'''');
+    # 预处理需要执行的动态SQL，其中stmt是一个变量
+    PREPARE stmt FROM @strsql;  
+    # 执行SQL语句
+    EXECUTE stmt;  
+    # 释放掉预处理段
+    deallocate prepare stmt;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -68,4 +103,4 @@ SET character_set_client = @saved_cs_client;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-10-09 10:57:34
+-- Dump completed on 2020-12-12 16:00:57

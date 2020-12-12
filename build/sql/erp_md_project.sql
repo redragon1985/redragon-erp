@@ -32,6 +32,7 @@ CREATE TABLE `md_project` (
   `project_type` varchar(45) NOT NULL COMMENT '项目类型',
   `start_date` date NOT NULL COMMENT '开始日期',
   `end_date` date DEFAULT NULL COMMENT '结束日期',
+  `version` int(11) NOT NULL DEFAULT '1',
   `status` char(1) NOT NULL DEFAULT 'Y' COMMENT '状态',
   `approve_status` varchar(45) NOT NULL DEFAULT 'UNSUBMIT' COMMENT '审批状态（未提交UNSUBMIT、已提交SUBMIT、已审批APPROVE、已驳回REJECT）',
   `created_date` datetime NOT NULL COMMENT '创建时间',
@@ -42,7 +43,7 @@ CREATE TABLE `md_project` (
   PRIMARY KEY (`project_id`),
   UNIQUE KEY `project_code_UNIQUE` (`project_code`),
   UNIQUE KEY `project_name_UNIQUE` (`project_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='主数据项目表';
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='主数据项目表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -54,4 +55,4 @@ CREATE TABLE `md_project` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-10-09 10:57:12
+-- Dump completed on 2020-12-12 16:00:53

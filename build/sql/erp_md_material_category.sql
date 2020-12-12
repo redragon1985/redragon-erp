@@ -43,7 +43,7 @@ CREATE TABLE `md_material_category` (
   UNIQUE KEY `category_name_UNIQUE` (`category_name`),
   UNIQUE KEY `segment_code_UNIQUE` (`segment_code`),
   UNIQUE KEY `segment_desc_UNIQUE` (`segment_desc`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='主数据物料类别表';
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='主数据物料类别表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -55,4 +55,4 @@ CREATE TABLE `md_material_category` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-10-09 10:57:15
+-- Dump completed on 2020-12-12 16:00:22

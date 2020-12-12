@@ -30,6 +30,7 @@ CREATE TABLE `md_customer_contact` (
   `contact_name` varchar(45) NOT NULL COMMENT '联系人',
   `contact_telephone` varchar(45) NOT NULL COMMENT '联系电话',
   `contact_position` varchar(45) DEFAULT NULL COMMENT '联系人职位',
+  `version` int(11) NOT NULL DEFAULT '1',
   `status` char(1) NOT NULL DEFAULT 'Y' COMMENT '状态',
   `created_date` datetime NOT NULL COMMENT '创建时间',
   `created_by` varchar(45) NOT NULL COMMENT '创建人',
@@ -38,7 +39,7 @@ CREATE TABLE `md_customer_contact` (
   `org_code` varchar(10) NOT NULL COMMENT '组织机构',
   PRIMARY KEY (`contact_id`),
   KEY `UK_md_customer_contact_customer_code` (`customer_code`) /*!80000 INVISIBLE */
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='主数据客户联系人表';
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='主数据客户联系人表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -50,4 +51,4 @@ CREATE TABLE `md_customer_contact` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-10-09 10:57:20
+-- Dump completed on 2020-12-12 16:00:26

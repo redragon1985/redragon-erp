@@ -39,7 +39,7 @@ CREATE TABLE `sys_dataset` (
   UNIQUE KEY `dataset_name_UNIQUE` (`dataset_name`),
   UNIQUE KEY `dataset_code_UNIQUE` (`dataset_code`),
   KEY `IX_dataset_dataset_type_code` (`dataset_type_code`) /*!80000 INVISIBLE */
-) ENGINE=InnoDB AUTO_INCREMENT=80 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='系统数据字典值表';
+) ENGINE=InnoDB AUTO_INCREMENT=107 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='系统数据字典值表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -51,4 +51,4 @@ CREATE TABLE `sys_dataset` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-10-09 10:57:31
+-- Dump completed on 2020-12-12 16:00:48

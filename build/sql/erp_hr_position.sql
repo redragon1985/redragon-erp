@@ -38,7 +38,7 @@ CREATE TABLE `hr_position` (
   PRIMARY KEY (`position_id`),
   UNIQUE KEY `position_code_UNIQUE` (`position_code`),
   UNIQUE KEY `position_name_UNIQUE` (`position_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='人力职位表';
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='人力职位表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -50,4 +50,4 @@ CREATE TABLE `hr_position` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-10-09 10:57:23
+-- Dump completed on 2020-12-12 16:00:50

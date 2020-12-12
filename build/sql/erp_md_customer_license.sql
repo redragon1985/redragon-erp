@@ -32,6 +32,7 @@ CREATE TABLE `md_customer_license` (
   `company_type` varchar(45) NOT NULL COMMENT '公司类型',
   `business_scope` varchar(200) DEFAULT NULL COMMENT '经营范围',
   `start_date` date NOT NULL COMMENT '成立日期',
+  `version` int(11) NOT NULL DEFAULT '1',
   `status` char(1) NOT NULL DEFAULT 'Y' COMMENT '状态',
   `created_date` datetime NOT NULL COMMENT '创建时间',
   `created_by` varchar(45) NOT NULL COMMENT '创建人',
@@ -41,7 +42,7 @@ CREATE TABLE `md_customer_license` (
   PRIMARY KEY (`license_id`),
   UNIQUE KEY `license_number_UNIQUE` (`license_number`),
   KEY `IX_md_customer_license_customer_code` (`customer_code`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='主数据客户营业执照表';
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='主数据客户营业执照表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -53,4 +54,4 @@ CREATE TABLE `md_customer_license` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-10-09 10:57:12
+-- Dump completed on 2020-12-12 16:00:30

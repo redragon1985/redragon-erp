@@ -55,4 +55,4 @@ CREATE TABLE `md_finance_subject` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-10-09 10:57:11
+-- Dump completed on 2020-12-12 16:00:36

@@ -27,20 +27,23 @@ DROP TABLE IF EXISTS `ap_invoice_head`;
 CREATE TABLE `ap_invoice_head` (
   `invoice_head_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '发票头id',
   `invoice_head_code` varchar(45) NOT NULL COMMENT '发票头编码',
-  `invoice_source_type` varchar(45) NOT NULL COMMENT '发票来源类型（采购订单PO、入库单INPUT）',
-  `invoice_source_head_code` varchar(45) NOT NULL COMMENT '发票来源头编码（采购订单头编码、入库单头编码）',
-  `payer` varchar(45) NOT NULL COMMENT '付款方',
+  `ap_type` varchar(45) NOT NULL COMMENT '应付类型（发票Invoice、报销Expense）',
+  `invoice_type` varchar(45) NOT NULL COMMENT '发票类型（普通发票PO_INVOICE、预付款发票PRE_INVOICE）',
+  `invoice_source_type` varchar(45) DEFAULT NULL COMMENT '发票来源类型（采购订单PO、入库单INPUT）',
+  `invoice_source_head_code` varchar(45) DEFAULT NULL COMMENT '发票来源头编码（采购订单头编码、入库单头编码）',
+  `payer` varchar(45) DEFAULT NULL COMMENT '付款方',
   `receiver` varchar(45) NOT NULL COMMENT '收款方',
   `amount` decimal(10,2) NOT NULL COMMENT '发票金额',
   `currency_code` varchar(45) NOT NULL COMMENT '币种',
   `reference_number` varchar(45) DEFAULT NULL COMMENT '发票参考号（纸质发票号）',
   `invoice_date` date NOT NULL COMMENT '发票时间',
-  `prepay_flag` char(1) NOT NULL DEFAULT 'N' COMMENT '预付款标识',
   `pay_mode` varchar(45) NOT NULL COMMENT '付款方式',
   `bank_code` varchar(45) DEFAULT NULL COMMENT '银行编码',
   `sub_bank_code` varchar(45) DEFAULT NULL COMMENT '分行编码',
   `bank_account` varchar(45) DEFAULT NULL COMMENT '银行账户',
   `memo` varchar(200) DEFAULT NULL COMMENT '摘要',
+  `pre_invoice_head_code` varchar(45) DEFAULT NULL COMMENT '核销预付款发票编码',
+  `pre_invoice_amount` decimal(10,2) DEFAULT NULL COMMENT '核销预付款发票金额',
   `version` int(11) NOT NULL DEFAULT '1' COMMENT '版本',
   `status` varchar(10) NOT NULL DEFAULT 'NEW' COMMENT '状态（新建NEW，确认CONFIRM，取消CANCEL）',
   `approve_status` varchar(10) NOT NULL DEFAULT 'UNSUBMIT' COMMENT '审批状态（未提交UNSUBMIT、已提交SUBMIT、已审批APPROVE、已驳回REJECT）',
@@ -54,7 +57,48 @@ CREATE TABLE `ap_invoice_head` (
   `org_code` varchar(10) NOT NULL COMMENT '组织机构',
   PRIMARY KEY (`invoice_head_id`),
   UNIQUE KEY `pay_head_code_UNIQUE` (`invoice_head_code`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='采购发票头表';
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='采购发票头表';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ap_invoice_head_m`
+--
+
+DROP TABLE IF EXISTS `ap_invoice_head_m`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `ap_invoice_head_m` (
+  `invoice_head_id` int(11) NOT NULL DEFAULT '0' COMMENT '发票头id',
+  `invoice_head_code` varchar(45) NOT NULL COMMENT '发票头编码',
+  `ap_type` varchar(45) NOT NULL COMMENT '应付类型（发票Invoice、报销Expense）',
+  `invoice_type` varchar(45) NOT NULL COMMENT '发票类型（普通发票PO_INVOICE、预付款发票PRE_INVOICE）',
+  `invoice_source_type` varchar(45) DEFAULT NULL COMMENT '发票来源类型（采购订单PO、入库单INPUT）',
+  `invoice_source_head_code` varchar(45) DEFAULT NULL COMMENT '发票来源头编码（采购订单头编码、入库单头编码）',
+  `payer` varchar(45) DEFAULT NULL COMMENT '付款方',
+  `receiver` varchar(45) NOT NULL COMMENT '收款方',
+  `amount` decimal(10,2) NOT NULL COMMENT '发票金额',
+  `currency_code` varchar(45) NOT NULL COMMENT '币种',
+  `reference_number` varchar(45) DEFAULT NULL COMMENT '发票参考号（纸质发票号）',
+  `invoice_date` date NOT NULL COMMENT '发票时间',
+  `pay_mode` varchar(45) NOT NULL COMMENT '付款方式',
+  `bank_code` varchar(45) DEFAULT NULL COMMENT '银行编码',
+  `sub_bank_code` varchar(45) DEFAULT NULL COMMENT '分行编码',
+  `bank_account` varchar(45) DEFAULT NULL COMMENT '银行账户',
+  `memo` varchar(200) DEFAULT NULL COMMENT '摘要',
+  `pre_invoice_head_code` varchar(45) DEFAULT NULL COMMENT '核销预付款发票编码',
+  `pre_invoice_amount` decimal(10,2) DEFAULT NULL COMMENT '核销预付款发票金额',
+  `version` int(11) NOT NULL DEFAULT '1' COMMENT '版本',
+  `status` varchar(10) NOT NULL DEFAULT 'NEW' COMMENT '状态（新建NEW，确认CONFIRM，取消CANCEL）',
+  `approve_status` varchar(10) NOT NULL DEFAULT 'UNSUBMIT' COMMENT '审批状态（未提交UNSUBMIT、已提交SUBMIT、已审批APPROVE、已驳回REJECT）',
+  `paid_status` varchar(10) DEFAULT NULL COMMENT '付款状态（未付款N，已付款Y）',
+  `staff_code` varchar(45) NOT NULL COMMENT '制单人',
+  `department_code` varchar(45) NOT NULL COMMENT '制单部门',
+  `created_date` datetime NOT NULL COMMENT '创建时间',
+  `created_by` varchar(45) NOT NULL COMMENT '创建人',
+  `last_updated_date` datetime DEFAULT NULL COMMENT '最后修改时间',
+  `last_updated_by` varchar(45) DEFAULT NULL COMMENT '最后修改人',
+  `org_code` varchar(10) NOT NULL COMMENT '组织机构'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -84,7 +128,34 @@ CREATE TABLE `ap_invoice_line` (
   PRIMARY KEY (`invoice_line_id`),
   UNIQUE KEY `pay_line_code_UNIQUE` (`invoice_line_code`),
   KEY `IX_pay_line_pay_head_code` (`invoice_head_code`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='采购发票行表';
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='采购发票行表';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ap_invoice_line_m`
+--
+
+DROP TABLE IF EXISTS `ap_invoice_line_m`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `ap_invoice_line_m` (
+  `invoice_line_id` int(11) NOT NULL DEFAULT '0' COMMENT '发票行id',
+  `invoice_line_code` varchar(45) NOT NULL COMMENT '发票行编码',
+  `invoice_head_code` varchar(45) NOT NULL COMMENT '发票头编码',
+  `invoice_source_line_code` varchar(45) NOT NULL COMMENT '发票来源行编码（采购订单行编码、入库单行编码）',
+  `quantity` double NOT NULL COMMENT '发票行数量',
+  `amount` decimal(10,2) NOT NULL COMMENT '行金额',
+  `tax_rate` double NOT NULL COMMENT '税率（带小数）',
+  `tax_amount` decimal(10,2) NOT NULL COMMENT '税额',
+  `memo` varchar(200) DEFAULT NULL COMMENT '摘要',
+  `version` int(11) NOT NULL DEFAULT '1' COMMENT '版本',
+  `status` varchar(10) NOT NULL DEFAULT 'Y' COMMENT '状态',
+  `created_date` datetime NOT NULL COMMENT '创建时间',
+  `created_by` varchar(45) NOT NULL COMMENT '创建人',
+  `last_updated_date` datetime DEFAULT NULL COMMENT '最后修改时间',
+  `last_updated_by` varchar(45) DEFAULT NULL COMMENT '最后修改人',
+  `org_code` varchar(10) NOT NULL COMMENT '组织机构'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -115,7 +186,36 @@ CREATE TABLE `ap_pay_head` (
   `org_code` varchar(10) NOT NULL COMMENT '组织机构',
   PRIMARY KEY (`pay_head_id`),
   UNIQUE KEY `pay_head_code_UNIQUE` (`pay_head_code`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='付款头表';
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='付款头表';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ap_pay_head_m`
+--
+
+DROP TABLE IF EXISTS `ap_pay_head_m`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `ap_pay_head_m` (
+  `pay_head_id` int(11) NOT NULL DEFAULT '0' COMMENT '付款头id',
+  `pay_head_code` varchar(45) NOT NULL COMMENT '付款头code',
+  `pay_type` varchar(45) NOT NULL COMMENT '付款类型',
+  `vendor_code` varchar(45) NOT NULL COMMENT '供应商编码',
+  `currency_code` varchar(45) NOT NULL COMMENT '币种',
+  `amount` decimal(10,2) NOT NULL COMMENT '付款金额',
+  `pay_date` date NOT NULL COMMENT '付款日期',
+  `memo` varchar(200) DEFAULT NULL COMMENT '备注',
+  `version` int(11) NOT NULL DEFAULT '1' COMMENT '版本',
+  `status` varchar(10) NOT NULL DEFAULT 'NEW' COMMENT '状态（新建NEW，确认CONFIRM，取消CANCEL）',
+  `approve_status` varchar(10) NOT NULL DEFAULT 'UNSUBMIT' COMMENT '审批状态（未提交UNSUBMIT、已提交SUBMIT、已审批APPROVE、已驳回REJECT）',
+  `staff_code` varchar(45) NOT NULL COMMENT '制单人',
+  `department_code` varchar(45) NOT NULL COMMENT '制单部门',
+  `created_date` datetime NOT NULL COMMENT '创建时间',
+  `created_by` varchar(45) NOT NULL COMMENT '创建人',
+  `last_updated_date` datetime DEFAULT NULL COMMENT '最后修改时间',
+  `last_updated_by` varchar(45) DEFAULT NULL COMMENT '最后修改人',
+  `org_code` varchar(10) NOT NULL COMMENT '组织机构'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -132,6 +232,7 @@ CREATE TABLE `ap_pay_line` (
   `invoice_head_code` varchar(45) NOT NULL COMMENT '发票头code',
   `invoice_pay_amount` decimal(10,2) NOT NULL COMMENT '核销金额',
   `memo` varchar(200) DEFAULT NULL COMMENT '备注',
+  `reverse_line_code` varchar(45) DEFAULT NULL COMMENT '冲销行编码',
   `version` int(11) NOT NULL DEFAULT '1' COMMENT '版本',
   `status` varchar(10) NOT NULL DEFAULT 'Y' COMMENT '状态',
   `created_date` datetime NOT NULL COMMENT '创建时间',
@@ -141,7 +242,32 @@ CREATE TABLE `ap_pay_line` (
   `org_code` varchar(10) NOT NULL COMMENT '组织机构',
   PRIMARY KEY (`pay_line_id`),
   UNIQUE KEY `pay_line_code_UNIQUE` (`pay_line_code`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='付款行表';
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='付款行表';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ap_pay_line_m`
+--
+
+DROP TABLE IF EXISTS `ap_pay_line_m`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `ap_pay_line_m` (
+  `pay_line_id` int(11) NOT NULL DEFAULT '0' COMMENT '付款行id',
+  `pay_line_code` varchar(45) NOT NULL COMMENT '付款行code',
+  `pay_head_code` varchar(45) NOT NULL COMMENT '付款头code',
+  `invoice_head_code` varchar(45) NOT NULL COMMENT '发票头code',
+  `invoice_pay_amount` decimal(10,2) NOT NULL COMMENT '核销金额',
+  `memo` varchar(200) DEFAULT NULL COMMENT '备注',
+  `reverse_line_code` varchar(45) DEFAULT NULL COMMENT '冲销行编码',
+  `version` int(11) NOT NULL DEFAULT '1' COMMENT '版本',
+  `status` varchar(10) NOT NULL DEFAULT 'Y' COMMENT '状态',
+  `created_date` datetime NOT NULL COMMENT '创建时间',
+  `created_by` varchar(45) NOT NULL COMMENT '创建人',
+  `last_updated_date` datetime DEFAULT NULL COMMENT '最后修改时间',
+  `last_updated_by` varchar(45) DEFAULT NULL COMMENT '最后修改人',
+  `org_code` varchar(10) NOT NULL COMMENT '组织机构'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -154,6 +280,7 @@ DROP TABLE IF EXISTS `ar_invoice_head`;
 CREATE TABLE `ar_invoice_head` (
   `invoice_head_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '发票头id',
   `invoice_head_code` varchar(45) NOT NULL COMMENT '发票头编码',
+  `invoice_type` varchar(45) NOT NULL COMMENT '发票类型（普通发票SO_INVOICE、预收款发票PRE_INVOICE）',
   `invoice_source_type` varchar(45) NOT NULL COMMENT '发票来源类型（采购订单SO、入库单OUTPUT）',
   `invoice_source_head_code` varchar(45) NOT NULL COMMENT '发票来源头编码（销售订单头编码、出库单头编码）',
   `payer` varchar(45) NOT NULL COMMENT '付款方',
@@ -162,12 +289,13 @@ CREATE TABLE `ar_invoice_head` (
   `currency_code` varchar(45) NOT NULL COMMENT '币种',
   `reference_number` varchar(45) DEFAULT NULL COMMENT '发票参考号（纸质发票号）',
   `invoice_date` date NOT NULL COMMENT '发票时间',
-  `pre_receipt_flag` char(1) NOT NULL COMMENT '预收款标识',
-  `receipt_mode` varchar(45) NOT NULL DEFAULT 'N' COMMENT '收款方式',
+  `receipt_mode` varchar(45) NOT NULL COMMENT '收款方式',
   `bank_code` varchar(45) DEFAULT NULL COMMENT '银行编码',
   `sub_bank_code` varchar(45) DEFAULT NULL COMMENT '分行编码',
   `bank_account` varchar(45) DEFAULT NULL COMMENT '银行账户',
   `memo` varchar(200) DEFAULT NULL COMMENT '摘要',
+  `pre_invoice_head_code` varchar(45) DEFAULT NULL COMMENT '核销预付款发票编码',
+  `pre_invoice_amount` decimal(10,2) DEFAULT NULL COMMENT '核销预付款发票金额',
   `version` int(11) NOT NULL DEFAULT '1' COMMENT '版本',
   `status` varchar(10) NOT NULL DEFAULT 'NEW' COMMENT '状态（新建NEW，确认CONFIRM，取消CANCEL）',
   `approve_status` varchar(10) NOT NULL DEFAULT 'UNSUBMIT' COMMENT '审批状态（未提交UNSUBMIT、已提交SUBMIT、已审批APPROVE、已驳回REJECT）',
@@ -181,7 +309,47 @@ CREATE TABLE `ar_invoice_head` (
   `org_code` varchar(10) NOT NULL COMMENT '组织机构',
   PRIMARY KEY (`invoice_head_id`),
   UNIQUE KEY `receipt_head_code_UNIQUE` (`invoice_head_code`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='销售发票头表';
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='销售发票头表';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ar_invoice_head_m`
+--
+
+DROP TABLE IF EXISTS `ar_invoice_head_m`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `ar_invoice_head_m` (
+  `invoice_head_id` int(11) NOT NULL DEFAULT '0' COMMENT '发票头id',
+  `invoice_head_code` varchar(45) NOT NULL COMMENT '发票头编码',
+  `invoice_type` varchar(45) NOT NULL COMMENT '发票类型（普通发票SO_INVOICE、预收款发票PRE_INVOICE）',
+  `invoice_source_type` varchar(45) NOT NULL COMMENT '发票来源类型（采购订单SO、入库单OUTPUT）',
+  `invoice_source_head_code` varchar(45) NOT NULL COMMENT '发票来源头编码（销售订单头编码、出库单头编码）',
+  `payer` varchar(45) NOT NULL COMMENT '付款方',
+  `receiver` varchar(45) NOT NULL COMMENT '收款方',
+  `amount` decimal(10,2) NOT NULL COMMENT '发票金额',
+  `currency_code` varchar(45) NOT NULL COMMENT '币种',
+  `reference_number` varchar(45) DEFAULT NULL COMMENT '发票参考号（纸质发票号）',
+  `invoice_date` date NOT NULL COMMENT '发票时间',
+  `receipt_mode` varchar(45) NOT NULL COMMENT '收款方式',
+  `bank_code` varchar(45) DEFAULT NULL COMMENT '银行编码',
+  `sub_bank_code` varchar(45) DEFAULT NULL COMMENT '分行编码',
+  `bank_account` varchar(45) DEFAULT NULL COMMENT '银行账户',
+  `memo` varchar(200) DEFAULT NULL COMMENT '摘要',
+  `pre_invoice_head_code` varchar(45) DEFAULT NULL COMMENT '核销预付款发票编码',
+  `pre_invoice_amount` decimal(10,2) DEFAULT NULL COMMENT '核销预付款发票金额',
+  `version` int(11) NOT NULL DEFAULT '1' COMMENT '版本',
+  `status` varchar(10) NOT NULL DEFAULT 'NEW' COMMENT '状态（新建NEW，确认CONFIRM，取消CANCEL）',
+  `approve_status` varchar(10) NOT NULL DEFAULT 'UNSUBMIT' COMMENT '审批状态（未提交UNSUBMIT、已提交SUBMIT、已审批APPROVE、已驳回REJECT）',
+  `received_status` varchar(10) DEFAULT NULL COMMENT '收款状态（未付款N，已付款Y）',
+  `staff_code` varchar(45) NOT NULL COMMENT '制单人',
+  `department_code` varchar(45) NOT NULL COMMENT '制单人部门',
+  `created_date` datetime NOT NULL COMMENT '创建时间',
+  `created_by` varchar(45) NOT NULL COMMENT '创建人',
+  `last_updated_date` datetime DEFAULT NULL COMMENT '最后修改时间',
+  `last_updated_by` varchar(45) DEFAULT NULL COMMENT '最后修改人',
+  `org_code` varchar(10) NOT NULL COMMENT '组织机构'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -211,7 +379,34 @@ CREATE TABLE `ar_invoice_line` (
   PRIMARY KEY (`invoice_line_id`),
   UNIQUE KEY `receipt_line_code_UNIQUE` (`invoice_line_code`),
   KEY `IX_receipt_line_receipt_head_code` (`invoice_head_code`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='销售发票行表';
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='销售发票行表';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ar_invoice_line_m`
+--
+
+DROP TABLE IF EXISTS `ar_invoice_line_m`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `ar_invoice_line_m` (
+  `invoice_line_id` int(11) NOT NULL DEFAULT '0' COMMENT '发票行id',
+  `invoice_line_code` varchar(45) NOT NULL COMMENT '发票行编码',
+  `invoice_head_code` varchar(45) NOT NULL COMMENT '发票头编码',
+  `invoice_source_line_code` varchar(45) NOT NULL COMMENT '发票来源行编码',
+  `quantity` double NOT NULL COMMENT '发票行数量',
+  `amount` decimal(10,2) NOT NULL COMMENT '行金额',
+  `tax_rate` double NOT NULL COMMENT '税率（带小数）',
+  `tax_amount` decimal(10,2) NOT NULL COMMENT '税额',
+  `memo` varchar(200) DEFAULT NULL COMMENT '摘要',
+  `version` int(11) NOT NULL DEFAULT '1' COMMENT '版本',
+  `status` char(1) NOT NULL DEFAULT 'Y' COMMENT '状态',
+  `created_date` datetime NOT NULL COMMENT '创建时间',
+  `created_by` varchar(45) NOT NULL COMMENT '创建人',
+  `last_updated_date` datetime DEFAULT NULL COMMENT '最后修改时间',
+  `last_updated_by` varchar(45) DEFAULT NULL COMMENT '最后修改人',
+  `org_code` varchar(10) NOT NULL COMMENT '组织机构'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -242,7 +437,36 @@ CREATE TABLE `ar_receipt_head` (
   `org_code` varchar(10) NOT NULL COMMENT '组织机构',
   PRIMARY KEY (`receipt_head_id`),
   UNIQUE KEY `receipt_head_code_UNIQUE` (`receipt_head_code`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='收款头表';
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='收款头表';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ar_receipt_head_m`
+--
+
+DROP TABLE IF EXISTS `ar_receipt_head_m`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `ar_receipt_head_m` (
+  `receipt_head_id` int(11) NOT NULL DEFAULT '0' COMMENT '收款头id',
+  `receipt_head_code` varchar(45) NOT NULL COMMENT '收款头code',
+  `receipt_type` varchar(45) NOT NULL COMMENT '收款类型',
+  `customer_code` varchar(45) NOT NULL COMMENT '客户编码',
+  `currency_code` varchar(45) NOT NULL COMMENT '币种',
+  `amount` decimal(10,2) NOT NULL COMMENT '收款金额',
+  `receipt_date` date NOT NULL COMMENT '收款日期',
+  `memo` varchar(200) DEFAULT NULL COMMENT '备注',
+  `version` int(11) NOT NULL DEFAULT '1' COMMENT '版本',
+  `status` varchar(10) NOT NULL DEFAULT 'NEW' COMMENT '状态（新建NEW，确认CONFIRM，取消CANCEL）',
+  `approve_status` varchar(10) NOT NULL DEFAULT 'UNSUBMIT' COMMENT '审批状态（未提交UNSUBMIT、已提交SUBMIT、已审批APPROVE、已驳回REJECT）',
+  `staff_code` varchar(45) NOT NULL COMMENT '制单人',
+  `department_code` varchar(45) NOT NULL COMMENT '制单部门',
+  `created_date` datetime NOT NULL COMMENT '创建时间',
+  `created_by` varchar(45) NOT NULL COMMENT '创建人',
+  `last_updated_date` datetime DEFAULT NULL COMMENT '最后修改日期',
+  `last_updated_by` varchar(45) DEFAULT NULL COMMENT '最后修改人',
+  `org_code` varchar(10) NOT NULL COMMENT '组织机构'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -259,6 +483,7 @@ CREATE TABLE `ar_receipt_line` (
   `invoice_head_code` varchar(45) NOT NULL COMMENT '发票头code',
   `invoice_receipt_amount` decimal(10,2) NOT NULL COMMENT '核销金额',
   `memo` varchar(200) DEFAULT NULL COMMENT '备注',
+  `reverse_line_code` varchar(45) DEFAULT NULL COMMENT '冲销行编码',
   `version` int(11) NOT NULL DEFAULT '1' COMMENT '版本',
   `status` varchar(10) NOT NULL DEFAULT 'Y' COMMENT '状态',
   `created_date` datetime NOT NULL COMMENT '创建时间',
@@ -268,7 +493,32 @@ CREATE TABLE `ar_receipt_line` (
   `org_code` varchar(10) NOT NULL COMMENT '组织机构',
   PRIMARY KEY (`receipt_line_id`),
   UNIQUE KEY `receipt_line_code_UNIQUE` (`receipt_line_code`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='收款行表';
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='收款行表';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `ar_receipt_line_m`
+--
+
+DROP TABLE IF EXISTS `ar_receipt_line_m`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `ar_receipt_line_m` (
+  `receipt_line_id` int(11) NOT NULL DEFAULT '0' COMMENT '收款行id',
+  `receipt_line_code` varchar(45) NOT NULL COMMENT '收款行code',
+  `receipt_head_code` varchar(45) NOT NULL COMMENT '收款头code',
+  `invoice_head_code` varchar(45) NOT NULL COMMENT '发票头code',
+  `invoice_receipt_amount` decimal(10,2) NOT NULL COMMENT '核销金额',
+  `memo` varchar(200) DEFAULT NULL COMMENT '备注',
+  `reverse_line_code` varchar(45) DEFAULT NULL COMMENT '冲销行编码',
+  `version` int(11) NOT NULL DEFAULT '1' COMMENT '版本',
+  `status` varchar(10) NOT NULL DEFAULT 'Y' COMMENT '状态',
+  `created_date` datetime NOT NULL COMMENT '创建时间',
+  `created_by` varchar(45) NOT NULL COMMENT '创建人',
+  `last_updated_date` datetime DEFAULT NULL COMMENT '最后修改时间',
+  `last_updated_by` varchar(45) DEFAULT NULL COMMENT '最后修改人',
+  `org_code` varchar(10) NOT NULL COMMENT '组织机构'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -293,7 +543,7 @@ CREATE TABLE `fin_voucher_bill_r` (
   UNIQUE KEY `UK_fin_voucher_bill_r` (`voucher_head_code`,`bill_type`,`bill_head_code`),
   KEY `IX_fin_voucher_bill_r_bill_head_code` (`bill_head_code`) /*!80000 INVISIBLE */,
   KEY `IX_fin_voucher_bill_r_voucher_head_code` (`voucher_head_code`) /*!80000 INVISIBLE */
-) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='财务凭证与单据关联表';
+) ENGINE=InnoDB AUTO_INCREMENT=99 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='财务凭证与单据关联表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -324,7 +574,7 @@ CREATE TABLE `fin_voucher_head` (
   UNIQUE KEY `voucher_code_UNIQUE` (`voucher_head_code`),
   UNIQUE KEY `UK_fin_voucher_head` (`voucher_type`,`voucher_number`) /*!80000 INVISIBLE */,
   KEY `IX_fin_voucher_head_voucher_number` (`voucher_number`)
-) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='财务凭证头';
+) ENGINE=InnoDB AUTO_INCREMENT=117 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='财务凭证头';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -352,7 +602,7 @@ CREATE TABLE `fin_voucher_line` (
   PRIMARY KEY (`voucher_line_id`),
   UNIQUE KEY `voucher_line_code_UNIQUE` (`voucher_line_code`),
   KEY `IX_fin_voucher_line_voucher_head_code` (`voucher_head_code`)
-) ENGINE=InnoDB AUTO_INCREMENT=103 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='财务凭证行';
+) ENGINE=InnoDB AUTO_INCREMENT=267 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='财务凭证行';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -382,7 +632,7 @@ CREATE TABLE `fin_voucher_model_head` (
   `org_code` varchar(10) NOT NULL COMMENT '组织机构',
   PRIMARY KEY (`voucher_head_id`),
   UNIQUE KEY `voucher_head_code_UNIQUE` (`voucher_head_code`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='财务凭证模板头';
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='财务凭证模板头';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -410,7 +660,7 @@ CREATE TABLE `fin_voucher_model_line` (
   PRIMARY KEY (`voucher_line_id`),
   UNIQUE KEY `voucher_line_code_UNIQUE` (`voucher_line_code`),
   KEY `IX_fin_voucher_model_line_voucher_head_code` (`voucher_head_code`)
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='财务凭证模板行';
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='财务凭证模板行';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -463,7 +713,7 @@ CREATE TABLE `hr_department` (
   UNIQUE KEY `department_name_UNIQUE` (`department_name`),
   UNIQUE KEY `segment_code_UNIQUE` (`segment_code`),
   UNIQUE KEY `segment_desc_UNIQUE` (`segment_desc`)
-) ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='人力部门表';
+) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='人力部门表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -487,7 +737,7 @@ CREATE TABLE `hr_position` (
   PRIMARY KEY (`position_id`),
   UNIQUE KEY `position_code_UNIQUE` (`position_code`),
   UNIQUE KEY `position_name_UNIQUE` (`position_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='人力职位表';
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='人力职位表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -515,9 +765,9 @@ CREATE TABLE `hr_staff` (
   `org_code` varchar(10) NOT NULL COMMENT '组织机构',
   PRIMARY KEY (`staff_id`),
   UNIQUE KEY `staff_code_UNIQUE` (`staff_code`),
-  UNIQUE KEY `staff_number_UNIQUE` (`staff_number`),
-  UNIQUE KEY `UK_hr_staff_username` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='人力职员表';
+  UNIQUE KEY `staff_number_UNIQUE` (`staff_number`) /*!80000 INVISIBLE */,
+  UNIQUE KEY `hr_staff_UK` (`staff_code`,`username`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='人力职员表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -540,7 +790,7 @@ CREATE TABLE `hr_staff_department_r` (
   `org_code` varchar(10) NOT NULL COMMENT '组织机构',
   PRIMARY KEY (`sd_id`),
   UNIQUE KEY `uk_staff_department_position` (`staff_code`,`department_code`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='人力职员与部门关联表';
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='人力职员与部门关联表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -571,7 +821,36 @@ CREATE TABLE `inv_input_head` (
   `org_code` varchar(10) NOT NULL COMMENT '组织机构',
   PRIMARY KEY (`input_head_id`),
   UNIQUE KEY `input_head_code_UNIQUE` (`input_head_code`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='入库单头表';
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='入库单头表';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `inv_input_head_m`
+--
+
+DROP TABLE IF EXISTS `inv_input_head_m`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `inv_input_head_m` (
+  `input_head_id` int(11) NOT NULL DEFAULT '0' COMMENT '主键',
+  `input_head_code` varchar(45) NOT NULL COMMENT '入库单编码',
+  `input_type` varchar(45) NOT NULL COMMENT '入库类型（采购入库PO_IN、销售退回SO_RETURN、盘点入库CHECK_IN）',
+  `input_source_type` varchar(45) NOT NULL COMMENT '入库来源类型（采购订单PO）',
+  `input_source_head_code` varchar(45) NOT NULL COMMENT '入库来源头编码（采购订单头编码）',
+  `warehouse_code` varchar(45) NOT NULL COMMENT '仓库编码',
+  `input_date` date NOT NULL COMMENT '入库日期',
+  `memo` varchar(200) DEFAULT NULL COMMENT '备注',
+  `version` int(11) NOT NULL DEFAULT '1' COMMENT '版本',
+  `status` varchar(10) NOT NULL DEFAULT 'NEW' COMMENT '状态（新建NEW，确认CONFIRM，取消CANCEL）',
+  `approve_status` varchar(10) NOT NULL DEFAULT 'UNSUBMIT' COMMENT '审批状态（未提交UNSUBMIT、已提交SUBMIT、已审批APPROVE、已驳回REJECT）',
+  `staff_code` varchar(45) NOT NULL COMMENT '制单人',
+  `department_code` varchar(45) NOT NULL COMMENT '制单部门',
+  `created_date` datetime NOT NULL COMMENT '创建时间',
+  `created_by` varchar(45) NOT NULL COMMENT '创建人',
+  `last_updated_date` datetime DEFAULT NULL COMMENT '最后修改日期',
+  `last_updated_by` varchar(45) DEFAULT NULL COMMENT '最后修改人',
+  `org_code` varchar(10) NOT NULL COMMENT '组织机构'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -588,6 +867,9 @@ CREATE TABLE `inv_input_line` (
   `input_source_line_code` varchar(45) NOT NULL COMMENT '入库来源行编码（采购订单行编码）',
   `material_code` varchar(45) NOT NULL COMMENT '物料编码',
   `input_quantity` double NOT NULL COMMENT '入库数量',
+  `price` decimal(10,2) DEFAULT NULL COMMENT '单价',
+  `amount` decimal(10,2) DEFAULT NULL COMMENT '行金额',
+  `unit` varchar(45) DEFAULT NULL COMMENT '单位',
   `memo` varchar(200) DEFAULT NULL COMMENT '备注',
   `version` int(11) NOT NULL DEFAULT '1' COMMENT '版本',
   `status` varchar(10) NOT NULL DEFAULT 'Y' COMMENT '状态',
@@ -598,7 +880,35 @@ CREATE TABLE `inv_input_line` (
   `org_code` varchar(10) NOT NULL COMMENT '组织机构',
   PRIMARY KEY (`input_line_id`),
   UNIQUE KEY `input_line_code_UNIQUE` (`input_line_code`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='入库单行表';
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='入库单行表';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `inv_input_line_m`
+--
+
+DROP TABLE IF EXISTS `inv_input_line_m`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `inv_input_line_m` (
+  `input_line_id` int(11) NOT NULL DEFAULT '0' COMMENT '主键',
+  `input_line_code` varchar(45) NOT NULL COMMENT '入库行编码',
+  `input_head_code` varchar(45) NOT NULL COMMENT '入库头编码',
+  `input_source_line_code` varchar(45) NOT NULL COMMENT '入库来源行编码（采购订单行编码）',
+  `material_code` varchar(45) NOT NULL COMMENT '物料编码',
+  `input_quantity` double NOT NULL COMMENT '入库数量',
+  `price` decimal(10,2) DEFAULT NULL COMMENT '单价',
+  `amount` decimal(10,2) DEFAULT NULL COMMENT '行金额',
+  `unit` varchar(45) DEFAULT NULL COMMENT '单位',
+  `memo` varchar(200) DEFAULT NULL COMMENT '备注',
+  `version` int(11) NOT NULL DEFAULT '1' COMMENT '版本',
+  `status` varchar(10) NOT NULL DEFAULT 'Y' COMMENT '状态',
+  `created_date` datetime NOT NULL COMMENT '创建时间',
+  `created_by` varchar(45) NOT NULL COMMENT '创建人',
+  `last_updated_date` datetime DEFAULT NULL COMMENT '最后修改时间',
+  `last_updated_by` varchar(45) DEFAULT NULL COMMENT '最后修改人',
+  `org_code` varchar(10) NOT NULL COMMENT '组织机构'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -629,7 +939,36 @@ CREATE TABLE `inv_output_head` (
   `org_code` varchar(10) NOT NULL COMMENT '组织机构',
   PRIMARY KEY (`output_head_id`),
   UNIQUE KEY `input_head_code_UNIQUE` (`output_head_code`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='出库单头表';
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='出库单头表';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `inv_output_head_m`
+--
+
+DROP TABLE IF EXISTS `inv_output_head_m`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `inv_output_head_m` (
+  `output_head_id` int(11) NOT NULL DEFAULT '0' COMMENT '主键',
+  `output_head_code` varchar(45) NOT NULL COMMENT '出库单编码',
+  `output_type` varchar(45) NOT NULL COMMENT '出库类型（销售出库SO_OUT、购入退出PO_RETURN、盘点出库CHECK_OUT）',
+  `output_source_type` varchar(45) NOT NULL COMMENT '出库来源类型（销售订单SO）',
+  `output_source_head_code` varchar(45) NOT NULL COMMENT '出库来源头编码（销售订单头编码）',
+  `warehouse_code` varchar(45) NOT NULL COMMENT '仓库编码',
+  `output_date` date NOT NULL COMMENT '出库日期',
+  `memo` varchar(200) DEFAULT NULL COMMENT '备注',
+  `version` int(11) NOT NULL DEFAULT '1' COMMENT '版本',
+  `status` varchar(10) NOT NULL DEFAULT 'NEW' COMMENT '状态（新建NEW，确认CONFIRM，取消CANCEL）',
+  `approve_status` varchar(10) NOT NULL DEFAULT 'UNSUBMIT' COMMENT '审批状态（未提交UNSUBMIT、已提交SUBMIT、已审批APPROVE、已驳回REJECT）',
+  `staff_code` varchar(45) NOT NULL COMMENT '制单人',
+  `department_code` varchar(45) NOT NULL COMMENT '制单部门',
+  `created_date` datetime NOT NULL COMMENT '创建时间',
+  `created_by` varchar(45) NOT NULL COMMENT '创建人',
+  `last_updated_date` datetime DEFAULT NULL COMMENT '最后修改日期',
+  `last_updated_by` varchar(45) DEFAULT NULL COMMENT '最后修改人',
+  `org_code` varchar(10) NOT NULL COMMENT '组织机构'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -646,6 +985,9 @@ CREATE TABLE `inv_output_line` (
   `output_source_line_code` varchar(45) NOT NULL COMMENT '出库来源行编码（销售订单行编码）',
   `material_code` varchar(45) NOT NULL COMMENT '物料编码',
   `output_quantity` double NOT NULL COMMENT '出库数量',
+  `price` decimal(10,2) DEFAULT NULL COMMENT '单价',
+  `amount` decimal(10,2) DEFAULT NULL COMMENT '行金额',
+  `unit` varchar(45) DEFAULT NULL COMMENT '单位',
   `memo` varchar(200) DEFAULT NULL COMMENT '备注',
   `version` int(11) NOT NULL DEFAULT '1' COMMENT '版本',
   `status` varchar(10) NOT NULL DEFAULT 'Y' COMMENT '状态',
@@ -656,7 +998,35 @@ CREATE TABLE `inv_output_line` (
   `org_code` varchar(10) NOT NULL COMMENT '组织机构',
   PRIMARY KEY (`output_line_id`),
   UNIQUE KEY `input_line_code_UNIQUE` (`output_line_code`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='出库单行表';
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='出库单行表';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `inv_output_line_m`
+--
+
+DROP TABLE IF EXISTS `inv_output_line_m`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `inv_output_line_m` (
+  `output_line_id` int(11) NOT NULL DEFAULT '0' COMMENT '主键',
+  `output_line_code` varchar(45) NOT NULL COMMENT '出库行编码',
+  `output_head_code` varchar(45) NOT NULL COMMENT '出库头编码',
+  `output_source_line_code` varchar(45) NOT NULL COMMENT '出库来源行编码（销售订单行编码）',
+  `material_code` varchar(45) NOT NULL COMMENT '物料编码',
+  `output_quantity` double NOT NULL COMMENT '出库数量',
+  `price` decimal(10,2) DEFAULT NULL COMMENT '单价',
+  `amount` decimal(10,2) DEFAULT NULL COMMENT '行金额',
+  `unit` varchar(45) DEFAULT NULL COMMENT '单位',
+  `memo` varchar(200) DEFAULT NULL COMMENT '备注',
+  `version` int(11) NOT NULL DEFAULT '1' COMMENT '版本',
+  `status` varchar(10) NOT NULL DEFAULT 'Y' COMMENT '状态',
+  `created_date` datetime NOT NULL COMMENT '创建时间',
+  `created_by` varchar(45) NOT NULL COMMENT '创建人',
+  `last_updated_date` datetime DEFAULT NULL COMMENT '最后修改时间',
+  `last_updated_by` varchar(45) DEFAULT NULL COMMENT '最后修改人',
+  `org_code` varchar(10) NOT NULL COMMENT '组织机构'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -688,7 +1058,7 @@ CREATE TABLE `inv_stock` (
   PRIMARY KEY (`stock_id`),
   UNIQUE KEY `stock_code_UNIQUE` (`stock_code`),
   UNIQUE KEY `UK_inv_stock_bill` (`material_code`,`bill_type`,`bill_head_code`,`bill_line_code`)
-) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='库存表';
+) ENGINE=InnoDB AUTO_INCREMENT=65 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='库存表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -716,7 +1086,7 @@ CREATE TABLE `inv_stock_check_head` (
   `org_code` varchar(10) NOT NULL COMMENT '组织机构',
   PRIMARY KEY (`check_head_id`),
   UNIQUE KEY `check_head_code_UNIQUE` (`check_head_code`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='库存盘点表头';
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='库存盘点表头';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -742,7 +1112,7 @@ CREATE TABLE `inv_stock_check_line` (
   `org_code` varchar(10) NOT NULL COMMENT '组织机构',
   PRIMARY KEY (`check_line_id`),
   UNIQUE KEY `check_line_code_UNIQUE` (`check_line_code`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='库存盘点表行';
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='库存盘点表行';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -767,7 +1137,7 @@ CREATE TABLE `inv_warehouse` (
   PRIMARY KEY (`warehouse_id`),
   UNIQUE KEY `warehouse_code_UNIQUE` (`warehouse_code`),
   UNIQUE KEY `warehouse_name_UNIQUE` (`warehouse_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='仓库表';
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='仓库表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -789,6 +1159,7 @@ CREATE TABLE `md_customer` (
   `customer_category` varchar(45) DEFAULT NULL COMMENT '客户类型',
   `customer_label` varchar(100) DEFAULT NULL COMMENT '客户标签',
   `own_flag` char(1) NOT NULL DEFAULT 'N' COMMENT '本公司标识',
+  `version` int(11) NOT NULL DEFAULT '1' COMMENT '版本',
   `status` char(1) NOT NULL DEFAULT 'Y' COMMENT '客户状态',
   `approve_status` varchar(45) NOT NULL DEFAULT 'UNSUBMIT' COMMENT '审批状态（未提交UNSUBMIT、已提交SUBMIT、已审批APPROVE、已驳回REJECT）',
   `created_date` datetime NOT NULL COMMENT '创建时间',
@@ -799,7 +1170,7 @@ CREATE TABLE `md_customer` (
   PRIMARY KEY (`customer_id`),
   UNIQUE KEY `customer_code_UNIQUE` (`customer_code`),
   UNIQUE KEY `customer_name_UNIQUE` (`customer_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='主数据客户表';
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='主数据客户表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -815,6 +1186,7 @@ CREATE TABLE `md_customer_bank` (
   `bank_code` varchar(45) NOT NULL COMMENT '银行编码',
   `sub_bank_code` varchar(45) DEFAULT NULL COMMENT '分行编码',
   `bank_account` varchar(45) NOT NULL COMMENT '银行账户',
+  `version` int(11) NOT NULL DEFAULT '1',
   `status` char(1) NOT NULL DEFAULT 'Y' COMMENT '状态',
   `created_date` datetime NOT NULL COMMENT '创建时间',
   `created_by` varchar(45) NOT NULL COMMENT '创建人',
@@ -823,7 +1195,30 @@ CREATE TABLE `md_customer_bank` (
   `org_code` varchar(10) NOT NULL COMMENT '组织机构',
   PRIMARY KEY (`bank_id`),
   UNIQUE KEY `UK_md_customer_bank` (`customer_code`,`bank_code`,`bank_account`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='主数据客户银行表';
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='主数据客户银行表';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `md_customer_bank_m`
+--
+
+DROP TABLE IF EXISTS `md_customer_bank_m`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `md_customer_bank_m` (
+  `bank_id` int(11) NOT NULL DEFAULT '0' COMMENT '主键',
+  `customer_code` varchar(45) NOT NULL COMMENT '客户编码',
+  `bank_code` varchar(45) NOT NULL COMMENT '银行编码',
+  `sub_bank_code` varchar(45) DEFAULT NULL COMMENT '分行编码',
+  `bank_account` varchar(45) NOT NULL COMMENT '银行账户',
+  `version` int(11) NOT NULL DEFAULT '1',
+  `status` char(1) NOT NULL DEFAULT 'Y' COMMENT '状态',
+  `created_date` datetime NOT NULL COMMENT '创建时间',
+  `created_by` varchar(45) NOT NULL COMMENT '创建人',
+  `last_updated_date` datetime DEFAULT NULL COMMENT '最后修改时间',
+  `last_updated_by` varchar(45) DEFAULT NULL COMMENT '最后修改人',
+  `org_code` varchar(10) NOT NULL COMMENT '组织机构'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -839,6 +1234,7 @@ CREATE TABLE `md_customer_contact` (
   `contact_name` varchar(45) NOT NULL COMMENT '联系人',
   `contact_telephone` varchar(45) NOT NULL COMMENT '联系电话',
   `contact_position` varchar(45) DEFAULT NULL COMMENT '联系人职位',
+  `version` int(11) NOT NULL DEFAULT '1',
   `status` char(1) NOT NULL DEFAULT 'Y' COMMENT '状态',
   `created_date` datetime NOT NULL COMMENT '创建时间',
   `created_by` varchar(45) NOT NULL COMMENT '创建人',
@@ -847,7 +1243,30 @@ CREATE TABLE `md_customer_contact` (
   `org_code` varchar(10) NOT NULL COMMENT '组织机构',
   PRIMARY KEY (`contact_id`),
   KEY `UK_md_customer_contact_customer_code` (`customer_code`) /*!80000 INVISIBLE */
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='主数据客户联系人表';
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='主数据客户联系人表';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `md_customer_contact_m`
+--
+
+DROP TABLE IF EXISTS `md_customer_contact_m`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `md_customer_contact_m` (
+  `contact_id` int(11) NOT NULL DEFAULT '0' COMMENT '主键',
+  `customer_code` varchar(45) NOT NULL COMMENT '客户编码',
+  `contact_name` varchar(45) NOT NULL COMMENT '联系人',
+  `contact_telephone` varchar(45) NOT NULL COMMENT '联系电话',
+  `contact_position` varchar(45) DEFAULT NULL COMMENT '联系人职位',
+  `version` int(11) NOT NULL DEFAULT '1',
+  `status` char(1) NOT NULL DEFAULT 'Y' COMMENT '状态',
+  `created_date` datetime NOT NULL COMMENT '创建时间',
+  `created_by` varchar(45) NOT NULL COMMENT '创建人',
+  `last_updated_date` datetime DEFAULT NULL COMMENT '最后修改时间',
+  `last_updated_by` varchar(45) DEFAULT NULL COMMENT '最后修改人',
+  `org_code` varchar(10) NOT NULL COMMENT '组织机构'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -865,6 +1284,7 @@ CREATE TABLE `md_customer_license` (
   `company_type` varchar(45) NOT NULL COMMENT '公司类型',
   `business_scope` varchar(200) DEFAULT NULL COMMENT '经营范围',
   `start_date` date NOT NULL COMMENT '成立日期',
+  `version` int(11) NOT NULL DEFAULT '1',
   `status` char(1) NOT NULL DEFAULT 'Y' COMMENT '状态',
   `created_date` datetime NOT NULL COMMENT '创建时间',
   `created_by` varchar(45) NOT NULL COMMENT '创建人',
@@ -874,7 +1294,115 @@ CREATE TABLE `md_customer_license` (
   PRIMARY KEY (`license_id`),
   UNIQUE KEY `license_number_UNIQUE` (`license_number`),
   KEY `IX_md_customer_license_customer_code` (`customer_code`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='主数据客户营业执照表';
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='主数据客户营业执照表';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `md_customer_license_m`
+--
+
+DROP TABLE IF EXISTS `md_customer_license_m`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `md_customer_license_m` (
+  `license_id` int(11) NOT NULL DEFAULT '0' COMMENT '主键',
+  `customer_code` varchar(45) NOT NULL COMMENT '客户编码',
+  `license_number` varchar(45) NOT NULL COMMENT '营业执照号',
+  `legal_person` varchar(45) NOT NULL COMMENT '法人代表',
+  `company_type` varchar(45) NOT NULL COMMENT '公司类型',
+  `business_scope` varchar(200) DEFAULT NULL COMMENT '经营范围',
+  `start_date` date NOT NULL COMMENT '成立日期',
+  `version` int(11) NOT NULL DEFAULT '1',
+  `status` char(1) NOT NULL DEFAULT 'Y' COMMENT '状态',
+  `created_date` datetime NOT NULL COMMENT '创建时间',
+  `created_by` varchar(45) NOT NULL COMMENT '创建人',
+  `last_updated_date` datetime DEFAULT NULL COMMENT '最后修改时间',
+  `last_updated_by` varchar(45) DEFAULT NULL COMMENT '最后修改人',
+  `org_code` varchar(10) NOT NULL COMMENT '组织机构'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `md_customer_m`
+--
+
+DROP TABLE IF EXISTS `md_customer_m`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `md_customer_m` (
+  `customer_id` int(11) NOT NULL COMMENT '主键',
+  `customer_code` varchar(45) NOT NULL COMMENT '客户编码',
+  `customer_name` varchar(45) NOT NULL COMMENT '客户名称',
+  `customer_type` varchar(45) NOT NULL COMMENT '客户类型（个人、公司）',
+  `customer_address` varchar(100) DEFAULT NULL COMMENT '客户地址',
+  `customer_telephone` varchar(45) DEFAULT NULL COMMENT '客户电话',
+  `customer_country` varchar(45) NOT NULL COMMENT '客户国家',
+  `customer_city` varchar(45) DEFAULT NULL COMMENT '客户城市',
+  `customer_category` varchar(45) DEFAULT NULL COMMENT '客户类型',
+  `customer_label` varchar(100) DEFAULT NULL COMMENT '客户标签',
+  `own_flag` char(1) NOT NULL DEFAULT 'N' COMMENT '本公司标识',
+  `version` int(11) NOT NULL DEFAULT '1',
+  `status` char(1) NOT NULL DEFAULT 'Y' COMMENT '客户状态',
+  `approve_status` varchar(45) NOT NULL DEFAULT 'UNSUBMIT' COMMENT '审批状态（未提交UNSUBMIT、已提交SUBMIT、已审批APPROVE、已驳回REJECT）',
+  `created_date` datetime NOT NULL COMMENT '创建时间',
+  `created_by` varchar(45) NOT NULL COMMENT '创建人',
+  `last_updated_date` datetime DEFAULT NULL COMMENT '最后修改时间',
+  `last_updated_by` varchar(45) DEFAULT NULL COMMENT '最后修改人',
+  `org_code` varchar(10) NOT NULL COMMENT '组织机构'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `md_expense_item`
+--
+
+DROP TABLE IF EXISTS `md_expense_item`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `md_expense_item` (
+  `expense_item_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `expense_item_code` varchar(45) NOT NULL COMMENT '费项编码',
+  `expense_item_name` varchar(45) NOT NULL COMMENT '费项名称',
+  `expense_item_type` varchar(45) NOT NULL COMMENT '费项类型',
+  `memo` varchar(200) DEFAULT NULL COMMENT '摘要',
+  `fin_subject_code` varchar(45) NOT NULL COMMENT '财务科目编码',
+  `version` int(11) NOT NULL DEFAULT '1' COMMENT '版本',
+  `status` char(1) NOT NULL DEFAULT 'Y' COMMENT '状态',
+  `approve_status` varchar(45) NOT NULL DEFAULT 'UNSUBMIT' COMMENT '审批状态（未提交UNSUBMIT、已提交SUBMIT、已审批APPROVE、已驳回REJECT）',
+  `created_date` datetime NOT NULL COMMENT '创建时间',
+  `created_by` varchar(45) NOT NULL COMMENT '创建人',
+  `last_updated_date` datetime DEFAULT NULL COMMENT '最后修改时间',
+  `last_updated_by` varchar(45) DEFAULT NULL COMMENT '最后修改人',
+  `org_code` varchar(10) NOT NULL COMMENT '组织机构',
+  PRIMARY KEY (`expense_item_id`),
+  UNIQUE KEY `expense_item_code_UNIQUE` (`expense_item_code`),
+  UNIQUE KEY `expense_item_name_UNIQUE` (`expense_item_name`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='费项表';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `md_expense_item_m`
+--
+
+DROP TABLE IF EXISTS `md_expense_item_m`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `md_expense_item_m` (
+  `expense_item_id` int(11) NOT NULL DEFAULT '0' COMMENT '主键',
+  `expense_item_code` varchar(45) NOT NULL COMMENT '费项编码',
+  `expense_item_name` varchar(45) NOT NULL COMMENT '费项名称',
+  `expense_item_type` varchar(45) NOT NULL COMMENT '费项类型',
+  `memo` varchar(200) DEFAULT NULL COMMENT '摘要',
+  `fin_subject_code` varchar(45) NOT NULL COMMENT '财务科目编码',
+  `version` int(11) NOT NULL DEFAULT '1' COMMENT '版本',
+  `status` char(1) NOT NULL DEFAULT 'Y' COMMENT '状态',
+  `approve_status` varchar(45) NOT NULL DEFAULT 'UNSUBMIT' COMMENT '审批状态（未提交UNSUBMIT、已提交SUBMIT、已审批APPROVE、已驳回REJECT）',
+  `created_date` datetime NOT NULL COMMENT '创建时间',
+  `created_by` varchar(45) NOT NULL COMMENT '创建人',
+  `last_updated_date` datetime DEFAULT NULL COMMENT '最后修改时间',
+  `last_updated_by` varchar(45) DEFAULT NULL COMMENT '最后修改人',
+  `org_code` varchar(10) NOT NULL COMMENT '组织机构'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -953,6 +1481,9 @@ CREATE TABLE `md_material` (
   `standard` varchar(45) DEFAULT NULL COMMENT '规格',
   `standard_unit` varchar(45) DEFAULT NULL COMMENT '规格单位',
   `pack_standard` varchar(45) DEFAULT NULL COMMENT '包装规格',
+  `bom_property` varchar(45) DEFAULT NULL COMMENT '物料bom属性（自制MAKE、采购PO、委外ENTRUST）',
+  `produce_pre_days` int(11) DEFAULT NULL COMMENT '生产前置期（天数）',
+  `version` int(11) NOT NULL DEFAULT '1',
   `status` char(1) NOT NULL DEFAULT 'Y' COMMENT '状态',
   `approve_status` varchar(45) NOT NULL DEFAULT 'UNSUBMIT' COMMENT '审批状态（未提交UNSUBMIT、已提交SUBMIT、已审批APPROVE、已驳回REJECT）',
   `created_date` datetime NOT NULL COMMENT '创建时间',
@@ -963,7 +1494,7 @@ CREATE TABLE `md_material` (
   PRIMARY KEY (`material_id`),
   UNIQUE KEY `material_code_UNIQUE` (`material_code`),
   UNIQUE KEY `material_name_UNIQUE` (`material_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='主数据物料表';
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='主数据物料表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -992,7 +1523,38 @@ CREATE TABLE `md_material_category` (
   UNIQUE KEY `category_name_UNIQUE` (`category_name`),
   UNIQUE KEY `segment_code_UNIQUE` (`segment_code`),
   UNIQUE KEY `segment_desc_UNIQUE` (`segment_desc`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='主数据物料类别表';
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='主数据物料类别表';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `md_material_m`
+--
+
+DROP TABLE IF EXISTS `md_material_m`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `md_material_m` (
+  `material_id` int(11) NOT NULL DEFAULT '0' COMMENT '主键',
+  `material_code` varchar(45) NOT NULL COMMENT '物料编码',
+  `material_name` varchar(45) NOT NULL COMMENT '物料名称',
+  `material_type` varchar(45) NOT NULL COMMENT '物料或事项（MATERIAL、MATTER）',
+  `category_code` varchar(45) NOT NULL COMMENT '类别编码',
+  `material_unit` varchar(45) DEFAULT NULL COMMENT '物料单位',
+  `valid_day` int(11) DEFAULT NULL COMMENT '效期（天数）',
+  `standard` varchar(45) DEFAULT NULL COMMENT '规格',
+  `standard_unit` varchar(45) DEFAULT NULL COMMENT '规格单位',
+  `pack_standard` varchar(45) DEFAULT NULL COMMENT '包装规格',
+  `bom_property` varchar(45) DEFAULT NULL,
+  `produce_pre_days` int(11) DEFAULT NULL,
+  `version` int(11) NOT NULL DEFAULT '1',
+  `status` char(1) NOT NULL DEFAULT 'Y' COMMENT '状态',
+  `approve_status` varchar(45) NOT NULL DEFAULT 'UNSUBMIT' COMMENT '审批状态（未提交UNSUBMIT、已提交SUBMIT、已审批APPROVE、已驳回REJECT）',
+  `created_date` datetime NOT NULL COMMENT '创建时间',
+  `created_by` varchar(45) NOT NULL COMMENT '创建人',
+  `last_updated_date` datetime DEFAULT NULL COMMENT '最后修改日期',
+  `last_updated_by` varchar(45) DEFAULT NULL COMMENT '最后修改人',
+  `org_code` varchar(10) NOT NULL COMMENT '组织机构'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1010,6 +1572,7 @@ CREATE TABLE `md_project` (
   `project_type` varchar(45) NOT NULL COMMENT '项目类型',
   `start_date` date NOT NULL COMMENT '开始日期',
   `end_date` date DEFAULT NULL COMMENT '结束日期',
+  `version` int(11) NOT NULL DEFAULT '1',
   `status` char(1) NOT NULL DEFAULT 'Y' COMMENT '状态',
   `approve_status` varchar(45) NOT NULL DEFAULT 'UNSUBMIT' COMMENT '审批状态（未提交UNSUBMIT、已提交SUBMIT、已审批APPROVE、已驳回REJECT）',
   `created_date` datetime NOT NULL COMMENT '创建时间',
@@ -1020,7 +1583,33 @@ CREATE TABLE `md_project` (
   PRIMARY KEY (`project_id`),
   UNIQUE KEY `project_code_UNIQUE` (`project_code`),
   UNIQUE KEY `project_name_UNIQUE` (`project_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='主数据项目表';
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='主数据项目表';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `md_project_m`
+--
+
+DROP TABLE IF EXISTS `md_project_m`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `md_project_m` (
+  `project_id` int(11) NOT NULL DEFAULT '0' COMMENT '主键',
+  `project_code` varchar(45) NOT NULL COMMENT '项目编码',
+  `project_name` varchar(45) NOT NULL COMMENT '项目名称',
+  `project_desc` varchar(45) DEFAULT NULL COMMENT '项目描述',
+  `project_type` varchar(45) NOT NULL COMMENT '项目类型',
+  `start_date` date NOT NULL COMMENT '开始日期',
+  `end_date` date DEFAULT NULL COMMENT '结束日期',
+  `version` int(11) NOT NULL DEFAULT '1',
+  `status` char(1) NOT NULL DEFAULT 'Y' COMMENT '状态',
+  `approve_status` varchar(45) NOT NULL DEFAULT 'UNSUBMIT' COMMENT '审批状态（未提交UNSUBMIT、已提交SUBMIT、已审批APPROVE、已驳回REJECT）',
+  `created_date` datetime NOT NULL COMMENT '创建时间',
+  `created_by` varchar(45) NOT NULL COMMENT '创建人',
+  `last_updated_date` datetime DEFAULT NULL COMMENT '最后修改时间',
+  `last_updated_by` varchar(45) DEFAULT NULL COMMENT '最后修改人',
+  `org_code` varchar(10) NOT NULL COMMENT '组织机构'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1042,6 +1631,7 @@ CREATE TABLE `md_vendor` (
   `vendor_category` varchar(45) DEFAULT NULL COMMENT '供应商类别',
   `vendor_label` varchar(100) DEFAULT NULL COMMENT '供应商标签',
   `own_flag` char(1) NOT NULL DEFAULT 'N' COMMENT '本公司标识',
+  `version` int(11) NOT NULL DEFAULT '1',
   `status` char(1) NOT NULL DEFAULT 'Y' COMMENT '状态',
   `approve_status` varchar(45) NOT NULL DEFAULT 'UNSUBMIT' COMMENT '审批状态（未提交UNSUBMIT、已提交SUBMIT、已审批APPROVE、已驳回REJECT）',
   `created_date` datetime NOT NULL COMMENT '创建时间',
@@ -1052,7 +1642,7 @@ CREATE TABLE `md_vendor` (
   PRIMARY KEY (`vendor_id`),
   UNIQUE KEY `vendor_code_UNIQUE` (`vendor_code`),
   UNIQUE KEY `vendor_name_UNIQUE` (`vendor_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='主数据供应商表';
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='主数据供应商表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1068,6 +1658,7 @@ CREATE TABLE `md_vendor_bank` (
   `bank_code` varchar(45) NOT NULL COMMENT '银行编码',
   `sub_bank_code` varchar(45) DEFAULT NULL COMMENT '分行编码',
   `bank_account` varchar(45) NOT NULL COMMENT '银行账户',
+  `version` int(11) NOT NULL DEFAULT '1',
   `status` char(1) NOT NULL DEFAULT 'Y' COMMENT '状态',
   `created_date` datetime NOT NULL COMMENT '创建时间',
   `created_by` varchar(45) NOT NULL COMMENT '创建人',
@@ -1076,7 +1667,30 @@ CREATE TABLE `md_vendor_bank` (
   `org_code` varchar(10) NOT NULL COMMENT '组织机构',
   PRIMARY KEY (`bank_id`),
   UNIQUE KEY `UK_md_vendor_bank` (`vendor_code`,`bank_code`,`bank_account`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='主数据供应商银行表';
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='主数据供应商银行表';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `md_vendor_bank_m`
+--
+
+DROP TABLE IF EXISTS `md_vendor_bank_m`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `md_vendor_bank_m` (
+  `bank_id` int(11) NOT NULL DEFAULT '0' COMMENT '主键',
+  `vendor_code` varchar(45) NOT NULL COMMENT '供应商编码',
+  `bank_code` varchar(45) NOT NULL COMMENT '银行编码',
+  `sub_bank_code` varchar(45) DEFAULT NULL COMMENT '分行编码',
+  `bank_account` varchar(45) NOT NULL COMMENT '银行账户',
+  `version` int(11) NOT NULL DEFAULT '1',
+  `status` char(1) NOT NULL DEFAULT 'Y' COMMENT '状态',
+  `created_date` datetime NOT NULL COMMENT '创建时间',
+  `created_by` varchar(45) NOT NULL COMMENT '创建人',
+  `last_updated_date` datetime DEFAULT NULL COMMENT '最后修改时间',
+  `last_updated_by` varchar(45) DEFAULT NULL COMMENT '最后修改人',
+  `org_code` varchar(10) NOT NULL COMMENT '组织机构'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1092,6 +1706,7 @@ CREATE TABLE `md_vendor_contact` (
   `contact_name` varchar(45) NOT NULL COMMENT '联系人',
   `contact_telephone` varchar(45) NOT NULL COMMENT '联系人电话',
   `contact_position` varchar(45) DEFAULT NULL COMMENT '联系人岗位',
+  `version` int(11) NOT NULL DEFAULT '1',
   `status` char(1) NOT NULL DEFAULT 'Y' COMMENT '状态',
   `created_date` datetime NOT NULL COMMENT '创建时间',
   `created_by` varchar(45) NOT NULL COMMENT '创建人',
@@ -1100,7 +1715,30 @@ CREATE TABLE `md_vendor_contact` (
   `org_code` varchar(10) NOT NULL COMMENT '组织机构',
   PRIMARY KEY (`contact_id`),
   KEY `IX_md_vendor_contact_vendor_code` (`vendor_code`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='主数据供应商联系人表';
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='主数据供应商联系人表';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `md_vendor_contact_m`
+--
+
+DROP TABLE IF EXISTS `md_vendor_contact_m`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `md_vendor_contact_m` (
+  `contact_id` int(11) NOT NULL DEFAULT '0' COMMENT '主键',
+  `vendor_code` varchar(45) NOT NULL COMMENT '供应商编码',
+  `contact_name` varchar(45) NOT NULL COMMENT '联系人',
+  `contact_telephone` varchar(45) NOT NULL COMMENT '联系人电话',
+  `contact_position` varchar(45) DEFAULT NULL COMMENT '联系人岗位',
+  `version` int(11) NOT NULL DEFAULT '1',
+  `status` char(1) NOT NULL DEFAULT 'Y' COMMENT '状态',
+  `created_date` datetime NOT NULL COMMENT '创建时间',
+  `created_by` varchar(45) NOT NULL COMMENT '创建人',
+  `last_updated_date` datetime DEFAULT NULL COMMENT '最后修改时间',
+  `last_updated_by` varchar(45) DEFAULT NULL COMMENT '最后修改人',
+  `org_code` varchar(10) NOT NULL COMMENT '组织机构'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1118,6 +1756,7 @@ CREATE TABLE `md_vendor_license` (
   `company_type` varchar(45) NOT NULL COMMENT '企业类型',
   `business_scope` varchar(200) DEFAULT NULL COMMENT '经营范围',
   `start_date` date NOT NULL COMMENT '成立日期',
+  `version` int(11) NOT NULL DEFAULT '1',
   `status` char(1) NOT NULL DEFAULT 'Y' COMMENT '状态',
   `created_date` datetime NOT NULL COMMENT '创建时间',
   `created_by` varchar(45) NOT NULL COMMENT '创建人',
@@ -1127,7 +1766,62 @@ CREATE TABLE `md_vendor_license` (
   PRIMARY KEY (`license_id`),
   UNIQUE KEY `license_number_UNIQUE` (`license_number`),
   KEY `IX_md_vendor_license_vendor_code` (`vendor_code`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='主数据供应商营业执照表';
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='主数据供应商营业执照表';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `md_vendor_license_m`
+--
+
+DROP TABLE IF EXISTS `md_vendor_license_m`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `md_vendor_license_m` (
+  `license_id` int(11) NOT NULL DEFAULT '0' COMMENT '主键',
+  `vendor_code` varchar(45) NOT NULL COMMENT '供应商编码',
+  `license_number` varchar(45) NOT NULL COMMENT '营业执照号',
+  `legal_person` varchar(45) NOT NULL COMMENT '法人代表',
+  `company_type` varchar(45) NOT NULL COMMENT '企业类型',
+  `business_scope` varchar(200) DEFAULT NULL COMMENT '经营范围',
+  `start_date` date NOT NULL COMMENT '成立日期',
+  `version` int(11) NOT NULL DEFAULT '1',
+  `status` char(1) NOT NULL DEFAULT 'Y' COMMENT '状态',
+  `created_date` datetime NOT NULL COMMENT '创建时间',
+  `created_by` varchar(45) NOT NULL COMMENT '创建人',
+  `last_updated_date` datetime DEFAULT NULL COMMENT '最后修改时间',
+  `last_updated_by` varchar(45) DEFAULT NULL COMMENT '最后修改人',
+  `org_code` varchar(10) NOT NULL COMMENT '组织机构'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `md_vendor_m`
+--
+
+DROP TABLE IF EXISTS `md_vendor_m`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `md_vendor_m` (
+  `vendor_id` int(11) NOT NULL DEFAULT '0' COMMENT '主键',
+  `vendor_code` varchar(45) NOT NULL COMMENT '供应商编码',
+  `vendor_name` varchar(45) NOT NULL COMMENT '供应商名称',
+  `vendor_type` varchar(45) NOT NULL COMMENT '供应商类型（公司、个人）',
+  `vendor_address` varchar(100) DEFAULT NULL COMMENT '供应商地址',
+  `vendor_telephone` varchar(45) DEFAULT NULL COMMENT '供应商电话',
+  `vendor_country` varchar(45) NOT NULL COMMENT '供应商国家',
+  `vendor_city` varchar(45) DEFAULT NULL COMMENT '供应商城市',
+  `vendor_category` varchar(45) DEFAULT NULL COMMENT '供应商类别',
+  `vendor_label` varchar(100) DEFAULT NULL COMMENT '供应商标签',
+  `own_flag` char(1) NOT NULL DEFAULT 'N' COMMENT '本公司标识',
+  `version` int(11) NOT NULL DEFAULT '1',
+  `status` char(1) NOT NULL DEFAULT 'Y' COMMENT '状态',
+  `approve_status` varchar(45) NOT NULL DEFAULT 'UNSUBMIT' COMMENT '审批状态（未提交UNSUBMIT、已提交SUBMIT、已审批APPROVE、已驳回REJECT）',
+  `created_date` datetime NOT NULL COMMENT '创建时间',
+  `created_by` varchar(45) NOT NULL COMMENT '创建人',
+  `last_updated_date` datetime DEFAULT NULL COMMENT '最后修改时间',
+  `last_updated_by` varchar(45) DEFAULT NULL COMMENT '最后修改人',
+  `org_code` varchar(10) NOT NULL COMMENT '组织机构'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1142,6 +1836,7 @@ CREATE TABLE `po_head` (
   `po_head_code` varchar(45) NOT NULL COMMENT '采购订单头编码',
   `po_type` varchar(45) NOT NULL COMMENT '采购订单类型',
   `po_name` varchar(45) NOT NULL COMMENT '采购订单名称',
+  `po_agreement_head_code` varchar(45) DEFAULT NULL COMMENT '采购协议头编码',
   `po_desc` varchar(500) DEFAULT NULL COMMENT '采购订单描述',
   `project_code` varchar(45) DEFAULT NULL COMMENT '项目编码',
   `vendor_code` varchar(45) NOT NULL COMMENT '供应商编码',
@@ -1167,7 +1862,45 @@ CREATE TABLE `po_head` (
   PRIMARY KEY (`po_head_id`),
   UNIQUE KEY `po_head_code_UNIQUE` (`po_head_code`),
   UNIQUE KEY `po_name_UNIQUE` (`po_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='采购订单头表';
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='采购订单头表';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `po_head_m`
+--
+
+DROP TABLE IF EXISTS `po_head_m`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `po_head_m` (
+  `po_head_id` int(11) NOT NULL DEFAULT '0' COMMENT '采购订单头id',
+  `po_head_code` varchar(45) NOT NULL COMMENT '采购订单头编码',
+  `po_type` varchar(45) NOT NULL COMMENT '采购订单类型',
+  `po_name` varchar(45) NOT NULL COMMENT '采购订单名称',
+  `po_agreement_head_code` varchar(45) DEFAULT NULL COMMENT '采购协议头编码',
+  `po_desc` varchar(500) DEFAULT NULL COMMENT '采购订单描述',
+  `project_code` varchar(45) DEFAULT NULL COMMENT '项目编码',
+  `vendor_code` varchar(45) NOT NULL COMMENT '供应商编码',
+  `currency_code` varchar(45) NOT NULL COMMENT '采购订单币种',
+  `prepay_amount` decimal(10,2) NOT NULL DEFAULT '0.00' COMMENT '采购订单预付款金额',
+  `start_date` date DEFAULT NULL COMMENT '采购订单开始日期',
+  `end_date` date DEFAULT NULL COMMENT '采购订单结束日期',
+  `sign_date` date NOT NULL COMMENT '采购订单签订日期',
+  `tax_type` varchar(45) DEFAULT NULL COMMENT '计税类型',
+  `tax_percent` double DEFAULT NULL COMMENT '计税比率',
+  `version` int(11) NOT NULL DEFAULT '1' COMMENT '版本',
+  `status` varchar(10) NOT NULL DEFAULT 'NEW' COMMENT '状态（新建NEW，确认CONFIRM，取消CANCEL）',
+  `approve_status` varchar(45) NOT NULL DEFAULT 'UNSUBMIT' COMMENT '审批状态（未提交UNSUBMIT、已提交SUBMIT、已审批APPROVE、已驳回REJECT）',
+  `receive_status` varchar(10) DEFAULT NULL COMMENT '接收状态（未入库N，已入库Y，部分入库PART）',
+  `payment_status` varchar(10) DEFAULT NULL COMMENT '付款状态（未付款N，已付款Y，部分付款PART）',
+  `staff_code` varchar(45) NOT NULL COMMENT '采购员',
+  `department_code` varchar(45) NOT NULL COMMENT '采购部门',
+  `created_date` datetime NOT NULL COMMENT '创建时间',
+  `created_by` varchar(45) NOT NULL COMMENT '创建人',
+  `last_updated_date` datetime DEFAULT NULL COMMENT '最后修改时间',
+  `last_updated_by` varchar(45) DEFAULT NULL COMMENT '最后修改人',
+  `org_code` varchar(10) NOT NULL COMMENT '组织机构'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1197,7 +1930,34 @@ CREATE TABLE `po_line` (
   PRIMARY KEY (`po_line_id`),
   UNIQUE KEY `po_line_code_UNIQUE` (`po_line_code`),
   KEY `IX_po_line_po_head_code` (`po_head_code`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='采购订单行表';
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='采购订单行表';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `po_line_m`
+--
+
+DROP TABLE IF EXISTS `po_line_m`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `po_line_m` (
+  `po_line_id` int(11) NOT NULL DEFAULT '0' COMMENT '采购订单行id',
+  `po_line_code` varchar(45) NOT NULL COMMENT '采购订单行编码',
+  `po_head_code` varchar(45) NOT NULL COMMENT '采购订单头编码',
+  `material_code` varchar(45) NOT NULL COMMENT '物料编码',
+  `quantity` double NOT NULL COMMENT '数量',
+  `price` decimal(10,2) NOT NULL COMMENT '单价',
+  `amount` decimal(10,2) NOT NULL COMMENT '金额',
+  `unit` varchar(45) NOT NULL COMMENT '单位',
+  `memo` varchar(500) DEFAULT NULL COMMENT '摘要',
+  `version` int(11) NOT NULL DEFAULT '1' COMMENT '版本',
+  `status` varchar(10) NOT NULL DEFAULT 'Y' COMMENT '状态',
+  `created_date` datetime NOT NULL COMMENT '创建时间',
+  `created_by` varchar(45) NOT NULL COMMENT '创建人',
+  `last_updated_date` datetime DEFAULT NULL COMMENT '最后修改时间',
+  `last_updated_by` varchar(45) DEFAULT NULL COMMENT '最后修改人',
+  `org_code` varchar(10) NOT NULL COMMENT '组织机构'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1212,6 +1972,7 @@ CREATE TABLE `so_head` (
   `so_head_code` varchar(45) NOT NULL COMMENT '销售订单头编码',
   `so_type` varchar(45) NOT NULL COMMENT '销售订单类型',
   `so_name` varchar(45) NOT NULL COMMENT '销售订单名称',
+  `so_agreement_head_code` varchar(45) DEFAULT NULL COMMENT '销售协议头编码',
   `so_desc` varchar(500) DEFAULT NULL COMMENT '销售订单描述',
   `project_code` varchar(45) DEFAULT NULL COMMENT '项目编码',
   `customer_code` varchar(45) NOT NULL COMMENT '客户编码',
@@ -1237,7 +1998,45 @@ CREATE TABLE `so_head` (
   PRIMARY KEY (`so_head_id`),
   UNIQUE KEY `po_head_code_UNIQUE` (`so_head_code`),
   UNIQUE KEY `so_name_UNIQUE` (`so_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='销售订单头表';
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='销售订单头表';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `so_head_m`
+--
+
+DROP TABLE IF EXISTS `so_head_m`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `so_head_m` (
+  `so_head_id` int(11) NOT NULL DEFAULT '0' COMMENT '销售订单头id',
+  `so_head_code` varchar(45) NOT NULL COMMENT '销售订单头编码',
+  `so_type` varchar(45) NOT NULL COMMENT '销售订单类型',
+  `so_name` varchar(45) NOT NULL COMMENT '销售订单名称',
+  `so_agreement_head_code` varchar(45) DEFAULT NULL COMMENT '销售协议头编码',
+  `so_desc` varchar(500) DEFAULT NULL COMMENT '销售订单描述',
+  `project_code` varchar(45) DEFAULT NULL COMMENT '项目编码',
+  `customer_code` varchar(45) NOT NULL COMMENT '客户编码',
+  `currency_code` varchar(45) NOT NULL COMMENT '销售订单币种',
+  `pre_receipt_amount` decimal(10,2) NOT NULL DEFAULT '0.00' COMMENT '销售订单预收款金额',
+  `start_date` date DEFAULT NULL COMMENT '销售订单开始日期',
+  `end_date` date DEFAULT NULL COMMENT '销售订单结束日期',
+  `sign_date` date NOT NULL COMMENT '销售订单签订日期',
+  `tax_type` varchar(45) DEFAULT NULL COMMENT '计税类型',
+  `tax_percent` double DEFAULT NULL COMMENT '计税比率',
+  `version` int(11) NOT NULL DEFAULT '1' COMMENT '版本',
+  `status` varchar(10) NOT NULL DEFAULT 'NEW' COMMENT '状态（新建NEW，确认CONFIRM，取消CANCEL）',
+  `approve_status` varchar(45) NOT NULL DEFAULT 'UNSUBMIT' COMMENT '审批状态（未提交UNSUBMIT、已提交SUBMIT、已审批APPROVE、已驳回REJECT）',
+  `shipment_status` varchar(10) DEFAULT NULL COMMENT '发运状态（未出库N，已出库Y，部分出库PART）',
+  `receipt_status` varchar(10) DEFAULT NULL COMMENT '收款状态（未收款N，已收款Y，部分收款PART）',
+  `staff_code` varchar(45) NOT NULL COMMENT '销售员',
+  `department_code` varchar(45) NOT NULL COMMENT '销售部门',
+  `created_date` datetime NOT NULL COMMENT '创建时间',
+  `created_by` varchar(45) NOT NULL COMMENT '创建人',
+  `last_updated_date` datetime DEFAULT NULL COMMENT '最后修改时间',
+  `last_updated_by` varchar(45) DEFAULT NULL COMMENT '最后修改人',
+  `org_code` varchar(10) NOT NULL COMMENT '组织机构'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1267,7 +2066,34 @@ CREATE TABLE `so_line` (
   PRIMARY KEY (`so_line_id`),
   UNIQUE KEY `so_line_code_UNIQUE` (`so_line_code`),
   KEY `IX_so_line_so_head_code` (`so_head_code`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='销售订单行表';
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='销售订单行表';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `so_line_m`
+--
+
+DROP TABLE IF EXISTS `so_line_m`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `so_line_m` (
+  `so_line_id` int(11) NOT NULL DEFAULT '0' COMMENT '销售订单行id',
+  `so_line_code` varchar(45) NOT NULL COMMENT '销售订单行编码',
+  `so_head_code` varchar(45) NOT NULL COMMENT '销售订单头编码',
+  `material_code` varchar(45) NOT NULL COMMENT '物料编码',
+  `quantity` double NOT NULL COMMENT '数量',
+  `price` decimal(10,2) NOT NULL COMMENT '单价',
+  `amount` decimal(10,2) NOT NULL COMMENT '金额',
+  `unit` varchar(45) NOT NULL COMMENT '单位',
+  `memo` varchar(500) DEFAULT NULL COMMENT '摘要',
+  `version` int(11) NOT NULL DEFAULT '1' COMMENT '版本',
+  `status` varchar(10) NOT NULL DEFAULT 'Y' COMMENT '状态',
+  `created_date` datetime NOT NULL COMMENT '创建时间',
+  `created_by` varchar(45) NOT NULL COMMENT '创建人',
+  `last_updated_date` datetime DEFAULT NULL COMMENT '最后修改时间',
+  `last_updated_by` varchar(45) DEFAULT NULL COMMENT '最后修改人',
+  `org_code` varchar(10) NOT NULL COMMENT '组织机构'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1291,7 +2117,7 @@ CREATE TABLE `sys_auth` (
   PRIMARY KEY (`auth_id`),
   UNIQUE KEY `auth_code_UNIQUE` (`auth_code`),
   UNIQUE KEY `auth_name_UNIQUE` (`auth_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=73 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='系统权限表';
+) ENGINE=InnoDB AUTO_INCREMENT=135 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='系统权限表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1316,7 +2142,7 @@ CREATE TABLE `sys_dataset` (
   UNIQUE KEY `dataset_name_UNIQUE` (`dataset_name`),
   UNIQUE KEY `dataset_code_UNIQUE` (`dataset_code`),
   KEY `IX_dataset_dataset_type_code` (`dataset_type_code`) /*!80000 INVISIBLE */
-) ENGINE=InnoDB AUTO_INCREMENT=80 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='系统数据字典值表';
+) ENGINE=InnoDB AUTO_INCREMENT=107 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='系统数据字典值表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1339,7 +2165,7 @@ CREATE TABLE `sys_dataset_type` (
   PRIMARY KEY (`dataset_type_id`),
   UNIQUE KEY `type_code_UNIQUE` (`dataset_type_code`),
   UNIQUE KEY `type_name_UNIQUE` (`dataset_type_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='系统数据字典类型';
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='系统数据字典类型';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1362,7 +2188,7 @@ CREATE TABLE `sys_role` (
   PRIMARY KEY (`role_id`),
   UNIQUE KEY `role_code_UNIQUE` (`role_code`),
   UNIQUE KEY `role_name_UNIQUE` (`role_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='系统角色表';
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='系统角色表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1383,7 +2209,7 @@ CREATE TABLE `sys_role_auth_r` (
   `org_code` varchar(10) NOT NULL COMMENT '组织机构',
   PRIMARY KEY (`ra_id`),
   UNIQUE KEY `UK_sys_role_auth_r` (`role_code`,`auth_code`)
-) ENGINE=InnoDB AUTO_INCREMENT=478 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='系统角色与权限关联表';
+) ENGINE=InnoDB AUTO_INCREMENT=1771 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='系统角色与权限关联表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1405,7 +2231,7 @@ CREATE TABLE `sys_user` (
   `org_code` varchar(10) NOT NULL COMMENT '组织机构',
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `username_UNIQUE` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=76 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='系统用户表';
+) ENGINE=InnoDB AUTO_INCREMENT=81 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='系统用户表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1426,8 +2252,43 @@ CREATE TABLE `sys_user_role_r` (
   `org_code` varchar(10) NOT NULL COMMENT '组织机构',
   PRIMARY KEY (`ur_id`),
   UNIQUE KEY `UK_sys_user_role_r` (`username`,`role_code`)
-) ENGINE=InnoDB AUTO_INCREMENT=72 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='系统用户与角色关联表';
+) ENGINE=InnoDB AUTO_INCREMENT=83 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='系统用户与角色关联表';
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping routines for database 'erp'
+--
+/*!50003 DROP PROCEDURE IF EXISTS `save_history_data_proc` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `save_history_data_proc`(in p_table_name varchar(50), in p_primary_key varchar(30), in p_primary_key_value varchar(50), out error_code int)
+BEGIN
+	# 异常处理
+	DECLARE CONTINUE HANDLER FOR SQLWARNING,NOT FOUND,SQLEXCEPTION SET error_code = 1;
+    # 错误编码默认值
+	set error_code = 0;
+    
+	# 拼接SQL
+    SET @strsql = CONCAT('insert into ',p_table_name,'_m select * from ',p_table_name,' where ',p_primary_key,'= ''',p_primary_key_value,'''');
+    # 预处理需要执行的动态SQL，其中stmt是一个变量
+    PREPARE stmt FROM @strsql;  
+    # 执行SQL语句
+    EXECUTE stmt;  
+    # 释放掉预处理段
+    deallocate prepare stmt;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 
 --
 -- Final view structure for view `fin_voucher_report_v`
@@ -1456,4 +2317,4 @@ CREATE TABLE `sys_user_role_r` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-10-09 10:53:37
+-- Dump completed on 2020-12-12 16:01:29

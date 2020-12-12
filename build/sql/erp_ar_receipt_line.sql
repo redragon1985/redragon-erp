@@ -31,6 +31,7 @@ CREATE TABLE `ar_receipt_line` (
   `invoice_head_code` varchar(45) NOT NULL COMMENT '发票头code',
   `invoice_receipt_amount` decimal(10,2) NOT NULL COMMENT '核销金额',
   `memo` varchar(200) DEFAULT NULL COMMENT '备注',
+  `reverse_line_code` varchar(45) DEFAULT NULL COMMENT '冲销行编码',
   `version` int(11) NOT NULL DEFAULT '1' COMMENT '版本',
   `status` varchar(10) NOT NULL DEFAULT 'Y' COMMENT '状态',
   `created_date` datetime NOT NULL COMMENT '创建时间',
@@ -40,7 +41,7 @@ CREATE TABLE `ar_receipt_line` (
   `org_code` varchar(10) NOT NULL COMMENT '组织机构',
   PRIMARY KEY (`receipt_line_id`),
   UNIQUE KEY `receipt_line_code_UNIQUE` (`receipt_line_code`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='收款行表';
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='收款行表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -52,4 +53,4 @@ CREATE TABLE `ar_receipt_line` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-10-09 10:57:10
+-- Dump completed on 2020-12-12 16:00:36

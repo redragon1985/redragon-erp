@@ -42,7 +42,7 @@ CREATE TABLE `fin_voucher_model_line` (
   PRIMARY KEY (`voucher_line_id`),
   UNIQUE KEY `voucher_line_code_UNIQUE` (`voucher_line_code`),
   KEY `IX_fin_voucher_model_line_voucher_head_code` (`voucher_head_code`)
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='财务凭证模板行';
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='财务凭证模板行';
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -54,4 +54,4 @@ CREATE TABLE `fin_voucher_model_line` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-10-09 10:57:27
+-- Dump completed on 2020-12-12 16:00:53

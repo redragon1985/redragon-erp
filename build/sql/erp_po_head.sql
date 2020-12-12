@@ -29,6 +29,7 @@ CREATE TABLE `po_head` (
   `po_head_code` varchar(45) NOT NULL COMMENT '采购订单头编码',
   `po_type` varchar(45) NOT NULL COMMENT '采购订单类型',
   `po_name` varchar(45) NOT NULL COMMENT '采购订单名称',
+  `po_agreement_head_code` varchar(45) DEFAULT NULL COMMENT '采购协议头编码',
   `po_desc` varchar(500) DEFAULT NULL COMMENT '采购订单描述',
   `project_code` varchar(45) DEFAULT NULL COMMENT '项目编码',
   `vendor_code` varchar(45) NOT NULL COMMENT '供应商编码',
@@ -54,7 +55,7 @@ CREATE TABLE `po_head` (
   PRIMARY KEY (`po_head_id`),
   UNIQUE KEY `po_head_code_UNIQUE` (`po_head_code`),
   UNIQUE KEY `po_name_UNIQUE` (`po_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='采购订单头表';
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='采购订单头表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -66,4 +67,4 @@ CREATE TABLE `po_head` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-10-09 10:57:12
+-- Dump completed on 2020-12-12 16:00:25

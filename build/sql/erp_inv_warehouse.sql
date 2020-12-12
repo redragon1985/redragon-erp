@@ -39,7 +39,7 @@ CREATE TABLE `inv_warehouse` (
   PRIMARY KEY (`warehouse_id`),
   UNIQUE KEY `warehouse_code_UNIQUE` (`warehouse_code`),
   UNIQUE KEY `warehouse_name_UNIQUE` (`warehouse_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='仓库表';
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='仓库表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -51,4 +51,4 @@ CREATE TABLE `inv_warehouse` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-10-09 10:57:22
+-- Dump completed on 2020-12-12 16:00:29

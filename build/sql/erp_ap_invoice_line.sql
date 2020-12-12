@@ -44,7 +44,7 @@ CREATE TABLE `ap_invoice_line` (
   PRIMARY KEY (`invoice_line_id`),
   UNIQUE KEY `pay_line_code_UNIQUE` (`invoice_line_code`),
   KEY `IX_pay_line_pay_head_code` (`invoice_head_code`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='采购发票行表';
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='采购发票行表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -56,4 +56,4 @@ CREATE TABLE `ap_invoice_line` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-10-09 10:57:19
+-- Dump completed on 2020-12-12 16:00:25
