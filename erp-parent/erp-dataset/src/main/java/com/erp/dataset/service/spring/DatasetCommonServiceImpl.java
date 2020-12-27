@@ -129,4 +129,40 @@ public class DatasetCommonServiceImpl implements DatasetCommonService {
         return this.sysDatasetDao.getDatasetMap("voucher_type");
     }
     
+    @Override
+    @Cache(cacheType=CacheType.ALL, cacheSeconds=7200, cacheKey=DatasetParam.PROD_RESOURCE_CHARGE_TYPE_KEY)
+    public Map<String, String> getProdResourceChargeType() {
+        return this.sysDatasetDao.getDatasetMap("prod_resource_charge_type");
+    }
+    
+    @Override
+    @Cache(cacheType=CacheType.ALL, cacheSeconds=7200, cacheKey=DatasetParam.PROD_RESOURCE_COUNT_TYPE_KEY)
+    public Map<String, String> getProdResourceCountType() {
+        return this.sysDatasetDao.getDatasetMap("prod_resource_count_type");
+    }
+    
+    @Override
+    @Cache(cacheType=CacheType.ALL, cacheSeconds=7200, cacheKey=DatasetParam.PROD_RESOURCE_TYPE_KEY)
+    public Map<String, String> getProdResourceType() {
+        return this.sysDatasetDao.getDatasetMap("prod_resource_type");
+    }
+    
+    @Override
+    @Cache(cacheType=CacheType.ALL, cacheSeconds=7200, cacheKey=DatasetParam.PROD_WORK_CENTER_TYPE_KEY)
+    public Map<String, String> getProdWorkCenterType() {
+        return this.sysDatasetDao.getDatasetMap("prod_work_center_type");
+    }
+    
+    @Override
+    @Cache(cacheType=CacheType.ALL, cacheSeconds=7200, cacheKey=DatasetParam.PROD_WORK_SCHEDULE_KEY)
+    public Map<String, String> getProdWorkSchedule() {
+        return this.sysDatasetDao.getDatasetMap("prod_work_schedule");
+    }
+    
+    @Override
+    @Cache(cacheType=CacheType.ALL, cacheSeconds=7200, cacheKey=DatasetParam.EXPENSE_ITEM_TYPE_KEY)
+    public Map<String, String> getExpenseItemType() {
+        return this.sysDatasetDao.getDatasetMap("expense_item_type");
+    }
+    
 }

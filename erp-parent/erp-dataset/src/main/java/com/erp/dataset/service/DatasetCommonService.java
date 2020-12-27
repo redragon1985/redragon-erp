@@ -69,4 +69,22 @@ public interface DatasetCommonService {
     
     //获取凭证字
     public abstract Map<String, String> getVoucherType();
+    
+    //获取资源类型
+    public abstract Map<String, String> getProdResourceType();
+    
+    //获取资源计费类型
+    public abstract Map<String, String> getProdResourceChargeType();
+    
+    //获取资源计算基准类型
+    public abstract Map<String, String> getProdResourceCountType();
+    
+    //获取工作中心类型
+    public abstract Map<String, String> getProdWorkCenterType();
+    
+    //获取工作班次
+    public abstract Map<String, String> getProdWorkSchedule();
+    
+    //获取费用项目类型
+    public abstract Map<String, String> getExpenseItemType();
 }

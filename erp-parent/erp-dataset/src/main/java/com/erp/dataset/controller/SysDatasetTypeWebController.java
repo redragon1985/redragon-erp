@@ -21,6 +21,8 @@ package com.erp.dataset.controller;
 import java.util.List;
 import java.util.Map;
 import javax.validation.Valid;
+
+import org.hibernate.exception.ConstraintViolationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -128,12 +130,23 @@ public class SysDatasetTypeWebController extends ControllerSupport{
             return "forward:getSysDatasetType";
         }
         
-        //对当前编辑的对象初始化默认的字段
-        
-        //保存编辑的数据
-        this.sysDatasetTypeService.insertOrUpdateDataObject(sysDatasetType);
-        //提示信息
-        attr.addFlashAttribute("hint", "success");
+        try {
+            //对当前编辑的对象初始化默认的字段
+            
+            //保存编辑的数据
+            this.sysDatasetTypeService.insertOrUpdateDataObject(sysDatasetType);
+            //提示信息
+            attr.addFlashAttribute("hint", "success");
+        }catch(Exception e){
+            if(e.getCause().getClass()==ConstraintViolationException.class) {
+                //提示信息
+                model.addAttribute("hint", "hint");
+                model.addAttribute("alertMessage", "编码已存在请重新输入");
+                return "forward:getSysDatasetType";
+            }else {
+                throw e;
+            }
+        }
         
         return "redirect:getSysDatasetTypeList";
     }

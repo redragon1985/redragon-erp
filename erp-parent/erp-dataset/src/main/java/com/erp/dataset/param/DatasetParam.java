@@ -56,5 +56,17 @@ public class DatasetParam {
     public static final String PAY_MODE_KEY = "DATASET_PAY_MODE";
     //凭证字
     public static final String VOUCHER_TYPE_KEY = "DATASET_VOUCHER_TYPE";
+    //资源计费类型
+    public static final String PROD_RESOURCE_CHARGE_TYPE_KEY = "DATASET_PROD_RESOURCE_CHARGE_TYPE";
+    //资源计算基准类型
+    public static final String PROD_RESOURCE_COUNT_TYPE_KEY = "DATASET_PROD_RESOURCE_COUNT_TYPE";
+    //资源类型
+    public static final String PROD_RESOURCE_TYPE_KEY = "DATASET_PROD_RESOURCE_TYPE";
+    //工作中心类型
+    public static final String PROD_WORK_CENTER_TYPE_KEY = "DATASET_PROD_WORK_CENTER_TYPE";
+    //工作班次
+    public static final String PROD_WORK_SCHEDULE_KEY = "DATASET_PROD_WORK_SCHEDULE";
+    //费用项目类型
+    public static final String EXPENSE_ITEM_TYPE_KEY = "DATASET_EXPENSE_ITEM_TYPE";
     
 }

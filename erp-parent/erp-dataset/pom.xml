@@ -3,25 +3,14 @@
   <parent>
     <groupId>redragon</groupId>
     <artifactId>erp-parent</artifactId>
-    <version>0.9</version>
+    <version>1.0</version>
   </parent>
   <artifactId>erp-dataset</artifactId>
+  <!-- package mode change -->
   <packaging>war</packaging>
-
-  <build>
-    <plugins>
-        <plugin>
-           <artifactId>maven-war-plugin</artifactId>
-           <configuration>
-               <version>3.0</version>
-               <failOnMissingWebXml>false</failOnMissingWebXml>
-            </configuration>
-        </plugin>
-    </plugins>
-  </build>
+  
 
   <dependencies>
-    <!--  
   	<dependency>
 	    <groupId>redragon</groupId>
 	    <artifactId>redragon</artifactId>
@@ -29,6 +18,5 @@
 	    <scope>system</scope>
 	    <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/redragon.jar</systemPath>
 	</dependency>
-	-->
   </dependencies>
 </project>

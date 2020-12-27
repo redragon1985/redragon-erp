@@ -122,11 +122,17 @@ public class SysDatasetWebController extends ControllerSupport{
      *
      */
     @RequestMapping("editSysDataset")
-    public String editSysDataset(@Valid SysDataset sysDataset, String datasetTypeName, BindingResult bindingResult, Model model, RedirectAttributes attr) {
+    public String editSysDataset(@Valid SysDataset sysDataset, BindingResult bindingResult, String datasetTypeName, Model model, RedirectAttributes attr) {
         //参数校验
         Map<String, String> errorMap = this.validateParameters(bindingResult, model);
         if(errorMap.size()>0) {
-            return "forward:getSysDataset";
+            //提示信息
+            attr.addFlashAttribute("hint", "hint");
+            attr.addFlashAttribute("alertMessage", errorMap.get("alertMessage"));
+            //添加重定向参数
+            attr.addAttribute("datasetTypeCode", sysDataset.getDatasetTypeCode());
+            attr.addAttribute("datasetTypeName", datasetTypeName);
+            return "redirect:getSysDatasetList";
         }
         
         //对当前编辑的对象初始化默认的字段
