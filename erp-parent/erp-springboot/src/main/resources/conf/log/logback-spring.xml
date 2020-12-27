@@ -27,7 +27,7 @@
     <property name="DEV_FILE_PATH" value="d:/logs/test.log" />
     <!-- test文件路径 -->
     <property name="TEST_FILE_PATH" value="d:/logs/test.log" />
-    <!-- pro文件路径 -->
+    <!-- prod文件路径 -->
     <property name="PRO_FILE_PATH" value="/opt/test/log" />
     
     <!-- 开发环境 -->
