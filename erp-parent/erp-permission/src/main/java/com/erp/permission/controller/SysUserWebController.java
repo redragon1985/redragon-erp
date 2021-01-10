@@ -86,6 +86,7 @@ public class SysUserWebController extends ControllerSupport{
      * @return String
      *
      */
+    //@RequiresPermissions("super-admin")
     @RequestMapping("getSysUserList")
     public String getSysUserList(Pages pages, SysUserCO sysUserCO, Model model) {
         
@@ -116,6 +117,7 @@ public class SysUserWebController extends ControllerSupport{
      * @return String
      *
      */
+    //@RequiresPermissions("super-admin")
     @RequestMapping("getSysUser")
     public String getSysUser(SysUser sysUser, Model model) {
         //查询要编辑的数据
@@ -142,6 +144,7 @@ public class SysUserWebController extends ControllerSupport{
      * @return String
      *
      */
+    //@RequiresPermissions("super-admin")
     @RequestMapping("editSysUser")
     public String editSysUser(@Valid SysUser sysUser, BindingResult bindingResult, Model model, RedirectAttributes attr) {
         //参数校验
@@ -177,6 +180,7 @@ public class SysUserWebController extends ControllerSupport{
      * @return String
      *
      */
+    //@RequiresPermissions("super-admin")
     @RequestMapping("deleteSysUser")
     public String deleteSysUser(SysUser sysUser, RedirectAttributes attr) {
         //删除数据前验证数据
