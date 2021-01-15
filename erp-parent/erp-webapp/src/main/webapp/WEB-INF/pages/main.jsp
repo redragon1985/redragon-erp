@@ -27,7 +27,7 @@
 	
 	<%-- 顶部版本及价格导览开始 --%>
 	<div class="row">
-		<div class="col-lg-4">
+		<div class="col-lg-3">
 			<div class="ibox" style="height:206px;">
 				<div class="ibox-title" style="padding-right:15px;">
 					<h4 class="float-right text-danger">永久免费</h4>
@@ -45,33 +45,35 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-lg-4">
+		<div class="col-lg-3">
 			<div class="ibox" style="height:206px;">
 				<div class="ibox-title" style="padding-right:15px;">
 					<h4 class="float-right text-danger">
-						¥20,000.00 <span class="text-muted"
-							style="text-decoration: line-through;font-weight:400;">¥50,000.00</span>
+						¥20,000 <span class="text-muted"
+							style="text-decoration: line-through;font-weight:400;">¥50,000</span>
 					</h4>
 					<h5>
-						<i class="fa fa-puzzle-piece"></i> 社区版<span class="label label-info">商业授权</span>
+						<i class="fa fa-puzzle-piece"></i> 社区版<span class="label label-info">授权</span>
 					</h5>
 				</div>
 				<div class="ibox-content">
 					<p>
-						（1）社区版开源、功能持续迭代<br /> （2）实现ERP主流程的业务财务闭环<br /> （3）提供完备的技术文档，易于部署和二次开发<br />
-						<span class="text-info" style="font-weight: bold;">（4）获取商业授权后，可二次分发，可商用</span>
+						（1）社区版开源、功能持续迭代<br /> （2）实现ERP主流程的业务财务闭环<br /> （3）提供技术文档，易于二次开发<br />
+						<span class="text-info" style="font-weight: bold;">（4）商业授权后，可二次分发，可销售</span>
 					</p>
 					
 					<div class="text-right"><button class="btn btn-default btn-outline btn-xs" type="button" onclick="window.open('https://www.redragon-erp.com/product.html')">了解更多</button></div>
 				</div>
 			</div>
 		</div>
-		<div class="col-lg-4">
+		<div class="col-lg-3">
 			<div class="ibox" style="height:206px;">
 				<div class="ibox-title" style="padding-right:15px;">
 					<h4 class="float-right text-danger">
-						¥3,000.00 <span class="text-muted"
-							style="text-decoration: line-through;font-weight:400;">¥20,000.00</span>
+						(优惠价) ¥5,000/年
+						<%-- 
+						<span class="text-muted" style="text-decoration: line-through;font-weight:400;">¥20,000.00</span>
+						--%>
 					</h4>
 					<h5>
 						<i class="fa fa-globe"></i> 生态版<span class="label label-primary">会员制</span>
@@ -79,9 +81,33 @@
 				</div>
 				<div class="ibox-content">
 					<p>
-						（1）含社区版所有功能及服务<br /> <span class="text-navy" style="font-weight: bold;">（2）生态产品簇EHR、CRM持续发布</span><br />
-						<span class="text-navy" style="font-weight: bold;">（3）完整的企业级ERP开源解决方案</span><br /> <span
+						（1）含社区版所有功能及服务<br /> <span class="text-navy" style="font-weight: bold;">（2）包含完整的企业级ERP功能与模块</span><br />
+						<span class="text-navy" style="font-weight: bold;">（3）生态产品簇EHR、CRM持续发布</span><br /> <span
 							class="text-navy" style="font-weight: bold;">（4）更完善更专业的配套服务</span>
+					</p>
+					
+					<div class="text-right"><button class="btn btn-default btn-outline btn-xs" type="button" onclick="window.open('https://www.redragon-erp.com/product.html')">了解更多</button></div>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-3">
+			<div class="ibox" style="height:206px;">
+				<div class="ibox-title" style="padding-right:15px;">
+					<h4 class="float-right text-danger">
+						(优惠价) ¥8,000
+						<%-- 
+						<span class="text-muted" style="text-decoration: line-through;font-weight:400;">¥20,000.00</span>
+						--%>
+					</h4>
+					<h5>
+						<i class="fa fa-globe"></i> 生态版
+					</h5>
+				</div>
+				<div class="ibox-content">
+					<p>
+						（1）含社区版所有功能及服务<br /> <span class="text-navy" style="font-weight: bold;">（2）包含完整的企业级ERP功能与模块</span><br />
+						<span class="text-navy" style="font-weight: bold;">（3）必要的配套服务</span><br /> <span
+							class="text-warning" style="font-weight: bold;">（4）一次性支付获得软件终身使用权</span>
 					</p>
 					
 					<div class="text-right"><button class="btn btn-default btn-outline btn-xs" type="button" onclick="window.open('https://www.redragon-erp.com/product.html')">了解更多</button></div>
@@ -420,8 +446,59 @@
 								(7)&nbsp;合并处理预付款、预收款、借项通知单、贷项通知单的收付款功能<br/>
 								(8)&nbsp;增加收付款冲销功能<br/>
 								</p>
-								<a href="https://gitee.com/redragon/redragon-erp/blob/master/README.md" target="_blank" class="btn btn-sm btn-info">生态板</a> 
+								<a href="https://gitee.com/redragon/redragon-erp/blob/master/README.md" target="_blank" class="btn btn-sm btn-info">版本说明</a> 
 								<span class="vertical-date" style="font-weight: bold;"> v0.9.5 （已发布）<br /> <small>2020.10</small></span>
+							</div>
+						</div>
+						
+						<div class="vertical-timeline-block">
+							<div class="vertical-timeline-icon lazur-bg">
+								<i class="fa fa-flash"></i>
+							</div>
+
+							<div class="vertical-timeline-content">
+								<h2>生产制造模块上线</h2>
+								<p>
+								(1)&nbsp;增加BOM物料清单管理<br/>
+								(2)&nbsp;增加MPS主生产计划管理<br/>
+								(3)&nbsp;增加MRP物料需求计划管理<br/>
+								</p>
+								<a href="https://gitee.com/redragon/redragon-erp/blob/master/README.md" target="_blank" class="btn btn-sm btn-info">版本说明</a> 
+								<span class="vertical-date" style="font-weight: bold;"> v1.0 （已发布）<br /> <small>2020.11</small></span>
+							</div>
+						</div>
+						
+						<div class="vertical-timeline-block">
+							<div class="vertical-timeline-icon lazur-bg">
+								<i class="fa fa-flash"></i>
+							</div>
+
+							<div class="vertical-timeline-content">
+								<h2>费用报销模块上线</h2>
+								<p>
+								(1)&nbsp;增加费用报销模块<br/>
+								(2)&nbsp;增加借款模块<br/>
+								(3)&nbsp;实现费用报销、借款与发票的无缝集成<br/>
+								</p>
+								<a href="https://gitee.com/redragon/redragon-erp/blob/master/README.md" target="_blank" class="btn btn-sm btn-info">版本说明</a> 
+								<span class="vertical-date" style="font-weight: bold;"> v1.1 （已发布）<br /> <small>2020.12</small></span>
+							</div>
+						</div>
+						
+						<div class="vertical-timeline-block">
+							<div class="vertical-timeline-icon lazur-bg">
+								<i class="fa fa-flash"></i>
+							</div>
+
+							<div class="vertical-timeline-content">
+								<h2>生产制造WIP模块上线</h2>
+								<p>
+								(1)&nbsp;增加WIP车间生产模块<br/>
+								(2)&nbsp;实现生产任务与库存的集成<br/>
+								(3)&nbsp;实现MRP与WIP的无缝集成<br/>
+								</p>
+								<a href="https://gitee.com/redragon/redragon-erp/blob/master/README.md" target="_blank" class="btn btn-sm btn-info">版本说明</a> 
+								<span class="vertical-date" style="font-weight: bold;"> v1.2 （已发布）<br /> <small>2021.1</small></span>
 							</div>
 						</div>
 
