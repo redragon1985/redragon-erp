@@ -2,23 +2,23 @@
 ###### ------Enterprise transformation starts from 【Redragon ERP】
 
 
-### :fa-question-circle: Why high prices
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:fa-ban: The price of ERP software is too high? NO！
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**:fa-thumbs-o-up: Make ERP affordable for all small and micro enterprises**<br/><br/>
+###  Why high prices
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The price of ERP software is too high? NO！
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;** Make ERP affordable for all small and micro enterprises**<br/><br/>
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:fa-ban: ERP upgrade and maintenance are too expensive? NO！
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**:fa-thumbs-o-up: Follow us to upgrade and iterate, your management improvement is our service**
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ERP upgrade and maintenance are too expensive? NO！
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;** Follow us to upgrade and iterate, your management improvement is our service**
 
-### :fa-question-circle: Why is it complicated?
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:fa-ban: The threshold for using ERP is too high? Can't use it? Don't understand? NO！
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**:fa-thumbs-up: The only main-line process design makes it easier to use**<br/><br/>
+###  Why is it complicated?
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The threshold for using ERP is too high? Can't use it? Don't understand? NO！
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;** The only main-line process design makes it easier to use**<br/><br/>
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:fa-ban: The more functions of ERP, the better? NO！
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**:fa-thumbs-up: Sort out the most reasonable design ideas from nearly ten excellent software, simple but not simple**
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The more functions of ERP, the better? NO！
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;** Sort out the most reasonable design ideas from nearly ten excellent software, simple but not simple**
 
-### :fa-question-circle: Why customize?
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:fa-ban: Does ERP need to be customized according to the characteristics of the enterprise? NO！
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**:fa-thumbs-o-up: Adopt ERP management concepts that serve hundreds of Fortune 500 companies to truly improve your business management process**
+###  Why customize?
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Does ERP need to be customized according to the characteristics of the enterprise? NO！
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;** Adopt ERP management concepts that serve hundreds of Fortune 500 companies to truly improve your business management process**
 
 # Introduction
 
@@ -270,6 +270,6 @@ Please check the project construction document in the root directory BUILD.md
 
 ## Communicate and Share
 
-:fa-wechat: Scan the QR code to communicate with developers
+ Scan the QR code to communicate with developers
 
 ![Redragon ERP Developer](http://www.redragon-erp.com/images/redragon.png "Redragon ERP Developer")
