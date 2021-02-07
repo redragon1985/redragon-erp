@@ -42,7 +42,7 @@
 
 【Redragon ERP】The intellectual property rights belong to the **developer**. All users must abide by the following agreement, otherwise we will reserve the right to resort to law for those who violate the contract!
 
-:fa-exclamation-triangle:`Without the authorization of the developer, this product and derivative products (including community version and ecological version) shall not be used for any form of commercial use`
+`Without the authorization of the developer, this product and derivative products (including community version and ecological version) shall not be used for any form of commercial use`
 
 # Team
 
@@ -52,17 +52,17 @@ The core personnel of Redragon have more than ten years of experience in informa
 
 **Software agent**：Redragon ERP ecological version recruits regional agents and is willing to cooperate with you for a win-win situation. [More](https://www.redragon-erp.com/partner.html "Regional Software Agent")
 
-:fa-wechat:`If you need cooperation, please contact us on WeChat`
+`If you need cooperation, please contact us on WeChat`
 
 ![Redragon ERP Business cooperation](http://www.redragon-erp.com/images/redragonBussiness.png "Redragon ERP Business cooperation")
 
 # Demo address
 
-:fa-desktop: Eco Edition：&nbsp;&nbsp;[https://www.redragon-erp.com/erp](https://www.redragon-erp.com/erp "https://www.redragon-erp.com/erp")
+ Eco Edition：&nbsp;&nbsp;[https://www.redragon-erp.com/erp](https://www.redragon-erp.com/erp "https://www.redragon-erp.com/erp")
 
-:fa-home: Redragon official website：[https://www.redragon-erp.com](https://www.redragon-erp.com "https://www.redragon-erp.com")
+ Redragon official website：[https://www.redragon-erp.com](https://www.redragon-erp.com "https://www.redragon-erp.com")
 
-[:fa-hand-o-right: Click to apply for an account](https://www.redragon-erp.com/account.html "https://www.redragon-erp.com/account.html")
+[Click to apply for an account](https://www.redragon-erp.com/account.html "https://www.redragon-erp.com/account.html")
 
 `Add developer WeChat to join Redragon ERP communication group to discuss technical or business issues`
 
