@@ -190,7 +190,7 @@ Please check the project construction document in the root directory BUILD.md
 
 ## Development Plan
 
-###### 2020年8月 v0.5.1（Online）
+###### 2020.8 v0.5.1（Online）
 
 1. Add data permission function and configuration
 2. Increase operation authority function and configuration
@@ -201,19 +201,19 @@ Please check the project construction document in the root directory BUILD.md
 7. Optimize data transaction processing logic
 8. Update SQL table structure
 
-###### 2020年9月 v0.6（Online）
+###### 2020.9 v0.6（Online）
 
 1. Add inbound management and outbound management
 2. Increase warehouse management, inventory management and inventory counting
 3. Optimize the storage logic during shiro authorization
 
-###### 2020年9月 v0.6.1（Online）
+###### 2020.9 v0.6.1（Online）
 
 1. Optimize material selection logic
 2. Optimize maven jar package dependencies
 3. Simultaneous release of war package during software distribution
 
-###### 2020年9月 v0.7（Online）
+###### 2020.9 v0.7（Online）
 
 1. Add A/R invoice management
 2. Increase payable invoice management
@@ -221,19 +221,19 @@ Please check the project construction document in the root directory BUILD.md
 4. Add payment and collection modules
 5. Realize the verification and cancellation of receipts and payments on invoices
 
-###### 2020年9月 v0.8（Online）
+###### 2020.9 v0.8（Online）
 
 1. Add accounting entry function
 2. Increase the export function of vouchers for integration with third-party financial systems
 3. Automatically generate payment, receipt and transfer vouchers
 
-###### 2020年10月 v0.9（Online）
+###### 2020.10 v0.9（Online）
 
 1. Modify all the bugs of the previous version
 2. Optimize the function of each module
 3. Add change version record and view function
 
-###### 2020年11月 v0.9.5（Online）
+###### 2020.11 v0.9.5（Online）
 
 1. Add purchasing and sales agreement modules
 2. Increase purchase and sales order types, and link with agreements
@@ -244,25 +244,25 @@ Please check the project construction document in the root directory BUILD.md
 7. Consolidate the collection and payment functions of advance payment, advance receipt, debit memo, and credit memo
 8. Add the function of offsetting receipts and payments
 
-###### 2020年11月 v1.0（Online）
+###### 2020.11 v1.0（Online）
 
 1. Add MPS master production planning function
 2. Add MRP material requirement planning function
 3. Add BOM bill of materials function
 
-###### 2020年12月 v1.1（Online）
+###### 2020.12 v1.1（Online）
 
 1. Add expense reimbursement module
 2. Add loan module
 3. Achieve seamless integration of expense reimbursement, loan and invoice
 
-###### 2021年1月 v1.2（Online）
+###### 2021.1 v1.2（Online）
 
 1. Add WIP workshop production module
 2. Realize the integration of production tasks and inventory
 3. Achieve seamless integration of MRP and WIP
 
-###### 2021年2月 v1.3（Planning）
+###### 2021.2 v1.3（Planning）
 
 1. Add financial basic data management
 2. Add journal management function
