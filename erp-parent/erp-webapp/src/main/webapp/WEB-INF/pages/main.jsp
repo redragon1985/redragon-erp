@@ -49,8 +49,8 @@
 			<div class="ibox" style="height:206px;">
 				<div class="ibox-title" style="padding-right:15px;">
 					<h4 class="float-right text-danger">
-						¥20,000 <span class="text-muted"
-							style="text-decoration: line-through;font-weight:400;">¥50,000</span>
+						¥10,000 <span class="text-muted"
+							style="text-decoration: line-through;font-weight:400;">¥30,000</span>
 					</h4>
 					<h5>
 						<i class="fa fa-puzzle-piece"></i> 社区版<span class="label label-info">授权</span>
@@ -70,19 +70,19 @@
 			<div class="ibox" style="height:206px;">
 				<div class="ibox-title" style="padding-right:15px;">
 					<h4 class="float-right text-danger">
-						(优惠价) ¥5,000/年
+						<a href="http://www.redragon-erp.com/product.html#pricePreDiv" target="_blank" class="text-danger">查看参考报价</a>
 						<%-- 
 						<span class="text-muted" style="text-decoration: line-through;font-weight:400;">¥20,000.00</span>
 						--%>
 					</h4>
 					<h5>
-						<i class="fa fa-globe"></i> 生态版<span class="label label-primary">会员制</span>
+						<i class="fa fa-globe"></i> 生态版<span class="label label-primary">会员年付</span>
 					</h5>
 				</div>
 				<div class="ibox-content">
 					<p>
 						（1）含社区版所有功能及服务<br /> <span class="text-navy" style="font-weight: bold;">（2）包含完整的企业级ERP功能与模块</span><br />
-						<span class="text-navy" style="font-weight: bold;">（3）生态产品簇EHR、CRM持续发布</span><br /> <span
+						<span class="text-navy" style="font-weight: bold;">（3）获得服务期内产品持续升级</span><br /> <span
 							class="text-navy" style="font-weight: bold;">（4）更完善更专业的配套服务</span>
 					</p>
 					
@@ -94,20 +94,20 @@
 			<div class="ibox" style="height:206px;">
 				<div class="ibox-title" style="padding-right:15px;">
 					<h4 class="float-right text-danger">
-						(优惠价) ¥8,000
+						<a href="http://www.redragon-erp.com/product.html#pricePreDiv" target="_blank" class="text-danger">查看参考报价</a>
 						<%-- 
 						<span class="text-muted" style="text-decoration: line-through;font-weight:400;">¥20,000.00</span>
 						--%>
 					</h4>
 					<h5>
-						<i class="fa fa-globe"></i> 生态版
+						<i class="fa fa-globe"></i> 生态版<span class="label label-warning">一次支付</span>
 					</h5>
 				</div>
 				<div class="ibox-content">
 					<p>
 						（1）含社区版所有功能及服务<br /> <span class="text-navy" style="font-weight: bold;">（2）包含完整的企业级ERP功能与模块</span><br />
-						<span class="text-navy" style="font-weight: bold;">（3）必要的配套服务</span><br /> <span
-							class="text-warning" style="font-weight: bold;">（4）一次性支付获得软件终身使用权</span>
+						<span class="text-navy" style="font-weight: bold;">（3）首次免费的安装与部署</span><br />
+						<span class="text-warning" style="font-weight: bold;">（4）一次性支付获得软件终身使用权</span><br />
 					</p>
 					
 					<div class="text-right"><button class="btn btn-default btn-outline btn-xs" type="button" onclick="window.open('https://www.redragon-erp.com/product.html')">了解更多</button></div>
