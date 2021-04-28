@@ -35,10 +35,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.framework.controller.ControllerSupport;
 import com.framework.dao.model.Pages;
-import com.framework.util.JsonResultUtil;
-import com.framework.util.JsonUtil;
-
-import redragon.frame.hibernate.SnowFlake;
 
 import com.erp.dataset.service.DatasetCommonService;
 import com.erp.finance.ap.invoice.dao.model.ApInvoiceHead;
@@ -55,6 +51,7 @@ import com.erp.finance.ar.receipt.dao.model.ArReceiptLine;
 import com.erp.finance.ar.receipt.dao.model.ArReceiptLineCO;
 import com.erp.finance.ar.receipt.service.ArReceiptLineService;
 import com.erp.masterdata.common.service.MasterDataCommonService;
+import redragon.basic.tools.SnowFlake;
 
 @Controller
 @RequestMapping("/web/arReceiptLine")

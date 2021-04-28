@@ -29,6 +29,8 @@ import java.util.Set;
 
 import javax.validation.Valid;
 
+import com.framework.controller.JsonTextUtil;
+import com.framework.shiro.ShiroUtil;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -74,11 +76,8 @@ import com.erp.masterdata.common.service.MasterDataCommonService;
 import com.framework.controller.ControllerSupport;
 import com.framework.dao.data.GlobalDataBox;
 import com.framework.dao.model.Pages;
-import com.framework.util.JsonResultUtil;
-import com.framework.util.JsonUtil;
-import com.framework.util.ShiroUtil;
-
-import redragon.frame.hibernate.SnowFlake;
+import redragon.basic.tools.SnowFlake;
+import redragon.util.string.JsonUtil;
 
 @Controller
 @RequestMapping("/web/finVoucherModelHead")
@@ -236,7 +235,6 @@ public class FinVoucherModelHeadWebController extends ControllerSupport{
      * @author dongbin
      * @param businessType
      * @param pages
-     * @param poHeadCO
      * @param receiptHeadCO
      * @param model
      * @return
@@ -391,7 +389,6 @@ public class FinVoucherModelHeadWebController extends ControllerSupport{
      * @description 获取凭证模板Json数据
      * @date 2020年7月28日
      * @author dongbin
-     * @param finVoucherHead
      * @return
      * @return String
      *
@@ -425,7 +422,6 @@ public class FinVoucherModelHeadWebController extends ControllerSupport{
      * @description 自动创建凭证
      * @date 2020年7月30日
      * @author dongbin
-     * @param payHeadCode
      * @param amount
      * @param businessType
      * @param model
@@ -443,10 +439,10 @@ public class FinVoucherModelHeadWebController extends ControllerSupport{
                 //调用自动创建方法
                 return this.finVoucherModelHeadService.autoCreateVoucher(billHeadCode, amount, businessType);
             }catch(Exception e) {
-                return JsonResultUtil.getErrorJson(-1, "自动生成凭证执行错误");
+                return JsonTextUtil.getErrorJson(-1, "自动生成凭证执行错误");
             }
         }else {
-            return JsonResultUtil.getErrorJson(-1, "付款单参数传递错误");
+            return JsonTextUtil.getErrorJson(-1, "付款单参数传递错误");
         }
     }
     
@@ -457,7 +453,6 @@ public class FinVoucherModelHeadWebController extends ControllerSupport{
      * @description 跳转凭证字的流水号页面
      * @date 2020-07-04 18:25:32
      * @author 
-     * @param hrPosition
      * @param model
      * @return String
      *
@@ -486,7 +481,6 @@ public class FinVoucherModelHeadWebController extends ControllerSupport{
      * @description 编辑凭证字的流水号
      * @date 2020-07-04 18:25:32
      * @author 
-     * @param hrPosition
      * @param model
      * @return String
      *

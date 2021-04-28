@@ -21,6 +21,8 @@ package com.erp.common.voucher.dao.hibernate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import com.framework.dao.BasicDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
@@ -28,7 +30,6 @@ import com.framework.annotation.Cache;
 import com.framework.annotation.Permissions;
 import com.framework.annotation.Permissions.PermissionType;
 import com.framework.annotation.SqlParam;
-import com.framework.dao.DaoSupport;
 import com.framework.dao.model.Pages;
 import com.framework.util.DaoUtil;
 import com.erp.common.voucher.dao.FinVoucherBillRDao;
@@ -38,38 +39,38 @@ import com.erp.common.voucher.dao.model.FinVoucherBillRCO;
 @Repository("finVoucherBillRDaoCommon")
 public class FinVoucherBillRDaoImpl implements FinVoucherBillRDao{ 
 
-    //注入DaoSupport工具类
+    //注入basicDao工具类
     @Autowired
-    private DaoSupport daoSupport;
+    private BasicDao basicDao;
     
     @Override
     public void insertDataObject(FinVoucherBillR obj) {
-        this.daoSupport.insertDataTransaction(obj);
+        this.basicDao.insertDataTransaction(obj);
     }
 
     @Override
     public void updateDataObject(FinVoucherBillR obj) {
-        this.daoSupport.updateDataTransaction(obj);
+        this.basicDao.updateDataTransaction(obj);
     }
     
     @Override
     public void insertOrUpdateDataObject(FinVoucherBillR obj) {
-        this.daoSupport.insertOrUpdateDataTransaction(obj);
+        this.basicDao.insertOrUpdateDataTransaction(obj);
     }
 
     @Override
     public void deleteDataObject(FinVoucherBillR obj) {
-        this.daoSupport.deleteDataTransactionJPA(obj);
+        this.basicDao.deleteDataTransactionJPA(obj);
     }
 
     @Override
     public List<FinVoucherBillR> getDataObjects() {
-        return this.daoSupport.getDataAllObject(FinVoucherBillR.class);
+        return this.basicDao.getDataAllObject(FinVoucherBillR.class);
     }
 
     @Override
     public FinVoucherBillR getDataObject(int id) {
-        return (FinVoucherBillR)this.daoSupport.getDataObject(FinVoucherBillR.class, id);
+        return (FinVoucherBillR)this.basicDao.getDataObject(FinVoucherBillR.class, id);
     }
     
     @Override
@@ -110,7 +111,7 @@ public class FinVoucherBillRDaoImpl implements FinVoucherBillRDao{
         Map<String, Object> args = new HashMap<String, Object>();
         args.put("code", voucherHeadCode);
         
-        this.daoSupport.executeSQLTransaction(sql, args);
+        this.basicDao.executeSQLTransaction(sql, args);
     }
     
     @Override
@@ -121,7 +122,7 @@ public class FinVoucherBillRDaoImpl implements FinVoucherBillRDao{
         args.put("billType", billType);
         args.put("billHeadCode", billHeadCode);
         
-        List<String> list = this.daoSupport.selectDataSqlCount(sql, args);
+        List<String> list = this.basicDao.selectDataSqlCount(sql, args);
         if(list!=null&&list.size()>0) {
             return list.get(0);
         }
@@ -136,9 +137,9 @@ public class FinVoucherBillRDaoImpl implements FinVoucherBillRDao{
         Map<String, Object> args = new HashMap<String, Object>();
         args.put("headCode", headCode);
         
-        List list = this.daoSupport.selectDataSqlCount(sql, args);
+        List list = this.basicDao.selectDataSqlCount(sql, args);
         if(list.size()>0) {
-            int count = this.daoSupport.convertSQLCount(list.get(0));
+            int count = this.basicDao.convertSQLCount(list.get(0));
             if(count>0) {
                 return true;
             }
@@ -154,9 +155,9 @@ public class FinVoucherBillRDaoImpl implements FinVoucherBillRDao{
         Map<String, Object> args = new HashMap<String, Object>();
         args.put("headCode", headCode);
         
-        List list = this.daoSupport.selectDataSqlCount(sql, args);
+        List list = this.basicDao.selectDataSqlCount(sql, args);
         if(list.size()>0) {
-            int count = this.daoSupport.convertSQLCount(list.get(0));
+            int count = this.basicDao.convertSQLCount(list.get(0));
             if(count>0) {
                 return true;
             }

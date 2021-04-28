@@ -8,15 +8,6 @@
   <artifactId>erp-springboot</artifactId>
   <packaging>jar</packaging>
   
-  <build>
-    <plugins>
-        <plugin>
-           <artifactId>maven-jar-plugin</artifactId>
-           <version>3.1.1</version>
-        </plugin>
-    </plugins>
-  </build>
-  
   <dependencies>
   	<dependency>
   		<groupId>redragon</groupId>

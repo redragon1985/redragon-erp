@@ -21,6 +21,8 @@ package com.erp.inv.output.dao.hibernate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import com.framework.dao.BasicDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
@@ -28,7 +30,6 @@ import com.framework.annotation.Cache;
 import com.framework.annotation.Permissions;
 import com.framework.annotation.Permissions.PermissionType;
 import com.framework.annotation.SqlParam;
-import com.framework.dao.DaoSupport;
 import com.framework.dao.model.Pages;
 import com.framework.util.DaoUtil;
 import com.erp.inv.input.dao.model.InvInputHead;
@@ -39,38 +40,38 @@ import com.erp.inv.output.dao.model.InvOutputHeadCO;
 @Repository
 public class InvOutputHeadDaoImpl implements InvOutputHeadDao{ 
 
-    //注入DaoSupport工具类
+    //注入basicDao工具类
     @Autowired
-    private DaoSupport daoSupport;
+    private BasicDao basicDao;
     
     @Override
     public void insertDataObject(InvOutputHead obj) {
-        this.daoSupport.insertDataTransaction(obj);
+        this.basicDao.insertDataTransaction(obj);
     }
 
     @Override
     public void updateDataObject(InvOutputHead obj) {
-        this.daoSupport.updateDataTransaction(obj);
+        this.basicDao.updateDataTransaction(obj);
     }
     
     @Override
     public void insertOrUpdateDataObject(InvOutputHead obj) {
-        this.daoSupport.insertOrUpdateDataTransaction(obj);
+        this.basicDao.insertOrUpdateDataTransaction(obj);
     }
 
     @Override
     public void deleteDataObject(InvOutputHead obj) {
-        this.daoSupport.deleteDataTransactionJPA(obj);
+        this.basicDao.deleteDataTransactionJPA(obj);
     }
 
     @Override
     public List<InvOutputHead> getDataObjects() {
-        return this.daoSupport.getDataAllObject(InvOutputHead.class);
+        return this.basicDao.getDataAllObject(InvOutputHead.class);
     }
 
     @Override
     public InvOutputHead getDataObject(int id) {
-        return (InvOutputHead)this.daoSupport.getDataObject(InvOutputHead.class, id);
+        return (InvOutputHead)this.basicDao.getDataObject(InvOutputHead.class, id);
     }
     
     @Override
@@ -83,7 +84,7 @@ public class InvOutputHeadDaoImpl implements InvOutputHeadDao{
         Map<String, Class<?>> entity = new HashMap<String, Class<?>>();
         entity.put("i", InvOutputHead.class);
         
-        List<InvOutputHead> list = this.daoSupport.selectDataSql(sql, entity, args);
+        List<InvOutputHead> list = this.basicDao.selectData(sql, entity, args);
         if(list.size()>0) {
             return list.get(0);
         }
@@ -106,18 +107,18 @@ public class InvOutputHeadDaoImpl implements InvOutputHeadDao{
         String sql = "select i.* from inv_output_head i where 1=1";
         
         Map<String, Object> args = new HashMap<String, Object>();
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "outputHeadCode", "and i.", args);
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "outputSourceType", "and i.", args);
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "outputSourceHeadCode", "and i.", args);
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "outputType", "and i.", args);
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "outputDate", "and i.", args);
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "status", "and i.", args);
+        sql = sql + DaoUtil.settleParam(paramObj, "outputHeadCode", "and i.", args);
+        sql = sql + DaoUtil.settleParam(paramObj, "outputSourceType", "and i.", args);
+        sql = sql + DaoUtil.settleParam(paramObj, "outputSourceHeadCode", "and i.", args);
+        sql = sql + DaoUtil.settleParam(paramObj, "outputType", "and i.", args);
+        sql = sql + DaoUtil.settleParam(paramObj, "outputDate", "and i.", args);
+        sql = sql + DaoUtil.settleParam(paramObj, "status", "and i.", args);
         sql = sql + " order by i.output_head_id desc";
         
         Map<String, Class<?>> entity = new HashMap<String, Class<?>>();
         entity.put("i", InvOutputHead.class);
         
-        return this.daoSupport.getDataSqlByPage(sql, entity, args, pages);
+        return this.basicDao.getDataSql(sql, entity, args, pages);
     }
 
     @Override
@@ -131,19 +132,19 @@ public class InvOutputHeadDaoImpl implements InvOutputHeadDao{
         String sql = "select i.* from inv_output_head i where 1=1";
         
         Map<String, Object> args = new HashMap<String, Object>();
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "outputHeadCode", "and i.", args);
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "outputSourceType", "and i.", args);
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "outputSourceHeadCode", "and i.", args);
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "outputType", "and i.", args);
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "outputDate", "and i.", args);
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "status", "and i.", args);
+        sql = sql + DaoUtil.settleParam(paramObj, "outputHeadCode", "and i.", args);
+        sql = sql + DaoUtil.settleParam(paramObj, "outputSourceType", "and i.", args);
+        sql = sql + DaoUtil.settleParam(paramObj, "outputSourceHeadCode", "and i.", args);
+        sql = sql + DaoUtil.settleParam(paramObj, "outputType", "and i.", args);
+        sql = sql + DaoUtil.settleParam(paramObj, "outputDate", "and i.", args);
+        sql = sql + DaoUtil.settleParam(paramObj, "status", "and i.", args);
         sql = sql + DaoUtil.getDataAuthSQL(dataAuthSQL, "i.", "i.");
         sql = sql + " order by i.output_head_id desc";
         
         Map<String, Class<?>> entity = new HashMap<String, Class<?>>();
         entity.put("i", InvOutputHead.class);
         
-        return this.daoSupport.getDataSqlByPage(sql, entity, args, pages);
+        return this.basicDao.getDataSql(sql, entity, args, pages);
     }
     
     @Override
@@ -162,7 +163,7 @@ public class InvOutputHeadDaoImpl implements InvOutputHeadDao{
         
         sql = sql + " where output_head_code = :code";
         
-        this.daoSupport.executeSQLTransaction(sql, args);
+        this.basicDao.executeSQLTransaction(sql, args);
     }
     
 }

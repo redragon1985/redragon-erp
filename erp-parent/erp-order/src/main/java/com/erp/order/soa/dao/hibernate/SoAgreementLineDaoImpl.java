@@ -22,6 +22,8 @@ import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import com.framework.dao.BasicDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
@@ -29,7 +31,6 @@ import com.framework.annotation.Cache;
 import com.framework.annotation.Permissions;
 import com.framework.annotation.Permissions.PermissionType;
 import com.framework.annotation.SqlParam;
-import com.framework.dao.DaoSupport;
 import com.framework.dao.model.Pages;
 import com.framework.util.DaoUtil;
 import com.erp.order.so.dao.model.SoLine;
@@ -41,38 +42,38 @@ import com.erp.order.soa.dao.model.SoAgreementLineCO;
 @Repository
 public class SoAgreementLineDaoImpl implements SoAgreementLineDao{ 
 
-    //注入DaoSupport工具类
+    //注入basicDao工具类
     @Autowired
-    private DaoSupport daoSupport;
+    private BasicDao basicDao;
     
     @Override
     public void insertDataObject(SoAgreementLine obj) {
-        this.daoSupport.insertDataTransaction(obj);
+        this.basicDao.insertDataTransaction(obj);
     }
 
     @Override
     public void updateDataObject(SoAgreementLine obj) {
-        this.daoSupport.updateDataTransaction(obj);
+        this.basicDao.updateDataTransaction(obj);
     }
     
     @Override
     public void insertOrUpdateDataObject(SoAgreementLine obj) {
-        this.daoSupport.insertOrUpdateDataTransaction(obj);
+        this.basicDao.insertOrUpdateDataTransaction(obj);
     }
 
     @Override
     public void deleteDataObject(SoAgreementLine obj) {
-        this.daoSupport.deleteDataTransactionJPA(obj);
+        this.basicDao.deleteDataTransactionJPA(obj);
     }
 
     @Override
     public List<SoAgreementLine> getDataObjects() {
-        return this.daoSupport.getDataAllObject(SoAgreementLine.class);
+        return this.basicDao.getDataAllObject(SoAgreementLine.class);
     }
 
     @Override
     public SoAgreementLine getDataObject(int id) {
-        return (SoAgreementLine)this.daoSupport.getDataObject(SoAgreementLine.class, id);
+        return (SoAgreementLine)this.basicDao.getDataObject(SoAgreementLine.class, id);
     }
     
     @Override
@@ -85,7 +86,7 @@ public class SoAgreementLineDaoImpl implements SoAgreementLineDao{
         Map<String, Class<?>> entity = new HashMap<String, Class<?>>();
         entity.put("s", SoAgreementLine.class);
         
-        List<SoAgreementLine> list = this.daoSupport.selectDataSql(sql, entity, args);
+        List<SoAgreementLine> list = this.basicDao.selectData(sql, entity, args);
         if(list.size()>0) {
             return list.get(0);
         }
@@ -130,7 +131,7 @@ public class SoAgreementLineDaoImpl implements SoAgreementLineDao{
         Map<String, Class<?>> entity = new HashMap<String, Class<?>>();
         entity.put("s", SoAgreementLine.class);
         
-        return this.daoSupport.getDataSqlByPage(sql, entity, args, pages);
+        return this.basicDao.getDataSql(sql, entity, args, pages);
     }
     
     @Override
@@ -140,7 +141,7 @@ public class SoAgreementLineDaoImpl implements SoAgreementLineDao{
         Map<String, Object> args = new HashMap<String, Object>();
         args.put("soheadcode", soHeadCode);
         
-        this.daoSupport.executeSQLTransaction(sql, args);
+        this.basicDao.executeSQLTransaction(sql, args);
     }
     
     @Override
@@ -150,7 +151,7 @@ public class SoAgreementLineDaoImpl implements SoAgreementLineDao{
         Map<String, Object> args = new HashMap<String, Object>();
         args.put("soheadcode", soHeadCode);
         
-        List list = this.daoSupport.selectDataSqlCount(sql, args);
+        List list = this.basicDao.selectDataSqlCount(sql, args);
         if(list.size()>0) {
             return (BigDecimal)list.get(0);
         }
@@ -165,7 +166,7 @@ public class SoAgreementLineDaoImpl implements SoAgreementLineDao{
         Map<String, Object> args = new HashMap<String, Object>();
         args.put("code", code);
         
-        this.daoSupport.executeSQLTransaction(sql, args);
+        this.basicDao.executeSQLTransaction(sql, args);
     }
     
 }

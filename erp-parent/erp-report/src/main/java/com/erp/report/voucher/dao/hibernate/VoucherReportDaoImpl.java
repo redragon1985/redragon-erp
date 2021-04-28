@@ -22,20 +22,20 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.framework.dao.BasicDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.erp.report.voucher.dao.VoucherReportDao;
 import com.erp.report.voucher.dao.model.VoucherReportV;
-import com.framework.dao.DaoSupport;
 import com.framework.util.DaoUtil;
 
 @Repository
 public class VoucherReportDaoImpl implements VoucherReportDao {
     
-    //注入DaoSupport工具类
+    //注入basicDao工具类
     @Autowired
-    private DaoSupport daoSupport;
+    private BasicDao basicDao;
 
     @Override
     public List<VoucherReportV> getVoucherReportList(String startDate, String endDate) {
@@ -44,7 +44,7 @@ public class VoucherReportDaoImpl implements VoucherReportDao {
         Map<String, Object> args = new HashMap<String, Object>();
         sql = sql + DaoUtil.getSimpleSQLConditionForDateTime("voucherDate", startDate, endDate, "and ", args);
         
-        return this.daoSupport.selectDataSql(sql, VoucherReportV.class, args);
+        return this.basicDao.selectData(sql, VoucherReportV.class, args);
     }
 
 }

@@ -28,11 +28,11 @@ package com.erp.common.proc.dao.hibernate;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.framework.dao.BasicDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.erp.common.proc.dao.ProcedureDao;
-import com.framework.dao.DaoSupport;
 import com.framework.dao.model.ProcedureParam;
 
 /**
@@ -44,9 +44,9 @@ import com.framework.dao.model.ProcedureParam;
 @Repository("procedureDaoCommon")
 public class ProcedureDaoImpl implements ProcedureDao {
     
-    //注入DaoSupport工具类
+    //注入basicDao工具类
     @Autowired
-    private DaoSupport daoSupport;
+    private BasicDao basicDao;
 
     @Override
     public int saveHistoryData(String tableName, String primaryKey, String primarykeyValue) {
@@ -55,7 +55,7 @@ public class ProcedureDaoImpl implements ProcedureDao {
         
         try {
             String sql="{call save_history_data_proc(?,?,?,?)}";
-            procedureParams = this.daoSupport.executeProcedures(sql, procedureParams);
+            procedureParams = this.basicDao.executeProcedures(sql, procedureParams);
             
             for (int i = 0; i < procedureParams.size(); i++) {
                 ProcedureParam procedureParam=procedureParams.get(i);

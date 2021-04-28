@@ -23,6 +23,8 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import com.framework.shiro.ShiroUtil;
 import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -33,7 +35,6 @@ import com.erp.hr.dao.model.HrDepartment;
 import com.erp.hr.dao.model.HrStaffInfoRO;
 import com.erp.hr.service.HrCommonService;
 import com.framework.annotation.Permissions;
-import com.framework.util.ShiroUtil;
 
 @Component
 public class DataPermissionsAnnotationAspect {

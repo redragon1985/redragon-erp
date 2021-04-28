@@ -21,6 +21,8 @@ package com.erp.inv.check.service.spring;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
+
+import com.framework.shiro.ShiroUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -29,9 +31,6 @@ import com.framework.annotation.Cache;
 import com.framework.annotation.Cache.CacheType;
 import com.framework.annotation.Log;
 import com.framework.dao.model.Pages;
-import com.framework.util.ShiroUtil;
-
-import redragon.frame.hibernate.SnowFlake;
 
 import com.erp.hr.dao.model.HrStaffInfoRO;
 import com.erp.hr.service.HrCommonService;
@@ -47,6 +46,7 @@ import com.erp.inv.input.dao.model.InvInputLine;
 import com.erp.inv.input.dao.model.InvInputLineCO;
 import com.erp.inv.stock.dao.model.InvStock;
 import com.erp.inv.stock.service.InvStockService;
+import redragon.basic.tools.SnowFlake;
 
 @Service
 @Transactional(rollbackFor=Exception.class)

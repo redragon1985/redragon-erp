@@ -21,6 +21,8 @@ package com.erp.hr.dao.hibernate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import com.framework.dao.BasicDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
@@ -28,7 +30,6 @@ import com.framework.annotation.Cache;
 import com.framework.annotation.Permissions;
 import com.framework.annotation.Permissions.PermissionType;
 import com.framework.annotation.SqlParam;
-import com.framework.dao.DaoSupport;
 import com.framework.dao.model.Pages;
 import com.framework.util.DaoUtil;
 import com.erp.hr.dao.HrStaffDao;
@@ -39,38 +40,38 @@ import com.erp.hr.dao.model.HrStaffInfoRO;
 @Repository
 public class HrStaffDaoImpl implements HrStaffDao{ 
 
-    //注入DaoSupport工具类
+    //注入basicDao工具类
     @Autowired
-    private DaoSupport daoSupport;
+    private BasicDao basicDao;
     
     @Override
     public void insertDataObject(HrStaff obj) {
-        this.daoSupport.insertDataTransaction(obj);
+        this.basicDao.insertDataTransaction(obj);
     }
 
     @Override
     public void updateDataObject(HrStaff obj) {
-        this.daoSupport.updateDataTransaction(obj);
+        this.basicDao.updateDataTransaction(obj);
     }
     
     @Override
     public void insertOrUpdateDataObject(HrStaff obj) {
-        this.daoSupport.insertOrUpdateDataTransaction(obj);
+        this.basicDao.insertOrUpdateDataTransaction(obj);
     }
 
     @Override
     public void deleteDataObject(HrStaff obj) {
-        this.daoSupport.deleteDataTransactionJPA(obj);
+        this.basicDao.deleteDataTransactionJPA(obj);
     }
 
     @Override
     public List<HrStaff> getDataObjects() {
-        return this.daoSupport.getDataAllObject(HrStaff.class);
+        return this.basicDao.getDataAllObject(HrStaff.class);
     }
 
     @Override
     public HrStaff getDataObject(int id) {
-        return (HrStaff)this.daoSupport.getDataObject(HrStaff.class, id);
+        return (HrStaff)this.basicDao.getDataObject(HrStaff.class, id);
     }
     
     @Override
@@ -83,7 +84,7 @@ public class HrStaffDaoImpl implements HrStaffDao{
         Map<String, Class<?>> entity = new HashMap<String, Class<?>>();
         entity.put("s", HrStaff.class);
         
-        List<HrStaff> list = this.daoSupport.selectDataSql(sql, entity, args);
+        List<HrStaff> list = this.basicDao.selectData(sql, entity, args);
         if(list.size()>0) {
             return list.get(0);
         }
@@ -96,13 +97,13 @@ public class HrStaffDaoImpl implements HrStaffDao{
         String sql = "select s.* from hr_staff s where 1=1";
         
         Map<String, Object> args = new HashMap<String, Object>();
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "staffStatus", "and s.", args);
+        sql = sql + DaoUtil.settleParam(paramObj, "staffStatus", "and s.", args);
         sql = sql + " order by s.staff_code desc";
         
         Map<String, Class<?>> entity = new HashMap<String, Class<?>>();
         entity.put("s", HrStaff.class);
         
-        return this.daoSupport.selectDataSql(sql, entity, args);
+        return this.basicDao.selectData(sql, entity, args);
     }
     
     @Override
@@ -115,17 +116,17 @@ public class HrStaffDaoImpl implements HrStaffDao{
         String sql = "select s.* from hr_staff s where 1=1";
         
         Map<String, Object> args = new HashMap<String, Object>();
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "staffCode", "and s.", args);
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "staffName", "and s.", args);
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "staffSex", "and s.", args);
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "staffStatus", "and s.", args);
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "username", "and s.", args);
+        sql = sql + DaoUtil.settleParam(paramObj, "staffCode", "and s.", args);
+        sql = sql + DaoUtil.settleParam(paramObj, "staffName", "and s.", args);
+        sql = sql + DaoUtil.settleParam(paramObj, "staffSex", "and s.", args);
+        sql = sql + DaoUtil.settleParam(paramObj, "staffStatus", "and s.", args);
+        sql = sql + DaoUtil.settleParam(paramObj, "username", "and s.", args);
         sql = sql + " order by s.staff_code desc";
         
         Map<String, Class<?>> entity = new HashMap<String, Class<?>>();
         entity.put("s", HrStaff.class);
         
-        return this.daoSupport.getDataSqlByPage(sql, entity, args, pages);
+        return this.basicDao.getDataSql(sql, entity, args, pages);
     }
 
     @Override
@@ -148,7 +149,7 @@ public class HrStaffDaoImpl implements HrStaffDao{
         Map<String, Object> args = new HashMap<String, Object>();
         args.put("username", username);
         
-        List<HrStaffInfoRO> list = this.daoSupport.selectDataSql(sql, HrStaffInfoRO.class, args);
+        List<HrStaffInfoRO> list = this.basicDao.selectData(sql, HrStaffInfoRO.class, args);
         if(list.size()>0) {
             return list.get(0);
         }
@@ -163,9 +164,9 @@ public class HrStaffDaoImpl implements HrStaffDao{
         Map<String, Object> args = new HashMap<String, Object>();
         args.put("staffCode", staffCode);
         
-        List list = this.daoSupport.selectDataSqlCount(sql, args);
+        List list = this.basicDao.selectDataSqlCount(sql, args);
         if(list.size()>0) {
-            int num = this.daoSupport.convertSQLCount(list.get(0));
+            int num = this.basicDao.convertSQLCount(list.get(0));
             if(num==0) {
                 return false;
             }
@@ -181,7 +182,7 @@ public class HrStaffDaoImpl implements HrStaffDao{
         Map<String, Object> args = new HashMap<String, Object>();
         args.put("staffCode", staffCode);
         
-        List<String> list = this.daoSupport.selectDataSqlCount(sql, args);
+        List<String> list = this.basicDao.selectDataSqlCount(sql, args);
         if(list.size()>0) {
             return list.get(0);
         }

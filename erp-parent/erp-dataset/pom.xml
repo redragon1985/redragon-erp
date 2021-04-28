@@ -3,12 +3,11 @@
   <parent>
     <groupId>redragon</groupId>
     <artifactId>erp-parent</artifactId>
-    <version>1.0</version>
+    <version>0.9</version>
   </parent>
   <artifactId>erp-dataset</artifactId>
   <!-- package mode change -->
-  <packaging>war</packaging>
-  
+  <packaging>jar</packaging>
 
   <dependencies>
 	  <dependency>

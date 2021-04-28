@@ -21,6 +21,8 @@ package com.erp.inv.check.dao.hibernate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import com.framework.dao.BasicDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
@@ -28,7 +30,6 @@ import com.framework.annotation.Cache;
 import com.framework.annotation.Permissions;
 import com.framework.annotation.Permissions.PermissionType;
 import com.framework.annotation.SqlParam;
-import com.framework.dao.DaoSupport;
 import com.framework.dao.model.Pages;
 import com.framework.util.DaoUtil;
 import com.erp.inv.check.dao.InvStockCheckHeadDao;
@@ -39,38 +40,38 @@ import com.erp.inv.check.dao.model.InvStockData;
 @Repository
 public class InvStockCheckHeadDaoImpl implements InvStockCheckHeadDao{ 
 
-    //注入DaoSupport工具类
+    //注入basicDao工具类
     @Autowired
-    private DaoSupport daoSupport;
+    private BasicDao basicDao;
     
     @Override
     public void insertDataObject(InvStockCheckHead obj) {
-        this.daoSupport.insertDataTransaction(obj);
+        this.basicDao.insertDataTransaction(obj);
     }
 
     @Override
     public void updateDataObject(InvStockCheckHead obj) {
-        this.daoSupport.updateDataTransaction(obj);
+        this.basicDao.updateDataTransaction(obj);
     }
     
     @Override
     public void insertOrUpdateDataObject(InvStockCheckHead obj) {
-        this.daoSupport.insertOrUpdateDataTransaction(obj);
+        this.basicDao.insertOrUpdateDataTransaction(obj);
     }
 
     @Override
     public void deleteDataObject(InvStockCheckHead obj) {
-        this.daoSupport.deleteDataTransactionJPA(obj);
+        this.basicDao.deleteDataTransactionJPA(obj);
     }
 
     @Override
     public List<InvStockCheckHead> getDataObjects() {
-        return this.daoSupport.getDataAllObject(InvStockCheckHead.class);
+        return this.basicDao.getDataAllObject(InvStockCheckHead.class);
     }
 
     @Override
     public InvStockCheckHead getDataObject(int id) {
-        return (InvStockCheckHead)this.daoSupport.getDataObject(InvStockCheckHead.class, id);
+        return (InvStockCheckHead)this.basicDao.getDataObject(InvStockCheckHead.class, id);
     }
     
     @Override
@@ -83,7 +84,7 @@ public class InvStockCheckHeadDaoImpl implements InvStockCheckHeadDao{
         Map<String, Class<?>> entity = new HashMap<String, Class<?>>();
         entity.put("h", InvStockCheckHead.class);
         
-        List<InvStockCheckHead> list = this.daoSupport.selectDataSql(sql, entity, args);
+        List<InvStockCheckHead> list = this.basicDao.selectData(sql, entity, args);
         if(list.size()>0) {
             return list.get(0);
         }
@@ -106,16 +107,16 @@ public class InvStockCheckHeadDaoImpl implements InvStockCheckHeadDao{
         String sql = "select h.* from inv_stock_check_head h where 1=1";
         
         Map<String, Object> args = new HashMap<String, Object>();
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "checkHeadCode", "and h.", args);
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "checkName", "and h.", args);
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "warehouseCode", "and h.", args);
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "checkDate", "and h.", args);
+        sql = sql + DaoUtil.settleParam(paramObj, "checkHeadCode", "and h.", args);
+        sql = sql + DaoUtil.settleParam(paramObj, "checkName", "and h.", args);
+        sql = sql + DaoUtil.settleParam(paramObj, "warehouseCode", "and h.", args);
+        sql = sql + DaoUtil.settleParam(paramObj, "checkDate", "and h.", args);
         sql = sql + " order by h.check_head_id desc";
         
         Map<String, Class<?>> entity = new HashMap<String, Class<?>>();
         entity.put("h", InvStockCheckHead.class);
         
-        return this.daoSupport.getDataSqlByPage(sql, entity, args, pages);
+        return this.basicDao.getDataSql(sql, entity, args, pages);
     }
 
     @Override
@@ -145,7 +146,7 @@ public class InvStockCheckHeadDaoImpl implements InvStockCheckHeadDao{
         
         sql = sql + " where check_head_code = :code";
         
-        this.daoSupport.executeSQLTransaction(sql, args);
+        this.basicDao.executeSQLTransaction(sql, args);
     }
     
     @Override
@@ -156,7 +157,7 @@ public class InvStockCheckHeadDaoImpl implements InvStockCheckHeadDao{
         Map<String, Object> args = new HashMap<String, Object>();
         args.put("warehouseCode", warehouseCode);
         
-        return this.daoSupport.selectDataSql(sql, InvStockData.class, args);
+        return this.basicDao.selectData(sql, InvStockData.class, args);
     }
     
 }

@@ -21,6 +21,8 @@ package com.erp.inv.warehouse.dao.hibernate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import com.framework.dao.BasicDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
@@ -28,7 +30,6 @@ import com.framework.annotation.Cache;
 import com.framework.annotation.Permissions;
 import com.framework.annotation.Permissions.PermissionType;
 import com.framework.annotation.SqlParam;
-import com.framework.dao.DaoSupport;
 import com.framework.dao.model.Pages;
 import com.framework.util.DaoUtil;
 import com.erp.inv.check.dao.model.InvStockCheckHead;
@@ -39,38 +40,38 @@ import com.erp.inv.warehouse.dao.model.InvWarehouseCO;
 @Repository
 public class InvWarehouseDaoImpl implements InvWarehouseDao{ 
 
-    //注入DaoSupport工具类
+    //注入basicDao工具类
     @Autowired
-    private DaoSupport daoSupport;
+    private BasicDao basicDao;
     
     @Override
     public void insertDataObject(InvWarehouse obj) {
-        this.daoSupport.insertDataTransaction(obj);
+        this.basicDao.insertDataTransaction(obj);
     }
 
     @Override
     public void updateDataObject(InvWarehouse obj) {
-        this.daoSupport.updateDataTransaction(obj);
+        this.basicDao.updateDataTransaction(obj);
     }
     
     @Override
     public void insertOrUpdateDataObject(InvWarehouse obj) {
-        this.daoSupport.insertOrUpdateDataTransaction(obj);
+        this.basicDao.insertOrUpdateDataTransaction(obj);
     }
 
     @Override
     public void deleteDataObject(InvWarehouse obj) {
-        this.daoSupport.deleteDataTransactionJPA(obj);
+        this.basicDao.deleteDataTransactionJPA(obj);
     }
 
     @Override
     public List<InvWarehouse> getDataObjects() {
-        return this.daoSupport.getDataAllObject(InvWarehouse.class);
+        return this.basicDao.getDataAllObject(InvWarehouse.class);
     }
 
     @Override
     public InvWarehouse getDataObject(int id) {
-        return (InvWarehouse)this.daoSupport.getDataObject(InvWarehouse.class, id);
+        return (InvWarehouse)this.basicDao.getDataObject(InvWarehouse.class, id);
     }
     
     @Override
@@ -83,7 +84,7 @@ public class InvWarehouseDaoImpl implements InvWarehouseDao{
         Map<String, Class<?>> entity = new HashMap<String, Class<?>>();
         entity.put("h", InvWarehouse.class);
         
-        List<InvWarehouse> list = this.daoSupport.selectDataSql(sql, entity, args);
+        List<InvWarehouse> list = this.basicDao.selectData(sql, entity, args);
         if(list.size()>0) {
             return list.get(0);
         }
@@ -106,14 +107,14 @@ public class InvWarehouseDaoImpl implements InvWarehouseDao{
         String sql = "select w.* from inv_warehouse w where 1=1";
         
         Map<String, Object> args = new HashMap<String, Object>();
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "warehouseName", "and w.", args);
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "status", "and w.", args);
+        sql = sql + DaoUtil.settleParam(paramObj, "warehouseName", "and w.", args);
+        sql = sql + DaoUtil.settleParam(paramObj, "status", "and w.", args);
         sql = sql + " order by w.warehouse_id desc";
         
         Map<String, Class<?>> entity = new HashMap<String, Class<?>>();
         entity.put("w", InvWarehouse.class);
         
-        return this.daoSupport.getDataSqlByPage(sql, entity, args, pages);
+        return this.basicDao.getDataSql(sql, entity, args, pages);
     }
 
     @Override
@@ -134,9 +135,9 @@ public class InvWarehouseDaoImpl implements InvWarehouseDao{
         Map<String, Object> args = new HashMap<String, Object>();
         args.put("warehouseCode", warehouseCode);
         
-        List list = this.daoSupport.selectDataSqlCount(sql, args);
+        List list = this.basicDao.selectDataSqlCount(sql, args);
         if(list.size()>0) {
-            int num = this.daoSupport.convertSQLCount(list.get(0));
+            int num = this.basicDao.convertSQLCount(list.get(0));
             if(num==0) {
                 return false;
             }

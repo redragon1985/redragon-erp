@@ -23,6 +23,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.framework.dao.BasicDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -32,44 +33,43 @@ import com.erp.finance.ap.invoice.dao.model.ApInvoiceLineCO;
 import com.framework.annotation.Permissions;
 import com.framework.annotation.Permissions.PermissionType;
 import com.framework.annotation.SqlParam;
-import com.framework.dao.DaoSupport;
 import com.framework.dao.model.Pages;
 
 @Repository
 public class ApInvoiceLineDaoImpl implements ApInvoiceLineDao{ 
 
-    //注入DaoSupport工具类
+    //注入basicDao工具类
     @Autowired
-    private DaoSupport daoSupport;
+    private BasicDao basicDao;
     
     @Override
     public void insertDataObject(ApInvoiceLine obj) {
-        this.daoSupport.insertDataTransaction(obj);
+        this.basicDao.insertDataTransaction(obj);
     }
 
     @Override
     public void updateDataObject(ApInvoiceLine obj) {
-        this.daoSupport.updateDataTransaction(obj);
+        this.basicDao.updateDataTransaction(obj);
     }
     
     @Override
     public void insertOrUpdateDataObject(ApInvoiceLine obj) {
-        this.daoSupport.insertOrUpdateDataTransaction(obj);
+        this.basicDao.insertOrUpdateDataTransaction(obj);
     }
 
     @Override
     public void deleteDataObject(ApInvoiceLine obj) {
-        this.daoSupport.deleteDataTransactionJPA(obj);
+        this.basicDao.deleteDataTransactionJPA(obj);
     }
 
     @Override
     public List<ApInvoiceLine> getDataObjects() {
-        return this.daoSupport.getDataAllObject(ApInvoiceLine.class);
+        return this.basicDao.getDataAllObject(ApInvoiceLine.class);
     }
 
     @Override
     public ApInvoiceLine getDataObject(int id) {
-        return (ApInvoiceLine)this.daoSupport.getDataObject(ApInvoiceLine.class, id);
+        return (ApInvoiceLine)this.basicDao.getDataObject(ApInvoiceLine.class, id);
     }
     
     @Override
@@ -114,7 +114,7 @@ public class ApInvoiceLineDaoImpl implements ApInvoiceLineDao{
         Map<String, Class<?>> entity = new HashMap<String, Class<?>>();
         entity.put("p", ApInvoiceLine.class);
         
-        return this.daoSupport.getDataSqlByPage(sql, entity, args, pages);
+        return this.basicDao.getDataSql(sql, entity, args, pages);
     }
     
     @Override
@@ -125,7 +125,7 @@ public class ApInvoiceLineDaoImpl implements ApInvoiceLineDao{
         args.put("poheadcode", poHeadCode);
         args.put("payheadcode", payHeadCode);
         
-        List list = this.daoSupport.selectDataSqlCount(sql, args);
+        List list = this.basicDao.selectDataSqlCount(sql, args);
         if(list.size()>0) {
             return (BigDecimal)list.get(0);
         }
@@ -140,7 +140,7 @@ public class ApInvoiceLineDaoImpl implements ApInvoiceLineDao{
         Map<String, Object> args = new HashMap<String, Object>();
         args.put("payheadcode", headCode);
         
-        this.daoSupport.executeSQLTransaction(sql, args);
+        this.basicDao.executeSQLTransaction(sql, args);
     }
     
     @Override
@@ -150,7 +150,7 @@ public class ApInvoiceLineDaoImpl implements ApInvoiceLineDao{
         Map<String, Object> args = new HashMap<String, Object>();
         args.put("payheadcode", headCode);
         
-        List<BigDecimal> list = this.daoSupport.selectDataSqlCount(sql, args);
+        List<BigDecimal> list = this.basicDao.selectDataSqlCount(sql, args);
         if(list.size()>0) {
             return list.get(0);
         }
@@ -166,7 +166,7 @@ public class ApInvoiceLineDaoImpl implements ApInvoiceLineDao{
         args.put("headCode", headCode);
         
         BigDecimal[] sumAmount = new BigDecimal[2];
-        List<Object[]> list = this.daoSupport.selectDataSqlCount(sql, args);
+        List<Object[]> list = this.basicDao.selectDataSqlCount(sql, args);
         if(list.size()>0) {
             if(list.get(0)[0]!=null) {
                 sumAmount[0] = new BigDecimal(String.valueOf(list.get(0)[0]));
@@ -195,7 +195,7 @@ public class ApInvoiceLineDaoImpl implements ApInvoiceLineDao{
         Map<String, Class<?>> entity = new HashMap<String, Class<?>>();
         entity.put("p", ApInvoiceLine.class);
         
-        return this.daoSupport.selectDataSql(sql, entity, args);
+        return this.basicDao.selectData(sql, entity, args);
     }
     
     @Override
@@ -206,7 +206,7 @@ public class ApInvoiceLineDaoImpl implements ApInvoiceLineDao{
         args.put("code", poLineCode);
         args.put("id", invoiceLineId);
         
-        List list = this.daoSupport.selectDataSqlCount(sql, args);
+        List list = this.basicDao.selectDataSqlCount(sql, args);
         if(list!=null&&list.size()>0) {
             if(list.get(0)!=null) {
                 return Double.valueOf(String.valueOf(list.get(0)));

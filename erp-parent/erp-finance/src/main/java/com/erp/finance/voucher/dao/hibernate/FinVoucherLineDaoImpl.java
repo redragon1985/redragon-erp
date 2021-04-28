@@ -22,6 +22,8 @@ import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import com.framework.dao.BasicDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
@@ -29,7 +31,6 @@ import com.framework.annotation.Cache;
 import com.framework.annotation.Permissions;
 import com.framework.annotation.Permissions.PermissionType;
 import com.framework.annotation.SqlParam;
-import com.framework.dao.DaoSupport;
 import com.framework.dao.model.Pages;
 import com.framework.util.DaoUtil;
 import com.erp.finance.voucher.dao.FinVoucherLineDao;
@@ -40,38 +41,38 @@ import com.erp.finance.voucher.dao.model.FinVoucherLineCO;
 @Repository
 public class FinVoucherLineDaoImpl implements FinVoucherLineDao{ 
 
-    //注入DaoSupport工具类
+    //注入basicDao工具类
     @Autowired
-    private DaoSupport daoSupport;
+    private BasicDao basicDao;
     
     @Override
     public void insertDataObject(FinVoucherLine obj) {
-        this.daoSupport.insertDataTransaction(obj);
+        this.basicDao.insertDataTransaction(obj);
     }
 
     @Override
     public void updateDataObject(FinVoucherLine obj) {
-        this.daoSupport.updateDataTransaction(obj);
+        this.basicDao.updateDataTransaction(obj);
     }
     
     @Override
     public void insertOrUpdateDataObject(FinVoucherLine obj) {
-        this.daoSupport.insertOrUpdateDataTransaction(obj);
+        this.basicDao.insertOrUpdateDataTransaction(obj);
     }
 
     @Override
     public void deleteDataObject(FinVoucherLine obj) {
-        this.daoSupport.deleteDataTransactionJPA(obj);
+        this.basicDao.deleteDataTransactionJPA(obj);
     }
 
     @Override
     public List<FinVoucherLine> getDataObjects() {
-        return this.daoSupport.getDataAllObject(FinVoucherLine.class);
+        return this.basicDao.getDataAllObject(FinVoucherLine.class);
     }
 
     @Override
     public FinVoucherLine getDataObject(int id) {
-        return (FinVoucherLine)this.daoSupport.getDataObject(FinVoucherLine.class, id);
+        return (FinVoucherLine)this.basicDao.getDataObject(FinVoucherLine.class, id);
     }
     
     @Override
@@ -115,7 +116,7 @@ public class FinVoucherLineDaoImpl implements FinVoucherLineDao{
         Map<String, Class<?>> entity = new HashMap<String, Class<?>>();
         entity.put("l", FinVoucherLine.class);
         
-        return this.daoSupport.selectDataSql(sql, entity, args);
+        return this.basicDao.selectData(sql, entity, args);
     }
     
     @Override
@@ -125,7 +126,7 @@ public class FinVoucherLineDaoImpl implements FinVoucherLineDao{
         Map<String, Object> args = new HashMap<String, Object>();
         args.put("voucherheadcode", voucherHeadCode);
         
-        this.daoSupport.executeSQLTransaction(sql, args);
+        this.basicDao.executeSQLTransaction(sql, args);
     }
     
     @Override
@@ -135,7 +136,7 @@ public class FinVoucherLineDaoImpl implements FinVoucherLineDao{
         Map<String, Object> args = new HashMap<String, Object>();
         args.put("voucherheadcode", voucherHeadCode);
         
-        List<BigDecimal> list = this.daoSupport.selectDataSqlCount(sql, args);
+        List<BigDecimal> list = this.basicDao.selectDataSqlCount(sql, args);
         if(list.size()>0) {
             return list.get(0);
         }
@@ -156,7 +157,7 @@ public class FinVoucherLineDaoImpl implements FinVoucherLineDao{
          Map<String, Class<?>> entity = new HashMap<String, Class<?>>();
          entity.put("l", FinVoucherLine.class);
          
-         List<FinVoucherLine> list = this.daoSupport.selectDataSql(sql, entity, args);
+         List<FinVoucherLine> list = this.basicDao.selectData(sql, entity, args);
          
          return list;
     }

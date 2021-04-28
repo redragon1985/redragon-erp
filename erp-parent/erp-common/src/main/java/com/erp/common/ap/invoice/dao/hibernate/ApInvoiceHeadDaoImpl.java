@@ -29,11 +29,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.framework.dao.BasicDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.erp.common.ap.invoice.dao.ApInvoiceHeadDao;
-import com.framework.dao.DaoSupport;
 
 /**
  * @description
@@ -44,9 +44,9 @@ import com.framework.dao.DaoSupport;
 @Repository("apInvoiceHeadDaoCommon")
 public class ApInvoiceHeadDaoImpl implements ApInvoiceHeadDao {
     
-    //注入DaoSupport工具类
+    //注入basicDao工具类
     @Autowired
-    private DaoSupport daoSupport;
+    private BasicDao basicDao;
     
     @Override
     public boolean isExistApInvoiceRelatePO(String headCode) {
@@ -55,9 +55,9 @@ public class ApInvoiceHeadDaoImpl implements ApInvoiceHeadDao {
         Map<String, Object> args = new HashMap<String, Object>();
         args.put("headCode", headCode);
         
-        List list = this.daoSupport.selectDataSqlCount(sql, args);
+        List list = this.basicDao.selectDataSqlCount(sql, args);
         if(list.size()>0) {
-            int count = this.daoSupport.convertSQLCount(list.get(0));
+            int count = this.basicDao.convertSQLCount(list.get(0));
             if(count>0) {
                 return true;
             }

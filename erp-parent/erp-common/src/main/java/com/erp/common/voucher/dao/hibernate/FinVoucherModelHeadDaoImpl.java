@@ -21,6 +21,8 @@ package com.erp.common.voucher.dao.hibernate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import com.framework.dao.BasicDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
@@ -28,7 +30,6 @@ import com.framework.annotation.Cache;
 import com.framework.annotation.Permissions;
 import com.framework.annotation.Permissions.PermissionType;
 import com.framework.annotation.SqlParam;
-import com.framework.dao.DaoSupport;
 import com.framework.dao.model.Pages;
 import com.framework.util.DaoUtil;
 import com.erp.common.voucher.dao.FinVoucherModelHeadDao;
@@ -39,38 +40,38 @@ import com.erp.common.voucher.dao.model.FinVoucherModelHeadCO;
 @Repository("finVoucherModelHeadDaoCommon")
 public class FinVoucherModelHeadDaoImpl implements FinVoucherModelHeadDao{ 
 
-    //注入DaoSupport工具类
+    //注入basicDao工具类
     @Autowired
-    private DaoSupport daoSupport;
+    private BasicDao basicDao;
     
     @Override
     public void insertDataObject(FinVoucherModelHead obj) {
-        this.daoSupport.insertDataTransaction(obj);
+        this.basicDao.insertDataTransaction(obj);
     }
 
     @Override
     public void updateDataObject(FinVoucherModelHead obj) {
-        this.daoSupport.updateDataTransaction(obj);
+        this.basicDao.updateDataTransaction(obj);
     }
     
     @Override
     public void insertOrUpdateDataObject(FinVoucherModelHead obj) {
-        this.daoSupport.insertOrUpdateDataTransaction(obj);
+        this.basicDao.insertOrUpdateDataTransaction(obj);
     }
 
     @Override
     public void deleteDataObject(FinVoucherModelHead obj) {
-        this.daoSupport.deleteDataTransactionJPA(obj);
+        this.basicDao.deleteDataTransactionJPA(obj);
     }
 
     @Override
     public List<FinVoucherModelHead> getDataObjects() {
-        return this.daoSupport.getDataAllObject(FinVoucherModelHead.class);
+        return this.basicDao.getDataAllObject(FinVoucherModelHead.class);
     }
 
     @Override
     public FinVoucherModelHead getDataObject(int id) {
-        return (FinVoucherModelHead)this.daoSupport.getDataObject(FinVoucherModelHead.class, id);
+        return (FinVoucherModelHead)this.basicDao.getDataObject(FinVoucherModelHead.class, id);
     }
     
     @Override
@@ -93,16 +94,16 @@ public class FinVoucherModelHeadDaoImpl implements FinVoucherModelHeadDao{
         String sql = "select v.* from fin_voucher_model_head v where 1=1";
         
         Map<String, Object> args = new HashMap<String, Object>();
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "voucherType", "and v.", args);
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "modelName", "and v.", args);
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "businessType", "and v.", args);
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "status", "and v.", args);
+        sql = sql + DaoUtil.settleParam(paramObj, "voucherType", "and v.", args);
+        sql = sql + DaoUtil.settleParam(paramObj, "modelName", "and v.", args);
+        sql = sql + DaoUtil.settleParam(paramObj, "businessType", "and v.", args);
+        sql = sql + DaoUtil.settleParam(paramObj, "status", "and v.", args);
         sql = sql + " order by v.voucher_head_id desc";
         
         Map<String, Class<?>> entity = new HashMap<String, Class<?>>();
         entity.put("v", FinVoucherModelHead.class);
         
-        return this.daoSupport.getDataSqlByPage(sql, entity, args, pages);
+        return this.basicDao.getDataSql(sql, entity, args, pages);
     }
 
     @Override
@@ -126,7 +127,7 @@ public class FinVoucherModelHeadDaoImpl implements FinVoucherModelHeadDao{
         Map<String, Class<?>> entity = new HashMap<String, Class<?>>();
         entity.put("h", FinVoucherModelHead.class);
         
-        List<FinVoucherModelHead> list = this.daoSupport.selectDataSql(sql, entity, args);
+        List<FinVoucherModelHead> list = this.basicDao.selectData(sql, entity, args);
         if(list.size()>0) {
             return list.get(0);
         }

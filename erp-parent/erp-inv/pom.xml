@@ -6,19 +6,7 @@
     <version>0.9</version>
   </parent>
   <artifactId>erp-inv</artifactId>
-  <packaging>war</packaging>
-  
-  <build>
-    <plugins>
-        <plugin>
-           <artifactId>maven-war-plugin</artifactId>
-           <configuration>
-               <version>3.0</version>
-               <failOnMissingWebXml>false</failOnMissingWebXml>
-            </configuration>
-        </plugin>
-    </plugins>
-  </build>
+  <packaging>jar</packaging>
   
   <dependencies>
   	<dependency>

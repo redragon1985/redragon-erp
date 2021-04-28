@@ -46,9 +46,6 @@ import com.erp.order.po.dao.model.PoLine;
 import com.framework.annotation.Cache;
 import com.framework.annotation.Cache.CacheType;
 import com.framework.dao.model.Pages;
-import com.framework.util.ShiroUtil;
-
-import redragon.frame.hibernate.SnowFlake;
 
 @Service
 @Transactional(rollbackFor=Exception.class)

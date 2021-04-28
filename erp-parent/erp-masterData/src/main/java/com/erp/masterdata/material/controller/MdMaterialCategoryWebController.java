@@ -42,13 +42,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.framework.controller.ControllerSupport;
 import com.framework.dao.model.Pages;
 import com.framework.dao.model.TreeNode;
-import com.framework.util.JsonResultUtil;
-import com.framework.util.JsonUtil;
 import com.erp.masterdata.material.dao.model.MdMaterialCategory;
 import com.erp.masterdata.material.dao.model.MdMaterialCategoryCO;
 import com.erp.masterdata.material.service.MdMaterialCategoryService;
 import com.erp.masterdata.subject.dao.model.MdFinanceSubject;
 import com.erp.masterdata.subject.dao.model.MdFinanceSubjectCO;
+import redragon.util.string.JsonUtil;
 
 @Controller
 @RequestMapping("/web/mdMaterialCategory")
@@ -215,7 +214,6 @@ public class MdMaterialCategoryWebController extends ControllerSupport{
      * @description 获取物料类型编辑模态对话框
      * @date 2020年7月5日
      * @author dongbin
-     * @param nodeCode
      * @param model
      * @return String
      *
@@ -281,7 +279,6 @@ public class MdMaterialCategoryWebController extends ControllerSupport{
      * @description 编辑数据
      * @date 2020-08-02 14:54:16
      * @author 
-     * @param mdMaterialCategory
      * @param bindingResult
      * @param model
      * @return String
@@ -343,7 +340,6 @@ public class MdMaterialCategoryWebController extends ControllerSupport{
      * @description 删除数据
      * @date 2020-08-02 14:54:16
      * @author 
-     * @param mdMaterialCategory
      * @return String
      *
      */

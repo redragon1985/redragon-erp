@@ -20,6 +20,9 @@ package com.erp.common.voucher.service.spring;
 
 import java.util.List;
 import java.util.Map;
+
+import com.framework.controller.JsonTextUtil;
+import com.framework.shiro.ShiroUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -28,11 +31,9 @@ import com.framework.annotation.Cache;
 import com.framework.annotation.Cache.CacheType;
 import com.framework.annotation.Log;
 import com.framework.dao.model.Pages;
-import com.framework.util.JsonResultUtil;
-import com.framework.util.ShiroUtil;
 
+import redragon.basic.tools.SnowFlake;
 import redragon.basic.tools.TimeToolKit;
-import redragon.frame.hibernate.SnowFlake;
 
 import com.erp.common.voucher.dao.FinVoucherModelHeadDao;
 import com.erp.common.voucher.dao.FinVoucherModelLineDao;
@@ -208,10 +209,10 @@ public class FinVoucherModelHeadServiceImpl implements FinVoucherModelHeadServic
                return "{\"errCode\":0, \"errMsg\": \"\", \"voucherHeadId\": "+finVoucherHead.getVoucherHeadId()+", \"voucherHeadCode\": \""+finVoucherHead.getVoucherHeadCode()+"\"}";
            }
         }else {
-            return JsonResultUtil.getErrorJson(-1, "请先创建自动凭证模板");
+            return JsonTextUtil.getErrorJson(-1, "请先创建自动凭证模板");
         }
         
-        return JsonResultUtil.getErrorJson(-1, "自动生成凭证执行错误");
+        return JsonTextUtil.getErrorJson(-1, "自动生成凭证执行错误");
     }
     
 }

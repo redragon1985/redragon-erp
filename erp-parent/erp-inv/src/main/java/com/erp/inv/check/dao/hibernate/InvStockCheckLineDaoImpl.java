@@ -21,6 +21,8 @@ package com.erp.inv.check.dao.hibernate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import com.framework.dao.BasicDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
@@ -28,7 +30,6 @@ import com.framework.annotation.Cache;
 import com.framework.annotation.Permissions;
 import com.framework.annotation.Permissions.PermissionType;
 import com.framework.annotation.SqlParam;
-import com.framework.dao.DaoSupport;
 import com.framework.dao.model.Pages;
 import com.framework.util.DaoUtil;
 import com.erp.inv.check.dao.InvStockCheckLineDao;
@@ -39,38 +40,38 @@ import com.erp.inv.input.dao.model.InvInputLine;
 @Repository
 public class InvStockCheckLineDaoImpl implements InvStockCheckLineDao{ 
 
-    //注入DaoSupport工具类
+    //注入basicDao工具类
     @Autowired
-    private DaoSupport daoSupport;
+    private BasicDao basicDao;
     
     @Override
     public void insertDataObject(InvStockCheckLine obj) {
-        this.daoSupport.insertDataTransaction(obj);
+        this.basicDao.insertDataTransaction(obj);
     }
 
     @Override
     public void updateDataObject(InvStockCheckLine obj) {
-        this.daoSupport.updateDataTransaction(obj);
+        this.basicDao.updateDataTransaction(obj);
     }
     
     @Override
     public void insertOrUpdateDataObject(InvStockCheckLine obj) {
-        this.daoSupport.insertOrUpdateDataTransaction(obj);
+        this.basicDao.insertOrUpdateDataTransaction(obj);
     }
 
     @Override
     public void deleteDataObject(InvStockCheckLine obj) {
-        this.daoSupport.deleteDataTransactionJPA(obj);
+        this.basicDao.deleteDataTransactionJPA(obj);
     }
 
     @Override
     public List<InvStockCheckLine> getDataObjects() {
-        return this.daoSupport.getDataAllObject(InvStockCheckLine.class);
+        return this.basicDao.getDataAllObject(InvStockCheckLine.class);
     }
 
     @Override
     public InvStockCheckLine getDataObject(int id) {
-        return (InvStockCheckLine)this.daoSupport.getDataObject(InvStockCheckLine.class, id);
+        return (InvStockCheckLine)this.basicDao.getDataObject(InvStockCheckLine.class, id);
     }
     
     @Override
@@ -115,7 +116,7 @@ public class InvStockCheckLineDaoImpl implements InvStockCheckLineDao{
         Map<String, Class<?>> entity = new HashMap<String, Class<?>>();
         entity.put("l", InvStockCheckLine.class);
         
-        return this.daoSupport.selectDataSql(sql, entity, args);
+        return this.basicDao.selectData(sql, entity, args);
     }
     
     @Override
@@ -125,7 +126,7 @@ public class InvStockCheckLineDaoImpl implements InvStockCheckLineDao{
         Map<String, Object> args = new HashMap<String, Object>();
         args.put("headcode", headCode);
         
-        this.daoSupport.executeSQLTransaction(sql, args);
+        this.basicDao.executeSQLTransaction(sql, args);
     }
     
 }

@@ -29,11 +29,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.framework.dao.BasicDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.erp.common.inv.stock.dao.InvStockDao;
-import com.framework.dao.DaoSupport;
 
 
 /**
@@ -45,9 +45,9 @@ import com.framework.dao.DaoSupport;
 @Repository("invStockDaoCommon")
 public class InvStockDaoImpl implements InvStockDao {
     
-    //注入DaoSupport工具类
+    //注入basicDao工具类
     @Autowired
-    private DaoSupport daoSupport;
+    private BasicDao basicDao;
 
     @Override
     public Double getMaterialStockNumber(String materialCode) {
@@ -56,7 +56,7 @@ public class InvStockDaoImpl implements InvStockDao {
         Map<String, Object> args = new HashMap<String, Object>();
         args.put("materialCode", materialCode);
         
-        List list = this.daoSupport.selectDataSqlCount(sql, args);
+        List list = this.basicDao.selectDataSqlCount(sql, args);
         if(list!=null&&list.size()>0) {
             try {
                 return Double.valueOf(String.valueOf(list.get(0)));

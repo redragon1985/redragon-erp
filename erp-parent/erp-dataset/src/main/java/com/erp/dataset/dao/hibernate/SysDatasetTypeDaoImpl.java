@@ -21,6 +21,8 @@ package com.erp.dataset.dao.hibernate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import com.framework.dao.BasicDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
@@ -28,7 +30,6 @@ import com.framework.annotation.Cache;
 import com.framework.annotation.Permissions;
 import com.framework.annotation.Permissions.PermissionType;
 import com.framework.annotation.SqlParam;
-import com.framework.dao.DaoSupport;
 import com.framework.dao.model.Pages;
 import com.framework.util.DaoUtil;
 import com.erp.dataset.dao.SysDatasetTypeDao;
@@ -38,38 +39,38 @@ import com.erp.dataset.dao.model.SysDatasetTypeCO;
 @Repository
 public class SysDatasetTypeDaoImpl implements SysDatasetTypeDao{ 
 
-    //注入DaoSupport工具类
+    //注入basicDao工具类
     @Autowired
-    private DaoSupport daoSupport;
+    private BasicDao basicDao;
     
     @Override
     public void insertDataObject(SysDatasetType obj) {
-        this.daoSupport.insertDataTransaction(obj);
+        this.basicDao.insertDataTransaction(obj);
     }
 
     @Override
     public void updateDataObject(SysDatasetType obj) {
-        this.daoSupport.updateDataTransaction(obj);
+        this.basicDao.updateDataTransaction(obj);
     }
     
     @Override
     public void insertOrUpdateDataObject(SysDatasetType obj) {
-        this.daoSupport.insertOrUpdateDataTransaction(obj);
+        this.basicDao.insertOrUpdateDataTransaction(obj);
     }
 
     @Override
     public void deleteDataObject(SysDatasetType obj) {
-        this.daoSupport.deleteDataTransactionJPA(obj);
+        this.basicDao.deleteDataTransactionJPA(obj);
     }
 
     @Override
     public List<SysDatasetType> getDataObjects() {
-        return this.daoSupport.getDataAllObject(SysDatasetType.class);
+        return this.basicDao.getDataAllObject(SysDatasetType.class);
     }
 
     @Override
     public SysDatasetType getDataObject(int id) {
-        return (SysDatasetType)this.daoSupport.getDataObject(SysDatasetType.class, id);
+        return (SysDatasetType)this.basicDao.getDataObject(SysDatasetType.class, id);
     }
     
     @Override
@@ -92,15 +93,15 @@ public class SysDatasetTypeDaoImpl implements SysDatasetTypeDao{
         String sql = "select t.* from sys_dataset_type t where 1=1";
         
         Map<String, Object> args = new HashMap<String, Object>();
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "datasetTypeCode", "and t.", args);
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "datasetTypeName", "and t.", args);
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "status", "and t.", args);
+        sql = sql + DaoUtil.settleParam(paramObj, "datasetTypeCode", "and t.", args);
+        sql = sql + DaoUtil.settleParam(paramObj, "datasetTypeName", "and t.", args);
+        sql = sql + DaoUtil.settleParam(paramObj, "status", "and t.", args);
         sql = sql + " order by t.dataset_type_id desc";
         
         Map<String, Class<?>> entity = new HashMap<String, Class<?>>();
         entity.put("t", SysDatasetType.class);
         
-        return this.daoSupport.getDataSqlByPage(sql, entity, args, pages);
+        return this.basicDao.getDataSql(sql, entity, args, pages);
     }
 
     @Override
@@ -121,9 +122,9 @@ public class SysDatasetTypeDaoImpl implements SysDatasetTypeDao{
         Map<String, Object> args = new HashMap<String, Object>();
         args.put("code", datasetTypeCode);
         
-        List list = this.daoSupport.selectDataSqlCount(sql, args);
+        List list = this.basicDao.selectDataSqlCount(sql, args);
         if(list.size()>0) {
-            int num = this.daoSupport.convertSQLCount(list.get(0));
+            int num = this.basicDao.convertSQLCount(list.get(0));
             if(num==0) {
                 return false;
             }

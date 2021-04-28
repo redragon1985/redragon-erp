@@ -6,7 +6,7 @@
     <version>0.9</version>
   </parent>
   <artifactId>erp-masterData</artifactId>
-  <packaging>war</packaging>
+  <packaging>jar</packaging>
   
   <dependencies>
 	  <dependency>
@@ -15,17 +15,5 @@
 	  	<version>${redragon.erp.version}</version>
 	  </dependency>
   </dependencies>
-  
-  <build>
-    <plugins>
-        <plugin>
-           <artifactId>maven-war-plugin</artifactId>
-           <configuration>
-               <version>3.0</version>
-               <failOnMissingWebXml>false</failOnMissingWebXml>
-            </configuration>
-        </plugin>
-    </plugins>
-  </build>
 
 </project>

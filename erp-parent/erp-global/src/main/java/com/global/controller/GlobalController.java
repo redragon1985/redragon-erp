@@ -20,6 +20,8 @@ package com.global.controller;
 
 import javax.servlet.http.HttpSession;
 
+import com.framework.controller.JsonTextUtil;
+import com.framework.shiro.ShiroUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -37,9 +39,7 @@ import com.erp.order.po.service.PoHeadService;
 import com.erp.order.so.service.SoHeadService;
 import com.framework.util.EhcacheUtil;
 import com.framework.util.JedisUtil;
-import com.framework.util.JsonResultUtil;
 import com.framework.util.RedisUtil;
-import com.framework.util.ShiroUtil;
 
 import redragon.basic.tools.TimeToolKit;
 
@@ -80,7 +80,7 @@ public class GlobalController {
     @RequestMapping("apiError404")
     @ResponseBody
     public String apiError404() {
-        return JsonResultUtil.getErrorJson(-1, "404");
+        return JsonTextUtil.getErrorJson(-1, "404");
     }
     
     @RequestMapping("error500")
@@ -147,9 +147,9 @@ public class GlobalController {
             EhcacheUtil.clearBatch("com.erp*");
             RedisUtil.clearBatch("com.erp*");
             
-            return JsonResultUtil.getErrorJson(0);
+            return JsonTextUtil.getErrorJson(0);
         }catch(Exception e) {
-            return JsonResultUtil.getErrorJson(-1, "清除缓存失败");
+            return JsonTextUtil.getErrorJson(-1, "清除缓存失败");
         }
     }
     

@@ -21,6 +21,8 @@ package com.erp.finance.ar.receipt.dao.hibernate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import com.framework.dao.BasicDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
@@ -28,7 +30,6 @@ import com.framework.annotation.Cache;
 import com.framework.annotation.Permissions;
 import com.framework.annotation.Permissions.PermissionType;
 import com.framework.annotation.SqlParam;
-import com.framework.dao.DaoSupport;
 import com.framework.dao.model.Pages;
 import com.framework.util.DaoUtil;
 import com.erp.finance.ap.pay.dao.model.ApPayHead;
@@ -40,38 +41,38 @@ import com.erp.finance.ar.receipt.dao.model.ArReceiptHeadCO;
 @Repository
 public class ArReceiptHeadDaoImpl implements ArReceiptHeadDao{ 
 
-    //注入DaoSupport工具类
+    //注入basicDao工具类
     @Autowired
-    private DaoSupport daoSupport;
+    private BasicDao basicDao;
     
     @Override
     public void insertDataObject(ArReceiptHead obj) {
-        this.daoSupport.insertDataTransaction(obj);
+        this.basicDao.insertDataTransaction(obj);
     }
 
     @Override
     public void updateDataObject(ArReceiptHead obj) {
-        this.daoSupport.updateDataTransaction(obj);
+        this.basicDao.updateDataTransaction(obj);
     }
     
     @Override
     public void insertOrUpdateDataObject(ArReceiptHead obj) {
-        this.daoSupport.insertOrUpdateDataTransaction(obj);
+        this.basicDao.insertOrUpdateDataTransaction(obj);
     }
 
     @Override
     public void deleteDataObject(ArReceiptHead obj) {
-        this.daoSupport.deleteDataTransactionJPA(obj);
+        this.basicDao.deleteDataTransactionJPA(obj);
     }
 
     @Override
     public List<ArReceiptHead> getDataObjects() {
-        return this.daoSupport.getDataAllObject(ArReceiptHead.class);
+        return this.basicDao.getDataAllObject(ArReceiptHead.class);
     }
 
     @Override
     public ArReceiptHead getDataObject(int id) {
-        return (ArReceiptHead)this.daoSupport.getDataObject(ArReceiptHead.class, id);
+        return (ArReceiptHead)this.basicDao.getDataObject(ArReceiptHead.class, id);
     }
     
     @Override
@@ -84,7 +85,7 @@ public class ArReceiptHeadDaoImpl implements ArReceiptHeadDao{
         Map<String, Class<?>> entity = new HashMap<String, Class<?>>();
         entity.put("h", ArReceiptHead.class);
         
-        List<ArReceiptHead> list = this.daoSupport.selectDataSql(sql, entity, args);
+        List<ArReceiptHead> list = this.basicDao.selectData(sql, entity, args);
         if(list.size()>0) {
             return list.get(0);
         }
@@ -107,17 +108,17 @@ public class ArReceiptHeadDaoImpl implements ArReceiptHeadDao{
         String sql = "select h.* from ar_receipt_head h where 1=1";
         
         Map<String, Object> args = new HashMap<String, Object>();
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "receiptHeadCode", "and h.", args);
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "customerCode", "and h.", args);
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "amount", "and h.", args);
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "receiptDate", "and h.", args);
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "status", "and h.", args);
+        sql = sql + DaoUtil.settleParam(paramObj, "receiptHeadCode", "and h.", args);
+        sql = sql + DaoUtil.settleParam(paramObj, "customerCode", "and h.", args);
+        sql = sql + DaoUtil.settleParam(paramObj, "amount", "and h.", args);
+        sql = sql + DaoUtil.settleParam(paramObj, "receiptDate", "and h.", args);
+        sql = sql + DaoUtil.settleParam(paramObj, "status", "and h.", args);
         sql = sql + " order by h.receipt_head_id desc";
         
         Map<String, Class<?>> entity = new HashMap<String, Class<?>>();
         entity.put("h", ArReceiptHead.class);
         
-        return this.daoSupport.getDataSqlByPage(sql, entity, args, pages);
+        return this.basicDao.getDataSql(sql, entity, args, pages);
     }
 
     @Override
@@ -147,7 +148,7 @@ public class ArReceiptHeadDaoImpl implements ArReceiptHeadDao{
         
         sql = sql + " where receipt_head_code = :code";
         
-        this.daoSupport.executeSQLTransaction(sql, args);  
+        this.basicDao.executeSQLTransaction(sql, args);
     }
     
     @Override
@@ -155,11 +156,11 @@ public class ArReceiptHeadDaoImpl implements ArReceiptHeadDao{
         String sql = "select p.* from ar_receipt_head p where 1=1";
         
         Map<String, Object> args = new HashMap<String, Object>();
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "receiptHeadCode", "and p.", args);
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "customerCode", "and p.", args);
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "amount", "and p.", args);
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "receiptDate", "and p.", args);
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "status", "and p.", args);
+        sql = sql + DaoUtil.settleParam(paramObj, "receiptHeadCode", "and p.", args);
+        sql = sql + DaoUtil.settleParam(paramObj, "customerCode", "and p.", args);
+        sql = sql + DaoUtil.settleParam(paramObj, "amount", "and p.", args);
+        sql = sql + DaoUtil.settleParam(paramObj, "receiptDate", "and p.", args);
+        sql = sql + DaoUtil.settleParam(paramObj, "status", "and p.", args);
         
         sql = sql + " and not exists (select 1 from fin_voucher_bill_r where bill_type = 'RECEIPT' and bill_head_code = p.receipt_head_code)";
         sql = sql + " order by p.receipt_head_id desc";
@@ -167,7 +168,7 @@ public class ArReceiptHeadDaoImpl implements ArReceiptHeadDao{
         Map<String, Class<?>> entity = new HashMap<String, Class<?>>();
         entity.put("p", ArReceiptHead.class);
         
-        return this.daoSupport.getDataSqlByPage(sql, entity, args, pages);
+        return this.basicDao.getDataSql(sql, entity, args, pages);
     }
     
 }

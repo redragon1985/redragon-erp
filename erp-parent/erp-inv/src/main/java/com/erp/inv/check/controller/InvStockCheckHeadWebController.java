@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.Map;
 import javax.validation.Valid;
 
+import com.framework.shiro.ShiroUtil;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,12 +36,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.framework.controller.ControllerSupport;
 import com.framework.dao.data.GlobalDataBox;
 import com.framework.dao.model.Pages;
-import com.framework.util.JsonResultUtil;
-import com.framework.util.JsonUtil;
-import com.framework.util.ShiroUtil;
 
+import redragon.basic.tools.SnowFlake;
 import redragon.basic.tools.TimeToolKit;
-import redragon.frame.hibernate.SnowFlake;
 
 import com.erp.dataset.service.DatasetCommonService;
 import com.erp.hr.dao.model.HrStaffInfoRO;
@@ -214,7 +212,7 @@ public class InvStockCheckHeadWebController extends ControllerSupport{
         
         //对当前编辑的对象初始化默认的字段
         if(invStockCheckHead.getCheckHeadId()==null) {
-            invStockCheckHead.setCheckHeadCode("check"+SnowFlake.generateId().toString());
+            invStockCheckHead.setCheckHeadCode("check"+ SnowFlake.generateId().toString());
         }
         //获取职员信息
         HrStaffInfoRO hrStaffInfoRO = this.hrCommonService.getStaffInfo(ShiroUtil.getUsername());

@@ -18,73 +18,73 @@
         <groupId>redragon</groupId>
         <artifactId>erp-permission</artifactId>
         <version>${redragon.erp.version}</version>
-        <type>war</type>
+        <type>jar</type>
     </dependency>
     <dependency>
         <groupId>redragon</groupId>
         <artifactId>erp-dataset</artifactId>
         <version>${redragon.erp.version}</version>
-        <type>war</type>
+        <type>jar</type>
     </dependency>
     <dependency>
     	<groupId>redragon</groupId>
     	<artifactId>erp-hr</artifactId>
     	<version>${redragon.erp.version}</version>
-    	<type>war</type>
+    	<type>jar</type>
     </dependency>
     <dependency>
     	<groupId>redragon</groupId>
     	<artifactId>erp-masterData</artifactId>
     	<version>${redragon.erp.version}</version>
-    	<type>war</type>
+    	<type>jar</type>
     </dependency>
     <dependency>
     	<groupId>redragon</groupId>
     	<artifactId>erp-order</artifactId>
     	<version>${redragon.erp.version}</version>
-    	<type>war</type>
+    	<type>jar</type>
     </dependency>
     <dependency>
     	<groupId>redragon</groupId>
     	<artifactId>erp-finance</artifactId>
     	<version>${redragon.erp.version}</version>
-    	<type>war</type>
+    	<type>jar</type>
     </dependency>
     <dependency>
     	<groupId>redragon</groupId>
     	<artifactId>erp-global</artifactId>
     	<version>${redragon.erp.version}</version>
-    	<type>war</type>
+    	<type>jar</type>
     </dependency>
     <dependency>
     	<groupId>redragon</groupId>
     	<artifactId>erp-inv</artifactId>
     	<version>${redragon.erp.version}</version>
-    	<type>war</type>
+    	<type>jar</type>
     </dependency>
     <dependency>
     	<groupId>redragon</groupId>
     	<artifactId>erp-ledger</artifactId>
     	<version>${redragon.erp.version}</version>
-    	<type>war</type>
+    	<type>jar</type>
     </dependency>
     <dependency>
     	<groupId>redragon</groupId>
     	<artifactId>erp-common</artifactId>
     	<version>${redragon.erp.version}</version>
-    	<type>war</type>
+    	<type>jar</type>
     </dependency>
     <dependency>
     	<groupId>redragon</groupId>
     	<artifactId>erp-report</artifactId>
     	<version>${redragon.erp.version}</version>
-    	<type>war</type>
+    	<type>jar</type>
     </dependency>
     <dependency>
     	<groupId>redragon</groupId>
     	<artifactId>erp-produce</artifactId>
     	<version>${redragon.erp.version}</version>
-    	<type>war</type>
+    	<type>jar</type>
     </dependency>
   </dependencies>
   
@@ -98,7 +98,7 @@
           <configuration>
               <!--    
               <packagingExcludes>WEB-INF/web.xml</packagingExcludes>    
-              -->
+
               <overlays>    
                   <overlay>    
                    <groupId>redragon</groupId>
@@ -148,7 +148,8 @@
                    <groupId>redragon</groupId>
                    <artifactId>erp-produce</artifactId>
                   </overlay>
-              </overlays>   
+              </overlays>
+              -->
           </configuration>    
         </plugin>    
       </plugins>   

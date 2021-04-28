@@ -22,6 +22,8 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+
+import com.framework.dao.BasicDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
@@ -29,7 +31,6 @@ import com.framework.annotation.Cache;
 import com.framework.annotation.Permissions;
 import com.framework.annotation.Permissions.PermissionType;
 import com.framework.annotation.SqlParam;
-import com.framework.dao.DaoSupport;
 import com.framework.dao.model.Pages;
 import com.framework.util.DaoUtil;
 import com.erp.hr.dao.HrStaffDepartmentRDao;
@@ -43,38 +44,38 @@ import com.erp.hr.dao.model.HrStaffDepartmentRCO;
 @Repository
 public class HrStaffDepartmentRDaoImpl implements HrStaffDepartmentRDao{ 
 
-    //注入DaoSupport工具类
+    //注入basicDao工具类
     @Autowired
-    private DaoSupport daoSupport;
+    private BasicDao basicDao;
     
     @Override
     public void insertDataObject(HrStaffDepartmentR obj) {
-        this.daoSupport.insertDataTransaction(obj);
+        this.basicDao.insertDataTransaction(obj);
     }
 
     @Override
     public void updateDataObject(HrStaffDepartmentR obj) {
-        this.daoSupport.updateDataTransaction(obj);
+        this.basicDao.updateDataTransaction(obj);
     }
     
     @Override
     public void insertOrUpdateDataObject(HrStaffDepartmentR obj) {
-        this.daoSupport.insertOrUpdateDataTransaction(obj);
+        this.basicDao.insertOrUpdateDataTransaction(obj);
     }
 
     @Override
     public void deleteDataObject(HrStaffDepartmentR obj) {
-        this.daoSupport.deleteDataTransactionJPA(obj);
+        this.basicDao.deleteDataTransactionJPA(obj);
     }
 
     @Override
     public List<HrStaffDepartmentR> getDataObjects() {
-        return this.daoSupport.getDataAllObject(HrStaffDepartmentR.class);
+        return this.basicDao.getDataAllObject(HrStaffDepartmentR.class);
     }
 
     @Override
     public HrStaffDepartmentR getDataObject(int id) {
-        return (HrStaffDepartmentR)this.daoSupport.getDataObject(HrStaffDepartmentR.class, id);
+        return (HrStaffDepartmentR)this.basicDao.getDataObject(HrStaffDepartmentR.class, id);
     }
     
     @Override
@@ -114,7 +115,7 @@ public class HrStaffDepartmentRDaoImpl implements HrStaffDepartmentRDao{
                 + "where r.staff_code = s.staff_code and r.position_code = p.position_code and r.department_code = d.department_code";
         
         Map<String, Object> args = new HashMap<String, Object>();
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "departmentId", "and d.", args);
+        sql = sql + DaoUtil.settleParam(paramObj, "departmentId", "and d.", args);
         sql = sql + " order by s.staff_code";
         
         Map<String, Class<?>> entity = new LinkedHashMap<String, Class<?>>();
@@ -123,7 +124,7 @@ public class HrStaffDepartmentRDaoImpl implements HrStaffDepartmentRDao{
         entity.put("p", HrPosition.class);
         entity.put("d", HrDepartment.class);
         
-        return this.daoSupport.getDataSqlByPage(sql, entity, args, pages);
+        return this.basicDao.getDataSql(sql, entity, args, pages);
     }
     
 }

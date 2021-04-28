@@ -34,8 +34,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.framework.controller.ControllerSupport;
 import com.framework.dao.data.GlobalDataBox;
 import com.framework.dao.model.Pages;
-import com.framework.util.JsonResultUtil;
-import com.framework.util.JsonUtil;
 import com.erp.dataset.service.DatasetCommonService;
 import com.erp.masterdata.material.dao.data.DataBox;
 import com.erp.masterdata.material.dao.model.MdMaterial;
@@ -213,7 +211,6 @@ public class MdMaterialWebController extends ControllerSupport{
      * @description 更新审批状态
      * @date 2020年8月4日
      * @author dongbin
-     * @param code
      * @param approveStatus
      * @param attr
      * @return

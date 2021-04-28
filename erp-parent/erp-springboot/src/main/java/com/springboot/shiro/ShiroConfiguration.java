@@ -23,6 +23,7 @@ import java.util.Map;
 
 import javax.servlet.Filter;
 
+import com.framework.util.PropUtil;
 import org.apache.shiro.cache.ehcache.EhCacheManager;
 import org.apache.shiro.cas.CasFilter;
 import org.apache.shiro.cas.CasSubjectFactory;
@@ -48,7 +49,6 @@ import org.springframework.context.annotation.DependsOn;
 import org.springframework.core.env.Environment;
 import org.springframework.web.filter.DelegatingFilterProxy;
 
-import redragon.util.i18n.i18n;
 
 import com.framework.shiro.MyCasRealm;
 import com.framework.shiro.filter.AnyPermsFilter;
@@ -77,9 +77,9 @@ public class ShiroConfiguration {
     	myCasRealm.setAuthorizationCachingEnabled(true);
     	myCasRealm.setAuthorizationCacheName("authorizationCache");
     	//CAS Server服务器端地址
-    	myCasRealm.setCasServerUrlPrefix(i18n.getKeyValue("shiro", "casUrl"));
+    	myCasRealm.setCasServerUrlPrefix(PropUtil.getKeyValue("shiro", "casUrl"));
     	//当前应用CAS服务URL，即用于接收并处理登录成功后的Ticket的
-    	myCasRealm.setCasService(i18n.getKeyValue("shiro", "requestUrl"));
+    	myCasRealm.setCasService(PropUtil.getKeyValue("shiro", "requestUrl"));
     	
         return myCasRealm;
     }
@@ -128,7 +128,7 @@ public class ShiroConfiguration {
     	//cookie关闭浏览器即失效
     	simpleCookie.setMaxAge(-1);
     	//设置cookie的共享的域名
-    	simpleCookie.setDomain(i18n.getKeyValue("shiro", "cookieDomain"));
+    	simpleCookie.setDomain(PropUtil.getKeyValue("shiro", "cookieDomain"));
     	
     	return simpleCookie;
     }
@@ -142,7 +142,7 @@ public class ShiroConfiguration {
         simpleCookie.setHttpOnly(true);
         simpleCookie.setMaxAge(120);
         //设置cookie的共享的域名
-        simpleCookie.setDomain(i18n.getKeyValue("shiro", "cookieDomain"));
+        simpleCookie.setDomain(PropUtil.getKeyValue("shiro", "cookieDomain"));
         return simpleCookie;
     }
     
@@ -256,7 +256,7 @@ public class ShiroConfiguration {
 //    @Bean(name="logout")
     public LogoutFilter logoutFilter() {
     	LogoutFilter logoutFilter = new LogoutFilter();
-    	logoutFilter.setRedirectUrl(i18n.getKeyValue("shiro", "casUrl")+"/logout?service="+i18n.getKeyValue("shiro", "successUrl"));
+    	logoutFilter.setRedirectUrl(PropUtil.getKeyValue("shiro", "casUrl")+"/logout?service="+PropUtil.getKeyValue("shiro", "successUrl"));
     	
     	return logoutFilter;
     }
@@ -268,8 +268,8 @@ public class ShiroConfiguration {
     @Bean(name="anyRolesFilter")
     public AnyRolesFilter anyRolesFilter() {
     	AnyRolesFilter anyRolesFilter = new AnyRolesFilter();
-    	anyRolesFilter.setLoginUrl(i18n.getKeyValue("shiro", "casUrl")+"/login?service="+i18n.getKeyValue("shiro", "requestUrl"));
-    	anyRolesFilter.setUnauthorizedUrl(i18n.getKeyValue("shiro", "unauthUrl"));
+    	anyRolesFilter.setLoginUrl(PropUtil.getKeyValue("shiro", "casUrl")+"/login?service="+PropUtil.getKeyValue("shiro", "requestUrl"));
+    	anyRolesFilter.setUnauthorizedUrl(PropUtil.getKeyValue("shiro", "unauthUrl"));
     	
     	return anyRolesFilter;
     }
@@ -281,8 +281,8 @@ public class ShiroConfiguration {
     @Bean(name="anyPermsFilter")
     public AnyPermsFilter anyPermsFilter() {
     	AnyPermsFilter anyPermsFilter = new AnyPermsFilter();
-    	anyPermsFilter.setLoginUrl(i18n.getKeyValue("shiro", "casUrl")+"/login?service="+i18n.getKeyValue("shiro", "requestUrl"));
-    	anyPermsFilter.setUnauthorizedUrl(i18n.getKeyValue("shiro", "unauthUrl"));
+    	anyPermsFilter.setLoginUrl(PropUtil.getKeyValue("shiro", "casUrl")+"/login?service="+PropUtil.getKeyValue("shiro", "requestUrl"));
+    	anyPermsFilter.setUnauthorizedUrl(PropUtil.getKeyValue("shiro", "unauthUrl"));
     	return anyPermsFilter;
     }
     
@@ -297,11 +297,11 @@ public class ShiroConfiguration {
         shiroFilterFactoryBean.setSecurityManager(this.securityManager());
         
         // 如果不设置默认会自动寻找工程根目录下的"/login"页面
-        shiroFilterFactoryBean.setLoginUrl(i18n.getKeyValue("shiro", "casUrl")+"/login?service="+i18n.getKeyValue("shiro", "requestUrl"));
+        shiroFilterFactoryBean.setLoginUrl(PropUtil.getKeyValue("shiro", "casUrl")+"/login?service="+PropUtil.getKeyValue("shiro", "requestUrl"));
         // 登录成功后要跳转的链接
-        shiroFilterFactoryBean.setSuccessUrl(i18n.getKeyValue("shiro", "successUrl"));
+        shiroFilterFactoryBean.setSuccessUrl(PropUtil.getKeyValue("shiro", "successUrl"));
         // 未授权界面
-        shiroFilterFactoryBean.setUnauthorizedUrl(i18n.getKeyValue("shiro", "unauthUrl"));
+        shiroFilterFactoryBean.setUnauthorizedUrl(PropUtil.getKeyValue("shiro", "unauthUrl"));
         
         // 自定义拦截器
         Map<String, Filter> filtersMap = shiroFilterFactoryBean.getFilters();

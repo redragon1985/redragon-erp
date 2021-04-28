@@ -21,6 +21,8 @@ package com.erp.permission.dao.hibernate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import com.framework.dao.BasicDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
@@ -28,7 +30,6 @@ import com.framework.annotation.Cache;
 import com.framework.annotation.Permissions;
 import com.framework.annotation.Permissions.PermissionType;
 import com.framework.annotation.SqlParam;
-import com.framework.dao.DaoSupport;
 import com.framework.dao.model.Pages;
 import com.framework.util.DaoUtil;
 import com.erp.permission.dao.SysRoleAuthRDao;
@@ -38,38 +39,38 @@ import com.erp.permission.dao.model.SysRoleAuthRCO;
 @Repository
 public class SysRoleAuthRDaoImpl implements SysRoleAuthRDao{ 
 
-    //注入DaoSupport工具类
+    //注入basicDao工具类
     @Autowired
-    private DaoSupport daoSupport;
+    private BasicDao basicDao;
     
     @Override
     public void insertDataObject(SysRoleAuthR obj) {
-        this.daoSupport.insertDataTransaction(obj);
+        this.basicDao.insertDataTransaction(obj);
     }
 
     @Override
     public void updateDataObject(SysRoleAuthR obj) {
-        this.daoSupport.updateDataTransaction(obj);
+        this.basicDao.updateDataTransaction(obj);
     }
     
     @Override
     public void insertOrUpdateDataObject(SysRoleAuthR obj) {
-        this.daoSupport.insertOrUpdateDataTransaction(obj);
+        this.basicDao.insertOrUpdateDataTransaction(obj);
     }
 
     @Override
     public void deleteDataObject(SysRoleAuthR obj) {
-        this.daoSupport.deleteDataTransactionJPA(obj);
+        this.basicDao.deleteDataTransactionJPA(obj);
     }
 
     @Override
     public List<SysRoleAuthR> getDataObjects() {
-        return this.daoSupport.getDataAllObject(SysRoleAuthR.class);
+        return this.basicDao.getDataAllObject(SysRoleAuthR.class);
     }
 
     @Override
     public SysRoleAuthR getDataObject(int id) {
-        return (SysRoleAuthR)this.daoSupport.getDataObject(SysRoleAuthR.class, id);
+        return (SysRoleAuthR)this.basicDao.getDataObject(SysRoleAuthR.class, id);
     }
     
     @Override
@@ -110,7 +111,7 @@ public class SysRoleAuthRDaoImpl implements SysRoleAuthRDao{
         Map<String, Object> args = new HashMap<String, Object>();
         args.put("roleCode", roleCode);
         
-        this.daoSupport.executeSQLTransaction(sql, args);
+        this.basicDao.executeSQLTransaction(sql, args);
     }
     
 }

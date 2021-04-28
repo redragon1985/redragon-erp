@@ -21,11 +21,11 @@ package com.springboot.exception;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.framework.controller.JsonTextUtil;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.framework.util.JsonResultUtil;
 
 /**
  * @description API全局异常处理
@@ -44,7 +44,7 @@ public class ApiExceptionResolver implements HandlerExceptionResolver {
                 //response.setContentType("text/html;charset=UTF-8");
                 
                 if(ex!=null) {
-                    response.getWriter().print(JsonResultUtil.getErrorJson(-1, ex.toString()));
+                    response.getWriter().print(JsonTextUtil.getErrorJson(-1, ex.toString()));
                     response.getWriter().flush();
                     response.getWriter().close();
                 }

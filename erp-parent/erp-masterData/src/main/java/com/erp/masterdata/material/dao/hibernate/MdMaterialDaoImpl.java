@@ -21,6 +21,8 @@ package com.erp.masterdata.material.dao.hibernate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import com.framework.dao.BasicDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
@@ -28,7 +30,6 @@ import com.framework.annotation.Cache;
 import com.framework.annotation.Permissions;
 import com.framework.annotation.Permissions.PermissionType;
 import com.framework.annotation.SqlParam;
-import com.framework.dao.DaoSupport;
 import com.framework.dao.model.Pages;
 import com.framework.util.DaoUtil;
 import com.erp.masterdata.material.dao.MdMaterialDao;
@@ -38,38 +39,38 @@ import com.erp.masterdata.material.dao.model.MdMaterialCO;
 @Repository
 public class MdMaterialDaoImpl implements MdMaterialDao{ 
 
-    //注入DaoSupport工具类
+    //注入basicDao工具类
     @Autowired
-    private DaoSupport daoSupport;
+    private BasicDao basicDao;
     
     @Override
     public void insertDataObject(MdMaterial obj) {
-        this.daoSupport.insertDataTransaction(obj);
+        this.basicDao.insertDataTransaction(obj);
     }
 
     @Override
     public void updateDataObject(MdMaterial obj) {
-        this.daoSupport.updateDataTransaction(obj);
+        this.basicDao.updateDataTransaction(obj);
     }
     
     @Override
     public void insertOrUpdateDataObject(MdMaterial obj) {
-        this.daoSupport.insertOrUpdateDataTransaction(obj);
+        this.basicDao.insertOrUpdateDataTransaction(obj);
     }
 
     @Override
     public void deleteDataObject(MdMaterial obj) {
-        this.daoSupport.deleteDataTransactionJPA(obj);
+        this.basicDao.deleteDataTransactionJPA(obj);
     }
 
     @Override
     public List<MdMaterial> getDataObjects() {
-        return this.daoSupport.getDataAllObject(MdMaterial.class);
+        return this.basicDao.getDataAllObject(MdMaterial.class);
     }
 
     @Override
     public MdMaterial getDataObject(int id) {
-        return (MdMaterial)this.daoSupport.getDataObject(MdMaterial.class, id);
+        return (MdMaterial)this.basicDao.getDataObject(MdMaterial.class, id);
     }
     
     @Override
@@ -82,7 +83,7 @@ public class MdMaterialDaoImpl implements MdMaterialDao{
         Map<String, Class<?>> entity = new HashMap<String, Class<?>>();
         entity.put("m", MdMaterial.class);
         
-        List<MdMaterial> list = this.daoSupport.selectDataSql(sql, entity, args);
+        List<MdMaterial> list = this.basicDao.selectData(sql, entity, args);
         if(list.size()>0) {
             return list.get(0);
         }
@@ -95,19 +96,19 @@ public class MdMaterialDaoImpl implements MdMaterialDao{
         String sql = "select m.* from md_material m where 1=1";
         
         Map<String, Object> args = new HashMap<String, Object>();
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "materialCode", "and m.", args);
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "materialName", "and m.", args);
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "materialType", "and m.", args);
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "categoryCode", "and m.", args);
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "approveStatus", "and m.", args);
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "status", "and m.", args);
+        sql = sql + DaoUtil.settleParam(paramObj, "materialCode", "and m.", args);
+        sql = sql + DaoUtil.settleParam(paramObj, "materialName", "and m.", args);
+        sql = sql + DaoUtil.settleParam(paramObj, "materialType", "and m.", args);
+        sql = sql + DaoUtil.settleParam(paramObj, "categoryCode", "and m.", args);
+        sql = sql + DaoUtil.settleParam(paramObj, "approveStatus", "and m.", args);
+        sql = sql + DaoUtil.settleParam(paramObj, "status", "and m.", args);
         
         sql = sql + " order by m.material_id desc";
         
         Map<String, Class<?>> entity = new HashMap<String, Class<?>>();
         entity.put("m", MdMaterial.class);
         
-        return this.daoSupport.selectDataSql(sql, entity, args);
+        return this.basicDao.selectData(sql, entity, args);
     }
     
     @Override
@@ -120,18 +121,18 @@ public class MdMaterialDaoImpl implements MdMaterialDao{
         String sql = "select m.* from md_material m where 1=1";
         
         Map<String, Object> args = new HashMap<String, Object>();
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "materialCode", "and m.", args);
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "materialName", "and m.", args);
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "materialType", "and m.", args);
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "categoryCode", "and m.", args);
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "status", "and m.", args);
+        sql = sql + DaoUtil.settleParam(paramObj, "materialCode", "and m.", args);
+        sql = sql + DaoUtil.settleParam(paramObj, "materialName", "and m.", args);
+        sql = sql + DaoUtil.settleParam(paramObj, "materialType", "and m.", args);
+        sql = sql + DaoUtil.settleParam(paramObj, "categoryCode", "and m.", args);
+        sql = sql + DaoUtil.settleParam(paramObj, "status", "and m.", args);
         
         sql = sql + " order by m.material_id desc";
         
         Map<String, Class<?>> entity = new HashMap<String, Class<?>>();
         entity.put("m", MdMaterial.class);
         
-        return this.daoSupport.getDataSqlByPage(sql, entity, args, pages);
+        return this.basicDao.getDataSql(sql, entity, args, pages);
     }
 
     @Override
@@ -153,7 +154,7 @@ public class MdMaterialDaoImpl implements MdMaterialDao{
         args.put("id", id);
         args.put("approveStatus", approveStatus);
         
-        this.daoSupport.executeSQLTransaction(sql, args);
+        this.basicDao.executeSQLTransaction(sql, args);
     }
     
 }

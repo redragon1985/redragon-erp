@@ -20,11 +20,12 @@ package com.springboot.interceptor;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.framework.controller.JsonTextUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
-import com.framework.util.JsonResultUtil;
 
 public class ApiErrorInterceptor implements HandlerInterceptor {
     
@@ -40,15 +41,15 @@ public class ApiErrorInterceptor implements HandlerInterceptor {
 	    //http状态码判断
         if(response.getStatus()==503){
             //服务暂不可用
-            response.getWriter().write(JsonResultUtil.getErrorJson(101));
+            response.getWriter().write(JsonTextUtil.getErrorJson(101));
             response.getWriter().close();
         }else if(response.getStatus()==408){
             //请求超时
-            response.getWriter().write(JsonResultUtil.getErrorJson(102));
+            response.getWriter().write(JsonTextUtil.getErrorJson(102));
             response.getWriter().close();
         }else if(response.getStatus()==501){
             //未知的方法
-            response.getWriter().write(JsonResultUtil.getErrorJson(10001));
+            response.getWriter().write(JsonTextUtil.getErrorJson(10001));
             response.getWriter().close();
         }
         else{
@@ -100,7 +101,7 @@ public class ApiErrorInterceptor implements HandlerInterceptor {
         
         //https请求判断
         if(!request.getScheme().equalsIgnoreCase("https")){
-            response.getWriter().write(JsonResultUtil.getErrorJson(1003));
+            response.getWriter().write(JsonTextUtil.getErrorJson(1003));
             response.getWriter().close();
         }else {
             return true;

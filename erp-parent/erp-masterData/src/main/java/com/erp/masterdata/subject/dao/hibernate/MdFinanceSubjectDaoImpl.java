@@ -21,6 +21,8 @@ package com.erp.masterdata.subject.dao.hibernate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import com.framework.dao.BasicDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
@@ -28,7 +30,6 @@ import com.framework.annotation.Cache;
 import com.framework.annotation.Permissions;
 import com.framework.annotation.Permissions.PermissionType;
 import com.framework.annotation.SqlParam;
-import com.framework.dao.DaoSupport;
 import com.framework.dao.model.Pages;
 import com.framework.util.DaoUtil;
 import com.erp.masterdata.subject.dao.MdFinanceSubjectDao;
@@ -38,38 +39,38 @@ import com.erp.masterdata.subject.dao.model.MdFinanceSubjectCO;
 @Repository
 public class MdFinanceSubjectDaoImpl implements MdFinanceSubjectDao{ 
 
-    //注入DaoSupport工具类
+    //注入basicDao工具类
     @Autowired
-    private DaoSupport daoSupport;
+    private BasicDao basicDao;
     
     @Override
     public void insertDataObject(MdFinanceSubject obj) {
-        this.daoSupport.insertDataTransaction(obj);
+        this.basicDao.insertDataTransaction(obj);
     }
 
     @Override
     public void updateDataObject(MdFinanceSubject obj) {
-        this.daoSupport.updateDataTransaction(obj);
+        this.basicDao.updateDataTransaction(obj);
     }
     
     @Override
     public void insertOrUpdateDataObject(MdFinanceSubject obj) {
-        this.daoSupport.insertOrUpdateDataTransaction(obj);
+        this.basicDao.insertOrUpdateDataTransaction(obj);
     }
 
     @Override
     public void deleteDataObject(MdFinanceSubject obj) {
-        this.daoSupport.deleteDataTransactionJPA(obj);
+        this.basicDao.deleteDataTransactionJPA(obj);
     }
 
     @Override
     public List<MdFinanceSubject> getDataObjects() {
-        return this.daoSupport.getDataAllObject(MdFinanceSubject.class);
+        return this.basicDao.getDataAllObject(MdFinanceSubject.class);
     }
 
     @Override
     public MdFinanceSubject getDataObject(int id) {
-        return (MdFinanceSubject)this.daoSupport.getDataObject(MdFinanceSubject.class, id);
+        return (MdFinanceSubject)this.basicDao.getDataObject(MdFinanceSubject.class, id);
     }
     
     @Override
@@ -82,7 +83,7 @@ public class MdFinanceSubjectDaoImpl implements MdFinanceSubjectDao{
         Map<String, Class<?>> entity = new HashMap<String, Class<?>>();
         entity.put("d", MdFinanceSubject.class);
         
-        List<MdFinanceSubject> list = this.daoSupport.selectDataSql(sql, entity, args);
+        List<MdFinanceSubject> list = this.basicDao.selectData(sql, entity, args);
         if(list.size()>0) {
             return list.get(0);
         }
@@ -102,7 +103,7 @@ public class MdFinanceSubjectDaoImpl implements MdFinanceSubjectDao{
         Map<String, Class<?>> entity = new HashMap<String, Class<?>>();
         entity.put("d", MdFinanceSubject.class);
         
-        return this.daoSupport.selectDataSql(sql, entity, args);
+        return this.basicDao.selectData(sql, entity, args);
     }
     
     @Override
@@ -133,9 +134,9 @@ public class MdFinanceSubjectDaoImpl implements MdFinanceSubjectDao{
         Map<String, Object> args = new HashMap<String, Object>();
         args.put("departmentId", subjectId);
         
-        List list = this.daoSupport.selectDataSqlCount(sql, args);
+        List list = this.basicDao.selectDataSqlCount(sql, args);
         if(list.size()>0) {
-            return this.daoSupport.convertSQLCount(list.get(0));
+            return this.basicDao.convertSQLCount(list.get(0));
         }
         
         return 0;

@@ -48,8 +48,8 @@ import com.erp.order.so.dao.model.SoLineCO;
 import com.erp.order.so.service.SoLineService;
 import com.framework.controller.ControllerSupport;
 import com.framework.dao.model.Pages;
+import redragon.basic.tools.SnowFlake;
 
-import redragon.frame.hibernate.SnowFlake;
 
 @Controller
 @RequestMapping("/web/arInvoiceLine")

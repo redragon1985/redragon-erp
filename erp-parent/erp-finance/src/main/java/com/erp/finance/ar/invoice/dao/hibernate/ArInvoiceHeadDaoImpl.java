@@ -22,6 +22,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.framework.dao.BasicDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -31,45 +32,44 @@ import com.erp.finance.ar.invoice.dao.model.ArInvoiceHeadCO;
 import com.framework.annotation.Permissions;
 import com.framework.annotation.Permissions.PermissionType;
 import com.framework.annotation.SqlParam;
-import com.framework.dao.DaoSupport;
 import com.framework.dao.model.Pages;
 import com.framework.util.DaoUtil;
 
 @Repository
 public class ArInvoiceHeadDaoImpl implements ArInvoiceHeadDao{ 
 
-    //注入DaoSupport工具类
+    //注入basicDao工具类
     @Autowired
-    private DaoSupport daoSupport;
+    private BasicDao basicDao;
     
     @Override
     public void insertDataObject(ArInvoiceHead obj) {
-        this.daoSupport.insertDataTransaction(obj);
+        this.basicDao.insertDataTransaction(obj);
     }
 
     @Override
     public void updateDataObject(ArInvoiceHead obj) {
-        this.daoSupport.updateDataTransaction(obj);
+        this.basicDao.updateDataTransaction(obj);
     }
     
     @Override
     public void insertOrUpdateDataObject(ArInvoiceHead obj) {
-        this.daoSupport.insertOrUpdateDataTransaction(obj);
+        this.basicDao.insertOrUpdateDataTransaction(obj);
     }
 
     @Override
     public void deleteDataObject(ArInvoiceHead obj) {
-        this.daoSupport.deleteDataTransactionJPA(obj);
+        this.basicDao.deleteDataTransactionJPA(obj);
     }
 
     @Override
     public List<ArInvoiceHead> getDataObjects() {
-        return this.daoSupport.getDataAllObject(ArInvoiceHead.class);
+        return this.basicDao.getDataAllObject(ArInvoiceHead.class);
     }
 
     @Override
     public ArInvoiceHead getDataObject(int id) {
-        return (ArInvoiceHead)this.daoSupport.getDataObject(ArInvoiceHead.class, id);
+        return (ArInvoiceHead)this.basicDao.getDataObject(ArInvoiceHead.class, id);
     }
     
     @Override
@@ -82,7 +82,7 @@ public class ArInvoiceHeadDaoImpl implements ArInvoiceHeadDao{
         Map<String, Class<?>> entity = new HashMap<String, Class<?>>();
         entity.put("p", ArInvoiceHead.class);
         
-        List<ArInvoiceHead> list = this.daoSupport.selectDataSql(sql, entity, args);
+        List<ArInvoiceHead> list = this.basicDao.selectData(sql, entity, args);
         if(list.size()>0) {
             return list.get(0);
         }
@@ -105,18 +105,18 @@ public class ArInvoiceHeadDaoImpl implements ArInvoiceHeadDao{
         String sql = "select p.* from ar_invoice_head p where 1=1";
         
         Map<String, Object> args = new HashMap<String, Object>();
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "invoiceHeadCode", "and p.", args);
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "invoiceSourceType", "and p.", args);
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "invoiceSourceHeadCode", "and p.", args);
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "payer", "and p.", args);
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "approveStatus", "and p.", args);
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "status", "and p.", args);
+        sql = sql + DaoUtil.settleParam(paramObj, "invoiceHeadCode", "and p.", args);
+        sql = sql + DaoUtil.settleParam(paramObj, "invoiceSourceType", "and p.", args);
+        sql = sql + DaoUtil.settleParam(paramObj, "invoiceSourceHeadCode", "and p.", args);
+        sql = sql + DaoUtil.settleParam(paramObj, "payer", "and p.", args);
+        sql = sql + DaoUtil.settleParam(paramObj, "approveStatus", "and p.", args);
+        sql = sql + DaoUtil.settleParam(paramObj, "status", "and p.", args);
         sql = sql + " order by p.invoice_head_id desc";
         
         Map<String, Class<?>> entity = new HashMap<String, Class<?>>();
         entity.put("p", ArInvoiceHead.class);
         
-        return this.daoSupport.getDataSqlByPage(sql, entity, args, pages);
+        return this.basicDao.getDataSql(sql, entity, args, pages);
     }
 
     @Override
@@ -130,19 +130,19 @@ public class ArInvoiceHeadDaoImpl implements ArInvoiceHeadDao{
         String sql = "select p.* from ar_invoice_head p where 1=1";
         
         Map<String, Object> args = new HashMap<String, Object>();
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "invoiceHeadCode", "and p.", args);
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "invoiceSourceType", "and p.", args);
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "invoiceSourceHeadCode", "and p.", args);
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "payer", "and p.", args);
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "approveStatus", "and p.", args);
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "status", "and p.", args);
+        sql = sql + DaoUtil.settleParam(paramObj, "invoiceHeadCode", "and p.", args);
+        sql = sql + DaoUtil.settleParam(paramObj, "invoiceSourceType", "and p.", args);
+        sql = sql + DaoUtil.settleParam(paramObj, "invoiceSourceHeadCode", "and p.", args);
+        sql = sql + DaoUtil.settleParam(paramObj, "payer", "and p.", args);
+        sql = sql + DaoUtil.settleParam(paramObj, "approveStatus", "and p.", args);
+        sql = sql + DaoUtil.settleParam(paramObj, "status", "and p.", args);
         sql = sql + DaoUtil.getDataAuthSQL(dataAuthSQL, "p.", "p.");
         sql = sql + " order by p.invoice_head_id desc";
         
         Map<String, Class<?>> entity = new HashMap<String, Class<?>>();
         entity.put("p", ArInvoiceHead.class);
         
-        return this.daoSupport.getDataSqlByPage(sql, entity, args, pages);
+        return this.basicDao.getDataSql(sql, entity, args, pages);
     }
     
     @Override
@@ -161,7 +161,7 @@ public class ArInvoiceHeadDaoImpl implements ArInvoiceHeadDao{
         
         sql = sql + " where invoice_head_code = :code";
         
-        this.daoSupport.executeSQLTransaction(sql, args);
+        this.basicDao.executeSQLTransaction(sql, args);
     }
     
     @Override
@@ -172,9 +172,9 @@ public class ArInvoiceHeadDaoImpl implements ArInvoiceHeadDao{
         args.put("startDate", startDate);
         args.put("endDate", endDate);
         
-        List list = this.daoSupport.selectDataSqlCount(sql, args);
+        List list = this.basicDao.selectDataSqlCount(sql, args);
         if(list.size()>0) {
-            return this.daoSupport.convertSQLCount(list.get(0));
+            return this.basicDao.convertSQLCount(list.get(0));
         }
         
         return 0;

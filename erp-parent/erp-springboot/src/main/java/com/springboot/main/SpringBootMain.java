@@ -30,7 +30,7 @@ import org.springframework.context.annotation.Scope;
 import javax.persistence.EntityManagerFactory;
 import org.hibernate.SessionFactory;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
-import com.framework.dao.DaoSupport;
+import com.framework.dao.BasicDao;
 
 /**
  * Springboot主入口
@@ -56,13 +56,12 @@ public class SpringBootMain extends SpringBootServletInitializer{
 	 * @description 声明DaoSupport bean
 	 * @date 2018年4月12日 下午5:14:41
 	 * @author dongbin
-	 * @param hemf
 	 * @return
 	 */
 	@Bean
 	@Scope(scopeName="prototype")
-	public DaoSupport daoSupport(EntityManagerFactory entityManagerFactory) {
-		DaoSupport dao = new DaoSupport();
+	public BasicDao daoSupport(EntityManagerFactory entityManagerFactory) {
+		BasicDao dao = new BasicDao();
 		dao.setSessionFactory(entityManagerFactory.unwrap(SessionFactory.class));
 	    return dao;
 	}
@@ -71,7 +70,6 @@ public class SpringBootMain extends SpringBootServletInitializer{
 	 * @description 声明HibernateTransactionManager bean
 	 * @date 2018年5月31日 下午3:55:01
 	 * @author dongbin
-	 * @param hemf
 	 * @return
 	 */
 	@Bean

@@ -21,6 +21,8 @@ package com.erp.order.soa.dao.hibernate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import com.framework.dao.BasicDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
@@ -28,7 +30,6 @@ import com.framework.annotation.Cache;
 import com.framework.annotation.Permissions;
 import com.framework.annotation.Permissions.PermissionType;
 import com.framework.annotation.SqlParam;
-import com.framework.dao.DaoSupport;
 import com.framework.dao.model.Pages;
 import com.framework.util.DaoUtil;
 import com.erp.order.so.dao.model.SoHead;
@@ -39,38 +40,38 @@ import com.erp.order.soa.dao.model.SoAgreementHeadCO;
 @Repository
 public class SoAgreementHeadDaoImpl implements SoAgreementHeadDao{ 
 
-    //注入DaoSupport工具类
+    //注入basicDao工具类
     @Autowired
-    private DaoSupport daoSupport;
+    private BasicDao basicDao;
     
     @Override
     public void insertDataObject(SoAgreementHead obj) {
-        this.daoSupport.insertDataTransaction(obj);
+        this.basicDao.insertDataTransaction(obj);
     }
 
     @Override
     public void updateDataObject(SoAgreementHead obj) {
-        this.daoSupport.updateDataTransaction(obj);
+        this.basicDao.updateDataTransaction(obj);
     }
     
     @Override
     public void insertOrUpdateDataObject(SoAgreementHead obj) {
-        this.daoSupport.insertOrUpdateDataTransaction(obj);
+        this.basicDao.insertOrUpdateDataTransaction(obj);
     }
 
     @Override
     public void deleteDataObject(SoAgreementHead obj) {
-        this.daoSupport.deleteDataTransactionJPA(obj);
+        this.basicDao.deleteDataTransactionJPA(obj);
     }
 
     @Override
     public List<SoAgreementHead> getDataObjects() {
-        return this.daoSupport.getDataAllObject(SoAgreementHead.class);
+        return this.basicDao.getDataAllObject(SoAgreementHead.class);
     }
 
     @Override
     public SoAgreementHead getDataObject(int id) {
-        return (SoAgreementHead)this.daoSupport.getDataObject(SoAgreementHead.class, id);
+        return (SoAgreementHead)this.basicDao.getDataObject(SoAgreementHead.class, id);
     }
     
     @Override
@@ -83,7 +84,7 @@ public class SoAgreementHeadDaoImpl implements SoAgreementHeadDao{
         Map<String, Class<?>> entity = new HashMap<String, Class<?>>();
         entity.put("s", SoAgreementHead.class);
         
-        List<SoAgreementHead> list = this.daoSupport.selectDataSql(sql, entity, args);
+        List<SoAgreementHead> list = this.basicDao.selectData(sql, entity, args);
         if(list.size()>0) {
             return list.get(0);
         }
@@ -106,19 +107,19 @@ public class SoAgreementHeadDaoImpl implements SoAgreementHeadDao{
         String sql = "select s.* from so_agreement_head s where 1=1";
         
         Map<String, Object> args = new HashMap<String, Object>();
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "soHeadCode", "and s.", args);
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "soType", "and s.", args);
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "soName", "and s.", args);
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "customerCode", "and s.", args);
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "projectCode", "and s.", args);
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "approveStatus", "and s.", args);
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "status", "and s.", args);
+        sql = sql + DaoUtil.settleParam(paramObj, "soHeadCode", "and s.", args);
+        sql = sql + DaoUtil.settleParam(paramObj, "soType", "and s.", args);
+        sql = sql + DaoUtil.settleParam(paramObj, "soName", "and s.", args);
+        sql = sql + DaoUtil.settleParam(paramObj, "customerCode", "and s.", args);
+        sql = sql + DaoUtil.settleParam(paramObj, "projectCode", "and s.", args);
+        sql = sql + DaoUtil.settleParam(paramObj, "approveStatus", "and s.", args);
+        sql = sql + DaoUtil.settleParam(paramObj, "status", "and s.", args);
         sql = sql + " order by s.so_head_id desc";
         
         Map<String, Class<?>> entity = new HashMap<String, Class<?>>();
         entity.put("s", SoAgreementHead.class);
         
-        return this.daoSupport.getDataSqlByPage(sql, entity, args, pages);
+        return this.basicDao.getDataSql(sql, entity, args, pages);
     }
 
     @Override
@@ -132,20 +133,20 @@ public class SoAgreementHeadDaoImpl implements SoAgreementHeadDao{
         String sql = "select s.* from so_agreement_head s where 1=1";
         
         Map<String, Object> args = new HashMap<String, Object>();
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "soHeadCode", "and s.", args);
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "soType", "and s.", args);
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "soName", "and s.", args);
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "customerCode", "and s.", args);
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "projectCode", "and s.", args);
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "approveStatus", "and s.", args);
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "status", "and s.", args);
+        sql = sql + DaoUtil.settleParam(paramObj, "soHeadCode", "and s.", args);
+        sql = sql + DaoUtil.settleParam(paramObj, "soType", "and s.", args);
+        sql = sql + DaoUtil.settleParam(paramObj, "soName", "and s.", args);
+        sql = sql + DaoUtil.settleParam(paramObj, "customerCode", "and s.", args);
+        sql = sql + DaoUtil.settleParam(paramObj, "projectCode", "and s.", args);
+        sql = sql + DaoUtil.settleParam(paramObj, "approveStatus", "and s.", args);
+        sql = sql + DaoUtil.settleParam(paramObj, "status", "and s.", args);
         sql = sql + DaoUtil.getDataAuthSQL(dataAuthSQL, "s.", "s.");
         sql = sql + " order by s.so_head_id desc";
         
         Map<String, Class<?>> entity = new HashMap<String, Class<?>>();
         entity.put("s", SoAgreementHead.class);
         
-        return this.daoSupport.getDataSqlByPage(sql, entity, args, pages);
+        return this.basicDao.getDataSql(sql, entity, args, pages);
     }
     
     @Override
@@ -164,7 +165,7 @@ public class SoAgreementHeadDaoImpl implements SoAgreementHeadDao{
         
         sql = sql + " where so_head_code = :code";
         
-        this.daoSupport.executeSQLTransaction(sql, args);
+        this.basicDao.executeSQLTransaction(sql, args);
     }
     
 }

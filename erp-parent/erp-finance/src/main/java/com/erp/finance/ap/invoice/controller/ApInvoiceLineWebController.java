@@ -47,8 +47,8 @@ import com.erp.order.po.dao.model.PoLineCO;
 import com.erp.order.po.service.PoLineService;
 import com.framework.controller.ControllerSupport;
 import com.framework.dao.model.Pages;
+import redragon.basic.tools.SnowFlake;
 
-import redragon.frame.hibernate.SnowFlake;
 
 @Controller
 @RequestMapping("/web/apInvoiceLine")

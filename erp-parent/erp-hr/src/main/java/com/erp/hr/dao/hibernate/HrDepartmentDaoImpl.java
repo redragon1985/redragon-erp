@@ -21,6 +21,8 @@ package com.erp.hr.dao.hibernate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import com.framework.dao.BasicDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
@@ -28,7 +30,6 @@ import com.framework.annotation.Cache;
 import com.framework.annotation.Permissions;
 import com.framework.annotation.Permissions.PermissionType;
 import com.framework.annotation.SqlParam;
-import com.framework.dao.DaoSupport;
 import com.framework.dao.model.Pages;
 import com.framework.util.DaoUtil;
 import com.erp.hr.dao.HrDepartmentDao;
@@ -38,38 +39,38 @@ import com.erp.hr.dao.model.HrDepartmentCO;
 @Repository
 public class HrDepartmentDaoImpl implements HrDepartmentDao{ 
 
-    //注入DaoSupport工具类
+    //注入basicDao工具类
     @Autowired
-    private DaoSupport daoSupport;
+    private BasicDao basicDao;
     
     @Override
     public void insertDataObject(HrDepartment obj) {
-        this.daoSupport.insertDataTransaction(obj);
+        this.basicDao.insertDataTransaction(obj);
     }
 
     @Override
     public void updateDataObject(HrDepartment obj) {
-        this.daoSupport.updateDataTransaction(obj);
+        this.basicDao.updateDataTransaction(obj);
     }
     
     @Override
     public void insertOrUpdateDataObject(HrDepartment obj) {
-        this.daoSupport.insertOrUpdateDataTransaction(obj);
+        this.basicDao.insertOrUpdateDataTransaction(obj);
     }
 
     @Override
     public void deleteDataObject(HrDepartment obj) {
-        this.daoSupport.deleteDataTransactionJPA(obj);
+        this.basicDao.deleteDataTransactionJPA(obj);
     }
 
     @Override
     public List<HrDepartment> getDataObjects() {
-        return this.daoSupport.getDataAllObject(HrDepartment.class);
+        return this.basicDao.getDataAllObject(HrDepartment.class);
     }
 
     @Override
     public HrDepartment getDataObject(int id) {
-        return (HrDepartment)this.daoSupport.getDataObject(HrDepartment.class, id);
+        return (HrDepartment)this.basicDao.getDataObject(HrDepartment.class, id);
     }
     
     @Override
@@ -82,7 +83,7 @@ public class HrDepartmentDaoImpl implements HrDepartmentDao{
         Map<String, Class<?>> entity = new HashMap<String, Class<?>>();
         entity.put("d", HrDepartment.class);
         
-        List<HrDepartment> list = this.daoSupport.selectDataSql(sql, entity, args);
+        List<HrDepartment> list = this.basicDao.selectData(sql, entity, args);
         if(list.size()>0) {
             return list.get(0);
         }
@@ -102,7 +103,7 @@ public class HrDepartmentDaoImpl implements HrDepartmentDao{
         Map<String, Class<?>> entity = new HashMap<String, Class<?>>();
         entity.put("d", HrDepartment.class);
         
-        return this.daoSupport.selectDataSql(sql, entity, args);
+        return this.basicDao.selectData(sql, entity, args);
     }
     
     @Override
@@ -133,9 +134,9 @@ public class HrDepartmentDaoImpl implements HrDepartmentDao{
         Map<String, Object> args = new HashMap<String, Object>();
         args.put("departmentId", departmentId);
         
-        List list = this.daoSupport.selectDataSqlCount(sql, args);
+        List list = this.basicDao.selectDataSqlCount(sql, args);
         if(list.size()>0) {
-            return this.daoSupport.convertSQLCount(list.get(0));
+            return this.basicDao.convertSQLCount(list.get(0));
         }
         
         return 0;
@@ -151,7 +152,7 @@ public class HrDepartmentDaoImpl implements HrDepartmentDao{
         Map<String, Class<?>> entity = new HashMap<String, Class<?>>();
         entity.put("d", HrDepartment.class);
         
-        return this.daoSupport.selectDataSql(sql, entity, args);
+        return this.basicDao.selectData(sql, entity, args);
     }
     
 }

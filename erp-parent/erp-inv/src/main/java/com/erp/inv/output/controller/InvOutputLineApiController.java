@@ -21,6 +21,8 @@ package com.erp.inv.output.controller;
 import java.util.List;
 import java.util.Map;
 import javax.validation.Valid;
+
+import com.framework.controller.JsonTextUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,11 +31,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.framework.controller.ControllerSupport;
 import com.framework.dao.model.Pages;
-import com.framework.util.JsonResultUtil;
-import com.framework.util.JsonUtil;
 import com.erp.inv.output.dao.model.InvOutputLine;
 import com.erp.inv.output.dao.model.InvOutputLineCO;
 import com.erp.inv.output.service.InvOutputLineService;
+import redragon.util.string.JsonUtil;
 
 @RestController
 @RequestMapping("/api/invOutputLine")
@@ -79,7 +80,7 @@ public class InvOutputLineApiController extends ControllerSupport{
         //分页查询数据
         List<InvOutputLine> list = this.invOutputLineService.getDataObjects(pages, invOutputLineCO);
         
-        return JsonResultUtil.getQueryJson(JsonUtil.listToJson(list, "yyyy-MM-dd HH:mm:ss"), JsonUtil.objectToJson(pages), null);
+        return JsonTextUtil.getDataJson(JsonUtil.listToJson(list, "yyyy-MM-dd HH:mm:ss"), JsonUtil.objectToJson(pages), null);
     }
     
     
@@ -117,7 +118,7 @@ public class InvOutputLineApiController extends ControllerSupport{
         //参数校验
         Map<String, String> errorMap = this.validateParameters(bindingResult);
         if(errorMap.size()>0) {
-            return JsonResultUtil.getErrorJson(11, "", JsonUtil.mapToJson(errorMap));
+            return JsonTextUtil.getErrorJson(11, "", JsonUtil.mapToJson(errorMap));
         }
         
         //TODO: 对当前编辑的对象初始化默认的字段
@@ -125,7 +126,7 @@ public class InvOutputLineApiController extends ControllerSupport{
         //保存编辑的数据
         this.invOutputLineService.insertDataObject(invOutputLine);
         
-        return JsonResultUtil.getErrorJson(0);
+        return JsonTextUtil.getErrorJson(0);
     }
     
     
@@ -146,7 +147,7 @@ public class InvOutputLineApiController extends ControllerSupport{
         //删除数据
         this.invOutputLineService.deleteDataObject(invOutputLine);
         
-        return JsonResultUtil.getErrorJson(0);
+        return JsonTextUtil.getErrorJson(0);
     }
     
 }

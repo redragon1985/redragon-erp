@@ -21,6 +21,8 @@ package com.erp.order.po.dao.hibernate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import com.framework.dao.BasicDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
@@ -28,7 +30,6 @@ import com.framework.annotation.Cache;
 import com.framework.annotation.Permissions;
 import com.framework.annotation.Permissions.PermissionType;
 import com.framework.annotation.SqlParam;
-import com.framework.dao.DaoSupport;
 import com.framework.dao.model.Pages;
 import com.framework.util.DaoUtil;
 import com.erp.order.po.dao.PoHeadDao;
@@ -38,38 +39,38 @@ import com.erp.order.po.dao.model.PoHeadCO;
 @Repository
 public class PoHeadDaoImpl implements PoHeadDao{ 
 
-    //注入DaoSupport工具类
+    //注入basicDao工具类
     @Autowired
-    private DaoSupport daoSupport;
+    private BasicDao basicDao;
     
     @Override
     public void insertDataObject(PoHead obj) {
-        this.daoSupport.insertDataTransaction(obj);
+        this.basicDao.insertDataTransaction(obj);
     }
 
     @Override
     public void updateDataObject(PoHead obj) {
-        this.daoSupport.updateDataTransaction(obj);
+        this.basicDao.updateDataTransaction(obj);
     }
     
     @Override
     public void insertOrUpdateDataObject(PoHead obj) {
-        this.daoSupport.insertOrUpdateDataTransaction(obj);
+        this.basicDao.insertOrUpdateDataTransaction(obj);
     }
 
     @Override
     public void deleteDataObject(PoHead obj) {
-        this.daoSupport.deleteDataTransactionJPA(obj);
+        this.basicDao.deleteDataTransactionJPA(obj);
     }
 
     @Override
     public List<PoHead> getDataObjects() {
-        return this.daoSupport.getDataAllObject(PoHead.class);
+        return this.basicDao.getDataAllObject(PoHead.class);
     }
 
     @Override
     public PoHead getDataObject(int id) {
-        return (PoHead)this.daoSupport.getDataObject(PoHead.class, id);
+        return (PoHead)this.basicDao.getDataObject(PoHead.class, id);
     }
     
     @Override
@@ -82,7 +83,7 @@ public class PoHeadDaoImpl implements PoHeadDao{
         Map<String, Class<?>> entity = new HashMap<String, Class<?>>();
         entity.put("p", PoHead.class);
         
-        List<PoHead> list = this.daoSupport.selectDataSql(sql, entity, args);
+        List<PoHead> list = this.basicDao.selectData(sql, entity, args);
         if(list.size()>0) {
             return list.get(0);
         }
@@ -105,19 +106,19 @@ public class PoHeadDaoImpl implements PoHeadDao{
         String sql = "select p.* from po_head p where 1=1";
         
         Map<String, Object> args = new HashMap<String, Object>();
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "poHeadCode", "and p.", args);
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "poType", "and p.", args);
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "poName", "and p.", args);
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "vendorCode", "and p.", args);
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "projectCode", "and p.", args);
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "approveStatus", "and p.", args);
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "status", "and p.", args);
+        sql = sql + DaoUtil.settleParam(paramObj, "poHeadCode", "and p.", args);
+        sql = sql + DaoUtil.settleParam(paramObj, "poType", "and p.", args);
+        sql = sql + DaoUtil.settleParam(paramObj, "poName", "and p.", args);
+        sql = sql + DaoUtil.settleParam(paramObj, "vendorCode", "and p.", args);
+        sql = sql + DaoUtil.settleParam(paramObj, "projectCode", "and p.", args);
+        sql = sql + DaoUtil.settleParam(paramObj, "approveStatus", "and p.", args);
+        sql = sql + DaoUtil.settleParam(paramObj, "status", "and p.", args);
         sql = sql + " order by p.po_head_id desc";
         
         Map<String, Class<?>> entity = new HashMap<String, Class<?>>();
         entity.put("p", PoHead.class);
         
-        return this.daoSupport.getDataSqlByPage(sql, entity, args, pages);
+        return this.basicDao.getDataSql(sql, entity, args, pages);
     }
 
     @Override
@@ -131,20 +132,20 @@ public class PoHeadDaoImpl implements PoHeadDao{
         String sql = "select p.* from po_head p where 1=1";
         
         Map<String, Object> args = new HashMap<String, Object>();
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "poHeadCode", "and p.", args);
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "poType", "and p.", args);
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "poName", "and p.", args);
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "vendorCode", "and p.", args);
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "projectCode", "and p.", args);
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "approveStatus", "and p.", args);
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "status", "and p.", args);
+        sql = sql + DaoUtil.settleParam(paramObj, "poHeadCode", "and p.", args);
+        sql = sql + DaoUtil.settleParam(paramObj, "poType", "and p.", args);
+        sql = sql + DaoUtil.settleParam(paramObj, "poName", "and p.", args);
+        sql = sql + DaoUtil.settleParam(paramObj, "vendorCode", "and p.", args);
+        sql = sql + DaoUtil.settleParam(paramObj, "projectCode", "and p.", args);
+        sql = sql + DaoUtil.settleParam(paramObj, "approveStatus", "and p.", args);
+        sql = sql + DaoUtil.settleParam(paramObj, "status", "and p.", args);
         sql = sql + DaoUtil.getDataAuthSQL(dataAuthSQL, "p.", "p.");
         sql = sql + " order by p.po_head_id desc";
         
         Map<String, Class<?>> entity = new HashMap<String, Class<?>>();
         entity.put("p", PoHead.class);
         
-        return this.daoSupport.getDataSqlByPage(sql, entity, args, pages);
+        return this.basicDao.getDataSql(sql, entity, args, pages);
     }
     
     @Override
@@ -163,7 +164,7 @@ public class PoHeadDaoImpl implements PoHeadDao{
         
         sql = sql + " where po_head_code = :code";
         
-        this.daoSupport.executeSQLTransaction(sql, args);
+        this.basicDao.executeSQLTransaction(sql, args);
     }
     
     @Override
@@ -174,9 +175,9 @@ public class PoHeadDaoImpl implements PoHeadDao{
         args.put("startDate", startDate);
         args.put("endDate", endDate);
         
-        List list = this.daoSupport.selectDataSqlCount(sql, args);
+        List list = this.basicDao.selectDataSqlCount(sql, args);
         if(list.size()>0) {
-            return this.daoSupport.convertSQLCount(list.get(0));
+            return this.basicDao.convertSQLCount(list.get(0));
         }
         
         return 0;

@@ -7,6 +7,6 @@
   </parent>
   <artifactId>erp-produce</artifactId>
   <version>0.9</version>
-  <packaging>war</packaging>
+  <packaging>jar</packaging>
   <build/>
 </project>

@@ -43,11 +43,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.framework.controller.ControllerSupport;
 import com.framework.dao.model.Pages;
 import com.framework.dao.model.TreeNode;
-import com.framework.util.JsonResultUtil;
-import com.framework.util.JsonUtil;
 import com.erp.hr.dao.model.HrDepartment;
 import com.erp.hr.dao.model.HrDepartmentCO;
 import com.erp.hr.service.HrDepartmentService;
+import redragon.util.string.JsonUtil;
 
 @Controller
 @RequestMapping("/web/hrDepartment")
@@ -198,7 +197,6 @@ public class HrDepartmentWebController extends ControllerSupport{
      * @description 获取组织编辑模态对话框
      * @date 2020年7月5日
      * @author dongbin
-     * @param nodeCode
      * @param model
      * @return String
      *

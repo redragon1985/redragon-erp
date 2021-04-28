@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.Map;
 import javax.validation.Valid;
 
+import com.framework.shiro.ShiroUtil;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,11 +37,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.framework.controller.ControllerSupport;
 import com.framework.dao.model.Pages;
-import com.framework.util.JsonResultUtil;
-import com.framework.util.JsonUtil;
-import com.framework.util.ShiroUtil;
-
-import redragon.frame.hibernate.SnowFlake;
 
 import com.erp.dataset.service.DatasetCommonService;
 import com.erp.hr.dao.model.HrStaffInfoRO;
@@ -52,6 +48,7 @@ import com.erp.inv.stock.service.InvStockService;
 import com.erp.masterdata.common.service.MasterDataCommonService;
 import com.erp.masterdata.material.dao.model.MdMaterial;
 import com.erp.masterdata.material.service.MdMaterialService;
+import redragon.basic.tools.SnowFlake;
 
 @Controller
 @RequestMapping("/web/invStock")

@@ -23,6 +23,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.framework.dao.BasicDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -32,7 +33,6 @@ import com.erp.finance.ar.invoice.dao.model.ArInvoiceLineCO;
 import com.framework.annotation.Permissions;
 import com.framework.annotation.Permissions.PermissionType;
 import com.framework.annotation.SqlParam;
-import com.framework.dao.DaoSupport;
 import com.framework.dao.model.Pages;
 
 @Repository
@@ -40,7 +40,7 @@ public class ArInvoiceLineDaoImpl implements ArInvoiceLineDao{
 
     //注入DaoSupport工具类
     @Autowired
-    private DaoSupport daoSupport;
+    private BasicDao daoSupport;
     
     @Override
     public void insertDataObject(ArInvoiceLine obj) {
@@ -140,7 +140,7 @@ public class ArInvoiceLineDaoImpl implements ArInvoiceLineDao{
         Map<String, Class<?>> entity = new HashMap<String, Class<?>>();
         entity.put("p", ArInvoiceLine.class);
         
-        return this.daoSupport.getDataSqlByPage(sql, entity, args, pages);
+        return this.daoSupport.getDataSql(sql, entity, args, pages);
     }
     
     @Override
@@ -195,7 +195,7 @@ public class ArInvoiceLineDaoImpl implements ArInvoiceLineDao{
         Map<String, Class<?>> entity = new HashMap<String, Class<?>>();
         entity.put("p", ArInvoiceLine.class);
         
-        return this.daoSupport.selectDataSql(sql, entity, args);
+        return this.daoSupport.selectData(sql, entity, args);
     }
     
     @Override

@@ -21,6 +21,8 @@ package com.erp.inv.stock.dao.hibernate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import com.framework.dao.BasicDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
@@ -28,7 +30,6 @@ import com.framework.annotation.Cache;
 import com.framework.annotation.Permissions;
 import com.framework.annotation.Permissions.PermissionType;
 import com.framework.annotation.SqlParam;
-import com.framework.dao.DaoSupport;
 import com.framework.dao.model.Pages;
 import com.framework.util.DaoUtil;
 import com.erp.inv.stock.dao.InvStockDao;
@@ -38,38 +39,38 @@ import com.erp.inv.stock.dao.model.InvStockCO;
 @Repository
 public class InvStockDaoImpl implements InvStockDao{ 
 
-    //注入DaoSupport工具类
+    //注入basicDao工具类
     @Autowired
-    private DaoSupport daoSupport;
+    private BasicDao basicDao;
     
     @Override
     public void insertDataObject(InvStock obj) {
-        this.daoSupport.insertDataTransaction(obj);
+        this.basicDao.insertDataTransaction(obj);
     }
 
     @Override
     public void updateDataObject(InvStock obj) {
-        this.daoSupport.updateDataTransaction(obj);
+        this.basicDao.updateDataTransaction(obj);
     }
     
     @Override
     public void insertOrUpdateDataObject(InvStock obj) {
-        this.daoSupport.insertOrUpdateDataTransaction(obj);
+        this.basicDao.insertOrUpdateDataTransaction(obj);
     }
 
     @Override
     public void deleteDataObject(InvStock obj) {
-        this.daoSupport.deleteDataTransactionJPA(obj);
+        this.basicDao.deleteDataTransactionJPA(obj);
     }
 
     @Override
     public List<InvStock> getDataObjects() {
-        return this.daoSupport.getDataAllObject(InvStock.class);
+        return this.basicDao.getDataAllObject(InvStock.class);
     }
 
     @Override
     public InvStock getDataObject(int id) {
-        return (InvStock)this.daoSupport.getDataObject(InvStock.class, id);
+        return (InvStock)this.basicDao.getDataObject(InvStock.class, id);
     }
     
     @Override
@@ -92,17 +93,17 @@ public class InvStockDaoImpl implements InvStockDao{
         String sql = "select s.* from inv_stock s where 1=1";
         
         Map<String, Object> args = new HashMap<String, Object>();
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "warehouseCode", "and s.", args);
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "materialCode", "and s.", args);
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "retainFlag", "and s.", args);
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "billType", "and s.", args);
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "billHeadCode", "and s.", args);
+        sql = sql + DaoUtil.settleParam(paramObj, "warehouseCode", "and s.", args);
+        sql = sql + DaoUtil.settleParam(paramObj, "materialCode", "and s.", args);
+        sql = sql + DaoUtil.settleParam(paramObj, "retainFlag", "and s.", args);
+        sql = sql + DaoUtil.settleParam(paramObj, "billType", "and s.", args);
+        sql = sql + DaoUtil.settleParam(paramObj, "billHeadCode", "and s.", args);
         sql = sql + " order by s.stock_id";
         
         Map<String, Class<?>> entity = new HashMap<String, Class<?>>();
         entity.put("s", InvStock.class);
         
-        return this.daoSupport.getDataSqlByPage(sql, entity, args, pages);
+        return this.basicDao.getDataSql(sql, entity, args, pages);
     }
 
     @Override
@@ -124,10 +125,10 @@ public class InvStockDaoImpl implements InvStockDao{
         args.put("warehouseCode", warehouseCode);
         args.put("materialCode", materialCode);
         
-        List list = this.daoSupport.selectDataSqlCount(sql, args);
+        List list = this.basicDao.selectDataSqlCount(sql, args);
         
         if(list.size()>0) {
-            int num = this.daoSupport.convertSQLCount(list.get(0));
+            int num = this.basicDao.convertSQLCount(list.get(0));
             if(num<=1) {
                 return false;
             }
@@ -144,10 +145,10 @@ public class InvStockDaoImpl implements InvStockDao{
         args.put("warehouseCode", warehouseCode);
         args.put("materialCode", materialCode);
         
-        List list = this.daoSupport.selectDataSqlCount(sql, args);
+        List list = this.basicDao.selectDataSqlCount(sql, args);
         
         if(list.size()>0) {
-            int num = this.daoSupport.convertSQLCount(list.get(0));
+            int num = this.basicDao.convertSQLCount(list.get(0));
             if(num==0) {
                 return false;
             }
@@ -164,7 +165,7 @@ public class InvStockDaoImpl implements InvStockDao{
         args.put("billType", billType);
         args.put("billHeadCode", billHeadCode);
         
-        this.daoSupport.executeSQLTransaction(sql, args);
+        this.basicDao.executeSQLTransaction(sql, args);
     }
     
     @Override
@@ -176,7 +177,7 @@ public class InvStockDaoImpl implements InvStockDao{
         args.put("billHeadCode", billHeadCode);
         args.put("billLineCode", billLineCode);
         
-        this.daoSupport.executeSQLTransaction(sql, args);
+        this.basicDao.executeSQLTransaction(sql, args);
     }
     
     @Override
@@ -186,7 +187,7 @@ public class InvStockDaoImpl implements InvStockDao{
         Map<String, Object> args = new HashMap<String, Object>();
         args.put("materialCode", materialCode);
         
-        List list = this.daoSupport.selectDataSqlCount(sql, args);
+        List list = this.basicDao.selectDataSqlCount(sql, args);
         if(list.size()>0) {
             try {
                 return Double.valueOf(list.get(0).toString());
@@ -201,17 +202,17 @@ public class InvStockDaoImpl implements InvStockDao{
         String sql = "select s.* from inv_stock s where bill_head_code is null";
         
         Map<String, Object> args = new HashMap<String, Object>();
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "warehouseCode", "and s.", args);
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "materialCode", "and s.", args);
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "retainFlag", "and s.", args);
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "billType", "and s.", args);
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "billHeadCode", "and s.", args);
+        sql = sql + DaoUtil.settleParam(paramObj, "warehouseCode", "and s.", args);
+        sql = sql + DaoUtil.settleParam(paramObj, "materialCode", "and s.", args);
+        sql = sql + DaoUtil.settleParam(paramObj, "retainFlag", "and s.", args);
+        sql = sql + DaoUtil.settleParam(paramObj, "billType", "and s.", args);
+        sql = sql + DaoUtil.settleParam(paramObj, "billHeadCode", "and s.", args);
         sql = sql + " order by s.stock_id desc";
         
         Map<String, Class<?>> entity = new HashMap<String, Class<?>>();
         entity.put("s", InvStock.class);
         
-        return this.daoSupport.getDataSqlByPage(sql, entity, args, pages);
+        return this.basicDao.getDataSql(sql, entity, args, pages);
     }
     
 }

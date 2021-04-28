@@ -21,6 +21,8 @@ package com.erp.masterdata.customer.dao.hibernate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import com.framework.dao.BasicDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
@@ -28,7 +30,6 @@ import com.framework.annotation.Cache;
 import com.framework.annotation.Permissions;
 import com.framework.annotation.Permissions.PermissionType;
 import com.framework.annotation.SqlParam;
-import com.framework.dao.DaoSupport;
 import com.framework.dao.model.Pages;
 import com.framework.util.DaoUtil;
 import com.erp.masterdata.customer.dao.MdCustomerLicenseDao;
@@ -39,38 +40,38 @@ import com.erp.masterdata.customer.dao.model.MdCustomerLicenseCO;
 @Repository
 public class MdCustomerLicenseDaoImpl implements MdCustomerLicenseDao{ 
 
-    //注入DaoSupport工具类
+    //注入basicDao工具类
     @Autowired
-    private DaoSupport daoSupport;
+    private BasicDao basicDao;
     
     @Override
     public void insertDataObject(MdCustomerLicense obj) {
-        this.daoSupport.insertDataTransaction(obj);
+        this.basicDao.insertDataTransaction(obj);
     }
 
     @Override
     public void updateDataObject(MdCustomerLicense obj) {
-        this.daoSupport.updateDataTransaction(obj);
+        this.basicDao.updateDataTransaction(obj);
     }
     
     @Override
     public void insertOrUpdateDataObject(MdCustomerLicense obj) {
-        this.daoSupport.insertOrUpdateDataTransaction(obj);
+        this.basicDao.insertOrUpdateDataTransaction(obj);
     }
 
     @Override
     public void deleteDataObject(MdCustomerLicense obj) {
-        this.daoSupport.deleteDataTransactionJPA(obj);
+        this.basicDao.deleteDataTransactionJPA(obj);
     }
 
     @Override
     public List<MdCustomerLicense> getDataObjects() {
-        return this.daoSupport.getDataAllObject(MdCustomerLicense.class);
+        return this.basicDao.getDataAllObject(MdCustomerLicense.class);
     }
 
     @Override
     public MdCustomerLicense getDataObject(int id) {
-        return (MdCustomerLicense)this.daoSupport.getDataObject(MdCustomerLicense.class, id);
+        return (MdCustomerLicense)this.basicDao.getDataObject(MdCustomerLicense.class, id);
     }
     
     @Override
@@ -90,7 +91,7 @@ public class MdCustomerLicenseDaoImpl implements MdCustomerLicenseDao{
         Map<String, Class<?>> entity = new HashMap<String, Class<?>>();
         entity.put("c", MdCustomerLicense.class);
         
-        return this.daoSupport.selectDataSql(sql, entity, args);
+        return this.basicDao.selectData(sql, entity, args);
     }
     
     @Override
@@ -121,7 +122,7 @@ public class MdCustomerLicenseDaoImpl implements MdCustomerLicenseDao{
         Map<String, Object> args = new HashMap<String, Object>();
         args.put("customerCode", customerCode);
         
-        List list = this.daoSupport.selectDataSqlCount(sql, args);
+        List list = this.basicDao.selectDataSqlCount(sql, args);
         if(list.size()>0) {
             return Integer.parseInt(String.valueOf(list.get(0)));
         }
@@ -141,7 +142,7 @@ public class MdCustomerLicenseDaoImpl implements MdCustomerLicenseDao{
         Map<String, Class<?>> entity = new HashMap<String, Class<?>>();
         entity.put("l", MdCustomerLicense.class);
         
-        List list = this.daoSupport.selectDataSql(sql, entity, args);
+        List list = this.basicDao.selectData(sql, entity, args);
         if(list.size()>0) {
             return (MdCustomerLicense)list.get(0);
         }

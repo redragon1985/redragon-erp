@@ -24,6 +24,8 @@ import java.util.Map;
 
 import javax.validation.Valid;
 
+import com.framework.controller.JsonTextUtil;
+import com.framework.shiro.ShiroUtil;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -63,8 +65,6 @@ import com.erp.order.so.service.SoLineService;
 import com.framework.controller.ControllerSupport;
 import com.framework.dao.data.GlobalDataBox;
 import com.framework.dao.model.Pages;
-import com.framework.util.JsonResultUtil;
-import com.framework.util.ShiroUtil;
 
 @Controller
 @RequestMapping("/web/arInvoiceHead")
@@ -484,9 +484,9 @@ public class ArInvoiceHeadWebController extends ControllerSupport{
             //调用自动创建方法
             this.finVoucherModelHeadService.autoCreateVoucher(headCode, new Double[]{voucherAmount.doubleValue(),amountSum.doubleValue(),taxAmountSum.doubleValue()}, "AR_INVOICE");
             
-            return JsonResultUtil.getErrorJson(0);
+            return JsonTextUtil.getErrorJson(0);
         }catch(Exception e) {
-            return JsonResultUtil.getErrorJson(-1, "重新生成分录错误");
+            return JsonTextUtil.getErrorJson(-1, "重新生成分录错误");
         }
     }
 }

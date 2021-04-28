@@ -21,6 +21,8 @@ package com.erp.masterdata.vendor.dao.hibernate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import com.framework.dao.BasicDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
@@ -28,7 +30,6 @@ import com.framework.annotation.Cache;
 import com.framework.annotation.Permissions;
 import com.framework.annotation.Permissions.PermissionType;
 import com.framework.annotation.SqlParam;
-import com.framework.dao.DaoSupport;
 import com.framework.dao.model.Pages;
 import com.framework.util.DaoUtil;
 import com.erp.masterdata.customer.dao.model.MdCustomer;
@@ -39,38 +40,38 @@ import com.erp.masterdata.vendor.dao.model.MdVendorCO;
 @Repository
 public class MdVendorDaoImpl implements MdVendorDao{ 
 
-    //注入DaoSupport工具类
+    //注入basicDao工具类
     @Autowired
-    private DaoSupport daoSupport;
+    private BasicDao basicDao;
     
     @Override
     public void insertDataObject(MdVendor obj) {
-        this.daoSupport.insertDataTransaction(obj);
+        this.basicDao.insertDataTransaction(obj);
     }
 
     @Override
     public void updateDataObject(MdVendor obj) {
-        this.daoSupport.updateDataTransaction(obj);
+        this.basicDao.updateDataTransaction(obj);
     }
     
     @Override
     public void insertOrUpdateDataObject(MdVendor obj) {
-        this.daoSupport.insertOrUpdateDataTransaction(obj);
+        this.basicDao.insertOrUpdateDataTransaction(obj);
     }
 
     @Override
     public void deleteDataObject(MdVendor obj) {
-        this.daoSupport.deleteDataTransactionJPA(obj);
+        this.basicDao.deleteDataTransactionJPA(obj);
     }
 
     @Override
     public List<MdVendor> getDataObjects() {
-        return this.daoSupport.getDataAllObject(MdVendor.class);
+        return this.basicDao.getDataAllObject(MdVendor.class);
     }
 
     @Override
     public MdVendor getDataObject(int id) {
-        return (MdVendor)this.daoSupport.getDataObject(MdVendor.class, id);
+        return (MdVendor)this.basicDao.getDataObject(MdVendor.class, id);
     }
     
     @Override
@@ -83,7 +84,7 @@ public class MdVendorDaoImpl implements MdVendorDao{
         Map<String, Class<?>> entity = new HashMap<String, Class<?>>();
         entity.put("c", MdVendor.class);
         
-        List list = this.daoSupport.selectDataSql(sql, entity, args);
+        List list = this.basicDao.selectData(sql, entity, args);
         
         if(list.size()>0) {
             return (MdVendor)list.get(0);
@@ -97,14 +98,14 @@ public class MdVendorDaoImpl implements MdVendorDao{
         String sql = "select c.* from md_vendor c where 1=1";
         
         Map<String, Object> args = new HashMap<String, Object>();
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "approveStatus", "and c.", args);
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "status", "and c.", args);
+        sql = sql + DaoUtil.settleParam(paramObj, "approveStatus", "and c.", args);
+        sql = sql + DaoUtil.settleParam(paramObj, "status", "and c.", args);
         sql = sql + " order by c.vendor_id desc";
         
         Map<String, Class<?>> entity = new HashMap<String, Class<?>>();
         entity.put("c", MdVendor.class);
         
-        return this.daoSupport.selectDataSql(sql, entity, args);
+        return this.basicDao.selectData(sql, entity, args);
     }
     
     @Override
@@ -117,17 +118,17 @@ public class MdVendorDaoImpl implements MdVendorDao{
         String sql = "select c.* from md_vendor c where 1=1";
         
         Map<String, Object> args = new HashMap<String, Object>();
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "vendorCode", "and c.", args);
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "vendorName", "and c.", args);
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "vendorType", "and c.", args);
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "vendorCity", "and c.", args);
-        sql = sql + DaoUtil.getSQLCondition(paramObj, "status", "and c.", args);
+        sql = sql + DaoUtil.settleParam(paramObj, "vendorCode", "and c.", args);
+        sql = sql + DaoUtil.settleParam(paramObj, "vendorName", "and c.", args);
+        sql = sql + DaoUtil.settleParam(paramObj, "vendorType", "and c.", args);
+        sql = sql + DaoUtil.settleParam(paramObj, "vendorCity", "and c.", args);
+        sql = sql + DaoUtil.settleParam(paramObj, "status", "and c.", args);
         sql = sql + " order by c.vendor_id desc";
         
         Map<String, Class<?>> entity = new HashMap<String, Class<?>>();
         entity.put("c", MdVendor.class);
         
-        return this.daoSupport.getDataSqlByPage(sql, entity, args, pages);
+        return this.basicDao.getDataSql(sql, entity, args, pages);
     }
 
     @Override
@@ -148,7 +149,7 @@ public class MdVendorDaoImpl implements MdVendorDao{
         Map<String, Class<?>> entity = new HashMap<String, Class<?>>();
         entity.put("c", MdVendor.class);
         
-        return this.daoSupport.selectDataSql(sql, entity);
+        return this.basicDao.selectData(sql, entity);
     }
     
     @Override
@@ -159,16 +160,16 @@ public class MdVendorDaoImpl implements MdVendorDao{
         args.put("code", code);
         args.put("approveStatus", approveStatus);
         
-        this.daoSupport.executeSQLTransaction(sql, args);
+        this.basicDao.executeSQLTransaction(sql, args);
     }
     
     @Override
     public int getVendorNum() {
         String sql = "select count(*) from md_vendor";
         
-        List list = this.daoSupport.selectDataSqlCount(sql);
+        List list = this.basicDao.selectDataSqlCount(sql);
         if(list.size()>0) {
-            return this.daoSupport.convertSQLCount(list.get(0));
+            return this.basicDao.convertSQLCount(list.get(0));
         }
         
         return 0;

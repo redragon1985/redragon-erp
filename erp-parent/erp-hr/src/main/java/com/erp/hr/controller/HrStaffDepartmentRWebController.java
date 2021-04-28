@@ -31,8 +31,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.framework.controller.ControllerSupport;
 import com.framework.dao.model.Pages;
-import com.framework.util.JsonResultUtil;
-import com.framework.util.JsonUtil;
 import com.erp.hr.dao.model.HrDepartment;
 import com.erp.hr.dao.model.HrPosition;
 import com.erp.hr.dao.model.HrPositionCO;

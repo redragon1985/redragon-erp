@@ -24,6 +24,8 @@ import java.util.List;
 import java.util.Map;
 import javax.validation.Valid;
 
+import com.framework.controller.JsonTextUtil;
+import com.framework.shiro.ShiroUtil;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,9 +41,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.framework.controller.ControllerSupport;
 import com.framework.dao.data.GlobalDataBox;
 import com.framework.dao.model.Pages;
-import com.framework.util.JsonResultUtil;
-import com.framework.util.JsonUtil;
-import com.framework.util.ShiroUtil;
 import com.erp.common.ar.invoice.service.ArInvoiceHeadService;
 import com.erp.common.voucher.service.FinVoucherBillRService;
 import com.erp.common.voucher.service.FinVoucherHeadService;
@@ -462,9 +461,9 @@ public class InvOutputHeadWebController extends ControllerSupport{
             //调用自动创建方法
             this.finVoucherModelHeadService.autoCreateVoucher(headCode, new Double[]{voucherAmount.doubleValue()}, "OUTPUT");
             
-            return JsonResultUtil.getErrorJson(0);
+            return JsonTextUtil.getErrorJson(0);
         }catch(Exception e) {
-            return JsonResultUtil.getErrorJson(-1, "重新生成分录错误");
+            return JsonTextUtil.getErrorJson(-1, "重新生成分录错误");
         }
     }
 }

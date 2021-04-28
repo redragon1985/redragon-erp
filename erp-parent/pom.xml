@@ -329,16 +329,32 @@
       </plugin>
       
       <plugin>
-       <artifactId>maven-war-plugin</artifactId>
-       <configuration>
-           <version>3.0</version>
-           <failOnMissingWebXml>false</failOnMissingWebXml>
-        </configuration>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-war-plugin</artifactId>
+          <configuration>
+              <failOnMissingWebXml>false</failOnMissingWebXml>
+          </configuration>
        </plugin>
-       
-       <plugin>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-maven-plugin</artifactId>
+
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-jar-plugin</artifactId>
+        </plugin>
+
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-dependency-plugin</artifactId>
+            <executions>
+                <execution>
+                    <goals>
+                        <goal>copy-dependencies</goal>
+                    </goals>
+                    <configuration>
+                        <outputDirectory>${project.build.directory}/${project.build.finalName}/WEB-INF/lib</outputDirectory>
+                        <includeScope>system</includeScope>
+                    </configuration>
+                </execution>
+            </executions>
         </plugin>
        
     </plugins>

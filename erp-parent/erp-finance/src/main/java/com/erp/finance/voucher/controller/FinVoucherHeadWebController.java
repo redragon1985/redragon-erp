@@ -25,6 +25,7 @@ import java.util.Map;
 
 import javax.validation.Valid;
 
+import com.framework.shiro.ShiroUtil;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -53,9 +54,7 @@ import com.erp.masterdata.common.service.MasterDataCommonService;
 import com.framework.controller.ControllerSupport;
 import com.framework.dao.data.GlobalDataBox;
 import com.framework.dao.model.Pages;
-import com.framework.util.ShiroUtil;
-
-import redragon.frame.hibernate.SnowFlake;
+import redragon.basic.tools.SnowFlake;
 
 @Controller
 @RequestMapping("/web/finVoucherHead")

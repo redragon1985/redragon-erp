@@ -22,6 +22,7 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
+import com.framework.shiro.ShiroUtil;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -31,10 +32,6 @@ import com.framework.annotation.Cache;
 import com.framework.annotation.Cache.CacheType;
 import com.framework.annotation.Log;
 import com.framework.dao.model.Pages;
-import com.framework.util.JsonResultUtil;
-import com.framework.util.ShiroUtil;
-
-import redragon.frame.hibernate.SnowFlake;
 
 import com.erp.common.voucher.service.FinVoucherBillRService;
 import com.erp.common.voucher.service.FinVoucherHeadService;
@@ -52,6 +49,7 @@ import com.erp.inv.stock.dao.model.InvStock;
 import com.erp.inv.stock.service.InvStockService;
 import com.erp.order.po.dao.model.PoLine;
 import com.erp.order.po.service.PoLineService;
+import redragon.basic.tools.SnowFlake;
 
 @Service
 @Transactional(rollbackFor=Exception.class)
