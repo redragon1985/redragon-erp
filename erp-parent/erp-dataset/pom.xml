@@ -8,18 +8,6 @@
   <artifactId>erp-dataset</artifactId>
   <packaging>war</packaging>
 
-  <build>
-    <plugins>
-        <plugin>
-           <artifactId>maven-war-plugin</artifactId>
-           <configuration>
-               <version>3.0</version>
-               <failOnMissingWebXml>false</failOnMissingWebXml>
-            </configuration>
-        </plugin>
-    </plugins>
-  </build>
-
   <dependencies>
     <!--  
   	<dependency>
