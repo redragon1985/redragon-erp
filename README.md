@@ -5,14 +5,16 @@
 <img  src="https://img.shields.io/badge/Release-v1.0-brightgreen.svg"> <img  src="https://img.shields.io/badge/JDK-1.8-important.svg"> <img  src="https://img.shields.io/badge/MySQL-8.0-important.svg"> <img  src="https://img.shields.io/badge/Redis-5.0-important.svg"> <img  src="https://img.shields.io/badge/SpringBoot-2.3-blue.svg"> <img  src="https://img.shields.io/badge/License-GPL2.0-lightgrey.svg">
 </p>
 <p align="center">
-<img  src="https://img.shields.io/badge/Copyright-赤龙ERP/redragon-blueviolet.svg"> <img  src="https://img.shields.io/badge/生态版-v1.6-blueviolet.svg">
+<img  src="https://img.shields.io/badge/Copyright-赤龙ERP/redragon-60569f.svg"> <img  src="https://img.shields.io/badge/生态版-v1.8-60569f.svg">
 </p>
-
+<p align="center">
+<img  src="https://img.shields.io/badge/生态产品上线-CRM系统-f44e91.svg"> <img  src="https://img.shields.io/badge/生态产品上线-项目管理系统-f44e91.svg">
+</p>
 ---
 
 # 中国开源ERP“领跑者”
 
-:fa-jsfiddle:` 赤龙ERP生态版v1.7上线`
+:fa-jsfiddle:` 赤龙ERP生态版v1.8上线`
 
 :fa-home: 赤龙官网：[https://www.redragon-erp.com](https://www.redragon-erp.com "https://www.redragon-erp.com")
 
@@ -46,7 +48,7 @@
 
 **生态版：**
 
-    （1）软件将持续发布生态产品簇（EHR、CRM、WMS、工作流等）
+    （1）软件将持续发布生态产品簇（EHR、CRM[已上线]、WMS、项目管理[已上线]、工作流[已上线]等）
     （2）除主流程外，针对业务完整的分支流程和逆流程
     （3）精确的财务业务一体化实现
     （4）快速的应用部署服务、便捷的客户化指导、完备的社群咨询
@@ -118,8 +120,8 @@
 |  发票、红字发票、预付款、预收款、付款单、收款单、费用报销  |  自动凭证、日记账、结账、财务报表、财务业务一体化  |  账套、会计科目结构、会计日历、成本中心  |
 |  **工作流**  |  **自定义系统**  |  **资产管理**  |
 |  多节点、多分支、跨组织、可配置、记录审批历史  |  可配置数据字典、自定义系统参数、自定义字段、自定义编码  |  资产类别、资产台账、计提折旧、报废  |
-|  **项目管理**  |  **其他功能**  |   &nbsp;  |
-|  项目立项、项目资源分配、项目计划管理、项目进度跟进  | 通知与预警、导出数据、工具栏、单据变更  |  &nbsp;  |
+|  **:tw-1f331: 项目管理系统**  |  **:tw-1f331: CRM系统**  |  **其他功能**  |
+|  项目立项、项目资源分配、项目计划管理、项目进度跟进  |  线索、客户、公海、产品、报价、商机、活动、任务  |  通知与预警、导出数据、工具栏、单据变更  |
 
 
 # 产品与服务
@@ -127,7 +129,7 @@
 **社区版**
 - 免费的学习与使用：赤龙ERP社区版允许个人学习和企业内部使用，并完全免费。
 - 商业分发授权：赤龙ERP社区版在取得软件的正式授权前禁止任何形式的商业行为；在取得软件开发者的授权后，才有权进行二次分发并收费。[了解更多](https://www.redragon-erp.com/product.html "商业使用授权")<br/>
-`二次分发包括但不限于：将赤龙ERP或客户化的版本销售给其他客户或通过网络渠道发布并获得收益`
+`二次分发包括：将赤龙ERP或客户化的版本销售给其他客户或通过网络渠道发布并获得收益`
 
 **生态版**
 - 会员制与服务：赤龙ERP生态版提供会员制的服务并收取必要的服务费。[了解更多](https://www.redragon-erp.com/product.html "赤龙ERP会员")
@@ -194,9 +196,9 @@
 
 # 安装和部署
 
-请查看根目录下，项目构建文档BUILD.md
+请查看根目录下，项目构建文档[BUILD.md](https://gitee.com/redragon/redragon-erp/blob/master/BUILD.md "BUILD.md")
 
-`如果在部署时出现问题，可直接与开发者沟通，微信二维码见文档底部`
+`如果在部署时出现问题，可发布ISSUE或直接与开发者沟通，微信二维码见文档底部`
 
 # 开发计划
 
@@ -301,7 +303,8 @@
 6. 优化会计科目结构查询
 7. 增加自动业务编码维护功能
 8. 实现车间管理WIP手工计费
-9. 修改各模块BUG
+9. 增加质检管理模块
+10. 修改各模块BUG
 
 **赤龙ERP生态版 v1.5.1（已上线）**
 
@@ -317,12 +320,19 @@
 3. 资产计提折旧
 4. 资产报废
 
-**赤龙ERP生态版 v1.7（已上线）**
+**赤龙ERP生态版--项目管理系统 v1.7（已上线）**
 
 1. 项目立项
 2. 项目资源分配
 3. 项目工作计划
 4. 项目进度跟踪
+
+**赤龙ERP生态版--CRM系统 v1.8（已上线）**
+
+1. 线索
+2. 客户与公海
+3. 产品与报价
+4. 销售商机
 
 # 交流与分享
 
