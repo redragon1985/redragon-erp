@@ -14,7 +14,7 @@
 
 # 中国开源ERP“领跑者”
 
-:fa-jsfiddle:` 赤龙ERP生态版v1.8上线`
+:fa-jsfiddle:` 赤龙ERP生态版v2.0上线`
 
 :fa-home: 赤龙官网：[https://www.redragon-erp.com](https://www.redragon-erp.com "https://www.redragon-erp.com")
 
@@ -72,7 +72,7 @@
 
 :fa-wechat:`如需咨询或合作，加微信详询`
 
-![赤龙ERP开发者](http://www.redragon-erp.com/images/redragonBussiness.png "赤龙ERP商业合作")
+![赤龙ERP开发者](http://www.redragon-erp.com/images/redragon.png "赤龙ERP开发者")
 
 # 团队招募
 
@@ -102,7 +102,7 @@
 
 [:fa-hand-o-right: 点击自助申请账号](https://www.redragon-erp.com/account.html "https://www.redragon-erp.com/account.html")
 
-`加开发者微信，可加入赤龙ERP沟通群，讨论技术或业务问题`
+`可加入赤龙ERP沟通群，讨论技术或业务问题`
 
 ![赤龙ERP开发者](http://www.redragon-erp.com/images/redragon.png "赤龙ERP开发者")
 
@@ -137,7 +137,7 @@
 
 :fa-wechat:`如需购买或合作，可加微信详询`
 
-![赤龙ERP开发者](http://www.redragon-erp.com/images/redragonBussiness.png "赤龙ERP商业合作")
+![赤龙ERP开发者](http://www.redragon-erp.com/images/redragon.png "赤龙ERP开发者")
 
 # 产品展示
 
@@ -334,8 +334,44 @@
 3. 产品与报价
 4. 销售商机
 
+**赤龙ERP生态版--报表系统 v1.9（已上线）**
+
+1. 报表配置
+2. 模板配置
+
+**赤龙ERP生态版--报表系统 v2.0（已上线）**
+
+1. 全模块功能完善
+（1）数据字典排序
+（2）单点记录登陆状态
+（3）应收应付模块增加GL日期
+（4）优化所有表单验证
+（5）优化报销单查询功能
+（6）修复库存明细数据
+（7）优化生产任务的工厂入库和退货流程
+（8）发票自动带入增值税
+（9）优化凭证自动生成税行
+（10）子分类账会计科目结构根据业务自动生成
+（11）自定义凭证摘要
+（12）生产资源自动记录成本
+（13）可配置流水号
+（14）优化表单的保存与提交逻辑
+（15）优化基础数据的状态判断
+（16）验证会计期间状态
+（17）在库存中记录库存成本
+（18）ajax提交报错提示优化
+（19）实现多版本物料清单
+（20）数据权限分模块配置
+（21）增加项目日历功能
+（22）增加营销日历功能
+（23）报表系统测试入口
+（24）记录列表查询历史
+（25）报表模板样例
+2. 各模块BUG修改
+3. 底层框架优化
+
 # 交流与分享
 
-:fa-wechat: 扫描二维码与开发者沟通交流
+:fa-wechat: 扫描二维码入群沟通交流
 
 ![赤龙ERP商业合作](http://www.redragon-erp.com/images/redragon.png "赤龙ERP商业合作")
