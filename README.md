@@ -218,18 +218,6 @@
 
 ------------
 
-![赤龙ERP](https://www.redragon-erp.com/images/eco/r8.jpg "赤龙ERP")
-
-------------
-
-![赤龙ERP](https://www.redragon-erp.com/images/eco/r9.jpg "赤龙ERP")
-
-------------
-
-![赤龙ERP](https://www.redragon-erp.com/images/eco/r10.jpg "赤龙ERP")
-
-------------
-
 ![赤龙ERP](https://www.redragon-erp.com/images/eco/r11.jpg "赤龙ERP")
 
 ------------
@@ -239,6 +227,23 @@
 ------------
 
 ![赤龙ERP](https://www.redragon-erp.com/images/eco/r13.jpg "赤龙ERP")
+
+------------
+
+**移动端**
+
+![赤龙ERP](https://www.redragon-erp.com/images/eco/m1.jpg "赤龙ERP")
+![赤龙ERP](https://www.redragon-erp.com/images/eco/m3.jpg "赤龙ERP")
+
+------------
+
+![赤龙ERP](https://www.redragon-erp.com/images/eco/m4.jpg "赤龙ERP")
+![赤龙ERP](https://www.redragon-erp.com/images/eco/m6.jpg "赤龙ERP")
+
+------------
+
+![赤龙ERP](https://www.redragon-erp.com/images/eco/m7.jpg "赤龙ERP")
+![赤龙ERP](https://www.redragon-erp.com/images/eco/m8.jpg "赤龙ERP")
 
 ------------
 
