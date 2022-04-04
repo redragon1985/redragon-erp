@@ -5,7 +5,7 @@
 <img  src="https://img.shields.io/badge/Release-v1.0-brightgreen.svg"> <img  src="https://img.shields.io/badge/JDK-1.8-important.svg"> <img  src="https://img.shields.io/badge/MySQL-8.0-important.svg"> <img  src="https://img.shields.io/badge/Redis-5.0-important.svg"> <img  src="https://img.shields.io/badge/SpringBoot-2.3-blue.svg"> <img  src="https://img.shields.io/badge/License-GPL2.0-lightgrey.svg">
 </p>
 <p align="center">
-<img  src="https://img.shields.io/badge/Copyright-赤龙ERP/redragon-60569f.svg"> <img  src="https://img.shields.io/badge/生态版-v2.1-60569f.svg">
+<img  src="https://img.shields.io/badge/Copyright-赤龙ERP/redragon-60569f.svg"> <img  src="https://img.shields.io/badge/生态版-v2.1.2-60569f.svg">
 </p>
 <p align="center">
 <img  src="https://img.shields.io/badge/生态产品上线-CRM系统-f44e91.svg"> <img  src="https://img.shields.io/badge/生态产品上线-项目管理系统-f44e91.svg">
@@ -14,7 +14,7 @@
 
 # 中国开源ERP“领跑者”
 
-:fa-jsfiddle:` 赤龙ERP生态版v2.1上线`
+:fa-jsfiddle:` 赤龙ERP生态版v2.1.2上线`
 
 :fa-home: 赤龙官网：[https://www.redragon-erp.com](https://www.redragon-erp.com "https://www.redragon-erp.com")
 
@@ -74,7 +74,7 @@
 
 ![赤龙ERP开发者](http://www.redragon-erp.com/images/redragon.png "赤龙ERP开发者")
 
-# 团队招募
+# 生态团队招募
 
 如果你有一技之长，并有一定的时间，愿意与我们一起打造一套数字化服务平台，并作出自己的贡献，我们愿意与你一起创业共赢！
 
@@ -121,7 +121,7 @@
 |  **工作流**  |  **自定义系统**  |  **资产管理**  |
 |  多节点、多分支、跨组织、可配置、记录审批历史  |  可配置数据字典、自定义系统参数、自定义字段、自定义编码  |  资产类别、资产台账、计提折旧、报废  |
 |  **:tw-1f331: 项目管理系统**  |  **:tw-1f331: CRM系统**  |  **其他功能**  |
-|  项目立项、项目资源分配、项目计划管理、项目进度跟进、任务看板  |  线索、客户、公海、产品、报价、商机、活动、任务、销售漏斗、销售仪表盘  |  通知与预警、导出数据、工具栏、OA知识库、单据变更  |
+|  项目立项、项目资源分配、项目计划管理、项目进度跟进、任务看板  |  线索、客户、公海、产品、报价、商机、活动、任务、销售漏斗、销售仪表盘  |  通知与预警、系统日志、导出数据、工具栏、OA知识库、单据变更、日志表  |
 
 
 # 产品与服务
@@ -132,8 +132,8 @@
 `二次分发包括：将赤龙ERP或客户化的版本销售给其他客户或通过网络渠道发布并获得收益`
 
 **生态版**
-- 会员制与服务：赤龙ERP生态版提供会员制的服务并收取必要的服务费。[了解更多](https://www.redragon-erp.com/product.html "赤龙ERP会员")
-- 软件区域代理：赤龙ERP生态版招募区域代理，代理商有权代理我们的软件，并通过实施或客户化获利。[了解更多](https://www.redragon-erp.com/partner.html "区域软件代理")
+- 会员与服务：赤龙ERP生态版提供会员服务并收取必要的服务费。[了解更多](https://www.redragon-erp.com/product.html "赤龙ERP会员")
+- 区域经销/代理：赤龙ERP生态版招募区域经销商、代理商和实施商，通过实施或客户化获利。[了解更多](https://www.redragon-erp.com/partner.html "区域软件代理")
 
 :fa-wechat:`如需购买或合作，可加微信详询`
 
@@ -226,19 +226,10 @@
 
 ------------
 
-![赤龙ERP](https://www.redragon-erp.com/images/eco/r13.jpg "赤龙ERP")
-
-------------
-
 **移动端**
 
 ![赤龙ERP](https://www.redragon-erp.com/images/eco/m1.jpg "赤龙ERP")
 ![赤龙ERP](https://www.redragon-erp.com/images/eco/m3.jpg "赤龙ERP")
-
-------------
-
-![赤龙ERP](https://www.redragon-erp.com/images/eco/m4.jpg "赤龙ERP")
-![赤龙ERP](https://www.redragon-erp.com/images/eco/m6.jpg "赤龙ERP")
 
 ------------
 
@@ -259,7 +250,7 @@
 
 请查看根目录下，项目构建文档[BUILD.md](https://gitee.com/redragon/redragon-erp/blob/master/BUILD.md "BUILD.md")
 
-`如果在部署时出现问题，可发布ISSUE或直接与开发者沟通，微信二维码见文档底部`
+`如果在部署时出现问题，可发布ISSUE或直接加群沟通，微信二维码见文档底部`
 
 # 开发计划
 
@@ -466,6 +457,26 @@
 （20）增加业务单据作废功能
 （21）凭证过账验证逻辑优化
 （22）增加科目余额方向配置功能
+```
+
+**赤龙ERP生态版 v2.1.2（已上线）**
+1. 新增更多类型系统通知
+2. 子分类账自动分录功能迭代
+3. 优化各模块所需主数据状态逻辑验证
+4. 部分业务模块优化取消功能
+5. 增加系统日志功能，可查看一些特殊的操作
+6. 增加自定义编码功能，可根据需要配置多段编码
+7. 质检模块增加部分验证和数据权限
+8. 增加日志表功能，可随时追溯任何修改和删除
+```
+（1）物料选择框优化（展示更多物料信息）
+（2）客户/供应商选择框优化（展示更多物料信息）
+（3）库存盘点自动生成分录
+（4）固定资产根据资产类型生成分录BUG
+（5）批次效期退货BUG
+（6）费用报销根据费项生成分录BUG
+（7）高亮显示有查询条件的列表
+（8）生产模块工序完成BUG
 ```
 
 # 交流与分享
