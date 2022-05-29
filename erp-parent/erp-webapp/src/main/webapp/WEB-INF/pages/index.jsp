@@ -1,4 +1,3 @@
-<%@page import="redragon.util.i18n.i18n"%>
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%
 String path = request.getContextPath();

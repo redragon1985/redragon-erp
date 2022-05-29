@@ -149,7 +149,13 @@ $(document).ready(function () {
     })
 });
 
-
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?aeb24c5a4c69653d29dccf070b82b285";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
 
 // Fixed Sidebar
 $(window).bind("load", function () {

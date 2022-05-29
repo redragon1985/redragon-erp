@@ -137,11 +137,6 @@
 			}
 		});
 	</script>
-	
-    <!-- cnzz -->
-    <div style="display: none;">
-    	<script type="text/javascript" src="https://s9.cnzz.com/z_stat.php?id=1279413703&web_id=1279413703"></script>
-    </div>
 
 </body>
 </html>
