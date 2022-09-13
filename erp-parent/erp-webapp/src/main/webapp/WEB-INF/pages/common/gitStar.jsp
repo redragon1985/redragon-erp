@@ -36,20 +36,20 @@ $(document).ready(function(){
 					<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
 				</button>
 				--%>
-				<i class="fa fa-comments-o modal-icon text-danger"></i>
-				<h4 class="modal-title" style="color: black;">入群赤龙ERP</h4>
+				<i class="fa fa-warning modal-icon text-danger" style="font-size: 60px;"></i>
+				<h4 class="modal-title" style="color: black;">赤龙ERP社区版授权</h4>
 			</div>
 			<div class="modal-body">
 				<h3 style="line-height:28px; text-align: center;">
-					别犹豫，马上入群！与我们一起探讨【赤龙ERP】的技术或业务，带你走进不一样的开源ERP世界！
+					【赤龙ERP社区版】现免费对用户开放“授权申请”，申请后可获取更多软件权益，使用或商用前建议先获得授权书。企业或个人均可申请使用授权或商用授权
 				</h3>
-				<center><img src="http://www.redragon-erp.com/images/redragon.png" width="150" height="150" alt="赤龙ERP沟通群"/></center>
+				<center><a href="https://www.redragon-erp.com/grant-community.html" target="_blank"><i class="fa fa-hand-o-right"></i> 免费获取授权书</a></center>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-white btn-notcontrol" data-dismiss="modal">再想想</button>
-				<%-- 
-				<button type="button" class="btn btn-danger" id="gitstarButton1" style="font-size: 16px; font-weight: bold;"><i class="fa fa-chevron-circle-right"></i> 去点星</button>
-				--%>
+				<button type="button" class="btn btn-white btn-notcontrol" data-dismiss="modal">关闭</button>
+				
+				<button type="button" class="btn btn-danger" id="gitstarButton1" style="font-weight: bold;"><i class="fa fa-chevron-circle-right"></i> 去点星</button>
+
 			</div>
 		</div>
 	</div>

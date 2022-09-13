@@ -49,20 +49,20 @@
 			<div class="ibox" style="height:206px;">
 				<div class="ibox-title" style="padding-right:15px;">
 					<h4 class="float-right text-danger">
-						¥10,000 <span class="text-muted"
-							style="text-decoration: line-through;font-weight:400;">¥30,000</span>
+						<a href="https://www.redragon-erp.com/grant-community.html" target="_blank" class="text-danger">免费申请授权</a>
 					</h4>
 					<h5>
-						<i class="fa fa-puzzle-piece"></i> 社区版<span class="label label-info">授权</span>
+						<i class="fa fa-puzzle-piece"></i> 社区版<span class="label label-info"><i class="fa fa-unlock-alt"></i> 授权</span>
 					</h5>
 				</div>
 				<div class="ibox-content">
 					<p>
-						（1）社区版开源、功能持续迭代<br /> （2）实现ERP主流程的业务财务闭环<br /> （3）提供技术文档，易于二次开发<br />
-						<span class="text-info" style="font-weight: bold;">（4）商业授权后，可二次分发，可销售</span>
+						（1）社区版开源、功能持续迭代<br /> （2）实现ERP主流程的业务财务闭环<br /> 
+						<span class="text-info" style="font-weight: bold;">（3）使用或商用前须获得授权书</span><br/>
+						（4）商业授权后，可二开并二次销售
 					</p>
 					
-					<div class="text-right"><button class="btn btn-default btn-outline btn-xs" type="button" onclick="window.open('https://www.redragon-erp.com/product.html')">了解更多</button></div>
+					<div class="text-right"><button class="btn btn-default btn-outline btn-xs" type="button" onclick="window.open('https://www.redragon-erp.com/grant-community.html')"><i class="fa fa-bolt"></i> 免费申请</button></div>
 				</div>
 			</div>
 		</div>
