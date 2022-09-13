@@ -63,7 +63,7 @@
 
 # 社区版授权
 
-【赤龙ERP社区版】现免费对用户开放“授权申请”，申请后可获取更多软件权益。<br/>[免费获取授权书](https://www.redragon-erp.com/grant-community.html "免费获取授权")
+【赤龙ERP社区版】现免费对用户开放“授权申请”，申请后可获取更多软件权益，使用或商用前建议先获得授权书。<br/>[:fa-hand-o-right: 免费获取授权书](https://www.redragon-erp.com/grant-community.html "免费获取授权")
 
 :fa-heartbeat:`企业或个人均可申请，使用授权或商用授权`
 
