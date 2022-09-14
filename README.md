@@ -10,11 +10,13 @@
 <p align="center">
 <img  src="https://img.shields.io/badge/生态产品上线-CRM系统-f44e91.svg"> <img  src="https://img.shields.io/badge/生态产品上线-项目管理系统-f44e91.svg">
 </p>
----
+--
 
 # 中国开源ERP“领跑者”
 
-:fa-jsfiddle:` 赤龙ERP生态版v2.3.1上线` ` 赤龙ERP社区版v1.0上线`
+:fa-git:` 赤龙ERP社区版v1.0`
+
+:fa-pagelines: ` 赤龙ERP生态版v2.3.1`
 
 :fa-home: 赤龙官网：[https://www.redragon-erp.com](https://www.redragon-erp.com "https://www.redragon-erp.com")
 
