@@ -2,7 +2,7 @@
 <img alt="logo" src="http://www.redragon-erp.com/images/redragon-logo.png" width="120" height="120">
 </p>
 <p align="center">
-<img  src="https://img.shields.io/badge/Release-v1.0-brightgreen.svg"> <img  src="https://img.shields.io/badge/JDK-1.8-important.svg"> <img  src="https://img.shields.io/badge/MySQL-8.0-important.svg"> <img  src="https://img.shields.io/badge/Redis-5.0-important.svg"> <img  src="https://img.shields.io/badge/SpringBoot-2.3-blue.svg"> <img  src="https://img.shields.io/badge/License-GPL2.0-lightgrey.svg">
+<img  src="https://img.shields.io/badge/社区版-v1.0-brightgreen.svg"> <img  src="https://img.shields.io/badge/JDK-1.8-important.svg"> <img  src="https://img.shields.io/badge/MySQL-8.0-important.svg"> <img  src="https://img.shields.io/badge/Redis-5.0-important.svg"> <img  src="https://img.shields.io/badge/SpringBoot-2.3-blue.svg"> <img  src="https://img.shields.io/badge/License-GPL2.0-lightgrey.svg">
 </p>
 <p align="center">
 <img  src="https://img.shields.io/badge/Copyright-赤龙ERP/redragon-60569f.svg"> <img  src="https://img.shields.io/badge/生态版-v2.3.1-60569f.svg">
@@ -14,7 +14,7 @@
 
 # 中国开源ERP“领跑者”
 
-:fa-jsfiddle:` 赤龙ERP生态版v2.3.1上线`
+:fa-jsfiddle:` 赤龙ERP生态版v2.3.1上线` ` 赤龙ERP社区版v1.0上线`
 
 :fa-home: 赤龙官网：[https://www.redragon-erp.com](https://www.redragon-erp.com "https://www.redragon-erp.com")
 
@@ -42,7 +42,7 @@
 
 **社区版：**
 
-    （1）软件永久免费、持续迭代
+    （1）软件永久免费、持续迭代、gitee开源，github开源
     （2）实现主流程的业务和财务闭环
     （3）完备的文档，易于部署和二次开发
 
@@ -53,7 +53,7 @@
     （3）除主流程外，实现业务完整的分支流程和逆流程
     （4）精确的财务业务一体化实现
     （5）快速的应用部署服务、便捷的客户化指导、完备的售后服务体系
-    （6） 开源可自由定制、与第三方系统快速打通
+    （6）可自由定制、与第三方系统快速打通
 
 # 赤龙声明
 
@@ -113,7 +113,7 @@
 
 ![赤龙ERP开发者](http://www.redragon-erp.com/images/redragon.png "赤龙ERP开发者")
 
-# 核心功能
+# 核心功能（生态版）
 
 |   |   |   |
 | ------------ | ------------ | ------------ |
@@ -237,7 +237,7 @@
 
 ------------
 
-**移动端**
+**生态版移动端**
 
 ![赤龙ERP](https://www.redragon-erp.com/images/eco/m1.jpg "赤龙ERP")
 ![赤龙ERP](https://www.redragon-erp.com/images/eco/m3.jpg "赤龙ERP")
