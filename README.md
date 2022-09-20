@@ -10,7 +10,9 @@
 <p align="center">
 <img  src="https://img.shields.io/badge/生态产品上线-CRM系统-f44e91.svg"> <img  src="https://img.shields.io/badge/生态产品上线-项目管理系统-f44e91.svg">
 </p>
---
+
+<br/>
+
 
 # 中国开源ERP“领跑者”
 
@@ -63,11 +65,19 @@
 
 :fa-exclamation-triangle:`未经开发者授权，本产品及衍生产品（包括社区版和生态版）不得用于任何形式的商业用途`
 
-# 社区版授权
+# 社区版免费授权
 
 【赤龙ERP社区版】现免费对用户开放“授权申请”，申请后可获取更多软件权益，使用或商用前建议先获得授权书。<br/>[:fa-hand-o-right: 免费获取授权书](https://www.redragon-erp.com/grant-community.html "免费获取授权")
 
 :fa-heartbeat:`企业或个人均可申请，使用授权或商用授权`
+
+# 赤龙ERP社群
+
+:fa-wechat: 分享赤龙ERP业务和技术，交朋识友！
+
+`看文章、学知识、享文档、可提问、随时获取最新动态！`
+
+![赤龙ERP社群](http://www.redragon-erp.com/images/fenchuan.png "赤龙ERP社群")
 
 # 赤龙团队
 
@@ -111,9 +121,9 @@
 
 [:fa-hand-o-right: 点击自助申请账号](https://www.redragon-erp.com/account.html "https://www.redragon-erp.com/account.html")
 
-`可加入赤龙ERP沟通群，讨论技术或业务问题`
+`可加入赤龙ERP社群，讨论技术或业务问题`
 
-![赤龙ERP开发者](http://www.redragon-erp.com/images/redragon.png "赤龙ERP开发者")
+![赤龙ERP社群](http://www.redragon-erp.com/images/fenchuan.png "赤龙ERP社群")
 
 # 核心功能（生态版）
 
@@ -540,9 +550,4 @@
 2. 多币种处理及汇率设置
 3. 列表查询条件逻辑优化
 
-
-# 交流与分享
-
-:fa-wechat: 扫描二维码入群沟通交流
-
-![赤龙ERP商业合作](http://www.redragon-erp.com/images/redragon.png "赤龙ERP商业合作")
+<br/>
