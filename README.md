@@ -89,6 +89,8 @@
 
 **软件代理**：赤龙ERP生态版招募区域代理，愿与您一起合作共赢。[了解更多](https://www.redragon-erp.com/partner.html "区域软件代理")
 
+[:fa-hand-o-right: 代理商申请](https://www.redragon-erp.com/apply-partner.html "区域软件代理")
+
 :fa-wechat:`如需咨询或合作，加微信详询`
 
 ![赤龙ERP开发者](http://www.redragon-erp.com/images/redragon.png "赤龙ERP开发者")
@@ -156,7 +158,9 @@
 
 **生态版**
 - 会员与服务：赤龙ERP生态版提供会员服务并收取必要的服务费。[了解更多](https://www.redragon-erp.com/product.html "赤龙ERP会员")
-- 区域经销/代理：赤龙ERP生态版招募区域经销商、代理商和实施商，通过实施或客户化获利。[了解更多](https://www.redragon-erp.com/partner.html "区域软件代理")
+- 区域经销/代理：赤龙ERP生态版招募区域经销商、代理商，通过实施或客户化获利。[了解更多](https://www.redragon-erp.com/partner.html "区域软件代理")
+
+[:fa-hand-o-right: 代理商申请](https://www.redragon-erp.com/apply-partner.html "区域软件代理")
 
 :fa-wechat:`如需购买或合作，可加微信详询`
 
