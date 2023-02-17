@@ -5,7 +5,7 @@
 <img  src="https://img.shields.io/badge/社区版-v1.0-brightgreen.svg"> <img  src="https://img.shields.io/badge/JDK-1.8-important.svg"> <img  src="https://img.shields.io/badge/MySQL-8.0-important.svg"> <img  src="https://img.shields.io/badge/Redis-5.0-important.svg"> <img  src="https://img.shields.io/badge/SpringBoot-2.3-blue.svg"> <img  src="https://img.shields.io/badge/License-GPL2.0-lightgrey.svg">
 </p>
 <p align="center">
-<img  src="https://img.shields.io/badge/Copyright-赤龙ERP/redragon-60569f.svg"> <img  src="https://img.shields.io/badge/生态版-v2.3.1-60569f.svg">
+<img  src="https://img.shields.io/badge/Copyright-赤龙ERP/redragon-60569f.svg"> <img  src="https://img.shields.io/badge/生态版-v2.7-60569f.svg">
 </p>
 <p align="center">
 <img  src="https://img.shields.io/badge/生态产品上线-CRM系统-f44e91.svg"> <img  src="https://img.shields.io/badge/生态产品上线-项目管理系统-f44e91.svg">
@@ -18,7 +18,7 @@
 
 :fa-git:` 赤龙ERP社区版v1.0`
 
-:fa-pagelines: ` 赤龙ERP生态版v2.3.1`
+:fa-pagelines: ` 赤龙ERP生态版v2.7`
 
 :fa-home: 赤龙官网：[https://www.redragon-erp.com](https://www.redragon-erp.com "https://www.redragon-erp.com")
 
@@ -553,5 +553,48 @@
 1. HRMS薪酬管理并自动生成凭证
 2. 多币种处理及汇率设置
 3. 列表查询条件逻辑优化
+
+**赤龙ERP生态版 v2.3.2（已上线）**
+
+1. 工序退回要判定凭证是否审批或过账
+2. 核算成本价时判定入库单的状态
+3. 应付款发票可核销多个预付款
+4. 凭证字编号每月结账后重置
+5. 日记账增加凭证字和号
+6. 重新优化权限系统
+7. 收付款单对不同的应收/应付做收付款时产生分录不同
+8. 出入库创建库存逻辑调整
+
+**赤龙ERP生态版 v2.4（已上线）**
+
+1. 增加货位管理功能
+2. 根据物料的存货/销货科目生成分录
+3. 可分配某一部门的数据权限
+4. 根据规则配置按钮权限
+5. 增加查看日记账/总账/明细账功能
+6. 增加供应商报价功能
+7. 增加客户报价功能
+
+**赤龙ERP生态版 v2.5（已上线）**
+
+1. 增加费用单管理
+2. 物料增加质检配置功能
+3. 增加支票管理功能
+4. 增加其他应收款发票
+5. 增加收款项管理
+
+**赤龙ERP生态版 v2.6 - 运输管理模块（已上线）**
+
+1. 车辆管理
+2. 驾驶员和车队管理
+3. 运输线路管理
+4. 运单管理
+5. 运单调度
+
+**赤龙ERP生态版 v2.7（已上线）**
+
+1. 增加业务主体和法人主体
+2. 实现区分主体的系统登陆（多个子公司）
+3. 实现多主体的数据隔离
 
 <br/>
