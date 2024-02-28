@@ -16,31 +16,31 @@
 
 # 中国开源ERP“领跑者”
 
-:fa-git:` 赤龙ERP社区版v1.0`
+` 赤龙ERP社区版v1.0`
 
-:fa-pagelines: ` 赤龙ERP生态版v2.7`
+` 赤龙ERP生态版v2.7`
 
-:fa-home: 赤龙官网：[https://www.redragon-erp.com](https://www.redragon-erp.com "https://www.redragon-erp.com")
+ 赤龙官网：[https://www.redragon-erp.com](https://www.redragon-erp.com "https://www.redragon-erp.com")
 
 
 |  ERP的问题与痛点  | 赤龙ERP优势何在 |
 | ------------ | ------------ |
-|  ERP中低端产品质量良莠不齐  | :tw-1f6a9: 赤龙ERP只做最专业的ERP，所匹配市场无出其右者 |
-|  功能的堆砌根本不是ERP系统 |  :tw-1f6a9: ERP各功能模块间的背后逻辑、流程关系及相互约束才是ERP的精髓，也是我们的核心优势 |
-|  引入ERP不仅仅是为了从无到有  | :tw-1f6a9: 上线ERP的目的一定是管理方式和管理流程的提升，拥有专业ERP才是企业的福音 |
+|  ERP中低端产品质量良莠不齐  |  赤龙ERP只做最专业的ERP，所匹配市场无出其右者 |
+|  功能的堆砌根本不是ERP系统 |   ERP各功能模块间的背后逻辑、流程关系及相互约束才是ERP的精髓，也是我们的核心优势 |
+|  引入ERP不仅仅是为了从无到有  |  上线ERP的目的一定是管理方式和管理流程的提升，拥有专业ERP才是企业的福音 |
 
 
-**:fa-question-circle: 何须高价**<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:fa-ban: ERP的软件或维护费用太高？NO！
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**:fa-thumbs-o-up: 让所有小微企业都用得起ERP**<br/>
+** 何须高价**<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: ERP的软件或维护费用太高？NO！
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;** 让所有小微企业都用得起ERP**<br/>
 
-**:fa-question-circle: 何须复杂**<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:fa-ban: ERP的使用门槛太高？不会用？弄不懂？NO！
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**:fa-thumbs-up: 唯一的主线流程设计，让操作变得更简单**<br/>
+** 何须复杂**<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ERP的使用门槛太高？不会用？弄不懂？NO！
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;** 唯一的主线流程设计，让操作变得更简单**<br/>
 
-**:fa-question-circle: 何须定制**<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:fa-ban: ERP需要根据企业的特色定制？NO！
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**:fa-thumbs-o-up: 采用服务于500强企业的ERP理念，真正提升您企业管理流程**
+** 何须定制**<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ERP需要根据企业的特色定制？NO！
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;** 采用服务于500强企业的ERP理念，真正提升您企业管理流程**
 
 # 赤龙简介
 
@@ -63,7 +63,7 @@
 
 【赤龙ERP】所有产品均具有《**软件著作权登记证书**》，知识产权归**赤龙官方**所有。所有用户必须遵守如下约定，否则对违约者我们将保留诉诸法律的权利！
 
-:fa-exclamation-triangle:`未经开发者授权，本产品及衍生产品（包括社区版和生态版）不得用于任何形式的商业用途`
+`未经开发者授权，本产品及衍生产品（包括社区版和生态版）不得用于任何形式的商业用途`
 
 # 社区版免费授权
 
@@ -81,7 +81,7 @@
 
 # 赤龙ERP社群
 
-:fa-wechat: 分享赤龙ERP业务和技术，交朋识友！
+ 分享赤龙ERP业务和技术，交朋识友！
 
 `看文章、学知识、享文档、可提问、随时获取最新动态！`
 
@@ -97,9 +97,9 @@
 
 **软件代理**：赤龙ERP生态版招募区域代理，愿与您一起合作共赢。[了解更多](https://www.redragon-erp.com/partner.html "区域软件代理")
 
-[:fa-hand-o-right: 代理商申请](https://www.redragon-erp.com/apply-partner.html "区域软件代理")
+[代理商申请](https://www.redragon-erp.com/apply-partner.html "区域软件代理")
 
-:fa-wechat:`如需咨询或合作，加微信详询`
+`如需咨询或合作，加微信详询`
 
 ![赤龙ERP开发者](http://www.redragon-erp.com/images/redragon.png "赤龙ERP开发者")
 
@@ -121,15 +121,15 @@
     （3）我可以独立开发功能模块
     （4）我的专业可以做更多事。。。
 
-:fa-exclamation-triangle:`我们旨在打造一个组织或社区，让每个人可以用自己的专业做自己想做的事情，并获得可能的收益`
+`我们旨在打造一个组织或社区，让每个人可以用自己的专业做自己想做的事情，并获得可能的收益`
 
 # 演示地址
 
-:fa-desktop: 生态版：&nbsp;&nbsp;[https://www.redragon-erp.com/erp](https://www.redragon-erp.com/erp "https://www.redragon-erp.com/erp")
+ 生态版：&nbsp;&nbsp;[https://www.redragon-erp.com/erp](https://www.redragon-erp.com/erp "https://www.redragon-erp.com/erp")
 
-:fa-home: 赤龙官网：[https://www.redragon-erp.com](https://www.redragon-erp.com "https://www.redragon-erp.com")
+ 赤龙官网：[https://www.redragon-erp.com](https://www.redragon-erp.com "https://www.redragon-erp.com")
 
-[:fa-hand-o-right: 点击自助申请账号](https://www.redragon-erp.com/account.html "https://www.redragon-erp.com/account.html")
+[点击自助申请账号](https://www.redragon-erp.com/account.html "https://www.redragon-erp.com/account.html")
 
 `可加入赤龙ERP社群，讨论技术或业务问题`
 
@@ -168,9 +168,9 @@
 - 会员与服务：赤龙ERP生态版提供会员服务并收取必要的服务费。[了解更多](https://www.redragon-erp.com/product.html "赤龙ERP会员")
 - 区域经销/代理：赤龙ERP生态版招募区域经销商、代理商，通过实施或客户化获利。[了解更多](https://www.redragon-erp.com/partner.html "区域软件代理")
 
-[:fa-hand-o-right: 代理商申请](https://www.redragon-erp.com/apply-partner.html "区域软件代理")
+[代理商申请](https://www.redragon-erp.com/apply-partner.html "区域软件代理")
 
-:fa-wechat:`如需购买或合作，可加微信详询`
+`如需购买或合作，可加微信详询`
 
 ![赤龙ERP开发者](http://www.redragon-erp.com/images/redragon.png "赤龙ERP开发者")
 
