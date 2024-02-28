@@ -69,7 +69,15 @@
 
 【赤龙ERP社区版】现免费对用户开放“授权申请”，申请后可获取更多软件权益，使用或商用前建议先获得授权书。<br/>[:fa-hand-o-right: 免费获取授权书](https://www.redragon-erp.com/grant-community.html "免费获取授权")
 
-:fa-heartbeat:`企业或个人均可申请，使用授权或商用授权`
+`企业或个人均可申请，使用授权或商用授权`
+
+# 社区版手册免费获取
+
+1.访问GitHub赤龙ERP仓库，点击star，地址：[https://github.com/redragon1985/redragon-erp](https://github.com/redragon1985/redragon-erp "https://github.com/redragon1985/redragon-erp")
+
+2.加微信联系赤龙客服，获取免费的社区版操作手册
+
+![赤龙ERP开发者](http://www.redragon-erp.com/images/redragon.png "赤龙ERP开发者")
 
 # 赤龙ERP社群
 
