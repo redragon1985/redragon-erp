@@ -31,15 +31,15 @@
 
 
 ** 何须高价**<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: ERP的软件或维护费用太高？NO！
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ERP的软件或维护费用太高？NO！
 <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;** 让所有小微企业都用得起ERP**<br/>
 
 ** 何须复杂**<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ERP的使用门槛太高？不会用？弄不懂？NO！
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ERP的使用门槛太高？不会用？弄不懂？NO！
 <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;** 唯一的主线流程设计，让操作变得更简单**<br/>
 
 ** 何须定制**<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ERP需要根据企业的特色定制？NO！
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ERP需要根据企业的特色定制？NO！
 <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;** 采用服务于500强企业的ERP理念，真正提升您企业管理流程**
 
 # 赤龙简介
@@ -67,7 +67,7 @@
 
 # 社区版免费授权
 
-【赤龙ERP社区版】现免费对用户开放“授权申请”，申请后可获取更多软件权益，使用或商用前建议先获得授权书。<br/>[:fa-hand-o-right: 免费获取授权书](https://www.redragon-erp.com/grant-community.html "免费获取授权")
+【赤龙ERP社区版】现免费对用户开放“授权申请”，申请后可获取更多软件权益，使用或商用前建议先获得授权书。<br/>[免费获取授权书](https://www.redragon-erp.com/grant-community.html "免费获取授权")
 
 `企业或个人均可申请，使用授权或商用授权`
 
