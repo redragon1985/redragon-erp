@@ -86,6 +86,7 @@
 `看文章、学知识、享文档、可提问、随时获取最新动态！`
 
 ![赤龙ERP社群](http://www.redragon-erp.com/images/fenchuan.png "赤龙ERP社群")
+![赤龙ERP社群](http://www.redragon-erp.com/images/wxgroup-git.png "赤龙ERP社群")
 
 # 赤龙团队
 
