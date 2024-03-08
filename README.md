@@ -75,7 +75,7 @@
 
 1.访问GitHub赤龙ERP仓库，点击star，地址：[https://github.com/redragon1985/redragon-erp](https://github.com/redragon1985/redragon-erp "https://github.com/redragon1985/redragon-erp")
 
-2.加微信联系赤龙客服，获取免费的社区版操作手册
+2.加微信联系赤龙客服，获取免费的社区版操作手册（需发送star截图）
 
 ![赤龙ERP开发者](http://www.redragon-erp.com/images/redragon.png "赤龙ERP开发者")
 
