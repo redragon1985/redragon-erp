@@ -153,9 +153,24 @@ public class ShiroConfiguration {
     @Bean(name="rememberMeManager")
     public CookieRememberMeManager rememberMeManager() {
         CookieRememberMeManager cookieRememberMeManager = new CookieRememberMeManager();
-        cookieRememberMeManager.setCipherKey(Base64.decode("4AvVhmFLUs0KTA3Kprsdag=="));
+        cookieRememberMeManager.setCipherKey(this.rememberMeCipherKey());
         cookieRememberMeManager.setCookie(this.rememberMeCookie());
         return cookieRememberMeManager;
+    }
+
+    /**
+     * rememberMe cipher key.
+     * The key must be unique per deployment and kept secret. It is read from the
+     * shiro configuration (property rememberMeCipherKey, Base64 encoded). When no
+     * key is configured a fresh random AES key is generated at startup so that no
+     * publicly known key is ever used.
+     */
+    private byte[] rememberMeCipherKey() {
+        String configured = PropUtil.getKeyValue("shiro", "rememberMeCipherKey");
+        if (configured != null && configured.trim().length() > 0) {
+            return Base64.decode(configured.trim());
+        }
+        return new org.apache.shiro.crypto.AesCipherService().generateNewKey().getEncoded();
     }
     
     /**
